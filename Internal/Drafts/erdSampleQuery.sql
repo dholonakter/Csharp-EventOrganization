@@ -40,3 +40,7 @@ GROUP BY storeID;
 SELECT itemID, SUM(itemPrice * quantity) "Total sold per product"
 FROM ORDER_LINE
 GROUP BY itemID;
+
+SELECT campID, campName
+FROM CAMP
+WHERE booked = 'N';
