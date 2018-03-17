@@ -15,6 +15,7 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
+            tabPage1.Text = "Monitor";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -53,6 +54,11 @@ namespace WindowsFormsApp1
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label17_Click(object sender, EventArgs e)
         {
 
         }
