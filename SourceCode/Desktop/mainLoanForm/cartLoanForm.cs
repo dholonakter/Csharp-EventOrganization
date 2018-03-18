@@ -8,23 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace mainShop
+namespace mainLoanForm
 {
-    public partial class productForm : Form
+    public partial class cartLoanForm : Form
     {
-        public productForm()
+        public cartLoanForm()
         {
             InitializeComponent();
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void listBoxDetails_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

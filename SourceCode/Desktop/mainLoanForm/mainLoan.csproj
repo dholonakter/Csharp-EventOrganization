@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7C64692A-9D1A-412F-BE32-71FA52478305}</ProjectGuid>
+    <ProjectGuid>{5BD03E83-F46A-42AE-AD08-9BE54F6BC5A6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>mainShop</RootNamespace>
-    <AssemblyName>mainShop</AssemblyName>
+    <RootNamespace>mainLoanForm</RootNamespace>
+    <AssemblyName>mainLoanForm</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -21,7 +21,6 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>true</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,42 +45,42 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cartForm.cs">
+    <Compile Include="cartLoanForm.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="cartForm.Designer.cs">
-      <DependentUpon>cartForm.cs</DependentUpon>
+    <Compile Include="cartLoanForm.Designer.cs">
+      <DependentUpon>cartLoanForm.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="mainShopForm.cs">
+    <Compile Include="mainLoanForm.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="mainShopForm.Designer.cs">
-      <DependentUpon>mainShopForm.cs</DependentUpon>
+    <Compile Include="mainLoanForm.Designer.cs">
+      <DependentUpon>mainLoanForm.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="productForm.cs">
+    <Compile Include="productLoanForm.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="productForm.Designer.cs">
-      <DependentUpon>productForm.cs</DependentUpon>
+    <Compile Include="productLoanForm.Designer.cs">
+      <DependentUpon>productLoanForm.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="cartForm.resx">
-      <DependentUpon>cartForm.cs</DependentUpon>
+    <EmbeddedResource Include="cartLoanForm.resx">
+      <DependentUpon>cartLoanForm.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="mainShopForm.resx">
-      <DependentUpon>mainShopForm.cs</DependentUpon>
+    <EmbeddedResource Include="mainLoanForm.resx">
+      <DependentUpon>mainLoanForm.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="productForm.resx">
-      <DependentUpon>productForm.cs</DependentUpon>
+    <EmbeddedResource Include="productLoanForm.resx">
+      <DependentUpon>productLoanForm.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

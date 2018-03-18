@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7C64692A-9D1A-412F-BE32-71FA52478305}</ProjectGuid>
+    <ProjectGuid>{EBE5F6E4-ABAF-4F92-8D7D-523D3D2ECE6F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>mainShop</RootNamespace>
-    <AssemblyName>mainShop</AssemblyName>
+    <RootNamespace>mainBoss</RootNamespace>
+    <AssemblyName>mainBoss</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,42 +47,66 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="cartForm.cs">
+    <Compile Include="mainOverview.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="cartForm.Designer.cs">
-      <DependentUpon>cartForm.cs</DependentUpon>
+    <Compile Include="mainOverview.Designer.cs">
+      <DependentUpon>mainOverview.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="mainShopForm.cs">
+    <Compile Include="overviewCamp.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="mainShopForm.Designer.cs">
-      <DependentUpon>mainShopForm.cs</DependentUpon>
+    <Compile Include="overviewCamp.Designer.cs">
+      <DependentUpon>overviewCamp.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="productForm.cs">
+    <Compile Include="overviewEvent.cs">
       <SubType>Form</SubType>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
-    <Compile Include="productForm.Designer.cs">
-      <DependentUpon>productForm.cs</DependentUpon>
+    <Compile Include="overviewEvent.Designer.cs">
+      <DependentUpon>overviewEvent.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="overviewShop.cs">
+      <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="overviewShop.Designer.cs">
+      <DependentUpon>overviewShop.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="overviewStaff.cs">
+      <SubType>Form</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="overviewStaff.Designer.cs">
+      <DependentUpon>overviewStaff.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="cartForm.resx">
-      <DependentUpon>cartForm.cs</DependentUpon>
+    <EmbeddedResource Include="mainOverview.resx">
+      <DependentUpon>mainOverview.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="mainShopForm.resx">
-      <DependentUpon>mainShopForm.cs</DependentUpon>
+    <EmbeddedResource Include="overviewCamp.resx">
+      <DependentUpon>overviewCamp.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="productForm.resx">
-      <DependentUpon>productForm.cs</DependentUpon>
+    <EmbeddedResource Include="overviewEvent.resx">
+      <DependentUpon>overviewEvent.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="overviewShop.resx">
+      <DependentUpon>overviewShop.cs</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="overviewStaff.resx">
+      <DependentUpon>overviewStaff.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

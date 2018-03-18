@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace mainShop
+namespace mainBoss
 {
-    public partial class productForm : Form
+    public partial class overviewShop : Form
     {
-        public productForm()
+        public overviewShop()
         {
             InitializeComponent();
         }
@@ -20,11 +20,6 @@ namespace mainShop
         private void buttonExit_Click(object sender, EventArgs e)
         {
             this.Close();
-        }
-
-        private void listBoxDetails_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

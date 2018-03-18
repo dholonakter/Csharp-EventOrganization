@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace mainShop
+namespace mainBoss
 {
-    public partial class productForm : Form
+    public partial class overviewStaff : Form
     {
-        public productForm()
+        public overviewStaff()
         {
             InitializeComponent();
         }
@@ -22,7 +22,17 @@ namespace mainShop
             this.Close();
         }
 
-        private void listBoxDetails_SelectedIndexChanged(object sender, EventArgs e)
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void overviewStaff_Load(object sender, EventArgs e)
         {
 
         }

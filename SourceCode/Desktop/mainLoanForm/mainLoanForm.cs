@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace mainCamp
+namespace mainLoanForm
 {
-    public partial class mainCampForm : Form
+    public partial class mainLoanForm : Form
     {
-        public mainCampForm()
+        public mainLoanForm()
         {
             InitializeComponent();
         }
@@ -32,9 +32,9 @@ namespace mainCamp
         }
         private void ShowButtonText(Button b, string t)
         {
-            b.ImageAlign = ContentAlignment.MiddleCenter;
+            b.ImageAlign = ContentAlignment.TopCenter;
             b.Text = t;
-            b.TextAlign = ContentAlignment.BottomCenter;
+            b.TextAlign = ContentAlignment.TopCenter;
         }
         private void ResetButtonText(Button b)
         {
@@ -44,24 +44,24 @@ namespace mainCamp
         #endregion
         private void button2_Click(object sender, EventArgs e)
         {
-            checkInCampForm checkInCamp = new checkInCampForm();
-            checkInCamp.Show();
+            productLoanForm productLoan = new productLoanForm();
+            productLoan.Show();
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            campStatusForm campStatus = new campStatusForm();
-            campStatus.Show();
-        }
-
-        private void button2_MouseEnter(object sender, EventArgs e)
-        {
-            ShowButtonText((Button)sender, "Check in");
+            cartLoanForm cartLoan = new cartLoanForm();
+            cartLoan.Show();
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void button2_MouseEnter(object sender, EventArgs e)
+        {
+            ShowButtonText((Button)sender, "See products");
         }
 
         private void button2_MouseLeave(object sender, EventArgs e)
@@ -72,36 +72,13 @@ namespace mainCamp
 
         private void button3_MouseEnter(object sender, EventArgs e)
         {
-            ShowButtonText((Button)sender, "Camp status");
+            ShowButtonText((Button)sender, "See cart");
         }
 
         private void button3_MouseLeave(object sender, EventArgs e)
         {
-            ChangeColor(sender, Color.FromArgb(242, 173, 89));
+            ChangeColor(sender, Color.FromArgb(255, 110, 64));
             ResetButtonText((Button)sender);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            monitorCampForm monitorCamp = new monitorCampForm();
-            monitorCamp.Show();
-        }
-
-        private void button1_MouseEnter(object sender, EventArgs e)
-        {
-            ChangeColor(sender, Color.PaleTurquoise);
-            ShowButtonText((Button)sender, "Monitor reservations");
-        }
-
-        private void button1_MouseLeave(object sender, EventArgs e)
-        {
-            ChangeColor(sender, Color.FromArgb(36, 198, 221));
-            ResetButtonText((Button)sender);
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
