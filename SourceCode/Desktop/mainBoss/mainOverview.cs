@@ -15,24 +15,6 @@ namespace mainBoss
         public mainOverview()
         {
             InitializeComponent();
-
-            // ---- GUI CODE PLEASE DO NOT TOUCH ---- //
-            button6.Width = 243;
-            button1.Width = 243;
-            button4.Width = 243;
-            button2.Width = 243;
-
-            button4.Height = 148;
-            button1.Height = 148;
-            button6.Height = 148;
-            button2.Height = 148;
-
-            Point p = new Point(439, 46);
-            button4.Location = p;
-
-            p = new Point(439, 194);
-            button6.Location = p;
-            // ---- GUI CODE PLEASE DO NOT TOUCH ---- //
         }
         #region GUICODE
         private void ChangeColor(object o, Color c)
@@ -48,11 +30,7 @@ namespace mainBoss
                 l.BackColor = c;
             }
         }
-        private void ResetButton(Button b)
-        {
-            b.Width = 243;
-            b.Height = 148;
-        }
+
         private void ShowButtonText(Button b, string t)
         {
             b.ImageAlign = ContentAlignment.MiddleCenter;
@@ -66,81 +44,66 @@ namespace mainBoss
         }
         private void button2_MouseEnter(object sender, EventArgs e)
         {
+            ChangeColor(button4, Color.FromArgb(54, 104, 58)); // camp
+            ChangeColor(button6, Color.FromArgb(117, 87, 42)); // staff
+            ChangeColor(button1, Color.FromArgb(25, 65, 84)); // shops
             ShowButtonText((Button)sender, "Event");
-            button2.Width = 486;
-
-            /* arduous measurement which if possible should be left alone */
-            ResetButton(button4);
-            ResetButton(button6);
-            button4.Width = 122;
-            button6.Width = 122;
-            Point p = new Point(560, 194);
-            button4.Location = p;
         }
 
         private void button4_MouseEnter(object sender, EventArgs e)
         {
-            ShowButtonText((Button)sender, "Camp");
-            button4.BringToFront();
-            button4.Height = 296;
+            ChangeColor(button2, Color.FromArgb(48, 66, 107)); // event
+            ChangeColor(button6, Color.FromArgb(117, 87, 42)); // staff
+            ChangeColor(button1, Color.FromArgb(25, 65, 84)); // shops
+            ShowButtonText((Button)sender, "Camps");
         }
 
         private void button1_MouseEnter(object sender, EventArgs e)
         {
-            ShowButtonText((Button)sender, "Shop");
-            button1.Location = button2.Location;
-            button1.Height = 296;
+            ChangeColor(button2, Color.FromArgb(48, 66, 107)); // event
+            ChangeColor(button6, Color.FromArgb(117, 87, 42)); // staff
+            ChangeColor(button4, Color.FromArgb(54, 104, 58)); // camp
+            ShowButtonText((Button)sender, "Stores");
         }
 
         private void button6_MouseEnter(object sender, EventArgs e)
         {
-            button6.BringToFront();
+            ChangeColor(button2, Color.FromArgb(48, 66, 107)); // event
+            ChangeColor(button1, Color.FromArgb(25, 65, 84)); // shops
+            ChangeColor(button4, Color.FromArgb(54, 104, 58)); // camp
             ShowButtonText((Button)sender, "Staff");
-            button6.Location = button1.Location;
-            button6.Width = 486;
         }
 
         private void button2_MouseLeave(object sender, EventArgs e)
         {
-            ChangeColor(sender, Color.FromArgb(89, 118, 185));
             ResetButtonText((Button)sender);
-            button2.Width = 243;
-
-            /* arduous measurement which if possible should be left alone */
-            ResetButton(button4);
-            ResetButton(button6);
-
-            Point p = new Point(439, 46);
-            button4.Location = p;
-
-            p = new Point(439, 194);
-            button6.Location = p;
+            ChangeColor(button4, Color.FromArgb(102, 187, 106)); // camp
+            ChangeColor(button6, Color.FromArgb(255, 191, 96)); // staff
+            ChangeColor(button1, Color.FromArgb(79, 195, 247)); // shops
         }
 
         private void button4_MouseLeave(object sender, EventArgs e)
         {
-            ChangeColor(sender, Color.FromArgb(102, 187, 106));
             ResetButtonText((Button)sender);
-            ResetButton(button4);
-
+            ChangeColor(button6, Color.FromArgb(255, 191, 96)); // staff
+            ChangeColor(button2, Color.FromArgb(89, 118, 185)); // event
+            ChangeColor(button1, Color.FromArgb(79, 195, 247)); // shops
         }
 
         private void button1_MouseLeave(object sender, EventArgs e)
         {
-            ChangeColor(sender, Color.FromArgb(79, 195, 247));
             ResetButtonText((Button)sender);
-            ResetButton(button1);
-            Point p = new Point(196, 194);
-            button1.Location = p;
+            ChangeColor(button4, Color.FromArgb(102, 187, 106)); // camp
+            ChangeColor(button6, Color.FromArgb(255, 191, 96)); // staff
+            ChangeColor(button2, Color.FromArgb(89, 118, 185)); // event
         }
 
         private void button6_MouseLeave(object sender, EventArgs e)
         {
-            ChangeColor(sender, Color.FromArgb(255, 191, 96));
             ResetButtonText((Button)sender);
-            ResetButton(button6);
-            Point p = new Point(439, 194);
-            button6.Location = p;
+            ChangeColor(button4, Color.FromArgb(102, 187, 106)); // camp
+            ChangeColor(button1, Color.FromArgb(79, 195, 247)); // shops
+            ChangeColor(button2, Color.FromArgb(89, 118, 185)); // event
         }
         #endregion
 
