@@ -12,7 +12,7 @@ html body {
     padding-bottom: 30px;
 }
 
-.setting, .events, .fun, .rules, .normalreg {
+.setting, .events, .fun, .rules, .normalreg, .camping1 {
     padding-top: 30px;
 }
 
@@ -36,7 +36,7 @@ html body {
 
 
 /* thanh */
-.eventbuttons, .funbuttons, activitybuttons {
+.eventbuttons, .funbuttons, activitybuttons, campingbtn {
     text-align: center; 
 }
 
