@@ -47,6 +47,11 @@ html body {
     color: white !important;
 }
 
-.eventbtn1,.eventbtn2,.eventbtn3, .funbtn1, .funbtn2, .funbtn3 {
+.funbtn1, .funbtn2, .funbtn3 {
     margin-left: 10px;
+}
+
+/* thanh */
+.eventbuttons {
+    text-align: center; 
 }
