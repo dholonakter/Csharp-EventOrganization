@@ -1,0 +1,52 @@
+html body {
+    background-color: black !important;
+    color: white !important;
+}
+
+.settingImage, .funactivitytop, .eventimage, .funactivity, .camping1, .camping2 {
+    width: 100%;
+    height: 100%;
+}
+
+.funactivitytop{
+    padding-bottom: 30px;
+}
+
+
+.settingbody {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.setting {
+    padding-top: 30px;
+}
+
+.rules {
+    padding-top: 20px;
+}
+
+.events, .fun {
+    padding-top: 30px;
+}
+
+.eventsbody, .funbody {
+    display: inline-block;
+    text-align: left;
+    margin: auto;
+    padding-left: 30px;
+}
+
+.eventbuttons, .funbuttons, .campingtxt, .campingimages {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.btn, .btn:hover, .btn:active, .btn:visited, .btn:focus, .btn:active:focus {
+    background-color: red !important;
+    color: white !important;
+}
+
+.eventbtn1,.eventbtn2,.eventbtn3, .funbtn1, .funbtn2, .funbtn3 {
+    margin-left: 10px;
+}
