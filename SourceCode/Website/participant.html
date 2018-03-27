@@ -2,35 +2,50 @@
 <html>
 <head>
 <title>Participant's information page</title>
+     <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./js/bootstrap.bundle.min.js">
+        <link rel="stylesheet" href="./css/styles_t.css">
+		 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+
 </head>
 <body>
 
 <h1>Ticket Information</h1>
-  <div  class="Ticket Information">
-      
+  <div  class="container">
+      <div class="row">
+        <div class="col-lg-4">
       <div id="Participant info">
        <p>Participant Info</p>
           <figure>
               <img src="images/ProfileImage.png" alt="profile pic"/>
-              <br>
-              <figcaption>
+              <div class="row">
+                  <div class="col-lg-12">
+                <figcaption>
                Name:Abiske Bacchan
               </figcaption>
-              <br>
               <figcaption>
               Email:abisekh@gmail.com
               </figcaption>
-              <br>
               <figcaption>
                  phone:8905677
               </figcaption>
+              
+              </div>
+              </div>
+            
+          
+      
+           </figure>
+            </div>
               <br>
-               <button onclick="" class="Edit">Edit</button>
-          </figure>
+               <button onclick="" class="Edit">Edit Profile</button>
+          
            </div>
      
           
-          <div id="Ticket Status">
+           <div class="col-lg-4">
+
             <p>Ticket Status</p>
               <form>
            <input type="radio" name="iDeal" value="male" checked>iDeal<br>
@@ -41,25 +56,35 @@
 
           </div>
           
-          <div id="Camping Status">
+          
+           <div class="col-lg-4">
+
            <p>Camping status</p>
              <button onclick="" class="Rent">Rent a camping site</button>
           </div>
           
-         <div id="Activate">
+      </div>
+          
+         <div class="row">
+             <div class="col-lg-4">
            <form>
              Enter the Bundle code:<br>
-                <input type="text" name="lastname"><br>
-                <button onclick="" class="Activation">Activation Code</button>
-                <p>Dont have a bundles</p>
-               <p>Buy Bundles Here....</p>
+                <input type="text" name="lastname">
+               <button onclick="" class="Activation">Activation Code</button>
              </form>
+             </div>
+                 <div class="col-lg-4">
+                     <p>Dont have a bundles??</p>
+                    <p>Buy Bundles Here....</p>
+                 
+                 </div>
+
+             </div>
          
          </div>
+
       
-     
-    
-    </div>
+
 
 </body>
                

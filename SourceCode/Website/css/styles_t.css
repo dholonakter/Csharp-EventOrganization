@@ -68,3 +68,43 @@ html body {
 .caption {
 	margin: 10px;
 }
+.newsButton {
+    float: right;
+   background-color:red;
+    border: none;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+.subheader{
+    float: inherit; 
+}
+
+.Back,.Edit,.Rent,.Purchase,.Activation,.GetLink{
+    background-color: red;
+     border: none;
+    color: white;
+    padding: 5px 40px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 10px;
+    margin: 5px 1px;
+    cursor: pointer;
+}
+#CampingGroup{
+    text-align-last: left; 
+}
+h1{
+   
+    margin-bottom: 100px;
+    margin-right: 150px;
+    margin-left: 80px;
+    background-color: lightblue;
+}
+}
