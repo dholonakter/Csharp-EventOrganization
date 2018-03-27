@@ -1,0 +1,58 @@
+html body {
+    background-color: black !important;
+    color: white !important;
+}
+
+.settingImage, .funactivitytop, .eventimage, .funactivity, .camping1, .camping2, .campmap, .logo {
+    width: 100%;
+    height: 100%;
+}
+
+.funactivitytop, .regcontainer {
+    padding-bottom: 30px;
+}
+
+.setting, .events, .fun, .rules, .normalreg, .camping1, .funactivitytop, .settingImage {
+    padding-top: 30px;
+}
+
+
+.eventsbody, .funbody, .regbody {
+    display: inline-block;
+    text-align: left;
+    margin: auto;
+    padding-left: 30px;
+}
+
+.eventbuttons, .funbuttons, .campingtxt, .campingimages, .activitiestxt, .activitiesbtns, .settingbody, .campingtxt {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.btn, .btn:hover, .btn:active, .btn:visited, .btn:focus, .btn:active:focus {
+    background-color:  #c42626 !important;
+    color: white !important;
+}
+
+
+/* thanh */
+.eventbuttons, .funbuttons, .activitybuttons, .campingbtn {
+    text-align: center; 
+}
+
+.login, .signup {
+    padding: 30px;
+}
+
+
+.login, .signup {
+    background-color: #2b0202;
+}
+
+.regtitle {
+    text-align: center;
+}
+
+#bundlelink {
+    color: #c42626;
+}
