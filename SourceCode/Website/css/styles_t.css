@@ -52,14 +52,19 @@ html body {
 #bundlelink {
     color: darkred;
 }
-/* Dola*/
+/* Dola
 .container{
     float: left;
   display: block;
   margin-top: 5%;
-}
+}*/
 #button-group{
     padding-top: 30px;
     padding-bottom: 30px;
 
+}
+
+/* thanh */
+.caption {
+	margin: 10px;
 }
