@@ -30,6 +30,8 @@ html body {
 }
 
 .btn, .btn:hover, .btn:active, .btn:visited, .btn:focus, .btn:active:focus {
+    outline: none !important;
+    box-shadow: none !important;
     background-color:  #c42626 !important;
     color: white !important;
 }
@@ -42,12 +44,10 @@ html body {
 
 .login, .signup {
     padding: 30px;
-}
-
-
-.login, .signup {
     background-color: #2b0202;
 }
+
+
 
 .regtitle {
     text-align: center;
@@ -55,4 +55,22 @@ html body {
 
 #bundlelink {
     color: #c42626;
+}
+
+.topnav .btn, .topnav .btn:hover, .topnav .btn:active, .topnav .btn:visited, .topnav .btn:focus, .topnav .btn:active:focus {
+    background-color:  black !important;
+    color: white !important;
+    
+}
+
+.navbtn {
+    padding-right: 50px;
+}
+
+#toplink {
+    padding-left: 10px;
+}
+
+.outer{
+    padding: 50px 350px 50px 350px;
 }
