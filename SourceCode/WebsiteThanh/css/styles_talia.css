@@ -1,0 +1,172 @@
+/* that shade of red: #ef2828 */
+/* --- thanh: organized and fixed --- */
+
+/* --- GENERIC --- */
+* {
+    font-family: Segoe UI;
+    font-size: 14px; 
+}
+
+html body {
+    background-color: black !important;
+    color: white !important;
+}
+
+h1, h2, h3 {
+    font-weight: bold;
+}
+
+h2 {
+    text-transform: uppercase;
+    font-size: 28px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+.paginationButtons {
+    text-align: center; 
+}
+
+.paginationButtons button {
+    margin-top: 20px;
+    font-size: 12px;
+}
+.btn:hover {
+    color:  #ef2828 !important;
+    background-color: white !important;
+    transition: .5s;
+}
+
+.btn {
+    outline: none !important;
+    box-shadow: none !important;
+    background-color:  #ef2828 !important;
+    color: white !important;
+}
+
+.articleImage {
+    max-width: 100%;
+    max-height: 100%;
+    margin-bottom: 10px;
+}
+
+/* --- ARTICLE FOR EVENTS + FUNACTIVITIES --- */
+.article {
+    padding-bottom: 10px;
+}
+
+.article h3 {
+    padding: 5px;
+    padding-left: 10px;
+    border-bottom: 1px solid white;
+}
+
+.article h3:hover {
+    color: #ef2828;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #ef2828;
+    transition: .5s;
+    cursor: pointer;
+}
+
+/* --- LOGIN --- */
+.login, .signup {
+    margin: auto; 
+    margin-top: 5%; 
+    width: 50%; 
+    padding: 30px;
+    padding-top: 0px;
+    background-color: #2b0202;
+}
+.login * {
+    overflow: hidden;
+}
+.login img { 
+    margin-top: 10px;
+    margin-bottom: 10px;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.login input {
+    margin-bottom: 12px;
+}
+
+.login label {
+    margin-top: 3px;
+}
+
+.login input {
+    font-size: 13px;
+    width: 100%; 
+}
+
+.login .loginForm {
+    margin: auto;
+}
+
+.login .btn {
+    width: 100%;
+}
+
+
+/* --- to be organized --- */
+
+.activitybuttons button {
+    width: 200px; 
+    padding: 30px;
+    margin: 20px; 
+}
+
+.settingImage, .funactivitytop, .eventimage, .funactivity, .camping1, .camping2, .campmap, .logo {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.funactivitytop, .regcontainer {
+    padding-bottom: 30px;
+}
+
+.setting, .events, .fun, .rules, .normalreg, .camping1, .funactivitytop, .settingImage {
+    padding-top: 30px;
+}
+
+
+
+.eventbuttons, .funbuttons, .campingtxt, .campingimages, .activitiestxt, .activitiesbtns, .settingbody, .campingtxt {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+
+
+
+/* thanh */
+.eventbuttons, .funbuttons, .activitybuttons, .campingbtn {
+    text-align: center; 
+}
+
+
+.regtitle {
+    text-align: center;
+}
+
+#bundlelink {
+    color: #ef2828;
+}
+
+.topnav .btn, .topnav .btn:hover, .topnav .btn:active, .topnav .btn:visited, .topnav .btn:focus, .topnav .btn:active:focus {
+    background-color:  black !important;
+    color: white !important;
+    
+}
+
+.navbtn {
+    padding-right: 50px;
+}
+
+#toplink {
+    padding-left: 10px;
+}
