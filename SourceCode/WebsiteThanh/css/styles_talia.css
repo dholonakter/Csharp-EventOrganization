@@ -46,7 +46,7 @@ p {
     font-size: 12px; 
     outline: none !important;
     box-shadow: none !important;
-    background-color: #aa1d1d;
+    background-color: #aa1d1d !important;
     color:  #eaeaea!important;
     border-radius: 0px; 
 }
@@ -183,6 +183,7 @@ p {
     font-weight: bold;
     text-transform: uppercase;
     color: #dbdbdb;
+	background-color: #0d0d0d;
     padding: 20px 52px;
 }
 .topNav li a:hover{
@@ -193,7 +194,7 @@ p {
     transition: .3s;
 }
 
-
+/* --- ACTIVITIES PAGE --- */
 .activitybuttons button {
     text-transform: uppercase;
     font-size: 13x;
@@ -202,6 +203,8 @@ p {
     width: 150px;
     margin: 0 20px; 
 }
+
+/* --- INDEX --- */
 .indexNav button{
     float: right;
     margin: 0 0 0 10px;
@@ -224,7 +227,9 @@ p {
     margin-bottom: 10px;
 }
 
-
+#indexbanner {
+    margin-bottom: 20px;
+}
 
 
 /* --- to be organized --- */
@@ -266,7 +271,7 @@ p {
 }
 
 .topnav .btn, .topnav .btn:hover, .topnav .btn:active, .topnav .btn:visited, .topnav .btn:focus, .topnav .btn:active:focus {
-    background-color:  black !important;
+    background-color:  #0d0d0d !important;
     color: #dbdbdb !important;
     
 }
