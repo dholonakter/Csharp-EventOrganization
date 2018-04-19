@@ -6,10 +6,12 @@
     font-family: Segoe UI;
     font-size: 14px; 
 }
-
+img {
+    max-width: 100%;
+}
 html body {
     background-color:	#0D0D0D !important;
-    color: white !important;
+    color: white;
 }
 
 h1, h2, h3 {
@@ -17,6 +19,7 @@ h1, h2, h3 {
 }
 
 h2 {
+    margin: 10px 0; 
     text-transform: uppercase;
     font-size: 30px;
 }
@@ -27,6 +30,11 @@ h3 {
 p {
     color: #797979;
 }
+
+input {
+    font-size: 13px;
+}
+
 .paginationButtons {
     text-align: center; 
 }
@@ -46,14 +54,17 @@ p {
     font-size: 12px; 
     outline: none !important;
     box-shadow: none !important;
-    background-color: #aa1d1d !important;
-    color:  #eaeaea!important;
+    background-color: #aa1d1d;
+    color:  #eaeaea;
     border-radius: 0px; 
 }
 
 /* --- ARTICLE FOR EVENTS + FUNACTIVITIES --- */
 .article {
     margin-top: 15px; 
+}
+.article img {
+    max-width: 100%;
 }
 .article p {
     color: #797979;
@@ -97,8 +108,8 @@ p {
 .login img { 
     margin-top: 10px;
     margin-bottom: 10px;
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 80%;
+    
 }
 
 .login input {
@@ -110,7 +121,6 @@ p {
 }
 
 .login input {
-    font-size: 13px;
     width: 100%; 
 }
 
@@ -123,18 +133,19 @@ p {
 }
 
 /* --- HEADER --- */
-.miniTopNav ul {
-    text-align: right; 
-    list-style: none;
+.miniTopNav {
+    padding: 0; 
     margin-top: 20px; 
     margin-bottom: 20px; 
-    padding-right: 14px;
+}
+.miniTopNav ul {
+    list-style: none; 
+    text-align: right;
+    margin-right: 20px; 
 }
 
 .miniTopNav li{
     display: inline-block;
-    margin-left: -1%;
-    margin-right: -1%;
 }
 
 .miniTopNav li a {
@@ -148,20 +159,33 @@ p {
     color: #aa1d1d;
 }
 
-.miniTopNav li:nth-child(3){
-    margin-left: 2%; 
-    margin-right: -4.5%;
+.miniTopNav li:last-child{
+    margin-left: -5px;
 }
-.logonav img {
-    float: left;
-    margin-top: -1.5%;
-    margin-left: -2.8%;
-    width: 20%;
+
+.miniTopNav li img {
+    width: 80%; 
 }
+
+.topNav li:first-child{
+    padding: 0;
+    border-bottom: 5px solid #aa1d1d;
+}
+
+.topNav li:first-child:hover{
+    border-bottom: 6px solid #eaeaea;
+    transition: .5s;
+    cursor: pointer;
+}
+.topNav li:first-child img {
+    width: 130px;
+    height: 30px;
+    margin: 10px; 
+}
+
 .topNav ul {
     padding: 0;
-    text-align: right;
-    margin-bottom: 30px;
+    text-align: left;
 }
 
 .topNav li {
@@ -171,7 +195,7 @@ p {
     background-color: black;    
 }
 
-.topNav li:first-child a{
+.topNav li:nth-child(2) a{
     margin-left: -2px;
 }
 .topNav li:last-child a {
@@ -179,14 +203,15 @@ p {
 }
 
 .topNav li a{
-    font-size: 12px;
+    font-size: 13px;
     font-weight: bold;
     text-transform: uppercase;
     color: #dbdbdb;
-	background-color: #0d0d0d;
-    padding: 20px 52px;
+    background-color: #0d0d0d;
+    padding: 20px 48px;
 }
-.topNav li a:hover{
+.topNav li:not(:first-child) a:hover{
+    cursor: pointer;
     text-decoration: none;
     background-color: #1f2525;
     border-bottom: 5px solid #aa1d1d;
@@ -231,55 +256,103 @@ p {
     margin-bottom: 20px;
 }
 
-
-/* --- to be organized --- */
-.settingImage, .funactivitytop, .eventimage, .funactivity, .camping1, .camping2, .campmap, .logo {
-    max-width: 100%;
-    max-height: 100%;
+/* --- CAMPING --- */
+.campingbuttons .btn {
+    text-transform: uppercase;
+    font-size: 13x;
+    font-weight: bold;
+    padding: 2% 4%; 
 }
-
-.funactivitytop, .regcontainer {
-    padding-bottom: 30px;
-}
-
-.setting, .events, .fun, .rules, .normalreg, .camping1, .funactivitytop, .settingImage {
-    padding-top: 30px;
-}
-
-
-
-.eventbuttons, .funbuttons, .campingtxt, .campingimages, .activitiestxt, .activitiesbtns, .settingbody, .campingtxt {
-    padding-top: 30px;
-    padding-bottom: 30px;
-}
-
-
-
-
-/* thanh */
-.eventbuttons, .funbuttons, .activitybuttons, .campingbtn {
+.campingbuttons {
     text-align: center; 
+    margin-bottom: 20px;
 }
 
+.campimages img{
+    width: 95%;
+}
 
-.regtitle {
+.campimages .col-4{
     text-align: center;
 }
 
-#bundlelink {
+/* --- CAMPING REG --- */
+.campingreg label {
+    color: #797979;
+}
+.campForm .btn {
+    margin: 10px 0;
+}
+
+/* --- FOOTER --- */
+footer {
+    margin-top: 20px; 
+    border-top: 1px solid #797979; 
+}
+footer h2 {
+    font-size: 16px;
+}
+.footerlinks ul {
+    list-style: none;
+}
+
+.footerlinks li {
+    margin-left: -40px;
+}
+
+.footerlinks a {
     color: #aa1d1d;
 }
 
-.topnav .btn, .topnav .btn:hover, .topnav .btn:active, .topnav .btn:visited, .topnav .btn:focus, .topnav .btn:active:focus {
-    background-color:  #0d0d0d !important;
-    color: #dbdbdb !important;
-    
+.footerlinks a:hover {
+    text-decoration: none;
+    color: #eaeaea;
+    transition: .5s;
 }
 
-.navbtn {
-    padding-right: 50px;
+.social .fa {
+    text-align: center;
+    text-decoration: none;
+    margin: 5px 2px;
+    padding: 20px; 
+    width: 60px;
+    font-size: 16px; 
 }
 
-#toplink {
-    padding-left: 10px;
+.social .fa:hover {
+    opacity: 0.7;
+}
+
+.social .fa-facebook {
+    background: #3B5998;
+    color: white;
+}
+
+.social .fa-twitter {
+    background: #55ACEE;
+    color: white;
+}
+
+.social .fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+/* --- PARTICIPANT --- */
+.participantInfo {
+    margin-top: 10px;
+    padding-top: 22%;
+}
+
+.participantInfo p {
+    color: #eaeaea;
+}
+
+label {
+    color: #797979;
+}
+
+.participant .btn {
+    padding: 10px 40px; 
+    margin-top: 10px; 
 }
