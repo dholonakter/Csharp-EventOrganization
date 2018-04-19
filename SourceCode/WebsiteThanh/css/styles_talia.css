@@ -1,4 +1,4 @@
-/* that shade of red: #ef2828 */
+/* that shade of red: #aa1d1d */
 /* --- thanh: organized and fixed --- */
 
 /* --- GENERIC --- */
@@ -8,7 +8,7 @@
 }
 
 html body {
-    background-color: black !important;
+    background-color:	#0D0D0D !important;
     color: white !important;
 }
 
@@ -18,20 +18,23 @@ h1, h2, h3 {
 
 h2 {
     text-transform: uppercase;
-    font-size: 28px;
+    font-size: 30px;
 }
 
 h3 {
     font-size: 18px;
 }
-
+p {
+    color: #797979;
+}
 .paginationButtons {
     text-align: center; 
 }
 
 .paginationButtons button {
+    background-color: #1f2525;
     margin-top: 20px;
-    font-size: 12px;
+    font-size: 10px;
 }
 .btn:hover {
     color:  #ef2828 !important;
@@ -40,10 +43,29 @@ h3 {
 }
 
 .btn {
+    font-size: 12px; 
     outline: none !important;
     box-shadow: none !important;
-    background-color:  #ef2828 !important;
-    color: white !important;
+    background-color: #aa1d1d;
+    color:  #eaeaea!important;
+    border-radius: 0px; 
+}
+
+/* --- ARTICLE FOR EVENTS + FUNACTIVITIES --- */
+.article {
+    margin-top: 15px; 
+}
+.article p {
+    color: #797979;
+}
+.article h3 {
+    padding: 5px 5px 5px 0;
+    color: #dbdbdb;
+}
+
+.article h3:hover {
+    transition: .5s;
+    cursor: pointer;
 }
 
 .articleImage {
@@ -52,27 +74,16 @@ h3 {
     margin-bottom: 10px;
 }
 
-/* --- ARTICLE FOR EVENTS + FUNACTIVITIES --- */
-.article {
-    padding-bottom: 10px;
+.article .btn {
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding: 15px;
+    float: right;
 }
-
-.article h3 {
-    padding: 5px;
-    padding-left: 10px;
-    border-bottom: 1px solid white;
-}
-
-.article h3:hover {
-    color: #ef2828;
-    background-color: #f5f5f5;
-    border-bottom: 1px solid #ef2828;
-    transition: .5s;
-    cursor: pointer;
-}
-
-/* --- LOGIN --- */
-.login, .signup {
+/* --- LOGIN + SIGNUP --- */
+.login {
     margin: auto; 
     margin-top: 5%; 
     width: 50%; 
@@ -111,15 +122,112 @@ h3 {
     width: 100%;
 }
 
-
-/* --- to be organized --- */
-
-.activitybuttons button {
-    width: 200px; 
-    padding: 30px;
-    margin: 20px; 
+/* --- HEADER --- */
+.miniTopNav ul {
+    text-align: right; 
+    list-style: none;
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+    padding-right: 14px;
 }
 
+.miniTopNav li{
+    display: inline-block;
+    margin-left: -1%;
+    margin-right: -1%;
+}
+
+.miniTopNav li a {
+    font-size: 11px; 
+    color: #dbdbdb;
+}
+
+.miniTopNav li a:hover {
+    text-decoration: none;
+    cursor: pointer;
+    color: #aa1d1d;
+}
+
+.miniTopNav li:nth-child(3){
+    margin-left: 2%; 
+    margin-right: -4.5%;
+}
+.logonav img {
+    float: left;
+    margin-top: -1.5%;
+    margin-left: -2.8%;
+    width: 20%;
+}
+.topNav ul {
+    padding: 0;
+    text-align: right;
+    margin-bottom: 30px;
+}
+
+.topNav li {
+    display: inline-block;
+    margin-right: -4.5px; 
+    padding: 18px 0 18px 0; 
+    background-color: black;    
+}
+
+.topNav li:first-child a{
+    margin-left: -2px;
+}
+.topNav li:last-child a {
+    margin-right: -2px;
+}
+
+.topNav li a{
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #dbdbdb;
+    padding: 20px 52px;
+}
+.topNav li a:hover{
+    text-decoration: none;
+    background-color: #1f2525;
+    border-bottom: 5px solid #aa1d1d;
+    color: #aa1d1d;
+    transition: .3s;
+}
+
+
+.activitybuttons button {
+    text-transform: uppercase;
+    font-size: 13x;
+    font-weight: bold;
+    height: 120px;
+    width: 150px;
+    margin: 0 20px; 
+}
+.indexNav button{
+    float: right;
+    margin: 0 0 0 10px;
+    margin-top: 5%;
+    height: 100px; 
+    width: 170px; 
+}
+.sponsors img {
+    margin-left: 10px;
+}
+.sponsors img:hover{
+    cursor: pointer;
+    filter: invert(5%);
+}
+.otherEvents {
+    margin-top: 30px;
+}
+.otherEvents img{
+    max-width: 100%;
+    margin-bottom: 10px;
+}
+
+
+
+
+/* --- to be organized --- */
 .settingImage, .funactivitytop, .eventimage, .funactivity, .camping1, .camping2, .campmap, .logo {
     max-width: 100%;
     max-height: 100%;
@@ -154,12 +262,12 @@ h3 {
 }
 
 #bundlelink {
-    color: #ef2828;
+    color: #aa1d1d;
 }
 
 .topnav .btn, .topnav .btn:hover, .topnav .btn:active, .topnav .btn:visited, .topnav .btn:focus, .topnav .btn:active:focus {
     background-color:  black !important;
-    color: white !important;
+    color: #dbdbdb !important;
     
 }
 
