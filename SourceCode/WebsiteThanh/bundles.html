@@ -1,90 +1,91 @@
 <!DOCTYPE html>
 <html>
+
     <head>
-        <title>Bundles</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 		<link rel="stylesheet" href="./css/bootstrap.min.css">
         <link rel="stylesheet" href="./js/bootstrap.bundle.min.js">
         <link rel="stylesheet" href="./css/styles_talia.css">
+        <title>Bundles</title>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
         <script>
             $(document).ready(function() {
                 $("header").load("header.html");
             });
         </script>
-        <script src="js/jquery.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
 
 
     </head>
+
     <body>
-        <header></header>
-        <h1 align="center">Bundles</h1>
-        <div class="container">
+        <header>
+        </header>
+        <div class="container bundles">
             <div class="row">
-                <div class="col-lg-4">
-                    <figure>
-                        <img src="images/Bundle1.png" alt="Discount1"/>
-                        <br/>
-                        <figcaption>
-                            Get 4 tickets and 50% discount on the 5th
-                        </figcaption>
-                    </figure> 
+                <div class="col-12">
+                    <h2>Bundles</h2>
+                    <p>generic bullshit about how to register. </p>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img src="images/Bundle2.png" alt="Discount1"/>
+                            <p>Get 4 tickets and 50% discount on the 5th</p>
+                        </div>
+
+                        <div class="col-lg-6">
+                            <img src="images/Bundle1.png" alt="Discount1"/>
+                            <p>30%  discount for 5 tickets  and a campsite</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <img src="images/Bundle1.png" alt="Discount1"/>
+                            <p>30%  discount for 5 tickets  and a campsite</p>
+                        </div>
+                        
+                         <div class="col-lg-6">
+                            <img src="images/Bundle2.png" alt="Discount1"/>
+                            <p>Get 4 tickets and 50% discount on the 5th</p>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="col-lg-4">
-                    <figure>
-                        <img src="images/Bundle2.png" alt="Discount1"/>
-                        <br/>
-                        <figcaption>
-                            30%  discount for 5 tickets  and a campsite
-                        </figcaption>
-                    </figure> 
+                <div class="col-4">
+                    <form class="col-12 campForm" action="">
+                        <div class="row">
+                            <div class="col-12">
+                                <h3>How will you pay?</h3>
+                            </div>
+
+                            <div class="col-12">
+                                <input type="radio" name="payment" value="ideal"> iDeal<br>
+                                <input type="radio" name="payment" value="paypal"> PayPal<br>
+                                <input type="radio" name="payment" value="ipay"> iPay<br>
+                                <input type="radio" name="payment" value="entrance"> At the entrance<br>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 article">
+                                <button type="submit" class="btn" >Purchase</button>
+                            </div>
+                        </div>
+                    </form> 
                 </div>
 
             </div>
 
-            <div class="row">
-                <div class="col-lg-4">
-                    <figure>
-                        <img src="images/Bundle1.png" alt="Discount1"/>
-                        <br/>
-                        <figcaption>
-                            Get 6 tickets for the price of 5
-                        </figcaption>
-
-
-                    </figure> 
-                </div>
-                <div class="col-lg-4">
-                    <figure>
-                        <img src="images/Bundle2.png" alt="Discount1"/>
-                        <br/>
-                        <figcaption>
-                            40% discount for 6 tickets and a campsite
-                        </figcaption>
-                    </figure> 
-                </div>
-
-            </div>
-        </div>
-
-        <div class="Pay">
-
-            <div class="col-lg-4">
-
-                <p>How you will pay</p>
-                <form>
-                    <input type="radio" name="iDeal" value="male" checked>iDeal<br>
-                    <input type="radio" name="Paypal" value="female"> paypal<br>
-                    <input type="radio" name="iPay" value="other">iPay <br>
-                    <button onclick="" class="Purchase">Purchase</button>
-                </form> 
-            </div> 
         </div>
 
 
-
-    </body>
+    <footer class="container"></footer></body>
 </html>

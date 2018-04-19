@@ -4,7 +4,7 @@
         <title>Participant's information</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 		<link rel="stylesheet" href="./css/bootstrap.min.css">
         <link rel="stylesheet" href="./js/bootstrap.bundle.min.js">
         <link rel="stylesheet" href="./css/styles_talia.css">
 
@@ -14,6 +14,7 @@
         <script>
             $(document).ready(function() {
                 $("header").load("header.html");
+                $("footer").load("footer.html");
             });
         </script>
 
@@ -25,59 +26,71 @@
         <div class="container participant">
             <div class="row">
                 <div class="col-12">
-                    <h2>Participant</h2>
+                    <h2>Your information</h2>
                 </div>
             </div>
 
             <div class="row">
-                <div class="col-4">
+                <div class="col-sm-12 col-md-12 col-lg-5">
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-sm-12 col-md-12 col-lg-5">
                             <img src="images/ProfileImage.png" class="img-responsive" id="profilePic" alt="profile pic">
                         </div>
-                        <div class="participantInfo col-6">
-                            <p> Name: Abiske Bacchan<br>
-                                Name: Abiske Bacchan<br>
-                                Name: Abiske Bacchan<br></p>
+
+                        <div class="col-sm-12 col-md-12 col-lg-7 participantInfo">
+                            <h2>Don Othello</h2>
+                            <ul>
+                                <li><b>Credits: $25.10</b></li>
+                                <li>donothello@shakespeare.com</li>
+                                <li>Date of birth: 31/02/1999</li>
+                                <li>Phone: 063141592</li>
+                                <li>Address: 2.07 PVT</li>
+                            </ul>
                         </div>
                     </div>
+
                 </div>
 
-                <div class="col-4">
+                <div class="col-sm-12 col-md-12 col-lg-7 participantPurchase">
                     <div class="row">
-                        <div class="col-12">
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
                             <h3>Ticket status</h3>
-                            <label>Purchase ticket: </label>
+                            <img style="width: 80%;" src="images/static_qr_code_without_logo.jpg">
                         </div>
 
-                        <div class="col-12">
-                            <input type="radio" name="payment" value="ideal"> iDeal<br>
-                            <input type="radio" name="payment" value="paypal"> PayPal<br>
-                            <input type="radio" name="payment" value="ipay"> iPay<br>
+                        <div class="col-sm-12 col-md-12 col-lg-6">
+                            <br/>
+                            <p><b>Entrance ticket #31415</b><br/>
+                                Ticket valid until: 25/10<br/></p>
+                            <p style="color: #797979">
+                                Please scan your tickets at the entrance or we will have to forcefully remove you from the premises, which may be a tiny bit unpleasant.</p>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="col-sm-12 col-md-12 col-lg-3">
+                            <h3>Camping status</h3>
+                            <img style="width: 80%;" src="images/static_qr_code_without_logo.jpg">
                         </div>
 
-                        <div class="col-12">
-                            <button onclick="" class="btn">Buy ticket</button>
+                        <div class="col-sm-12 col-md-12 col-lg-6 participantInfo">
+                            <br/>
+                            <p><b>Camp Orwell #1984</b><br/>
+                                Ticket valid until: 25/10</p>
+                            Members <br/>
+                            <ul>
+                                <li>B. Brother</li>
+                                <li>E. Goldstein</li>
+                            </ul>  
                         </div>
                     </div>
                 </div>
-
-                <div class="col-4">
-                    <h3>Camping status</h3>
-                    <button onclick="" class="btn">Rent a <br> camping site</button>
-                </div>
             </div>
 
-            <div class="row">
-                <div class="col-12">
-                    <h3>Enter bundle code:</h3>
-                </div>
-                <div class="col-12">
-                    <input type="text" name="lastname">
-                    <button onclick="" class="btn">Activation Code</button></div>
-            </div>
 
         </div>
-    </body>
-
+    <footer class="container"></footer></body>
 </html>

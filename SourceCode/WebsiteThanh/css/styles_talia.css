@@ -6,6 +6,7 @@
     font-family: Segoe UI;
     font-size: 14px; 
 }
+
 img {
     max-width: 100%;
 }
@@ -220,6 +221,9 @@ input {
 }
 
 /* --- ACTIVITIES PAGE --- */
+.activitybuttons {
+    text-align: center;
+}
 .activitybuttons button {
     text-transform: uppercase;
     font-size: 13x;
@@ -283,7 +287,17 @@ input {
 .campForm .btn {
     margin: 10px 0;
 }
+.campForm .article .btn {
+    float: none; 
+    font-size: 12px;
+    width: 250px ;
+    height: 50px; 
+}
 
+.campForm .article {
+    text-align: center; 
+    margin: 0;
+}
 /* --- FOOTER --- */
 footer {
     margin-top: 20px; 
@@ -339,20 +353,64 @@ footer h2 {
 }
 
 /* --- PARTICIPANT --- */
-.participantInfo {
-    margin-top: 10px;
-    padding-top: 22%;
+.participant {
+    font-size: 13px; 
+}
+
+.participant .col-5 {
+    margin-top: 5%; 
+}
+
+.col-5 .participantInfo {
+    margin-top: 25px; 
+}
+.participant h2, .participantPurchase h2, h3  {
+    color: #eaeaea;
 }
 
 .participantInfo p {
     color: #eaeaea;
 }
+.participantInfo h2 {
+    font-size: 14px;
+}
 
+.participantInfo ul {
+    list-style: none;
+}
+
+.participantInfo ul li {
+    color: #797979;
+    font-size: 13px;
+    margin-left: -40px; 
+}
 label {
     color: #797979;
 }
 
 .participant .btn {
-    padding: 10px 40px; 
-    margin-top: 10px; 
+    padding: 5px 10px; 
+}
+
+.participantPurchase p {
+    color: #eaeaea;
+}
+
+#profilePic {
+    margin: 10px;
+    margin-right: 0;
+    margin-left: 20px;
+    max-width: 80%;
+    border: 8px solid #aa1d1d; 
+}
+
+/* --- BUNDLES --- */
+.bundles p {
+    font-size: 13px; 
+}
+
+.bundles .article .btn {
+    margin: 0; 
+    font-size: 12px; 
+    float: left;
 }
