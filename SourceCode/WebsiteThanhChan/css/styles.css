@@ -11,18 +11,18 @@ body
 
 a
 {
-    color: #aa1d1d;
+    color: #EA6969;
 }
 
 a:hover
 {
-    color: #c82333;
+    color: #ffffff;
     text-decoration: none;
 }
 
 #collapsibleNavbar .font 
 {
-    font-size: 22px;
+    font-size: 20px;
 }
 
 h1, h2, h3, h4 
@@ -50,14 +50,12 @@ h4
     font-size: 140%;
 }
 
-.btn-danger
+/* buttons */
+
+.btn-info, .btn-danger, .btn-primary, .btn-secondary, btn-success, btn-warning
 {
-    background-color: #aa1d1d;
-    border-color: #aa1d1d ;
-    width: 100px;
-    height: 60px;
-    padding: 14px 0px;
-    margin: 0 3px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .btn-info
@@ -73,14 +71,50 @@ h4
     border-color: #bd2130 ;
 }
 
-.btn-info, .btn-danger, .btn-primary, .btn-secondary
+
+.btn-success
 {
-    font-size: 18px;
-    font-weight: bold;
+    background-color: #aa1d1d;
+    border-color: #aa1d1d ;
+}
+
+.btn-success:hover
+{
+    background-color: #c82333;
+    border-color: #bd2130 ;
+}
+
+.btn-secondary
+{
+    position: relative;
+    height: 80px;
+    width: 110px;
+    background-color: #aa1d1d;
+    border-color: #aa1d1d ;
+}
+
+.btn-secondary:hover
+{
+    background-color: #c82333;
+    border-color: #bd2130 ; 
 }
 
 /* fancy stuff */
 
+.centering
+{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.centering-Y
+{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
 ul.containeded a.assigned
 {
