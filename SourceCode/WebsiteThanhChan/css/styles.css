@@ -58,7 +58,7 @@ h4{font-size: 140%;}
 
 .btn-secondary
 {
-    position: relative;
+    position: relative; /* used together with .centering */
     height: 80px;
     width: 110px;
     background-color: #aa1d1d;
