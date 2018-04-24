@@ -3,64 +3,63 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 		<link rel="stylesheet" href="./css/bootstrap.min.css">
+        <!link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 		
+        <link rel="stylesheet" href="./css/bootstrap.min.css">
         <link rel="stylesheet" href="./js/bootstrap.bundle.min.js">
-        <link rel="stylesheet" href="./css/styles_talia.css">
+        <link rel="stylesheet" href="./css/styles.css">
+        <link rel="stylesheet" href="./css/stylesyt.css">
+
+        <!-- Custom fonts  -->
+        <link rel="stylesheet" href="vendor/font-awesome/css/font-awesome.min.css">
+        <link rel="stylesheet" href="vendor/simple-line-icons/css/simple-line-icons.css">
+        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet">
+
         <title>Login</title>
+
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $("header").load("header.html");
+                $("footer").load("footer.html");
+            });
+        </script>
+
     </head>
 
-    <body>
+    <body class="bg-light">
+        <header></header>
         <div class="container">
-            <div class="row login">
-                <div class ="col-12" style="text-align: center; margin-top: 10px;">
-                    <img src="./images/test.png" alt="Eloniah" class="logo img-responsive col-lg-12">
+            <div class="row">
+                <div class ="bg-secondary formthing col-5 mx-auto mt-5  text-center">
+                    <h2 class="mt-4 mb-3 pb-2">Login</h2>
+
+                    <form class>
+                        <div class="row mb-1 ml-5 mr-5">
+                            <p class="col-4 text-left">Username:</p>
+                            <input class="col-8" type="text" name="name" placeholder="Name">
+                        </div>
+
+                        <div class="row mb-1 ml-5 mr-5">
+                            <p class="col-4 my-auto text-left">Password:</p>
+                            <input class="col-8" type="text" name="name" placeholder="Name">
+                        </div>
+
+
+                        <div class="row mb-4 ml-5 mr-5">
+                            <button class="w-100 pt-2 pb-2 btn btn-info btn-success mt-3" type="submit">Login</button>
+                        </div>
+                    </form>
+
+                    <div class="row ml-5 mr-5">
+                        <p>Don't have an account?</p>
+                        <a class="mb-4 pt-2 pb-2 btn btn-info btn-success" href="signup.html">Sign up</a>
+                    </div>
                 </div>
-
-                <form class="col-12 loginForm " action="action_page.php">
-                    <div class="row">
-                        <h3 class="col-12">Login</h3>
-                    </div>
-
-                    <div class="row">
-                        <div  class="col-sm-12 col-lg-4">
-                            <label for="uname">Username</label>
-                        </div>
-
-                        <div  class="col-sm-12 col-lg-8">
-                            <input type="text" placeholder=" Enter Username" name="uname" required>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-sm-12 col-lg-4">
-                            <label for="psw">Password</label>
-                        </div>
-
-
-                        <div  class="col-sm-12 col-lg-8">
-                            <input type="password" placeholder=" Enter Password" name="psw" required>
-                        </div>
-
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12">
-                            <button type="submit" class="btn" >Login</button>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col-12" style="margin-top: 5px; margin-bottom: 5px;">Don't have an account yet?</div>
-
-                        <div class="col-12">
-                            <a href="signup.html"><button type="button" class="btn">Sign Up Now!</button></a>
-                        </div>
-                    </div>
-
-                </form> 
             </div>
-        </div>     
-
-    <footer class="container"></footer></body>
+        </div>
+    </body>
 </html>

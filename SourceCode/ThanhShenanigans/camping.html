@@ -29,11 +29,14 @@
             });
 
 
-            function camptopHover() { $("#camptopoverlay").addClass("overlay");
-            document.getElementById("camptopoverlay").innerHTML = "Veni, vidi, vici";
+            function camptopHover() { $("#camptopoverlay").addClass("overlay").ready(function() {
+                document.getElementById("camptopoverlay").innerHTML ="<p class='text-center'>CAMPING</p>";
+            });
+            
             }
             
             function camptopOut() { $("#camptopoverlay").removeClass("overlay");
+            document.getElementById("camptopoverlay").innerHTML ="";
             }
         </script>
 
@@ -44,27 +47,28 @@
         <header></header>
 
         <div class="container">
-            <div class="row position-relative" id="camptop" onmouseover="camptopHover();" onmouseout="camptopOut();">
+            <!--
+            <div class="row position-relative" id="camptop">
                 <img src="images/CampingTop.png" class="img-fluid">
-                <div class="" id="camptopoverlay"></div>
-            </div>
+                <div class="overlay" id="camptopoverlay"><p class='text-center'>CAMPING</p></div>
+            </div> -->
 
-            <h2 class="mb-3 display-4">Camping</h2>
+            <h2 class="mt-5 mb-3 h3">Camping</h2>
             <p class="mb-5">Molecaten Park Kuierpad is a campsite in Wezuperbrug, Drenthe, located by a lake / recreational pond. The campsite has pitches which are marked out, pitches without shade and pitches with some shade. Molecaten Park Kuierpad is located close to a sandy beach. The campground has a playground and sports field.</p>
 
             <div class="col-12 text-center mb-5">
-                <a onclick="location.href = 'campingreg.html';" class="btn btn-info pt-3 pb-3 pl-1 pr-1">Book a Camping Spot</a>
+                <a onclick="location.href = 'campingreg.html';" class="btn btn-info pt-3 pb-3 pl-4 pr-4">Book a Camping Spot</a>
             </div>
 
             <div class="row pb-4">
                 <div class="col-4">
-                    <img src="./images/camp1.png" alt="Camping" class="img-fluid">
+                    <img src="./images/Camping1.png" alt="Camping" class="img-fluid">
                 </div>
                 <div class="col-4">
-                    <img src="./images/camp2.png" alt="Camping" class="img-fluid">
+                    <img src="./images/Camping2.png" alt="Camping" class="img-fluid">
                 </div>
                 <div class="col-4">
-                    <img src="./images/camp3.png" alt="Camping" class="img-fluid">
+                    <img src="./images/Camping3.png" alt="Camping" class="img-fluid">
                 </div>
 
             </div>
