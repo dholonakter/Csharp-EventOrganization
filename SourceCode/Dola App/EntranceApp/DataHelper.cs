@@ -31,7 +31,7 @@ namespace EntranceApp
 
         public List<Visitors> GetAllVisitors()
         {
-            String sql = "SELECT * FROM Persons";
+            String sql = "SELECT * FROM Visitor";
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             List<Visitors> temp;
@@ -44,18 +44,24 @@ namespace EntranceApp
 
                 int id;
                 string name;
-                int rfid;
+                string emailAddress;
+                int phoneNumber;
+                double balance;
+                string rfid;
                 while (reader.Read())
                 {
                     id = Convert.ToInt32(reader["Id"]);
-                    name = Convert.ToString(reader["Name"]);
-                    rfid = Convert.ToInt32(reader["RFID"]);
-                    temp.Add(new Visitors(id, name, rfid));
+                    name = Convert.ToString(reader["FullName"]);
+                    emailAddress = Convert.ToString(reader["EmailAddress"]);
+                    phoneNumber = Convert.ToInt32(reader["PhoneNumber"]);
+                    balance = Convert.ToDouble(reader["Balance"]);
+                    rfid = Convert.ToString(reader["RFID"]);
+                    temp.Add(new Visitors( name,phoneNumber,emailAddress,balance,rfid));
                 }
             }
             catch
             {
-                MessageBox.Show("error while loading the persons");
+                MessageBox.Show("error while loading the Visitors");
             }
             finally
             {
@@ -64,17 +70,21 @@ namespace EntranceApp
             return temp;
         }
 
-        public int AddVisitor(int id, string name, int rfid)
+        public int AddVisitor( string name,string emailAddress,int phoneNumber ,double balance,string rfid)
         {   //Probably you expected a return-value of type bool:
             //true if the query was executed succesfully and false otherwise.
             //But what if you executed a delete-query? Or an update-query?
             //The return-value is teh number of records affected.
 
-            String sql = "INSERT INTO Persons VALUES (@name, @id, @rfid )";
+            String sql = "INSERT INTO visitor (FullName,EmailAddress,PhoneNumber,Balance,RFID)" + 
+                         "VALUES  (@FullName,@EmailAddress,@PhoneNumber,@Balance,@RFID )";
             MySqlCommand command = new MySqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@name", name);
-            command.Parameters.AddWithValue("@number", id);
-            command.Parameters.AddWithValue("@rfid", rfid);
+            command.Parameters.AddWithValue("@FullName", name);
+            command.Parameters.AddWithValue("@EmailAddress", emailAddress);
+            command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
+            command.Parameters.AddWithValue("@RFID", rfid);
+            command.Parameters.AddWithValue("@Balance", balance);
+
 
             //On internet you also see a solution like:
             // String sql = "INSERT INTO StudentTable VALUES (" +

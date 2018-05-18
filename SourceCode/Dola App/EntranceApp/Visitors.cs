@@ -5,30 +5,36 @@ using System.Text;
 
 namespace EntranceApp
 {
+    #region Field
     public class Visitors
     {
-        private int _id;
-        private int _rfid;
-        private double balance;
-        public int Id { get; }
+       // public int Id { get; set; }
         public string FullName { get; set; }
-        public int RFID { get; }
-        public int TelephonNumber { get; set; }
+        public string RFID { get;  set; }
+        public int PhoneNumber { get; set; }
         public string EmailAddress { get; set; }
         public double Balance { get; }
+        #endregion
 
 
-
-        public Visitors(int id, string name, int rfid,string fullname,int telephoneNumber,string emailaddress,double balance)
+        #region constructor
+        public Visitors( string name,int telephoneNumber,string emailaddress,double balance,string rfid)
         {
-            this.Id = id;
+            //this.Id = id;
             this.FullName = name;
+            this.PhoneNumber = telephoneNumber;
+            this.EmailAddress = emailaddress;
+            this.Balance = balance;
             this.RFID = rfid;
         }
-        public override string ToString()
-        {
-            return base.ToString();
-        }
+        #endregion
 
+        public string[] Info()
+        {
+            string[] info = new string[5];
+            info[0] = FullName;
+            info[1] = EmailAddress;
+            return info;
+        }
     }
 }

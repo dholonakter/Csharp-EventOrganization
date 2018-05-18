@@ -23,5 +23,10 @@ namespace FoodApp
             HomeForm home = new HomeForm();
             home.Show();
         }
+
+        private void EntranceForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

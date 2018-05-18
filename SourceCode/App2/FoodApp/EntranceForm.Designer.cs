@@ -189,6 +189,7 @@
             this.Name = "EntranceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EntranceForm";
+            this.Load += new System.EventHandler(this.EntranceForm_Load);
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
