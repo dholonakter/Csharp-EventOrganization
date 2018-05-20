@@ -20,6 +20,7 @@ namespace ProPApp
         public double Credit { get; set; }
         public bool CheckedIn { get; set; }
         public bool Paid { get; set; }
+        public List<StoreArticle> ArticlesBorrowed { get; set; } // need for checking out
 
         // Constructors
         public Visitor (int nr, string first, string last, string phone, string mail, string rfidNr, double cred, bool checkedIn, bool paid)
@@ -33,6 +34,7 @@ namespace ProPApp
             this.Credit = cred;
             this.CheckedIn = checkedIn;
             this.Paid = paid;
+            ArticlesBorrowed = new List<StoreArticle>();
         }
 
         // Methods

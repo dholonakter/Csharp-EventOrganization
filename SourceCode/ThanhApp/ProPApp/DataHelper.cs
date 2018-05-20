@@ -42,10 +42,10 @@ namespace ProPApp
                         "SET Credit = " + v.Credit + "," +
                         "CheckedIn = " + v.CheckedIn + "," +
                         "Paid = " + v.Paid + "," +
-                        "RFIDNr = " + (v.RFIDNr == ""? "NULL" : v.RFIDNr) + " " + 
+                        "RFIDNr = " + (v.RFIDNr == "" ? "NULL" : v.RFIDNr) + " " +
                         "WHERE VisitorNr = " + v.VisitorNr;
 
-            MessageBox.Show(sql);
+            //MessageBox.Show(sql);
 
             MySqlCommand command = new MySqlCommand(sql, connection);
 
@@ -193,10 +193,10 @@ namespace ProPApp
                     last = Convert.ToString(reader["LastName"]);
                     phone = Convert.ToString(reader["Phone"]);
                     mail = Convert.ToString(reader["Email"]);
-                    if (!(reader["RFIDNr"] is DBNull))
+                    if (!(reader["RFIDNr"] is DBNull && reader["RFIDNr"].ToString() == ""))
                     {
                         rfidNr = Convert.ToString(reader["RFIDNr"]);
-                    }
+                    } 
                     if (!(reader["Credit"] is DBNull))
                     {
                         cred = Convert.ToDouble(reader["Credit"]);
@@ -220,6 +220,51 @@ namespace ProPApp
                 connection.Close();
             }
             return temp;
+        }
+
+        /// <summary>
+        /// Finds all unreturned items and adds it to the selected visitor's object list
+        /// </summary>
+        /// <param name="v"></param>
+        public void FindUnreturnedItems(Visitor v)
+        {
+            string sql = "SELECT StoreNr, ArticleNr, ArticleName FROM NOT_RETURNED WHERE VisitorNr = " + v.VisitorNr;
+            
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                if (!reader.HasRows)
+                {
+                    return; 
+                }
+                else
+                {
+                    while (reader.Read())
+                    {
+                        // temporary variables
+                        int storeNr;
+                        int articleNr;
+                        string articleName;
+
+                        storeNr = Convert.ToInt32(reader["StoreNr"]);
+                        articleNr = Convert.ToInt32(reader["ArticleNr"]);
+                        articleName = Convert.ToString(reader["ArticleName"]);
+
+                        StoreArticle a = (new StoreArticle(storeNr, articleNr, articleName));
+                        v.ArticlesBorrowed.Add(a);
+                    }
+                }
+            }
+            catch (MySqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
         #endregion
 
@@ -292,7 +337,7 @@ namespace ProPApp
         {
             Visitor v = null;
             string sql = "SELECT * FROM VISITOR WHERE RFIDNr = " + rfidNr;
-            MessageBox.Show(sql);
+            //MessageBox.Show(sql);
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
@@ -345,7 +390,7 @@ namespace ProPApp
                     nr = Convert.ToInt32(reader["StoreNr"]);
                     name = Convert.ToString(reader["StoreName"]);
                     loc = Convert.ToString(reader["LocationName"]);
-                    
+
                     temp.Add(new Store(nr, name, loc));
                 }
                 return temp;
@@ -367,7 +412,7 @@ namespace ProPApp
 
         public List<StoreArticle> GetArticlesOfStore(Store s)
         {
-            string sql = "SELECT * FROM WAREHOUSE WHERE StoreNr = " + s.StoreNr;
+            string sql = "SELECT * FROM STORE_ARTICLE WHERE StoreNr = " + s.StoreNr;
             List<StoreArticle> temp = new List<StoreArticle>();
             MySqlCommand command = new MySqlCommand(sql, connection);
 
@@ -381,6 +426,7 @@ namespace ProPApp
                 string name;
                 decimal price;
                 int stock;
+                string img = "";
 
                 // reading
                 while (reader.Read())
@@ -389,8 +435,11 @@ namespace ProPApp
                     name = Convert.ToString(reader["ArticleName"]);
                     price = Convert.ToDecimal(reader["UnitPrice"]);
                     stock = Convert.ToInt32(reader["InStock"]);
-
-                    temp.Add(new StoreArticle(nr, name, price, stock));
+                    if (!(reader["img"] is DBNull))
+                    {
+                        img = Convert.ToString(reader["img"]);
+                    }
+                    temp.Add(new StoreArticle(s.StoreNr, nr, name, price, stock, img));
                 }
                 return temp;
             }
