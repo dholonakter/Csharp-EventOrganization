@@ -19,9 +19,10 @@ namespace ProPApp
         public string RFIDNr { get; set; }
         public double Credit { get; set; }
         public bool CheckedIn { get; set; }
+        public bool Paid { get; set; }
 
         // Constructors
-        public Visitor (int nr, string first, string last, string phone, string mail, string rfidNr, double cred, bool checkedIn)
+        public Visitor (int nr, string first, string last, string phone, string mail, string rfidNr, double cred, bool checkedIn, bool paid)
         {
             this.VisitorNr = nr;
             this.FirstName = first;
@@ -31,13 +32,14 @@ namespace ProPApp
             this.RFIDNr = rfidNr;
             this.Credit = cred;
             this.CheckedIn = checkedIn;
+            this.Paid = paid;
         }
 
         // Methods
         public override string ToString()
         {
-            return "Visitor #" + this.VisitorNr + " - " + this.FirstName + " " + this.LastName + " - Phone: " + this.Phone 
-                + " - Credit: " + this.Credit + " - Checked in: " + this.CheckedIn.ToString() + " - RFID: " + this.RFIDNr;
+            return "Visitor #" + this.VisitorNr + " - " + this.FirstName + " " + this.LastName + " - Phone: " + this.Phone
+                + " - Credit: " + this.Credit + " - Checked in: " + this.CheckedIn.ToString() + " - RFID: " + this.RFIDNr + " - Paid: " + this.Paid;
         }
     }
 }

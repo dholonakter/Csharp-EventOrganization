@@ -29,8 +29,10 @@ namespace ProPApp
         }
 
         // methods
+
+        #region VISITOR_HANDLING 
         /// <summary>
-        ///  This method updates credit, checked in status and rfid of the selected visitor in the database 
+        ///  Updates credit, checked in status and rfid of the selected visitor in the database 
         /// </summary>
         /// <param name="v">The selected visitor</param>
         /// <returns>-1 if fails, otherwise returns nr. of record affected (should be 1)</returns>
@@ -39,8 +41,12 @@ namespace ProPApp
             string sql = "UPDATE VISITOR " +
                         "SET Credit = " + v.Credit + "," +
                         "CheckedIn = " + v.CheckedIn + "," +
-                        "RFIDNr = '" + v.RFIDNr + "'" + 
+                        "Paid = " + v.Paid + "," +
+                        "RFIDNr = " + (v.RFIDNr == ""? "NULL" : v.RFIDNr) + " " + 
                         "WHERE VisitorNr = " + v.VisitorNr;
+
+            MessageBox.Show(sql);
+
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
@@ -59,13 +65,47 @@ namespace ProPApp
                 connection.Close();
             }
         }
+        public Visitor ReadDataVisitor(MySqlDataReader reader, Visitor v)
+        {
+            // temporary variables
+            int nr;
+            string first;
+            string last;
+            string phone;
+            string mail;
+            string rfidNr = "";
+            double cred = 0;
+            bool checkedIn;
+            bool paid;
+            // reading
+            while (reader.Read())
+            {
+                nr = Convert.ToInt32(reader["VisitorNr"]);
+                first = Convert.ToString(reader["FirstName"]);
+                last = Convert.ToString(reader["LastName"]);
+                phone = Convert.ToString(reader["Phone"]);
+                mail = Convert.ToString(reader["Email"]);
+                if (!(reader["RFIDNr"] is DBNull))
+                {
+                    rfidNr = Convert.ToString(reader["RFIDNr"]);
+                }
+                if (!(reader["Credit"] is DBNull))
+                {
+                    cred = Convert.ToDouble(reader["Credit"]);
+                }
+                checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
+                paid = Convert.ToBoolean(reader["Paid"]);
+                v = (new Visitor(nr, first, last, phone, mail, rfidNr, cred, checkedIn, paid));
+            }
+            return v;
+        }
 
         /// <summary>
-        /// This method finds the visitor with a given visitorNr
+        ///  Finds the visitor with a given visitorNr
         /// </summary>
         /// <param name="visitorNr"></param>
         /// <returns>Returns null if fails and the object visitor initiated if found</returns>
-        public Visitor FindVisitor(string visitorNr)
+        public Visitor FindVisitorByNr(string visitorNr)
         {
             Visitor v = null;
             string sql = "SELECT * FROM VISITOR WHERE VisitorNr = " + visitorNr;
@@ -76,35 +116,7 @@ namespace ProPApp
                 connection.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                // temporary variables
-                int nr;
-                string first;
-                string last;
-                string phone;
-                string mail;
-                string rfidNr = "";
-                double cred = 0;
-                bool checkedIn;
-
-                // reading
-                while (reader.Read())
-                {
-                    nr = Convert.ToInt32(reader["VisitorNr"]);
-                    first = Convert.ToString(reader["FirstName"]);
-                    last = Convert.ToString(reader["LastName"]);
-                    phone = Convert.ToString(reader["Phone"]);
-                    mail = Convert.ToString(reader["Email"]);
-                    if (!(reader["RFIDNr"] is DBNull))
-                    {
-                        rfidNr = Convert.ToString(reader["RFIDNr"]);
-                    }
-                    if (!(reader["Credit"] is DBNull))
-                    {
-                        cred = Convert.ToDouble(reader["Credit"]);
-                    }
-                    checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
-                    v = (new Visitor(nr, first, last, phone, mail, rfidNr, cred, checkedIn));
-                }
+                v = ReadDataVisitor(reader, v);
             }
             catch (MySqlException exc)
             {
@@ -122,11 +134,11 @@ namespace ProPApp
         }
 
         /// <summary>
-        /// This method links a visitor to a RFID card and updates it in the database
+        /// Links a visitor to a RFID card and updates it in the database
         /// </summary>
         /// <param name="v"></param>
         /// <param name="rfidNr"></param>
-        /// <returns>true if successful and false if not</returns>
+        /// <returns></returns>
         public bool LinkRFID(Visitor v, string rfidNr)
         {
             if (existsRFID(rfidNr))
@@ -146,10 +158,10 @@ namespace ProPApp
                 }
                 return false;
             }
-            }
+        }
 
         /// <summary>
-        /// This method returns all visitors in the database as a list of visitor object
+        ///  returns all visitors in the database as a list of visitor object
         /// </summary>
         /// <returns>A list of visitor object</returns>
         public List<Visitor> GetAllVisitors()
@@ -172,7 +184,7 @@ namespace ProPApp
                 string rfidNr = "";
                 double cred = 0;
                 bool checkedIn;
-
+                bool paid;
                 // reading
                 while (reader.Read())
                 {
@@ -190,8 +202,10 @@ namespace ProPApp
                         cred = Convert.ToDouble(reader["Credit"]);
                     }
                     checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
-                    temp.Add(new Visitor(nr, first, last, phone, mail, rfidNr, cred, checkedIn));
+                    paid = Convert.ToBoolean(reader["Paid"]);
+                    temp.Add(new Visitor(nr, first, last, phone, mail, rfidNr, cred, checkedIn, paid));
                 }
+                return temp;
             }
             catch (MySqlException exc)
             {
@@ -207,11 +221,11 @@ namespace ProPApp
             }
             return temp;
         }
+        #endregion
 
-
-        // *** THE CODE BELOW IS TO FIND A CERTAIN RFID. USEFULNESS CAN BE DISCUSSED I JUST WANNA HAVE FUN *** //
+        #region RFID_HANDLING 
         /// <summary>
-        /// This method gets all the RFID already used
+        /// Gets all the RFID already used
         /// </summary>
         /// <returns></returns>
         public List<String> GetAllRFIDs()
@@ -246,7 +260,13 @@ namespace ProPApp
 
             return usedRIFD;
         }
-        public bool existsRFID (string rfidNr)
+
+        /// <summary>
+        /// Checks if a certain RFID tag exists in the database
+        /// </summary>
+        /// <param name="rfidNr"></param>
+        /// <returns></returns>
+        public bool existsRFID(string rfidNr)
         {
             List<String> usedRfids = GetAllRFIDs();
             if (usedRfids.Count > 0)
@@ -262,5 +282,132 @@ namespace ProPApp
             }
             return false;
         }
+
+        /// <summary>
+        /// Finds visitor by RFID tag
+        /// </summary>
+        /// <param name="rfidNr"></param>
+        /// <returns></returns>
+        public Visitor FindVisitorByTag(string rfidNr)
+        {
+            Visitor v = null;
+            string sql = "SELECT * FROM VISITOR WHERE RFIDNr = " + rfidNr;
+            MessageBox.Show(sql);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                v = ReadDataVisitor(reader, v);
+            }
+            catch (MySqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return v;
+        }
+        #endregion
+
+        #region STORE_HANDLING
+        /// <summary>
+        /// Gets all stores in database with their locations
+        /// </summary>
+        /// <returns></returns>
+        public List<Store> GetAllStores()
+        {
+            string sql = "SELECT * FROM LIST_OF_STORES";
+            List<Store> temp = new List<Store>();
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // temporary variables
+                int nr;
+                string name;
+                string loc;
+
+                // reading
+                while (reader.Read())
+                {
+                    nr = Convert.ToInt32(reader["StoreNr"]);
+                    name = Convert.ToString(reader["StoreName"]);
+                    loc = Convert.ToString(reader["LocationName"]);
+                    
+                    temp.Add(new Store(nr, name, loc));
+                }
+                return temp;
+            }
+            catch (MySqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
+
+        public List<StoreArticle> GetArticlesOfStore(Store s)
+        {
+            string sql = "SELECT * FROM WAREHOUSE WHERE StoreNr = " + s.StoreNr;
+            List<StoreArticle> temp = new List<StoreArticle>();
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // temporary variables
+                int nr;
+                string name;
+                decimal price;
+                int stock;
+
+                // reading
+                while (reader.Read())
+                {
+                    nr = Convert.ToInt32(reader["ArticleNr"]);
+                    name = Convert.ToString(reader["ArticleName"]);
+                    price = Convert.ToDecimal(reader["UnitPrice"]);
+                    stock = Convert.ToInt32(reader["InStock"]);
+
+                    temp.Add(new StoreArticle(nr, name, price, stock));
+                }
+                return temp;
+            }
+            catch (MySqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
+        #endregion
     }
 }
