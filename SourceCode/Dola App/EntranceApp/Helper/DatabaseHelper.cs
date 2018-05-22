@@ -6,6 +6,7 @@ using System.Windows.Forms;
 using MySql.Data;
 using MySql.Data.MySqlClient;
 using EntranceApp.Helper;
+using EntranceApp.Models;
 
 namespace EntranceApp
 {
@@ -54,10 +55,10 @@ namespace EntranceApp
                 logger.LogMessage(errorType, message);
             }
         }
-        private Visitor FindVisitor(string rfidCode)
+        private Rfid FindRFID(string rfidCode)
         {
-            Visitor foundVisitor = null;
-            string sql = "SELECT * FROM visitor WHERE RFID ='" + rfidCode+"'";
+            Rfid foundRfid = null;
+            string sql = "SELECT * FROM rfid WHERE Code ='" + rfidCode+"'";
             
             try
             {
@@ -66,6 +67,43 @@ namespace EntranceApp
                 MySqlCommand command = new MySqlCommand(sql, connection);
                 MySqlDataReader reader = command.ExecuteReader();
                 
+                int id;
+                string code;
+                bool isCardLinked;
+                int? vistorId;
+                // reading
+                while (reader.Read())
+                {
+                    id = Convert.ToInt32(reader["Id"]);
+                    code = Convert.ToString(reader["Code"]);
+                    isCardLinked = Convert.ToBoolean(reader["IsCardLinked"]);
+                    vistorId = reader["Visitor_Id"] as int?;
+                    foundRfid = new Rfid(id, code, isCardLinked, vistorId);
+                }
+            }
+            catch (MySqlException)
+            {
+                LoggingError(ErrorType.MySqlException, "FindRFID: Something went wrong while querying");
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return foundRfid;
+        }
+
+        public Visitor FindVisitor(string rfidCode)
+        {
+            Visitor foundVisitor = null;
+            string sql = "SELECT * FROM visitor WHERE RFID ='" + rfidCode + "'";
+
+            try
+            {
+                connection.Open();
+
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
                 int id;
                 string fullName;
                 int phone;
@@ -77,14 +115,15 @@ namespace EntranceApp
                 {
                     id = Convert.ToInt32(reader["Id"]);
                     fullName = Convert.ToString(reader["FullName"]);
-                    phone = Convert.ToInt32(reader["PhoneNumber"]);
                     mail = Convert.ToString(reader["EmailAddress"]);
+                    phone = Convert.ToInt32(reader["PhoneNumber"]);
                     isCardLinked = Convert.ToBoolean(reader["IsCardLinked"]);
                     isCheckedIn = Convert.ToBoolean(reader["IsCheckedIn"]);
                     balance = Convert.ToInt32(reader["Balance"]);
-                    foundVisitor = new Visitor(fullName, phone, mail, balance, rfidCode);
+                    foundVisitor = new Visitor(fullName, mail, phone, balance, rfidCode);
                     foundVisitor.IsCheckedIn = isCheckedIn;
                     foundVisitor.IsCardLinked = isCardLinked;
+                    foundVisitor.Id = id;
                 }
             }
             catch (MySqlException)
@@ -97,7 +136,6 @@ namespace EntranceApp
             }
             return foundVisitor;
         }
-
         private bool UpdateVisitorTableIsCheckedInColumn(string rfidCode, bool checkedIn)
         {
             bool onSuccess = false;
@@ -110,7 +148,7 @@ namespace EntranceApp
             {
                 connection.Open();
                 MySqlCommand command = new MySqlCommand(sql, connection);
-                if (command.ExecuteNonQuery() > 1)
+                if (command.ExecuteNonQuery() > 0)
                 {
                     onSuccess = true;
                 }
@@ -121,6 +159,104 @@ namespace EntranceApp
 
                 LoggingError(ErrorType.MySqlException, "Something went wrong while querying");
 
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return onSuccess;
+        }
+
+        private bool DeleteVisitorFromTable(string rfidCode)
+        {
+            bool onSuccess = false;
+
+            string sql = "DELETE FROM visitor WHERE RFID='"+rfidCode+"'";
+
+
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    onSuccess = true;
+                }
+
+            }
+            catch (MySqlException)
+            {
+
+                LoggingError(ErrorType.MySqlException, "DeleteVisitorFromTable: Something went wrong while deleting");
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return onSuccess;
+        }
+
+        private bool UpdateRfidTableIsCardLinkedColumn(string rfidCode, bool isCardLinked)
+        {
+            bool onSuccess = false;
+
+            string sql = "UPDATE rfid " +
+            "SET IsCardLinked = " + isCardLinked +
+             " WHERE Code='" + rfidCode + "'";
+
+            try
+            {
+                connection.Open();
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    onSuccess = true;
+                }
+
+            }
+            catch (MySqlException)
+            {
+
+                LoggingError(ErrorType.MySqlException, "UpdateRfidColumn: Something went wrong while updating");
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return onSuccess;
+        }
+
+        private bool AddVisitorToDeletedVisitorTable(Visitor visitorTobeAdded)
+        {
+            bool onSuccess = false;
+
+            String sql = "INSERT INTO deletedvisitor (FullName,EmailAddress,PhoneNumber,Balance,RFID,VisitorId)" +
+               "VALUES  (@FullName,@EmailAddress,@PhoneNumber,@Balance,@RFID,@VisitorId)";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@FullName", visitorTobeAdded.FullName);
+            command.Parameters.AddWithValue("@EmailAddress", visitorTobeAdded.EmailAddress);
+            command.Parameters.AddWithValue("@PhoneNumber", visitorTobeAdded.PhoneNumber);
+            command.Parameters.AddWithValue("@RFID", visitorTobeAdded.RFID);
+            command.Parameters.AddWithValue("@Balance", visitorTobeAdded.Balance);
+            command.Parameters.AddWithValue("@VisitorId", visitorTobeAdded.Id);
+
+            try
+            {
+
+                connection.Open();
+                if (command.ExecuteNonQuery() > 0)
+                {
+                    connection.Close();
+                    onSuccess = true;
+                }
+
+
+            }
+            catch
+            {
+                LoggingError(ErrorType.MySqlException, "AddVisitorToDeletedVisitorTable: Error while adding visitor");
             }
             finally
             {
@@ -143,12 +279,12 @@ namespace EntranceApp
             bool onSuccess = false;
             if(foundVistor!=null)
             {
-               if(foundVistor.IsCheckedIn)
+               if(foundVistor.IsCheckedIn && foundVistor.IsCardLinked)
                 {
                     foundVistor.IsCheckedIn = false;
                     onSuccess= UpdateVisitorTableIsCheckedInColumn(rfidCode, false);
                 }
-                else
+                else if(foundVistor.IsCardLinked)
                 {
                     foundVistor.IsCheckedIn = true;
                     onSuccess= UpdateVisitorTableIsCheckedInColumn(rfidCode, true);
@@ -156,8 +292,10 @@ namespace EntranceApp
             }
             return onSuccess;
         }
-
-       
+        public Rfid GetRFID(string rfidCode)
+        {
+            return FindRFID(rfidCode);
+        }
 
         public List<Visitor> GetAllVisitors()
         {
@@ -181,7 +319,7 @@ namespace EntranceApp
                     phoneNumber = Convert.ToInt32(reader["PhoneNumber"]);
                     balance = Convert.ToDouble(reader["Balance"]);
                     rfid = Convert.ToString(reader["RFID"]);
-                    temp.Add(new Visitor(name, phoneNumber, emailAddress, balance, rfid));
+                    temp.Add(new Visitor(name, emailAddress,phoneNumber, balance, rfid));
                 }
             }
             catch
@@ -194,32 +332,66 @@ namespace EntranceApp
             }
             return temp;
         }
-  
-        public int AddVisitor(string name, string emailAddress, int phoneNumber, double balance, string rfid)
-        { 
-            String sql = "INSERT INTO visitor (FullName,EmailAddress,PhoneNumber,Balance,RFID)" +
-                         "VALUES  (@FullName,@EmailAddress,@PhoneNumber,@Balance,@RFID )";
-            MySqlCommand command = new MySqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@FullName", name);
-            command.Parameters.AddWithValue("@EmailAddress", emailAddress);
-            command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
-            command.Parameters.AddWithValue("@RFID", rfid);
-            command.Parameters.AddWithValue("@Balance", balance);
 
-            try
+        public bool LinkOrUnLinkCard(string name, string emailAddress, int phoneNumber, double balance, bool linkCard, string rfid)
+        {
+            bool onSuccess = false;
+            Visitor foundvisitor = FindVisitor(rfid);
+            if (linkCard)
             {
-                connection.Open();
-                int nrOfRecordsChanged = command.ExecuteNonQuery();
-                return nrOfRecordsChanged;
+                if (foundvisitor == null)
+                {
+                    String sql = "INSERT INTO visitor (FullName,EmailAddress,PhoneNumber,Balance,RFID,IsCardLinked,IsCheckedIn)" +
+                                  "VALUES  (@FullName,@EmailAddress,@PhoneNumber,@Balance,@RFID,@IsCardLinked,@IsCheckedIn )";
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@FullName", name);
+                    command.Parameters.AddWithValue("@EmailAddress", emailAddress);
+                    command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
+                    command.Parameters.AddWithValue("@RFID", rfid);
+                    command.Parameters.AddWithValue("@Balance", balance);
+                    command.Parameters.AddWithValue("@IsCardLinked", linkCard);
+                    command.Parameters.AddWithValue("@IsCheckedIn", false);
+
+                    try
+                    {
+
+                        connection.Open();
+                        if (command.ExecuteNonQuery() > 0)
+                        {
+                            connection.Close();
+                            onSuccess = UpdateRfidTableIsCardLinkedColumn(rfid, linkCard);
+                        }
+
+
+                    }
+                    catch
+                    {
+                        LoggingError(ErrorType.MySqlException, "AddVisitor: Error while adding visitor");
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                }
+
             }
-            catch
+            else
             {
-                return -1;
+                if (foundvisitor != null)
+                {
+                    onSuccess = AddVisitorToDeletedVisitorTable(foundvisitor);
+                    if(onSuccess)
+                    {
+                        onSuccess = DeleteVisitorFromTable(rfid);
+                        if (onSuccess)
+                        {
+                            onSuccess = UpdateRfidTableIsCardLinkedColumn(rfid, false);
+                        }
+                    }
+                   
+                }
             }
-            finally
-            {
-                connection.Close();
-            }
+            return onSuccess;
         }
         #endregion        
     }

@@ -53,11 +53,13 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cbxSelectedAmount = new System.Windows.Forms.ComboBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rbtnLinkCard = new System.Windows.Forms.RadioButton();
             this.rbtnUnLinkCard = new System.Windows.Forms.RadioButton();
-            this.button3 = new System.Windows.Forms.Button();
-            this.label11 = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.lblCardLinkedStatus = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.timerResetControls = new System.Windows.Forms.Timer(this.components);
@@ -193,6 +195,7 @@
             this.btnClearLogs.TabIndex = 7;
             this.btnClearLogs.Text = "ClearLogs";
             this.btnClearLogs.UseVisualStyleBackColor = true;
+            this.btnClearLogs.Click += new System.EventHandler(this.btnClearLogs_Click);
             // 
             // tbName
             // 
@@ -209,7 +212,7 @@
             this.btnPerform.TabIndex = 10;
             this.btnPerform.Text = "Perform";
             this.btnPerform.UseVisualStyleBackColor = true;
-            this.btnPerform.Click += new System.EventHandler(this.btnPerform_Click);
+            this.btnPerform.Click += new System.EventHandler(this.WhenPerformButtonIsClicked);
             // 
             // label6
             // 
@@ -231,7 +234,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(23, 113);
+            this.label8.Location = new System.Drawing.Point(23, 129);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(60, 13);
             this.label8.TabIndex = 15;
@@ -240,29 +243,30 @@
             // tbrfid
             // 
             this.tbrfid.Enabled = false;
-            this.tbrfid.Location = new System.Drawing.Point(103, 110);
+            this.tbrfid.Location = new System.Drawing.Point(103, 125);
             this.tbrfid.Name = "tbrfid";
             this.tbrfid.Size = new System.Drawing.Size(205, 20);
             this.tbrfid.TabIndex = 16;
             // 
             // tbEmailAddress
             // 
-            this.tbEmailAddress.Location = new System.Drawing.Point(103, 77);
+            this.tbEmailAddress.Location = new System.Drawing.Point(103, 44);
             this.tbEmailAddress.Name = "tbEmailAddress";
             this.tbEmailAddress.Size = new System.Drawing.Size(205, 20);
             this.tbEmailAddress.TabIndex = 18;
             // 
             // tbPhoneNumber
             // 
-            this.tbPhoneNumber.Location = new System.Drawing.Point(103, 48);
+            this.tbPhoneNumber.Location = new System.Drawing.Point(103, 71);
             this.tbPhoneNumber.Name = "tbPhoneNumber";
             this.tbPhoneNumber.Size = new System.Drawing.Size(205, 20);
             this.tbPhoneNumber.TabIndex = 19;
+            this.tbPhoneNumber.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbPhoneNumber_KeyPress);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 51);
+            this.label5.Location = new System.Drawing.Point(26, 48);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(35, 13);
             this.label5.TabIndex = 20;
@@ -271,7 +275,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(23, 84);
+            this.label12.Location = new System.Drawing.Point(26, 74);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(41, 13);
             this.label12.TabIndex = 21;
@@ -279,9 +283,11 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cbxSelectedAmount);
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.tbName);
-            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.lblCardLinkedStatus);
+            this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.label12);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label8);
@@ -297,13 +303,27 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Buy Tickets";
             // 
+            // cbxSelectedAmount
+            // 
+            this.cbxSelectedAmount.FormattingEnabled = true;
+            this.cbxSelectedAmount.Items.AddRange(new object[] {
+            "0",
+            "10",
+            "20",
+            "30",
+            "50"});
+            this.cbxSelectedAmount.Location = new System.Drawing.Point(103, 96);
+            this.cbxSelectedAmount.Name = "cbxSelectedAmount";
+            this.cbxSelectedAmount.Size = new System.Drawing.Size(205, 21);
+            this.cbxSelectedAmount.TabIndex = 24;
+            // 
             // groupBox4
             // 
             this.groupBox4.Controls.Add(this.rbtnLinkCard);
             this.groupBox4.Controls.Add(this.rbtnUnLinkCard);
             this.groupBox4.Controls.Add(this.btnPerform);
-            this.groupBox4.Controls.Add(this.button3);
-            this.groupBox4.Location = new System.Drawing.Point(28, 162);
+            this.groupBox4.Controls.Add(this.btnClear);
+            this.groupBox4.Location = new System.Drawing.Point(28, 173);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(282, 82);
             this.groupBox4.TabIndex = 23;
@@ -332,28 +352,38 @@
             this.rbtnUnLinkCard.Text = "UnLinkCard";
             this.rbtnUnLinkCard.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnClear
             // 
-            this.button3.Location = new System.Drawing.Point(165, 43);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 23);
-            this.button3.TabIndex = 10;
-            this.button3.Text = "Clear";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnClear.Location = new System.Drawing.Point(165, 43);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(90, 23);
+            this.btnClear.TabIndex = 10;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // label11
+            // lblCardLinkedStatus
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(102, 142);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(88, 13);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "...........................";
+            this.lblCardLinkedStatus.AutoSize = true;
+            this.lblCardLinkedStatus.Location = new System.Drawing.Point(102, 155);
+            this.lblCardLinkedStatus.Name = "lblCardLinkedStatus";
+            this.lblCardLinkedStatus.Size = new System.Drawing.Size(88, 13);
+            this.lblCardLinkedStatus.TabIndex = 2;
+            this.lblCardLinkedStatus.Text = "...........................";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(26, 103);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(43, 13);
+            this.label4.TabIndex = 21;
+            this.label4.Text = "TopUp:";
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(23, 142);
+            this.label10.Location = new System.Drawing.Point(23, 155);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(60, 13);
             this.label10.TabIndex = 15;
@@ -373,7 +403,7 @@
             // timerResetControls
             // 
             this.timerResetControls.Interval = 1000;
-            this.timerResetControls.Tick += new System.EventHandler(this.timerResetControls_Tick);
+            this.timerResetControls.Tick += new System.EventHandler(this.TimerToResetControls_Tick);
             // 
             // MainForm
             // 
@@ -388,8 +418,8 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Entrance App";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
@@ -427,13 +457,15 @@
         private System.Windows.Forms.Label lblRFIDCode;
         private System.Windows.Forms.Label lblEmailAddress;
         private System.Windows.Forms.Label lblMessage;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.RadioButton rbtnUnLinkCard;
         private System.Windows.Forms.RadioButton rbtnLinkCard;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label lblCardLinkedStatus;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Timer timerResetControls;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ComboBox cbxSelectedAmount;
     }
 }
 

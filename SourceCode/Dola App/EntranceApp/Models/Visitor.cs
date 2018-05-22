@@ -8,6 +8,7 @@ namespace EntranceApp
     public class Visitor
     {
         #region Properties
+        public int Id { get; set; }
         public string FullName { get; set; }
         public string RFID { get; set; }
         public int PhoneNumber { get; set; }
@@ -18,7 +19,7 @@ namespace EntranceApp
         #endregion
 
         #region constructor
-        public Visitor(string name, int telephoneNumber, string emailaddress, double balance, string rfid)
+        public Visitor(string name,string emailaddress, int telephoneNumber,double balance ,string rfid)
         {
             this.FullName = name;
             this.PhoneNumber = telephoneNumber;

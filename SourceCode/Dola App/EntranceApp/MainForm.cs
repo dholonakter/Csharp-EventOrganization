@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using Phidget22;
@@ -6,10 +6,11 @@ using Phidget22.Events;
 using EntranceApp.Helper;
 using System.Drawing;
 using System.Threading;
+using EntranceApp.Models;
 
 namespace EntranceApp
 {
-    public partial class MainForm : Form,ILogger
+    public partial class MainForm : Form, ILogger
     {
         #region Public Constants
         public const string lblDefaultText = "...........................";
@@ -18,7 +19,7 @@ namespace EntranceApp
         #region Private Fields
         private DatabaseHelper dh;
         private RFID myRFIDReader;
-
+        private bool isAllowedToLinkOrUnLinkCard;
         #endregion
 
         #region Constructor
@@ -39,43 +40,14 @@ namespace EntranceApp
         }
         #endregion
 
-        #region Private Event Handlers Methods
-        private void ProcessThisTag(object sender, RFIDTagEventArgs e)
+        #region Private Methods
+        private bool InputValidation()
         {
-            AssignRFIDCodeToTextBox(e.Tag);
-            Visitor  checkedInVisitor;
-            if(dh.MakeCheckInOrOut(e.Tag, out checkedInVisitor))
-            {
-                if (checkedInVisitor != null)
-                {
-                    lblFullName.Text = checkedInVisitor.FullName;
-                    lblEmailAddress.Text = checkedInVisitor.EmailAddress;
-                    lblRFIDCode.Text = e.Tag;
-                    lblMessage.BackColor = Color.Green;
-                    lblMessage.Text = "Success";
-                    if (checkedInVisitor.IsCheckedIn)
-                    {
-                        btnCheckIn.BackColor = Color.Green;
-                        btnCheckOut.BackColor = SystemColors.Control;
-                        timerResetControls.Start();
-                       // ResetControls();
-                    }
-                    else
-                    {
-                        btnCheckOut.BackColor = Color.Green;
-                        btnCheckIn.BackColor = SystemColors.Control;
-                        timerResetControls.Start();
-                        //ResetControls();
-                    }
-                }
-            }
-            else
-            {
-                lblMessage.BackColor = SystemColors.Control;
-                btnCheckIn.BackColor = SystemColors.Control;
-                btnCheckOut.BackColor = SystemColors.Control;
-                lblMessage.Text = "UnSuccess";
-            }
+            return !String.IsNullOrEmpty(tbName.Text) &&
+                   !String.IsNullOrEmpty(tbEmailAddress.Text) &&
+                   !String.IsNullOrEmpty(tbPhoneNumber.Text) &&
+                   !String.IsNullOrEmpty(tbrfid.Text) &&
+                   !String.IsNullOrEmpty(cbxSelectedAmount.Text);
         }
         private void ResetControls()
         {
@@ -87,50 +59,240 @@ namespace EntranceApp
             btnCheckIn.BackColor = SystemColors.Control;
             btnCheckOut.BackColor = SystemColors.Control;
         }
-        private void AssignRFIDCodeToTextBox(string rfidCode)
+
+        private void ResetBuyTicketsGroupControls()
         {
-            if (rbtnLinkCard.Checked || rbtnUnLinkCard.Checked)
+            tbName.Text = string.Empty;
+            tbEmailAddress.Text = string.Empty;
+            tbPhoneNumber.Text = string.Empty;
+            tbrfid.Text = string.Empty;
+            lblCardLinkedStatus.Text = lblDefaultText;
+            cbxSelectedAmount.Text = string.Empty;
+            rbtnLinkCard.Checked = false;
+            rbtnUnLinkCard.Checked = false;
+        }
+        #endregion
+
+        #region Private Event Handlers Methods
+
+        private void ShowErrorMessage(string message)
+        {
+            lblMessage.Text = "Cannot find visitor";
+            lblMessage.BackColor = Color.Red;
+        }
+        private void ShowSuccessMessage(string message)
+        {
+            lblMessage.BackColor = Color.Green;
+            lblMessage.Text = message;
+        }
+        private void ResetControlsBackColor()
+        {
+            lblMessage.BackColor = SystemColors.Control;
+            btnCheckIn.BackColor = SystemColors.Control;
+            btnCheckOut.BackColor = SystemColors.Control;
+        }
+        private void SetLabelsTextOfCheckInCheckOutGroupBox(Visitor visitor)
+        {
+            if (visitor != null)
             {
-                tbrfid.Text = rfidCode;
+                lblFullName.Text = visitor.FullName;
+                lblEmailAddress.Text = visitor.EmailAddress;
+                lblRFIDCode.Text = visitor.RFID;
+                if (visitor.IsCheckedIn)
+                {
+                    ShowSuccessMessage("Check In Success");
+                    btnCheckIn.BackColor = Color.Green;
+                    btnCheckOut.BackColor = SystemColors.Control; 
+                }
+                else
+                {
+                    ShowSuccessMessage("Check Out Success");
+                    btnCheckOut.BackColor = Color.Green;
+                    btnCheckIn.BackColor = SystemColors.Control;
+                }
             }
         }
-        private void Form1_Load(object sender, EventArgs e)
+        private void CardCheckedInOrOut(Rfid rfid)
+        {
+            if (rfid != null)
+            {
+                Visitor checkedInVisitor;
+                if (dh.MakeCheckInOrOut(rfid.Code, out checkedInVisitor))
+                {
+                    SetLabelsTextOfCheckInCheckOutGroupBox(checkedInVisitor);
+                    timerResetControls.Start();
+                }
+                else
+                {
+                    ResetControlsBackColor();
+                    ShowErrorMessage("Cannot find vistor");
+                    timerResetControls.Start();
+                }
+            }
+        }
+
+        private void SetTextBoxTextWhenUnLinkRadioButtonIsChecked(string rfidCode)
+        {
+            Visitor foundVisitor = dh.FindVisitor(rfidCode);
+            tbName.Text = foundVisitor.FullName;
+            tbEmailAddress.Text = foundVisitor.EmailAddress;
+            tbPhoneNumber.Text = foundVisitor.PhoneNumber.ToString();
+            tbrfid.Text = foundVisitor.RFID;
+            cbxSelectedAmount.Text = foundVisitor.Balance.ToString();
+            lblCardLinkedStatus.Text = "Card is Linked";
+        }
+        private void ProcessThisTag(object sender, RFIDTagEventArgs e)
+        {
+            Rfid foundRFID = dh.GetRFID(e.Tag);
+
+            if (foundRFID != null)
+            {
+                if (rbtnLinkCard.Checked)
+                {
+                    if (!foundRFID.IsCardLinked)
+                    {
+                        isAllowedToLinkOrUnLinkCard = true;
+                        tbrfid.Text = foundRFID.Code;
+                    }
+
+                }
+                else if (rbtnUnLinkCard.Checked)
+                {
+                    if (foundRFID.IsCardLinked)
+                    {
+                        isAllowedToLinkOrUnLinkCard = true;
+                        SetTextBoxTextWhenUnLinkRadioButtonIsChecked(foundRFID.Code);
+                    }
+
+                }
+                else
+                {
+                    CardCheckedInOrOut(foundRFID);
+                }
+            }
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
         {
             try
             {
-                
                 myRFIDReader.Tag += new RFIDTagEventHandler(ProcessThisTag);
                 myRFIDReader.Open();
-                lbxLogMessage.Items.Add("Open");
+                LogMessage(ErrorType.RFID, "Open");
             }
-            catch (PhidgetException) { lbxLogMessage.Items.Add("No RFID-reader opened"); }
+            catch (PhidgetException)
+            {
+                LogMessage(ErrorType.RFID, "No RFID-reader opened");
+            }
         }
-
-        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
-           
+
             myRFIDReader.Tag -= new RFIDTagEventHandler(ProcessThisTag);
             myRFIDReader.Close();
-            lbxLogMessage.Items.Add("Closed ");
+            LogMessage(ErrorType.RFID, "Closed");
+        }
+
+        private void TimerToResetControls_Tick(object sender, EventArgs e)
+        {
+            if (isAllowedToLinkOrUnLinkCard)
+            {
+                ResetBuyTicketsGroupControls();
+                isAllowedToLinkOrUnLinkCard = false;
+            }
+            else
+            {
+                ResetControls();
+            }
+            timerResetControls.Stop();
+        }
+        private void WhenPerformButtonIsClicked(object sender, EventArgs e)
+        {
+            string name, email, rfidCode;
+            int phone;
+            double balance;
+            if (isAllowedToLinkOrUnLinkCard)
+            {
+                if (rbtnLinkCard.Checked)
+                {
+                    if (InputValidation())
+                    {
+                        name = tbName.Text;
+                        email = tbEmailAddress.Text;
+                        phone = int.Parse(tbPhoneNumber.Text);
+                        rfidCode = tbrfid.Text;
+                        balance = Convert.ToDouble(cbxSelectedAmount.Text);
+                        if (dh.LinkOrUnLinkCard(name, email, phone, balance, true, rfidCode))
+                        {
+                            lblCardLinkedStatus.Text = "Linked Successfully";
+                            timerResetControls.Start();
+                        }
+                        else
+                        {
+                            lblCardLinkedStatus.Text = "Card is already Linked";
+                            timerResetControls.Start();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not All Fields are complete!!!");
+                    }
+                }
+                else if (rbtnUnLinkCard.Checked)
+                {
+                    if (InputValidation())
+                    {
+                        name = tbName.Text;
+                        email = tbEmailAddress.Text;
+                        phone = int.Parse(tbPhoneNumber.Text);
+                        rfidCode = tbrfid.Text;
+                        balance = Convert.ToInt32(cbxSelectedAmount.Text);
+                        if (dh.LinkOrUnLinkCard(name, email, phone, balance, false, rfidCode))
+                        {
+                            lblCardLinkedStatus.Text = "UnLinked Successfully";
+                            timerResetControls.Start();
+                        }
+                        else
+                        {
+                            lblCardLinkedStatus.Text = "Card is not Linked yet";
+                            timerResetControls.Start();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Not All Fields are complete!!!");
+                    }
+
+                }
+                else
+                {
+                    MessageBox.Show("Please select one of the option Link or Unlink card");
+                }
+            }
+        }
+
+        private void tbPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+        }
+
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            ResetBuyTicketsGroupControls();
+        }
+
+        private void btnClearLogs_Click(object sender, EventArgs e)
+        {
+            lbxLogMessage.Items.Clear();
         }
         #endregion
 
         #region ILogger Implementation
         public void LogMessage(ErrorType errorType, string message)
         {
-            lbxLogMessage.Items.Add(errorType+":"+message);
+            lbxLogMessage.Items.Add(errorType + ":" + message);
         }
         #endregion
-
-        private void timerResetControls_Tick(object sender, EventArgs e)
-        {
-            ResetControls();
-            timerResetControls.Stop();
-        }
-
-        private void btnPerform_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
