@@ -1,1 +1,1 @@
-w/o opening visual studio, you can find the .exe in the bin/Debug of each folder
+To Run the app, first you need to create tables in your database which can be done using sql script placed inside folder "sql-script"
