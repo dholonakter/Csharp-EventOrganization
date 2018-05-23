@@ -8,7 +8,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="EntranceApp.DatabaseHelper">
-    <Position X="5.5" Y="0.75" Width="1.5" />
+    <Position X="5.5" Y="0.75" Width="3.25" />
     <TypeIdentifier>
       <HashCode>AAAFAAUAAABAAABCABABAAAAAAABAAABCAEAAAAAAAA=</HashCode>
       <FileName>Helper\DatabaseHelper.cs</FileName>

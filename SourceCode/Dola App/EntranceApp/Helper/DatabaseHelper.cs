@@ -275,10 +275,18 @@ namespace EntranceApp
         /// <returns></returns>
         public bool MakeCheckInOrOut(string rfidCode, out Visitor foundVistor)
         {
+            /* trimmed */
+            /* suppose the rfidCode sent in is the scanned code */
+
+            foundVisitor.IsCheckedIn = !IsCheckedin; // if checked in, checks out. if not, checks in
+            return (UpdateVisitorTableIsCheckedInColumn(rfidcode, foundVisitor.IsCheckedIn));
+            
+
+            /* original */
             foundVistor = FindVisitor(rfidCode);
             bool onSuccess = false;
             if(foundVistor!=null)
-            {
+            {  
                if(foundVistor.IsCheckedIn && foundVistor.IsCardLinked)
                 {
                     foundVistor.IsCheckedIn = false;
