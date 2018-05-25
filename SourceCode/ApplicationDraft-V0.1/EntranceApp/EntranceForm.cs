@@ -12,6 +12,8 @@ namespace EntranceApp
 {
     public partial class EntranceForm : Form
     {
+        //Participant p;
+
         public EntranceForm()
         {
             InitializeComponent();

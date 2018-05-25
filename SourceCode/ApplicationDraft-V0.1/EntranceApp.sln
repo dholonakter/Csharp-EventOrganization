@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntranceApp", "EntranceApp\EntranceApp.csproj", "{693DA99F-AC00-48A9-A073-F4CD77332881}"
 EndProject
@@ -12,6 +12,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShopApp", "ShopApp\ShopApp.csproj", "{04BCD605-B631-4C90-8612-78C06FE22B97}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagerApp", "ManagerApp\ManagerApp.csproj", "{6D01969A-FC9D-4EBC-8913-FE08FF731F30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThanhDLL", "TestDLL\ThanhDLL.csproj", "{7B7CDC93-87BE-494E-9E83-81EB88DB1870}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,8 +41,15 @@ Global
 		{6D01969A-FC9D-4EBC-8913-FE08FF731F30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D01969A-FC9D-4EBC-8913-FE08FF731F30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D01969A-FC9D-4EBC-8913-FE08FF731F30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B7CDC93-87BE-494E-9E83-81EB88DB1870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B7CDC93-87BE-494E-9E83-81EB88DB1870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B7CDC93-87BE-494E-9E83-81EB88DB1870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B7CDC93-87BE-494E-9E83-81EB88DB1870}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2FBE6FA8-46C1-40DE-9871-C6F7FCF7DAA4}
 	EndGlobalSection
 EndGlobal
