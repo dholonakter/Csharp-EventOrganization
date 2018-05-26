@@ -101,6 +101,7 @@ namespace ThanhDLL
             string info = "No articles unreturned";
             if (ArticlesBorrowed.Count != 0)
             {
+                info = "";
                 info += "UNRETURNED ITEMS:";
                 foreach (Article a in ArticlesBorrowed)
                 {

@@ -37,6 +37,8 @@
             this.checkoutBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkinPanel = new System.Windows.Forms.Panel();
+            this.statusIn = new System.Windows.Forms.Label();
+            this.labelStatusIn = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.labelTag = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -44,22 +46,24 @@
             this.checkoutPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusOut = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelStatusOut = new System.Windows.Forms.Label();
             this.lbCheckOut = new System.Windows.Forms.ListBox();
             this.searchPanel = new System.Windows.Forms.Panel();
-            this.button6 = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.buttonSaveChanges = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dataGridVisitor = new System.Windows.Forms.DataGridView();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.textBoxVisitorNrSearch = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.listBox3 = new System.Windows.Forms.ListBox();
+            this.listBoxSearch = new System.Windows.Forms.ListBox();
             this.ticketPanel = new System.Windows.Forms.Panel();
-            this.statusIn = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.checkinPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.checkoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.searchPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridVisitor)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -175,17 +179,42 @@
             // checkinPanel
             // 
             this.checkinPanel.Controls.Add(this.statusIn);
-            this.checkinPanel.Controls.Add(this.label6);
+            this.checkinPanel.Controls.Add(this.labelStatusIn);
             this.checkinPanel.Controls.Add(this.pictureBox2);
-            this.checkinPanel.Controls.Add(this.checkoutPanel);
             this.checkinPanel.Controls.Add(this.labelTag);
             this.checkinPanel.Controls.Add(this.label2);
             this.checkinPanel.Controls.Add(this.lbCheckIn);
-            this.checkinPanel.Location = new System.Drawing.Point(307, 58);
+            this.checkinPanel.Location = new System.Drawing.Point(235, 20);
             this.checkinPanel.Margin = new System.Windows.Forms.Padding(4);
             this.checkinPanel.Name = "checkinPanel";
             this.checkinPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkinPanel.TabIndex = 3;
+            this.checkinPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.checkinPanel_Paint);
+            // 
+            // statusIn
+            // 
+            this.statusIn.BackColor = System.Drawing.Color.White;
+            this.statusIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.statusIn.ForeColor = System.Drawing.Color.DimGray;
+            this.statusIn.Image = ((System.Drawing.Image)(resources.GetObject("statusIn.Image")));
+            this.statusIn.Location = new System.Drawing.Point(311, 356);
+            this.statusIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusIn.Name = "statusIn";
+            this.statusIn.Size = new System.Drawing.Size(44, 31);
+            this.statusIn.TabIndex = 21;
+            this.statusIn.Text = "      ";
+            // 
+            // labelStatusIn
+            // 
+            this.labelStatusIn.AutoSize = true;
+            this.labelStatusIn.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStatusIn.ForeColor = System.Drawing.Color.DimGray;
+            this.labelStatusIn.Location = new System.Drawing.Point(177, 358);
+            this.labelStatusIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelStatusIn.Name = "labelStatusIn";
+            this.labelStatusIn.Size = new System.Drawing.Size(117, 28);
+            this.labelStatusIn.TabIndex = 20;
+            this.labelStatusIn.Text = "STATUS";
             // 
             // pictureBox2
             // 
@@ -226,24 +255,26 @@
             // 
             this.lbCheckIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCheckIn.FormattingEnabled = true;
+            this.lbCheckIn.HorizontalScrollbar = true;
             this.lbCheckIn.ItemHeight = 25;
             this.lbCheckIn.Location = new System.Drawing.Point(483, 187);
             this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4);
             this.lbCheckIn.Name = "lbCheckIn";
-            this.lbCheckIn.Size = new System.Drawing.Size(565, 429);
+            this.lbCheckIn.Size = new System.Drawing.Size(565, 254);
             this.lbCheckIn.TabIndex = 1;
             // 
             // checkoutPanel
             // 
             this.checkoutPanel.Controls.Add(this.pictureBox1);
             this.checkoutPanel.Controls.Add(this.statusOut);
-            this.checkoutPanel.Controls.Add(this.label5);
+            this.checkoutPanel.Controls.Add(this.labelStatusOut);
             this.checkoutPanel.Controls.Add(this.lbCheckOut);
-            this.checkoutPanel.Location = new System.Drawing.Point(77, 692);
+            this.checkoutPanel.Location = new System.Drawing.Point(235, 20);
             this.checkoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.checkoutPanel.Name = "checkoutPanel";
             this.checkoutPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkoutPanel.TabIndex = 4;
+            this.checkoutPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.checkoutPanel_Paint);
             // 
             // pictureBox1
             // 
@@ -269,17 +300,17 @@
             this.statusOut.TabIndex = 3;
             this.statusOut.Text = "      ";
             // 
-            // label5
+            // labelStatusOut
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.DimGray;
-            this.label5.Location = new System.Drawing.Point(180, 365);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(117, 28);
-            this.label5.TabIndex = 2;
-            this.label5.Text = "STATUS";
+            this.labelStatusOut.AutoSize = true;
+            this.labelStatusOut.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStatusOut.ForeColor = System.Drawing.Color.DimGray;
+            this.labelStatusOut.Location = new System.Drawing.Point(180, 365);
+            this.labelStatusOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelStatusOut.Name = "labelStatusOut";
+            this.labelStatusOut.Size = new System.Drawing.Size(117, 28);
+            this.labelStatusOut.TabIndex = 2;
+            this.labelStatusOut.Text = "STATUS";
             // 
             // lbCheckOut
             // 
@@ -294,99 +325,110 @@
             // 
             // searchPanel
             // 
-            this.searchPanel.Controls.Add(this.button6);
-            this.searchPanel.Controls.Add(this.textBox1);
+            this.searchPanel.Controls.Add(this.buttonSaveChanges);
+            this.searchPanel.Controls.Add(this.label1);
+            this.searchPanel.Controls.Add(this.dataGridVisitor);
+            this.searchPanel.Controls.Add(this.buttonSearch);
+            this.searchPanel.Controls.Add(this.textBoxVisitorNrSearch);
             this.searchPanel.Controls.Add(this.label9);
-            this.searchPanel.Controls.Add(this.listBox3);
-            this.searchPanel.Location = new System.Drawing.Point(303, 54);
+            this.searchPanel.Controls.Add(this.listBoxSearch);
+            this.searchPanel.Location = new System.Drawing.Point(235, 20);
             this.searchPanel.Margin = new System.Windows.Forms.Padding(4);
             this.searchPanel.Name = "searchPanel";
             this.searchPanel.Size = new System.Drawing.Size(1473, 846);
             this.searchPanel.TabIndex = 5;
             // 
-            // button6
+            // buttonSaveChanges
             // 
-            this.button6.BackColor = System.Drawing.Color.DimGray;
-            this.button6.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.button6.FlatAppearance.BorderSize = 0;
-            this.button6.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.button6.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.button6.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button6.ForeColor = System.Drawing.Color.White;
-            this.button6.Image = ((System.Drawing.Image)(resources.GetObject("button6.Image")));
-            this.button6.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button6.Location = new System.Drawing.Point(741, 150);
-            this.button6.Margin = new System.Windows.Forms.Padding(4);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(36, 37);
-            this.button6.TabIndex = 14;
-            this.button6.UseVisualStyleBackColor = false;
+            this.buttonSaveChanges.Location = new System.Drawing.Point(176, 285);
+            this.buttonSaveChanges.Name = "buttonSaveChanges";
+            this.buttonSaveChanges.Size = new System.Drawing.Size(81, 28);
+            this.buttonSaveChanges.TabIndex = 17;
+            this.buttonSaveChanges.Text = "Save";
+            this.buttonSaveChanges.UseVisualStyleBackColor = true;
+            this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
             // 
-            // textBox1
+            // label1
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(483, 155);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(249, 26);
-            this.textBox1.TabIndex = 12;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.DimGray;
+            this.label1.Location = new System.Drawing.Point(48, 286);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(107, 28);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Visitors";
+            // 
+            // dataGridVisitor
+            // 
+            this.dataGridVisitor.AllowUserToDeleteRows = false;
+            this.dataGridVisitor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridVisitor.Location = new System.Drawing.Point(53, 333);
+            this.dataGridVisitor.Name = "dataGridVisitor";
+            this.dataGridVisitor.RowTemplate.Height = 24;
+            this.dataGridVisitor.Size = new System.Drawing.Size(1027, 429);
+            this.dataGridVisitor.TabIndex = 15;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.BackColor = System.Drawing.Color.DimGray;
+            this.buttonSearch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonSearch.FlatAppearance.BorderSize = 0;
+            this.buttonSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.buttonSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.ForeColor = System.Drawing.Color.White;
+            this.buttonSearch.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearch.Image")));
+            this.buttonSearch.Location = new System.Drawing.Point(541, 57);
+            this.buttonSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(41, 27);
+            this.buttonSearch.TabIndex = 14;
+            this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
+            // 
+            // textBoxVisitorNrSearch
+            // 
+            this.textBoxVisitorNrSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxVisitorNrSearch.Location = new System.Drawing.Point(284, 57);
+            this.textBoxVisitorNrSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxVisitorNrSearch.Name = "textBoxVisitorNrSearch";
+            this.textBoxVisitorNrSearch.Size = new System.Drawing.Size(249, 26);
+            this.textBoxVisitorNrSearch.TabIndex = 12;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.DimGray;
-            this.label9.Location = new System.Drawing.Point(477, 116);
+            this.label9.Location = new System.Drawing.Point(48, 56);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(219, 28);
             this.label9.TabIndex = 11;
             this.label9.Text = "Enter Visitor ID ";
             // 
-            // listBox3
+            // listBoxSearch
             // 
-            this.listBox3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox3.FormattingEnabled = true;
-            this.listBox3.ItemHeight = 25;
-            this.listBox3.Location = new System.Drawing.Point(483, 199);
-            this.listBox3.Margin = new System.Windows.Forms.Padding(4);
-            this.listBox3.Name = "listBox3";
-            this.listBox3.Size = new System.Drawing.Size(565, 429);
-            this.listBox3.TabIndex = 1;
+            this.listBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listBoxSearch.FormattingEnabled = true;
+            this.listBoxSearch.HorizontalScrollbar = true;
+            this.listBoxSearch.ItemHeight = 25;
+            this.listBoxSearch.Location = new System.Drawing.Point(54, 92);
+            this.listBoxSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.listBoxSearch.Name = "listBoxSearch";
+            this.listBoxSearch.Size = new System.Drawing.Size(1026, 179);
+            this.listBoxSearch.TabIndex = 1;
             // 
             // ticketPanel
             // 
-            this.ticketPanel.Location = new System.Drawing.Point(299, 58);
+            this.ticketPanel.Location = new System.Drawing.Point(231, 20);
             this.ticketPanel.Margin = new System.Windows.Forms.Padding(4);
             this.ticketPanel.Name = "ticketPanel";
             this.ticketPanel.Size = new System.Drawing.Size(1473, 846);
             this.ticketPanel.TabIndex = 10;
-            // 
-            // statusIn
-            // 
-            this.statusIn.BackColor = System.Drawing.Color.White;
-            this.statusIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.statusIn.ForeColor = System.Drawing.Color.DimGray;
-            this.statusIn.Image = ((System.Drawing.Image)(resources.GetObject("statusIn.Image")));
-            this.statusIn.Location = new System.Drawing.Point(311, 356);
-            this.statusIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.statusIn.Name = "statusIn";
-            this.statusIn.Size = new System.Drawing.Size(44, 31);
-            this.statusIn.TabIndex = 21;
-            this.statusIn.Text = "      ";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.DimGray;
-            this.label6.Location = new System.Drawing.Point(177, 358);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(117, 28);
-            this.label6.TabIndex = 20;
-            this.label6.Text = "STATUS";
             // 
             // EntranceForm
             // 
@@ -394,17 +436,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
+            this.Controls.Add(this.checkinPanel);
+            this.Controls.Add(this.checkoutPanel);
+            this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.checkinPanel);
             this.Controls.Add(this.ticketPanel);
-            this.Controls.Add(this.searchPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EntranceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EntranceForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.EntranceForm_Load);
             this.panel1.ResumeLayout(false);
             this.checkinPanel.ResumeLayout(false);
             this.checkinPanel.PerformLayout();
@@ -414,6 +458,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridVisitor)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -433,18 +478,21 @@
         private System.Windows.Forms.ListBox lbCheckIn;
         private System.Windows.Forms.Panel checkoutPanel;
         private System.Windows.Forms.Label statusOut;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelStatusOut;
         private System.Windows.Forms.ListBox lbCheckOut;
         private System.Windows.Forms.Panel searchPanel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox textBoxVisitorNrSearch;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ListBox listBox3;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.ListBox listBoxSearch;
+        private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel ticketPanel;
         private System.Windows.Forms.Label statusIn;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelStatusIn;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.DataGridView dataGridVisitor;
+        private System.Windows.Forms.Button buttonSaveChanges;
     }
 }
 
