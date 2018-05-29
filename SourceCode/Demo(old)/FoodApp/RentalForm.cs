@@ -54,5 +54,10 @@ namespace FoodApp
             sideHighlight.Top = otherBtn.Top;
             otherControl1.BringToFront();
         }
+
+        private void otherControl1_Load(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

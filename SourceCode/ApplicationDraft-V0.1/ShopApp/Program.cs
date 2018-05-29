@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+// RFID DLL
+using Phidget22;
+using Phidget22.Events;
 
 namespace ShopApp
 {

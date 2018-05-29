@@ -16,5 +16,10 @@ namespace FoodApp
         {
             InitializeComponent();
         }
+
+        private void CameraControl_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

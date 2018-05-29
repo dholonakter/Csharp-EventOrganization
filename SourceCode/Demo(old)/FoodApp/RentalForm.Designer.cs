@@ -214,6 +214,7 @@
             this.otherControl1.Name = "otherControl1";
             this.otherControl1.Size = new System.Drawing.Size(832, 494);
             this.otherControl1.TabIndex = 8;
+            this.otherControl1.Load += new System.EventHandler(this.otherControl1_Load);
             // 
             // RentalForm
             // 
