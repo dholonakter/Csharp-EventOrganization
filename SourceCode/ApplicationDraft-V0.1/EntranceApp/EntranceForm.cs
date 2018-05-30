@@ -42,12 +42,13 @@ namespace EntranceApp
         QrCodeEncodingOptions options = new QrCodeEncodingOptions();
         WebCam wCam;
 
+        /*
         private FilterInfoCollection videoDevices;
         private VideoCaptureDevice videoSource;
         private Bitmap capturedImage;
-        private String message = "";
+        private String message = "";*/
 
-        // thanh has  some fun
+        // thanh has some fun
         SoundPlayer successSound = new SoundPlayer("../../../connect.wav");
         SoundPlayer errorSound = new SoundPlayer("../../../error.wav");
 
@@ -137,7 +138,7 @@ namespace EntranceApp
             dh = new DataHelper();
             visitor = dh.FindVisitorByNr("4"); // DEMO
 
-            // thanh tests qr
+            /* thanh tests qr
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
             foreach (FilterInfo device in videoDevices)
             {
@@ -145,7 +146,7 @@ namespace EntranceApp
             }
             comboBoxCameraSource.SelectedIndex = 0;
 
-            videoSource = new VideoCaptureDevice();
+            videoSource = new VideoCaptureDevice();*/
 
             // Connecting RFID reader
             try
@@ -331,6 +332,7 @@ namespace EntranceApp
 
         private string ReadQR(Bitmap bitmap)
         {
+            /*
             try
             {
                 BarcodeReader reader = new BarcodeReader
@@ -356,7 +358,7 @@ namespace EntranceApp
             catch (Exception ex)
             {
                 return ex.Message;
-            }
+            }*/
         }
         private void button1_Click(object sender, EventArgs e)
         {
@@ -364,7 +366,7 @@ namespace EntranceApp
             if (capturedImage != null)
             {
                 label2.Text = ReadQR(capturedImage);
-            }*/
+            }
             try
             {
                 Bitmap bitmap = new Bitmap(pictureBoxSource.Image);
@@ -379,7 +381,7 @@ namespace EntranceApp
             catch (Exception)
             {
                 MessageBox.Show("Image not found", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+            }*/
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -403,6 +405,7 @@ namespace EntranceApp
 
         private void button3_Click(object sender, EventArgs e)
         {
+            /*
             if (videoSource.IsRunning)
             {
                 videoSource.Stop();
@@ -416,8 +419,8 @@ namespace EntranceApp
                 videoSource = new VideoCaptureDevice(videoDevices[comboBoxCameraSource.SelectedIndex].MonikerString);
                 videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
                 videoSource.Start();
-            }
-            /*
+            }*/
+            
             if (wCam == null)
             {
                 wCam = new WebCam { Container = pictureBoxSource };
@@ -435,7 +438,7 @@ namespace EntranceApp
                 webCamTimer = null;
                 wCam.Dispose();
                 wCam = null;
-            }*/
+            }
         }
 
         private void webCamTimer_Tick(object sender, EventArgs e)
@@ -448,7 +451,9 @@ namespace EntranceApp
             if (result != null)
             {
                 //txtTypeWebCam.Text = result.BarcodeFormat.ToString();
-                MessageBox.Show(result.Text);
+                label2.Text = (result.Text);
+                visitor = dh.FindVisitorByNr(result.Text);
+                label3.Text = visitor.ToString();
             }
 
             else
