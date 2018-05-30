@@ -159,12 +159,6 @@ namespace ShopApp
             }
         }
 
-        private void cartBtn_Click(object sender, EventArgs e)
-        {
-            sideHighlight.Height = cartBtn.Height;
-            sideHighlight.Top = cartBtn.Top;
-            DisplayOrderItems();
-        }
 
         private void ShopForm_Load(object sender, EventArgs e)
         {
@@ -243,9 +237,6 @@ namespace ShopApp
             }
         }
 
-        private void buttonConfirmPayment_Click(object sender, EventArgs e)
-        {
-            // should probably be deleted 
-        }
+       
     }
 }

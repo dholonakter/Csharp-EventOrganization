@@ -34,11 +34,6 @@ namespace RentalApp
             productPanel.BringToFront();
         }
 
-        private void cartBtn_Click(object sender, EventArgs e)
-        {
-            sideHighlight.Height = cartBtn.Height;
-            sideHighlight.Top = cartBtn.Top;
-            cartPanel.BringToFront();
-        }
+
     }
 }
