@@ -10,18 +10,124 @@ using System.Windows.Forms;
 using ThanhDLL;
 using Phidget22;
 using Phidget22.Events;
+using System.Threading;
+
+// webcam and qr
+using ZXing;
+using ZXing.Common;
+using ZXing.QrCode;
+using AForge;
+using AForge.Video;
+using AForge.Video.DirectShow;
+using System.Media;
 
 namespace EntranceApp
 {
     public partial class EntranceForm : Form
     {
+        ///////////////////////////////////////
+        // DECLARATIONS
+        ///////////////////////////////////////
+
+        // Variables
         Visitor visitor;
         DataHelper dh;
         BindingSource visitorTable;
         RFID myRFIDReader;
-
+        
+        // Delegates for RFID
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
-        public ProcessTag tagProcessor;
+
+        // thanh tests qr
+        QrCodeEncodingOptions options = new QrCodeEncodingOptions();
+        WebCam wCam;
+
+        private FilterInfoCollection videoDevices;
+        private VideoCaptureDevice videoSource;
+        private Bitmap capturedImage;
+        private String message = "";
+
+        // thanh has  some fun
+        SoundPlayer successSound = new SoundPlayer("../../../connect.wav");
+        SoundPlayer errorSound = new SoundPlayer("../../../error.wav");
+
+
+        ///////////////////////////////////////
+        // CROSS-THREAD DISPLAY
+        ///////////////////////////////////////
+
+        // Delegates for cross-thread processing
+        delegate void LabelDelegate(string text, Label lb);
+        delegate void ListboxDelegate(Object o, ListBox lb);
+        delegate void VoidListboxDelegate(ListBox lb);
+
+        // Clearing the given listbox
+        private void ClearListbox(ListBox lb)
+        {
+            if (lb.InvokeRequired)
+            {
+                VoidListboxDelegate d = new VoidListboxDelegate(ClearListbox);
+                this.Invoke(d, new object[] { lb });
+            }
+            else
+            {
+                lb.Items.Clear();
+            }
+        }
+
+        // Set text to label
+        private void SetText(string text, Label lb)
+        {
+            // InvokeRequired required compares the thread ID of the  
+            // calling thread to the thread ID of the creating thread.  
+            // If these threads are different, it returns true.  
+            if (lb.InvokeRequired)
+            {
+                LabelDelegate d = new LabelDelegate(SetText);
+                this.Invoke(d, new object[] { text, lb});
+            }
+            else
+            {
+                lb.Text = text;
+            }
+        }
+
+        // Display a ticket in a given listbox
+        private void DisplayTicket(Object o, ListBox lb)
+        {
+            Ticket t = (Ticket)o;
+
+            if (lb.InvokeRequired)
+            {
+                ListboxDelegate d = new ListboxDelegate(DisplayTicket);
+                this.Invoke(d, new object[] { t, lb });
+            }
+            else
+            {
+                // Display them info
+                lb.Items.Clear();
+                lb.Items.Add("TICKET #" + t.TicketNr);
+                lb.Items.Add("Bought: " + t.TicketDate + " " + t.TicketTime);
+                lb.Items.Add("Type: " + t.TicketType);
+                lb.Items.Add("Status: " + (t.Paid ? "PAID" : "NOT PAID"));
+            }
+        }
+
+        // Display an article in a given listbox
+        private void DisplayArticle(Object o, ListBox lb)
+        {
+            LoanArticle a = (LoanArticle)o;
+
+            if (lb.InvokeRequired)
+            {
+                ListboxDelegate d = new ListboxDelegate(DisplayArticle);
+                this.Invoke(d, new object[] { a, lb });
+            }
+            else
+            {
+                lb.Items.Add("Article #" + a.ArticleNr + " - " + a.ArticleName + " at " + a.ShopName);
+            }
+        }
 
         ///////////////////////////////////////
         // STARTUP STUFF
@@ -40,6 +146,17 @@ namespace EntranceApp
         {
             // Connecting to DB
             dh = new DataHelper();
+            visitor = dh.FindVisitorByNr("7"); // DEMO
+
+            // thanh tests qr
+            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
+            foreach (FilterInfo device in videoDevices)
+            {
+                comboBoxCameraSource.Items.Add(device.Name);
+            }
+            comboBoxCameraSource.SelectedIndex = 0;
+
+            videoSource = new VideoCaptureDevice();
 
             // Connecting RFID reader
             try
@@ -47,9 +164,7 @@ namespace EntranceApp
                 myRFIDReader = new RFID();
                 myRFIDReader.Attach += new AttachEventHandler(ShowAttached);
                 myRFIDReader.Detach += new DetachEventHandler(ShowDetached);
-
-                tagProcessor += CheckIn; // by default checking in, but will change
-                myRFIDReader.Tag += new RFIDTagEventHandler(tagProcessor); // add delegate to handler
+                myRFIDReader.Open();
 
             }
             catch (PhidgetException)
@@ -66,7 +181,6 @@ namespace EntranceApp
             InitializeComponent();
             sideHighlight.Height = ticketsBtn.Height;
             sideHighlight.Top = ticketsBtn.Top;
-            ticketPanel.BringToFront();
         }
 
         private void ticketsBtn_Click(object sender, EventArgs e)
@@ -81,6 +195,10 @@ namespace EntranceApp
             sideHighlight.Height = checkinBtn.Height;
             sideHighlight.Top = checkinBtn.Top;
             checkinPanel.BringToFront();
+
+            // Switching delegate's method
+            myRFIDReader.Tag -= CheckOut;
+            myRFIDReader.Tag += CheckIn;
         }
 
         private void checkoutBtn_Click(object sender, EventArgs e)
@@ -88,6 +206,10 @@ namespace EntranceApp
             sideHighlight.Height = checkoutBtn.Height;
             sideHighlight.Top = checkoutBtn.Top;
             checkoutPanel.BringToFront();
+
+            // Switching delegate's method
+            myRFIDReader.Tag -= CheckIn;
+            myRFIDReader.Tag += CheckOut;
         }
 
         private void monitorBtn_Click(object sender, EventArgs e)
@@ -96,6 +218,7 @@ namespace EntranceApp
             sideHighlight.Top = monitorBtn.Top;
             searchPanel.BringToFront();
 
+            // Display data onto gridview
             visitorTable = new BindingSource();
             visitorTable.DataSource = dh.LoadVisitors();
             dataGridVisitor.DataSource = visitorTable;
@@ -133,85 +256,49 @@ namespace EntranceApp
         ///////////////////////////////////////
         // CHECK IN PANEL
         /////////////////////////////////////// 
-        private void checkinPanel_Paint(object sender, PaintEventArgs e)
-        {
-            // Switchy switch
-            tagProcessor -= CheckOut;
-            tagProcessor += CheckIn;
 
-            /* DEMO CODE */
-            visitor = dh.FindVisitorByNr("10");
-            Ticket t = dh.GetTicketStatusForVisitor(visitor.IdNr);
-
-            // Display them info
-            lbCheckIn.Items.Clear();
-            lbCheckIn.Items.Add("TICKET #" + t.TicketNr);
-            lbCheckIn.Items.Add("Bought: " + t.TicketDate + " " + t.TicketTime);
-            lbCheckIn.Items.Add("Type: " + t.TicketType);
-            lbCheckIn.Items.Add("Status: " + (t.Paid ? "PAID" : "NOT PAID"));
-
-            if (t != null) // if ticket exists
-            {
-                if (t.Paid)
-                {
-                    visitor.CheckInWith("testcheckingin");
-                    if (dh.UpdateSelectedVisitor(visitor) != -1)
-                    {
-                        labelTag.Text = "testcheckingin";
-                        labelStatusIn.Text = "OK";
-                    }
-                    else
-                    {
-                        visitor.CheckOut(); // undo the task
-                    }
-
-                }
-                else
-                {
-                    labelStatusIn.Text = "UNPAID";
-                }
-            }
-            else
-            {
-                MessageBox.Show("Your ticket is not valid");
-            }
-        }
         private void CheckIn(object sender, RFIDTagEventArgs e)
         {
             // TO DO: Read QR Code to get visitor Nr //
             Ticket t = dh.GetTicketStatusForVisitor(visitor.IdNr);
-
-            // Display them info
-            lbCheckIn.Items.Clear();
-            lbCheckIn.Items.Add("TICKET #" + t.TicketNr);
-            lbCheckIn.Items.Add("Bought: " + t.TicketDate + " " + t.TicketTime);
-            lbCheckIn.Items.Add("Type: " + t.TicketType);
-            lbCheckIn.Items.Add("Status: " + (t.Paid ? "PAID" : "NOT PAID"));
-
+            
             if (t != null) // if ticket exists
             {
+                DisplayTicket(t, lbCheckIn);
+
                 if (t.Paid)
                 {
-                    visitor.CheckInWith("testcheckingin");
-                    if (dh.UpdateSelectedVisitor(visitor) != -1)
+                    if (dh.existsRFID(e.Tag) == null)
                     {
-                        labelTag.Text = "testcheckingin";
-                        labelStatusIn.Text = "OK";
+                        visitor.CheckInWith(e.Tag);
+
+                        if (dh.UpdateSelectedVisitor(visitor) != -1)
+                        {
+                            SetText("OK", labelStatusIn);
+                            SetText(e.Tag, labelTagNr);
+                            successSound.Play();
+                        }
+                        else
+                        {
+                            visitor.CheckOut(); // undo the task
+                            MessageBox.Show("Error while checking in");
+                        }
                     }
                     else
                     {
-                        visitor.CheckOut(); // undo the task
+                        MessageBox.Show("RFID already used");
                     }
 
                 }
                 else
                 {
-                    labelStatusIn.Text = "UNPAID";
+                    errorSound.Play();
+                    SetText("UNPAID", labelStatusIn);
                 }
             }
             else
             {
-                MessageBox.Show("Your ticket is not valid");
+                MessageBox.Show("Ticket not found");
             }
         }
 
@@ -222,63 +309,164 @@ namespace EntranceApp
         {
             dh.FindUnreturnedItems(visitor);
 
+            ClearListbox(lbCheckOut);
+
             if (visitor.CanLeave())
             {
                 visitor.CheckOut();
                 if (dh.UpdateSelectedVisitor(visitor) != -1)
                 {
-                    labelStatusOut.Text = "OK";
+                    SetText("OK", labelStatusOut);
                 }
                 else
                 {
                     visitor.CheckInWith(visitor.RFIDNr); // undo the task
+                    MessageBox.Show("Error while checking out");
                 }
             }
             else
             {
-                labelStatusOut.Text = "NOT OK";
-                foreach (LoanArticle a in visitor.ArticlesBorrowed)
-                {
-                    lbCheckOut.Items.Add("Article #" + a.ArticleNr + " - " + a.ArticleName + " at " + a.ShopName);
-                }
+                errorSound.Play();
+                SetText("NOT OK", labelStatusOut);
             }
 
         }
 
-        private void checkoutPanel_Paint(object sender, PaintEventArgs e)
+        ///////////////////////////////////////
+        // THANH TEST
+        /////////////////////////////////////// 
+        void videoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
         {
-            // Switchy switch
-            tagProcessor -= CheckIn;
-            tagProcessor += CheckOut;
+            Bitmap image = (Bitmap)eventArgs.Frame.Clone();
+            pictureBoxSource.Image = image;
+        }
 
-            /* DEMO CODE */
-            visitor = dh.FindVisitorByNr("4");
-            dh.FindUnreturnedItems(visitor);
-
-            if (visitor.CanLeave())
+        private string ReadQR(Bitmap bitmap)
+        {
+            try
             {
-                visitor.CheckOut();
-                if (dh.UpdateSelectedVisitor(visitor) != -1)
+                BarcodeReader reader = new BarcodeReader
+                    (null, newbitmap => new BitmapLuminanceSource(bitmap), luminance => new GlobalHistogramBinarizer(luminance));
+
+                reader.AutoRotate = true;
+                reader.TryInverted = true;
+                reader.Options = new DecodingOptions { TryHarder = true };
+
+                var result = reader.Decode(bitmap);
+
+                if (result != null)
                 {
-                    labelStatusOut.Text = "OK";
+                    message = result.Text;
+                    return message;
                 }
                 else
                 {
-                    visitor.CheckInWith(visitor.RFIDNr); // undo the task
+                    message = "QRCode couldn't be decoded.";
+                    return message;
                 }
             }
-            else
+            catch (Exception ex)
             {
-                labelStatusOut.Text = "NOT OK";
-                lbCheckOut.Items.Clear();
-
-                foreach (LoanArticle a in visitor.ArticlesBorrowed)
-                {
-                    lbCheckOut.Items.Add("Article #" + a.ArticleNr + " - " + a.ArticleName + " at " + a.ShopName);
-                }
+                return ex.Message;
+            }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            /*
+            if (capturedImage != null)
+            {
+                label2.Text = ReadQR(capturedImage);
+            }*/
+            try
+            {
+                Bitmap bitmap = new Bitmap(pictureBoxSource.Image);
+                BarcodeReader reader = new BarcodeReader { AutoRotate = true, TryInverted = true };
+                Result result = reader.Decode(bitmap);
+                string decoded = result.ToString().Trim();
+                label2.Text = decoded;
+                // DEMO BUT ALSO KINDA WILL KEEP
+                visitor = dh.FindVisitorByNr(decoded);
+                label3.Text = visitor.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Image not found", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            /*
+            if (videoSource.IsRunning)
+            {
+                pictureBoxCaptured.Image = (Bitmap)pictureBoxSource.Image.Clone();
+                capturedImage = (Bitmap)pictureBoxCaptured.Image;
+            }*/
+            
+            OpenFileDialog open = new OpenFileDialog();
+            if (open.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                var qr = new ZXing.BarcodeWriter();
+                qr.Options = options;
+                qr.Format = ZXing.BarcodeFormat.QR_CODE;
+                pictureBoxSource.ImageLocation = open.FileName;
+            }
+        }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (videoSource.IsRunning)
+            {
+                videoSource.Stop();
+                pictureBoxSource.Image = null;
+                pictureBoxCaptured.Image = null;
+                pictureBoxSource.Invalidate();
+                pictureBoxCaptured.Invalidate();
+            }
+            else
+            {
+                videoSource = new VideoCaptureDevice(videoDevices[comboBoxCameraSource.SelectedIndex].MonikerString);
+                videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
+                videoSource.Start();
+            }
+            /*
+            if (wCam == null)
+            {
+                wCam = new WebCam { Container = pictureBoxSource };
+
+                wCam.OpenConnection();
+
+                webCamTimer = new System.Windows.Forms.Timer();
+                webCamTimer.Tick += webCamTimer_Tick;
+                webCamTimer.Interval = 100;
+                webCamTimer.Start();
+            }
+            else
+            {
+                webCamTimer.Stop();
+                webCamTimer = null;
+                wCam.Dispose();
+                wCam = null;
+            }*/
+        }
+
+        private void webCamTimer_Tick(object sender, EventArgs e)
+        {
+            var bitmap = wCam.GetCurrentImage();
+            if (bitmap == null)
+                return;
+            var reader = new BarcodeReader();
+            var result = reader.Decode(bitmap);
+            if (result != null)
+            {
+                //txtTypeWebCam.Text = result.BarcodeFormat.ToString();
+                MessageBox.Show(result.Text);
+            }
+
+            else
+            {
+                label2.Text = "NULL";
+            }
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace ThanhDLL
             if (Articles.Count != 0)
             {
                 string info = "--- WELCOME TO " + Shop.ShopName.ToUpper() + " ---\n";
-                info += "YOUR ORDER: \n";
+                info += "\nYour order: \n";
 
                 if (OrderDate != null && OrderTime != null)
                 {
@@ -60,11 +60,11 @@ namespace ThanhDLL
                         + "\t - Subtotal:" + Articles[i].Price * Quantity[i] + "\n";
                 }
 
-                info += "\nTOTAL: " + GetSum() + "\n";
+                info += "\nTOTAL: €" + GetSum().ToString("0.00") + "\n";
 
                 if (OrderDate != null & OrderTime != null)
                 {
-                    info += "\nTHANK YOU FOR YOUR PURCHASE";
+                    info += "\nThank you for your purchase!";
                 }
 
                 return info;
@@ -100,20 +100,20 @@ namespace ThanhDLL
         /// </summary>
         /// <param name="a"></param>
         /// <param name="nr"></param>
-        public void RemoveArticle(Article a, int nr)
+        public void SetQuantity(Article a, int nr)
         {
             for (int i = 0; i < Articles.Count; i++)
             {
                 if (Articles[i] == a)
                 {
-                    if (Quantity[i] - nr <= 0)
+                    if (nr <= 0)
                     {
                         Quantity.RemoveAt(i);
                         Articles.RemoveAt(i);
                     }
                     else
                     {
-                        Quantity[i] -= nr;
+                        Quantity[i] = nr;
                     }
                     return;
                 }

@@ -36,6 +36,7 @@ namespace EntranceApp
         ///////////////////////////////////////
         // DATA TABLES
         ///////////////////////////////////////
+
         /// <summary>
         /// Loads visitor's information into a data table
         /// </summary>

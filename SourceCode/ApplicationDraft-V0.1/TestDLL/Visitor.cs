@@ -22,13 +22,13 @@ namespace ThanhDLL
             get { return credit; }
             set
             {
-                if (credit + value < 0)
+                if (value < 0)
                 {
                     credit = 0;
                 }
                 else
                 {
-                    credit += value;
+                    credit = value;
                 }
             }
         }
