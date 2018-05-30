@@ -330,7 +330,7 @@ namespace EntranceApp
             pictureBoxSource.Image = image;
         }
 
-        private string ReadQR(Bitmap bitmap)
+        private void ReadQR(Bitmap bitmap)
         {
             /*
             try
