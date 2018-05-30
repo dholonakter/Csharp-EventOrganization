@@ -37,43 +37,9 @@ namespace ManagerApp
         // DATA TABLES
         ///////////////////////////////////////
 
-        /// <summary>
-        /// Loads visitor's information into a data table
-        /// </summary>
-        /// <returns></returns>
-        public DataTable LoadVisitors()
+        public DataTable DataTableFromSQL(string sql)
         {
-            dataAdapter.SelectCommand = new MySqlCommand("SELECT * FROM VISITOR", connection);
-            MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
-
-            DataTable table = new DataTable();
-            dataAdapter.Fill(table);
-            return table;
-        }
-
-        public DataTable LoadProblems()
-        {
-            dataAdapter.SelectCommand = new MySqlCommand("SELECT * FROM PROBLEM", connection);
-            MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
-
-            DataTable table = new DataTable();
-            dataAdapter.Fill(table);
-            return table;
-        }
-
-        public DataTable LoadActivities()
-        {
-            dataAdapter.SelectCommand = new MySqlCommand("SELECT * FROM ACTIVITY_INFO", connection);
-            MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
-
-            DataTable table = new DataTable();
-            dataAdapter.Fill(table);
-            return table;
-        }
-
-        public DataTable LoadCamps()
-        {
-            dataAdapter.SelectCommand = new MySqlCommand("SELECT * FROM CAMPING_SPOT", connection);
+            dataAdapter.SelectCommand = new MySqlCommand(sql, connection);
             MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
 
             DataTable table = new DataTable();

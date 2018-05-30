@@ -22,7 +22,8 @@ namespace ManagerApp
 
             // Display data onto gridview
             visitorTable = new BindingSource();
-            visitorTable.DataSource = dh.LoadVisitors();
+            visitorTable.DataSource = dh.DataTableFromSQL("SELECT FirstName, LastName, Phone, Email, UserPassword, RFIDNr, Credit, CheckedIn, SpotNr" +
+                " FROM VISITOR");
             dataGridViewVisitor.DataSource = visitorTable;
 
             UpdateLabels();

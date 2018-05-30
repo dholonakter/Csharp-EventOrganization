@@ -50,14 +50,18 @@ namespace ManagerApp
         {
             sideHighlight.Height = shopBtn.Height;
             sideHighlight.Top = shopBtn.Top;
-            shopPanel.BringToFront();
+            //shopPanel.BringToFront();
+
+            ShopForm sf = new ShopForm();
+            sf.Show();
+            sf.Focus();
         }
 
         private void campBtn_Click(object sender, EventArgs e)
         {
             sideHighlight.Height = campBtn.Height;
             sideHighlight.Top = campBtn.Top;
-            campPanel.BringToFront();
+            //campPanel.BringToFront();
 
             CampForm cf = new CampForm();
             cf.Show();
@@ -69,6 +73,10 @@ namespace ManagerApp
             sideHighlight.Height = rentBtn.Height;
             sideHighlight.Top = rentBtn.Top;
             rentalPanel.BringToFront();
+
+            StockForm sf = new StockForm();
+            sf.Show();
+            sf.Focus();
         }
 
         private void analyticBtn_Click(object sender, EventArgs e)
