@@ -68,16 +68,20 @@ namespace ShopApp
         // Display an article in a given listbox
         private void DisplayArticle(Object o, ListBox lb)
         {
-            Article a = (Article)o;
+            List<Article> list = (List<Article>)o;
 
             if (lb.InvokeRequired)
             {
                 ListboxDelegate d = new ListboxDelegate(DisplayArticle);
-                this.Invoke(d, new object[] { a, lb });
+                this.Invoke(d, new object[] { list, lb });
             }
             else
             {
-                lb.Items.Add(a);
+                lb.Items.Clear();
+                foreach (Article a in list)
+                {
+                    lb.Items.Add(a);
+                }
             }
         }
 
@@ -136,21 +140,13 @@ namespace ShopApp
 
         public void DisplayProducts()
         {
-            ClearListbox(itemLbx);
-
             if (foodRbtn.Checked)
             {
-                foreach (Article a in data.GetFoodArticles(selectedShop.ShopNr))
-                {
-                    DisplayArticle(a, itemLbx);
-                }
+                DisplayArticle(data.GetFoodArticles(selectedShop.ShopNr), itemLbx);
             }
             else
             {
-                foreach (Article a in data.GetDrinkArticles(selectedShop.ShopNr))
-                {
-                    DisplayArticle(a, itemLbx);
-                }
+                DisplayArticle(data.GetDrinkArticles(selectedShop.ShopNr), itemLbx);
             }
         }
 

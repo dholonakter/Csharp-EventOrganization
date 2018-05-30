@@ -59,21 +59,6 @@ namespace EntranceApp
         // Delegates for cross-thread processing
         delegate void LabelDelegate(string text, Label lb);
         delegate void ListboxDelegate(Object o, ListBox lb);
-        delegate void VoidListboxDelegate(ListBox lb);
-
-        // Clearing the given listbox
-        private void ClearListbox(ListBox lb)
-        {
-            if (lb.InvokeRequired)
-            {
-                VoidListboxDelegate d = new VoidListboxDelegate(ClearListbox);
-                this.Invoke(d, new object[] { lb });
-            }
-            else
-            {
-                lb.Items.Clear();
-            }
-        }
 
         // Set text to label
         private void SetText(string text, Label lb)
@@ -116,16 +101,20 @@ namespace EntranceApp
         // Display an article in a given listbox
         private void DisplayArticle(Object o, ListBox lb)
         {
-            LoanArticle a = (LoanArticle)o;
+            List<LoanArticle> list = (List<LoanArticle>)o;
 
             if (lb.InvokeRequired)
             {
                 ListboxDelegate d = new ListboxDelegate(DisplayArticle);
-                this.Invoke(d, new object[] { a, lb });
+                this.Invoke(d, new object[] { list, lb });
             }
             else
             {
-                lb.Items.Add("Article #" + a.ArticleNr + " - " + a.ArticleName + " at " + a.ShopName);
+                lb.Items.Clear();
+                foreach (LoanArticle a in list)
+                {
+                    lb.Items.Add(a);
+                }
             }
         }
 
@@ -146,7 +135,7 @@ namespace EntranceApp
         {
             // Connecting to DB
             dh = new DataHelper();
-            visitor = dh.FindVisitorByNr("7"); // DEMO
+            visitor = dh.FindVisitorByNr("4"); // DEMO
 
             // thanh tests qr
             videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
@@ -307,26 +296,25 @@ namespace EntranceApp
         /////////////////////////////////////// 
         private void CheckOut(object sender, RFIDTagEventArgs e)
         {
-            dh.FindUnreturnedItems(visitor);
+            Visitor v = dh.FindVisitorByTag(e.Tag);
+            dh.FindUnreturnedItems(v);
 
-            ClearListbox(lbCheckOut);
-
-            if (visitor.CanLeave())
+            if (v.CanLeave())
             {
-                visitor.CheckOut();
-                if (dh.UpdateSelectedVisitor(visitor) != -1)
+                if (dh.MoveToDeletedVisitor(v) != -1)
                 {
                     SetText("OK", labelStatusOut);
                 }
                 else
                 {
-                    visitor.CheckInWith(visitor.RFIDNr); // undo the task
+                    v.CheckInWith(visitor.RFIDNr); // undo the task
                     MessageBox.Show("Error while checking out");
                 }
             }
             else
             {
                 errorSound.Play();
+                DisplayArticle(v.ArticlesBorrowed, lbCheckOut);
                 SetText("NOT OK", labelStatusOut);
             }
 

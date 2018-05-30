@@ -8,7 +8,7 @@ using MySql;
 using MySql.Data.MySqlClient;
 using ThanhDLL;
 
-namespace EntranceApp
+namespace ManagerApp
 {
     class DataHelper
     {
@@ -51,16 +51,49 @@ namespace EntranceApp
             return table;
         }
 
+        public DataTable LoadProblems()
+        {
+            dataAdapter.SelectCommand = new MySqlCommand("SELECT * FROM PROBLEM", connection);
+            MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
+
+            DataTable table = new DataTable();
+            dataAdapter.Fill(table);
+            return table;
+        }
+
+        public DataTable LoadActivities()
+        {
+            dataAdapter.SelectCommand = new MySqlCommand("SELECT * FROM ACTIVITY_INFO", connection);
+            MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
+
+            DataTable table = new DataTable();
+            dataAdapter.Fill(table);
+            return table;
+        }
+
+        public DataTable LoadCamps()
+        {
+            dataAdapter.SelectCommand = new MySqlCommand("SELECT * FROM CAMPING_SPOT", connection);
+            MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
+
+            DataTable table = new DataTable();
+            dataAdapter.Fill(table);
+            return table;
+        }
+
         /// <summary>
         /// Updates datatable
         /// </summary>
         /// <param name="table"></param>
         /// <returns></returns>
-        public bool UpdateVisitorsTable(DataTable table)
+        public bool UpdateTable(DataTable changes)
         {
             try
             {
-                dataAdapter.Update(table);
+                /*dataAdapter.Update(changes);
+                MySqlCommandBuilder mcb = new MySqlCommandBuilder(dataAdapter);
+                dataAdapter.UpdateCommand = mcb.GetUpdateCommand();*/
+                dataAdapter.Update(changes);
             }
             catch (MySqlException)
             {
@@ -362,29 +395,16 @@ namespace EntranceApp
             return v;
         }
 
-        public int MoveToDeletedVisitor(Visitor v)
+        public int CountRowTable(string table)
         {
-            string sql = "INSERT INTO DELETED_VISITOR(IdNr, FirstName, LastName, Phone, Email, RFIDNr, SpotNr)" +
-                "VALUES(@IdNr, @FirstName, @LastName, @Phone, @Email, @RFIDNr, @SpotNr); ";
-            sql += "SET FOREIGN_KEY_CHECKS=0; DELETE FROM PARTICIPANT WHERE IdNr = " + v.IdNr + "; SET FOREIGN_KEY_CHECKS= 1;";
-            // temporarily turning off foreign key checks
-            
-            MySqlCommand command = new MySqlCommand(sql, connection);
+            string sql = "SELECT COUNT(*) FROM " + table;
 
-            // add values
-            command.Parameters.AddWithValue("@IdNr", v.IdNr);
-            command.Parameters.AddWithValue("@FirstName", v.FirstName);
-            command.Parameters.AddWithValue("@LastName", v.LastName);
-            command.Parameters.AddWithValue("@Phone", v.Phone);
-            command.Parameters.AddWithValue("@Email", v.Email);
-            command.Parameters.AddWithValue("@RFIDNr", v.RFIDNr);
-            command.Parameters.AddWithValue("@SpotNr", v.SpotNr);
+            MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
             {
                 connection.Open();
-                int rowsAffected = command.ExecuteNonQuery();
-                return rowsAffected;
+                return Convert.ToInt32(command.ExecuteScalar());
             }
             catch (MySqlException exc)
             {
@@ -396,5 +416,64 @@ namespace EntranceApp
                 connection.Close();
             }
         }
+
+        public double GetTotalBalance()
+        {
+            string sql = "SELECT SUM(Credit) 'Total' FROM VISITOR";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                double sum = 0;
+
+                while (reader.Read())
+                {
+                    sum = Convert.ToDouble(reader["Total"]);
+                }
+                return sum;
+            }
+            catch (MySqlException)
+            {
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public double GetTotalSpent()
+        {
+            string sql = "SELECT SUM(Subtotal) 'Total' FROM ALL_ORDER";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                double sum = 0;
+
+                while (reader.Read())
+                {
+                    sum = Convert.ToDouble(reader["Total"]);
+                }
+                return sum;
+            }
+            catch (MySqlException)
+            {
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
     }
 }

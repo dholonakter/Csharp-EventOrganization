@@ -13,19 +13,37 @@ namespace ManagerApp
 {
     public partial class ManagerForm : Form
     {
+        /////////////////////////////////////////
+        // DECLARATIONS
+        ///////////////////////////////////////
+
+        // Variables
+        Visitor visitor;
+        DataHelper dh;
+        BindingSource visitorTable;
+        BindingSource activityTable;
+        BindingSource problemTable;
+
+
         public ManagerForm()
         {
             InitializeComponent();
             sideHighlight.Height = eventBtn.Height;
             sideHighlight.Top = eventBtn.Top;
-            eventPanel.BringToFront();
+            //eventPanel.BringToFront();
+
+            dh = new DataHelper();
         }
 
         private void eventBtn_Click(object sender, EventArgs e)
         {
             sideHighlight.Height = eventBtn.Height;
             sideHighlight.Top = eventBtn.Top;
-            eventPanel.BringToFront();
+
+            VisitorForm tf = new VisitorForm();
+            tf.Show();
+            tf.Focus();
+            
         }
 
         private void shopBtn_Click(object sender, EventArgs e)
@@ -40,6 +58,10 @@ namespace ManagerApp
             sideHighlight.Height = campBtn.Height;
             sideHighlight.Top = campBtn.Top;
             campPanel.BringToFront();
+
+            CampForm cf = new CampForm();
+            cf.Show();
+            cf.Focus();
         }
 
         private void rentBtn_Click(object sender, EventArgs e)
@@ -68,6 +90,6 @@ namespace ManagerApp
             sideHighlight.Height = staffBtn.Height;
             sideHighlight.Top = staffBtn.Top;
             staffPanel.BringToFront();
-        }
+        }        
     }
 }
