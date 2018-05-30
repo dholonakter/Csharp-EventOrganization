@@ -67,14 +67,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbPhoneNumber = new System.Windows.Forms.TextBox();
             this.tbEmailAddress = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.pictureBoxCaptured = new System.Windows.Forms.PictureBox();
-            this.comboBoxCameraSource = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.button3 = new System.Windows.Forms.Button();
+            this.buttonStartWC = new System.Windows.Forms.Button();
             this.pictureBoxSource = new System.Windows.Forms.PictureBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.webCamTimer = new System.Windows.Forms.Timer(this.components);
             this.panel1.SuspendLayout();
             this.checkinPanel.SuspendLayout();
@@ -84,7 +78,6 @@
             this.searchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVisitor)).BeginInit();
             this.ticketPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCaptured)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSource)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,7 +91,7 @@
             this.panel1.Controls.Add(this.checkoutBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(221, 945);
             this.panel1.TabIndex = 0;
@@ -114,7 +107,7 @@
             this.ticketsBtn.Image = ((System.Drawing.Image)(resources.GetObject("ticketsBtn.Image")));
             this.ticketsBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.ticketsBtn.Location = new System.Drawing.Point(16, 110);
-            this.ticketsBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ticketsBtn.Margin = new System.Windows.Forms.Padding(4);
             this.ticketsBtn.Name = "ticketsBtn";
             this.ticketsBtn.Size = new System.Drawing.Size(207, 66);
             this.ticketsBtn.TabIndex = 12;
@@ -133,7 +126,7 @@
             this.checkinBtn.Image = ((System.Drawing.Image)(resources.GetObject("checkinBtn.Image")));
             this.checkinBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.checkinBtn.Location = new System.Drawing.Point(16, 223);
-            this.checkinBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkinBtn.Margin = new System.Windows.Forms.Padding(4);
             this.checkinBtn.Name = "checkinBtn";
             this.checkinBtn.Size = new System.Drawing.Size(207, 66);
             this.checkinBtn.TabIndex = 9;
@@ -145,7 +138,7 @@
             // 
             this.sideHighlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.sideHighlight.Location = new System.Drawing.Point(0, 110);
-            this.sideHighlight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.sideHighlight.Margin = new System.Windows.Forms.Padding(4);
             this.sideHighlight.Name = "sideHighlight";
             this.sideHighlight.Size = new System.Drawing.Size(15, 66);
             this.sideHighlight.TabIndex = 14;
@@ -161,7 +154,7 @@
             this.monitorBtn.Image = ((System.Drawing.Image)(resources.GetObject("monitorBtn.Image")));
             this.monitorBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.monitorBtn.Location = new System.Drawing.Point(16, 447);
-            this.monitorBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.monitorBtn.Margin = new System.Windows.Forms.Padding(4);
             this.monitorBtn.Name = "monitorBtn";
             this.monitorBtn.Size = new System.Drawing.Size(207, 66);
             this.monitorBtn.TabIndex = 10;
@@ -180,7 +173,7 @@
             this.checkoutBtn.Image = ((System.Drawing.Image)(resources.GetObject("checkoutBtn.Image")));
             this.checkoutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.checkoutBtn.Location = new System.Drawing.Point(16, 336);
-            this.checkoutBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkoutBtn.Margin = new System.Windows.Forms.Padding(4);
             this.checkoutBtn.Name = "checkoutBtn";
             this.checkoutBtn.Size = new System.Drawing.Size(207, 66);
             this.checkoutBtn.TabIndex = 11;
@@ -193,7 +186,7 @@
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(221, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1600, 12);
             this.panel2.TabIndex = 1;
@@ -205,8 +198,10 @@
             this.checkinPanel.Controls.Add(this.pictureBox2);
             this.checkinPanel.Controls.Add(this.labelTagNr);
             this.checkinPanel.Controls.Add(this.lbCheckIn);
+            this.checkinPanel.Controls.Add(this.buttonStartWC);
+            this.checkinPanel.Controls.Add(this.pictureBoxSource);
             this.checkinPanel.Location = new System.Drawing.Point(235, 20);
-            this.checkinPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkinPanel.Margin = new System.Windows.Forms.Padding(4);
             this.checkinPanel.Name = "checkinPanel";
             this.checkinPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkinPanel.TabIndex = 3;
@@ -266,7 +261,7 @@
             this.lbCheckIn.HorizontalScrollbar = true;
             this.lbCheckIn.ItemHeight = 25;
             this.lbCheckIn.Location = new System.Drawing.Point(483, 187);
-            this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4);
             this.lbCheckIn.Name = "lbCheckIn";
             this.lbCheckIn.Size = new System.Drawing.Size(565, 229);
             this.lbCheckIn.TabIndex = 1;
@@ -278,7 +273,7 @@
             this.checkoutPanel.Controls.Add(this.labelStatusOut);
             this.checkoutPanel.Controls.Add(this.lbCheckOut);
             this.checkoutPanel.Location = new System.Drawing.Point(235, 20);
-            this.checkoutPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.checkoutPanel.Name = "checkoutPanel";
             this.checkoutPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkoutPanel.TabIndex = 4;
@@ -325,7 +320,7 @@
             this.lbCheckOut.FormattingEnabled = true;
             this.lbCheckOut.ItemHeight = 25;
             this.lbCheckOut.Location = new System.Drawing.Point(439, 187);
-            this.lbCheckOut.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lbCheckOut.Margin = new System.Windows.Forms.Padding(4);
             this.lbCheckOut.Name = "lbCheckOut";
             this.lbCheckOut.Size = new System.Drawing.Size(565, 404);
             this.lbCheckOut.TabIndex = 1;
@@ -340,7 +335,7 @@
             this.searchPanel.Controls.Add(this.label9);
             this.searchPanel.Controls.Add(this.listBoxSearch);
             this.searchPanel.Location = new System.Drawing.Point(235, 20);
-            this.searchPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.searchPanel.Margin = new System.Windows.Forms.Padding(4);
             this.searchPanel.Name = "searchPanel";
             this.searchPanel.Size = new System.Drawing.Size(1473, 846);
             this.searchPanel.TabIndex = 5;
@@ -391,7 +386,7 @@
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
             this.buttonSearch.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearch.Image")));
             this.buttonSearch.Location = new System.Drawing.Point(541, 57);
-            this.buttonSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonSearch.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(41, 27);
             this.buttonSearch.TabIndex = 14;
@@ -402,7 +397,7 @@
             // 
             this.textBoxVisitorNrSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxVisitorNrSearch.Location = new System.Drawing.Point(284, 57);
-            this.textBoxVisitorNrSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBoxVisitorNrSearch.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxVisitorNrSearch.Name = "textBoxVisitorNrSearch";
             this.textBoxVisitorNrSearch.Size = new System.Drawing.Size(249, 26);
             this.textBoxVisitorNrSearch.TabIndex = 12;
@@ -426,7 +421,7 @@
             this.listBoxSearch.HorizontalScrollbar = true;
             this.listBoxSearch.ItemHeight = 25;
             this.listBoxSearch.Location = new System.Drawing.Point(53, 92);
-            this.listBoxSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.listBoxSearch.Margin = new System.Windows.Forms.Padding(4);
             this.listBoxSearch.Name = "listBoxSearch";
             this.listBoxSearch.Size = new System.Drawing.Size(1025, 154);
             this.listBoxSearch.TabIndex = 1;
@@ -443,16 +438,8 @@
             this.ticketPanel.Controls.Add(this.label6);
             this.ticketPanel.Controls.Add(this.tbPhoneNumber);
             this.ticketPanel.Controls.Add(this.tbEmailAddress);
-            this.ticketPanel.Controls.Add(this.label3);
-            this.ticketPanel.Controls.Add(this.pictureBoxCaptured);
-            this.ticketPanel.Controls.Add(this.comboBoxCameraSource);
-            this.ticketPanel.Controls.Add(this.label2);
-            this.ticketPanel.Controls.Add(this.button3);
-            this.ticketPanel.Controls.Add(this.pictureBoxSource);
-            this.ticketPanel.Controls.Add(this.button2);
-            this.ticketPanel.Controls.Add(this.button1);
             this.ticketPanel.Location = new System.Drawing.Point(231, 20);
-            this.ticketPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.ticketPanel.Margin = new System.Windows.Forms.Padding(4);
             this.ticketPanel.Name = "ticketPanel";
             this.ticketPanel.Size = new System.Drawing.Size(1473, 911);
             this.ticketPanel.TabIndex = 10;
@@ -466,24 +453,24 @@
             "20",
             "30",
             "50"});
-            this.cbxSelectedAmount.Location = new System.Drawing.Point(453, 686);
-            this.cbxSelectedAmount.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cbxSelectedAmount.Location = new System.Drawing.Point(343, 367);
+            this.cbxSelectedAmount.Margin = new System.Windows.Forms.Padding(4);
             this.cbxSelectedAmount.Name = "cbxSelectedAmount";
             this.cbxSelectedAmount.Size = new System.Drawing.Size(272, 24);
             this.cbxSelectedAmount.TabIndex = 35;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(453, 506);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Location = new System.Drawing.Point(343, 187);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(272, 22);
             this.textBox1.TabIndex = 26;
             // 
             // tbName
             // 
-            this.tbName.Location = new System.Drawing.Point(453, 546);
-            this.tbName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbName.Location = new System.Drawing.Point(343, 227);
+            this.tbName.Margin = new System.Windows.Forms.Padding(4);
             this.tbName.Name = "tbName";
             this.tbName.Size = new System.Drawing.Size(272, 22);
             this.tbName.TabIndex = 26;
@@ -491,7 +478,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(351, 686);
+            this.label4.Location = new System.Drawing.Point(241, 367);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 17);
@@ -501,7 +488,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(351, 635);
+            this.label12.Location = new System.Drawing.Point(241, 316);
             this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(53, 17);
@@ -511,7 +498,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(351, 594);
+            this.label5.Location = new System.Drawing.Point(241, 275);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(46, 17);
@@ -521,7 +508,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(351, 549);
+            this.label7.Location = new System.Drawing.Point(241, 230);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(76, 17);
@@ -531,7 +518,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(351, 508);
+            this.label6.Location = new System.Drawing.Point(241, 189);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(76, 17);
@@ -540,97 +527,39 @@
             // 
             // tbPhoneNumber
             // 
-            this.tbPhoneNumber.Location = new System.Drawing.Point(453, 635);
-            this.tbPhoneNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbPhoneNumber.Location = new System.Drawing.Point(343, 316);
+            this.tbPhoneNumber.Margin = new System.Windows.Forms.Padding(4);
             this.tbPhoneNumber.Name = "tbPhoneNumber";
             this.tbPhoneNumber.Size = new System.Drawing.Size(272, 22);
             this.tbPhoneNumber.TabIndex = 31;
             // 
             // tbEmailAddress
             // 
-            this.tbEmailAddress.Location = new System.Drawing.Point(453, 594);
-            this.tbEmailAddress.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tbEmailAddress.Location = new System.Drawing.Point(343, 275);
+            this.tbEmailAddress.Margin = new System.Windows.Forms.Padding(4);
             this.tbEmailAddress.Name = "tbEmailAddress";
             this.tbEmailAddress.Size = new System.Drawing.Size(272, 22);
             this.tbEmailAddress.TabIndex = 30;
             // 
-            // label3
+            // buttonStartWC
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(659, 114);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(46, 17);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "label3";
-            // 
-            // pictureBoxCaptured
-            // 
-            this.pictureBoxCaptured.Location = new System.Drawing.Point(1015, 164);
-            this.pictureBoxCaptured.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBoxCaptured.Name = "pictureBoxCaptured";
-            this.pictureBoxCaptured.Size = new System.Drawing.Size(307, 249);
-            this.pictureBoxCaptured.TabIndex = 6;
-            this.pictureBoxCaptured.TabStop = false;
-            // 
-            // comboBoxCameraSource
-            // 
-            this.comboBoxCameraSource.FormattingEnabled = true;
-            this.comboBoxCameraSource.Location = new System.Drawing.Point(443, 114);
-            this.comboBoxCameraSource.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.comboBoxCameraSource.Name = "comboBoxCameraSource";
-            this.comboBoxCameraSource.Size = new System.Drawing.Size(121, 24);
-            this.comboBoxCameraSource.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(491, 69);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 17);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "label2";
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(367, 367);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(205, 62);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "Click this one";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.buttonStartWC.Location = new System.Drawing.Point(516, 486);
+            this.buttonStartWC.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonStartWC.Name = "buttonStartWC";
+            this.buttonStartWC.Size = new System.Drawing.Size(205, 62);
+            this.buttonStartWC.TabIndex = 3;
+            this.buttonStartWC.Text = "Start webcam";
+            this.buttonStartWC.UseVisualStyleBackColor = true;
+            this.buttonStartWC.Click += new System.EventHandler(this.buttonStartWC_Click);
             // 
             // pictureBoxSource
             // 
-            this.pictureBoxSource.Location = new System.Drawing.Point(653, 164);
+            this.pictureBoxSource.Location = new System.Drawing.Point(176, 461);
             this.pictureBoxSource.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBoxSource.Name = "pictureBoxSource";
-            this.pictureBoxSource.Size = new System.Drawing.Size(307, 249);
+            this.pictureBoxSource.Size = new System.Drawing.Size(284, 249);
             this.pictureBoxSource.TabIndex = 2;
             this.pictureBoxSource.TabStop = false;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(367, 279);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(205, 62);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Browse/Capture";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(367, 177);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(205, 62);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Decode";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // webCamTimer
             // 
@@ -642,14 +571,14 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
+            this.Controls.Add(this.ticketPanel);
+            this.Controls.Add(this.checkinPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.ticketPanel);
             this.Controls.Add(this.checkoutPanel);
-            this.Controls.Add(this.checkinPanel);
             this.Controls.Add(this.searchPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EntranceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EntranceForm";
@@ -667,7 +596,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVisitor)).EndInit();
             this.ticketPanel.ResumeLayout(false);
             this.ticketPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxCaptured)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSource)).EndInit();
             this.ResumeLayout(false);
 
@@ -703,14 +631,7 @@
         private System.Windows.Forms.DataGridView dataGridVisitor;
         private System.Windows.Forms.Button buttonSaveChanges;
         private System.Windows.Forms.PictureBox pictureBoxSource;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Timer webCamTimer;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox comboBoxCameraSource;
-        private System.Windows.Forms.PictureBox pictureBoxCaptured;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button buttonStartWC;
         private System.Windows.Forms.ComboBox cbxSelectedAmount;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox tbName;
@@ -721,6 +642,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox tbPhoneNumber;
         private System.Windows.Forms.TextBox tbEmailAddress;
+        private System.Windows.Forms.Timer webCamTimer;
     }
 }
 

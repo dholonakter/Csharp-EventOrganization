@@ -16,9 +16,6 @@ using System.Threading;
 using ZXing;
 using ZXing.Common;
 using ZXing.QrCode;
-using AForge;
-using AForge.Video;
-using AForge.Video.DirectShow;
 using System.Media;
 
 namespace EntranceApp
@@ -34,19 +31,13 @@ namespace EntranceApp
         DataHelper dh;
         BindingSource visitorTable;
         RFID myRFIDReader;
-        
+
         // Delegates for RFID
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
 
         // thanh tests qr
         QrCodeEncodingOptions options = new QrCodeEncodingOptions();
         WebCam wCam;
-
-        /*
-        private FilterInfoCollection videoDevices;
-        private VideoCaptureDevice videoSource;
-        private Bitmap capturedImage;
-        private String message = "";*/
 
         // thanh has some fun
         SoundPlayer successSound = new SoundPlayer("../../../connect.wav");
@@ -70,7 +61,7 @@ namespace EntranceApp
             if (lb.InvokeRequired)
             {
                 LabelDelegate d = new LabelDelegate(SetText);
-                this.Invoke(d, new object[] { text, lb});
+                this.Invoke(d, new object[] { text, lb });
             }
             else
             {
@@ -249,46 +240,28 @@ namespace EntranceApp
 
         private void CheckIn(object sender, RFIDTagEventArgs e)
         {
-            // TO DO: Read QR Code to get visitor Nr //
-            Ticket t = dh.GetTicketStatusForVisitor(visitor.IdNr);
-            
-            if (t != null) // if ticket exists
+            if (visitor != null) // if there's a visitor
             {
-                DisplayTicket(t, lbCheckIn);
-
-                if (t.Paid)
+                if (dh.existsRFID(e.Tag) == null)
                 {
-                    if (dh.existsRFID(e.Tag) == null)
-                    {
-                        visitor.CheckInWith(e.Tag);
+                    visitor.CheckInWith(e.Tag);
 
-                        if (dh.UpdateSelectedVisitor(visitor) != -1)
-                        {
-                            SetText("OK", labelStatusIn);
-                            SetText(e.Tag, labelTagNr);
-                            successSound.Play();
-                        }
-                        else
-                        {
-                            visitor.CheckOut(); // undo the task
-                            MessageBox.Show("Error while checking in");
-                        }
+                    if (dh.UpdateSelectedVisitor(visitor) != -1)
+                    {
+                        SetText(e.Tag, labelTagNr);
+                        successSound.Play();
                     }
                     else
                     {
-                        MessageBox.Show("RFID already used");
+                        visitor.CheckOut(); // undo the task
+                        MessageBox.Show("Error while checking in");
                     }
-
                 }
                 else
                 {
-                    errorSound.Play();
-                    SetText("UNPAID", labelStatusIn);
+                    MessageBox.Show("RFID already used");
                 }
-            }
-            else
-            {
-                MessageBox.Show("Ticket not found");
+                StartWebcam(); // restart webcam
             }
         }
 
@@ -324,121 +297,23 @@ namespace EntranceApp
         ///////////////////////////////////////
         // THANH TEST
         /////////////////////////////////////// 
-        void videoSource_NewFrame(object sender, NewFrameEventArgs eventArgs)
+
+        private void StartWebcam()
         {
-            Bitmap image = (Bitmap)eventArgs.Frame.Clone();
-            pictureBoxSource.Image = image;
+            wCam = new WebCam { Container = pictureBoxSource };
+            wCam.OpenConnection();
+            webCamTimer = new System.Windows.Forms.Timer();
+            webCamTimer.Tick += webCamTimer_Tick;
+            webCamTimer.Interval = 200;
+            webCamTimer.Start();
         }
 
-        private void ReadQR(Bitmap bitmap)
+        private void StopWebcam()
         {
-            /*
-            try
-            {
-                BarcodeReader reader = new BarcodeReader
-                    (null, newbitmap => new BitmapLuminanceSource(bitmap), luminance => new GlobalHistogramBinarizer(luminance));
-
-                reader.AutoRotate = true;
-                reader.TryInverted = true;
-                reader.Options = new DecodingOptions { TryHarder = true };
-
-                var result = reader.Decode(bitmap);
-
-                if (result != null)
-                {
-                    message = result.Text;
-                    return message;
-                }
-                else
-                {
-                    message = "QRCode couldn't be decoded.";
-                    return message;
-                }
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }*/
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
-            /*
-            if (capturedImage != null)
-            {
-                label2.Text = ReadQR(capturedImage);
-            }
-            try
-            {
-                Bitmap bitmap = new Bitmap(pictureBoxSource.Image);
-                BarcodeReader reader = new BarcodeReader { AutoRotate = true, TryInverted = true };
-                Result result = reader.Decode(bitmap);
-                string decoded = result.ToString().Trim();
-                label2.Text = decoded;
-                // DEMO BUT ALSO KINDA WILL KEEP
-                visitor = dh.FindVisitorByNr(decoded);
-                label3.Text = visitor.ToString();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Image not found", "Oops!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }*/
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            /*
-            if (videoSource.IsRunning)
-            {
-                pictureBoxCaptured.Image = (Bitmap)pictureBoxSource.Image.Clone();
-                capturedImage = (Bitmap)pictureBoxCaptured.Image;
-            }*/
-            
-            OpenFileDialog open = new OpenFileDialog();
-            if (open.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                var qr = new ZXing.BarcodeWriter();
-                qr.Options = options;
-                qr.Format = ZXing.BarcodeFormat.QR_CODE;
-                pictureBoxSource.ImageLocation = open.FileName;
-            }
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            /*
-            if (videoSource.IsRunning)
-            {
-                videoSource.Stop();
-                pictureBoxSource.Image = null;
-                pictureBoxCaptured.Image = null;
-                pictureBoxSource.Invalidate();
-                pictureBoxCaptured.Invalidate();
-            }
-            else
-            {
-                videoSource = new VideoCaptureDevice(videoDevices[comboBoxCameraSource.SelectedIndex].MonikerString);
-                videoSource.NewFrame += new NewFrameEventHandler(videoSource_NewFrame);
-                videoSource.Start();
-            }*/
-            
-            if (wCam == null)
-            {
-                wCam = new WebCam { Container = pictureBoxSource };
-
-                wCam.OpenConnection();
-
-                webCamTimer = new System.Windows.Forms.Timer();
-                webCamTimer.Tick += webCamTimer_Tick;
-                webCamTimer.Interval = 100;
-                webCamTimer.Start();
-            }
-            else
-            {
-                webCamTimer.Stop();
-                webCamTimer = null;
-                wCam.Dispose();
-                wCam = null;
-            }
+            webCamTimer.Stop();
+            webCamTimer = null;
+            wCam.Dispose();
+            wCam = null;
         }
 
         private void webCamTimer_Tick(object sender, EventArgs e)
@@ -450,15 +325,48 @@ namespace EntranceApp
             var result = reader.Decode(bitmap);
             if (result != null)
             {
-                //txtTypeWebCam.Text = result.BarcodeFormat.ToString();
-                label2.Text = (result.Text);
+                /// Find visitor with scanned QR code
                 visitor = dh.FindVisitorByNr(result.Text);
-                label3.Text = visitor.ToString();
-            }
 
+                // Find their ticket
+                Ticket t = dh.GetTicketStatusForVisitor(visitor.IdNr);
+
+                if (t != null) // if ticket exists
+                {
+                    DisplayTicket(t, lbCheckIn);
+
+                    if (t.Paid)
+                    {
+                        SetText("OK", labelStatusIn);
+                        StopWebcam();
+                    }
+                    else
+                    {
+                        errorSound.Play();
+                        SetText("UNPAID", labelStatusIn);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Ticket not found");
+                }
+            }
             else
             {
-                label2.Text = "NULL";
+                labelStatusIn.Text = "No QR";
+            }
+        }
+
+        private void buttonStartWC_Click(object sender, EventArgs e)
+        {
+            if (wCam == null)
+            {
+                StartWebcam();
+
+            }
+            else
+            {
+                StopWebcam();
             }
         }
     }
