@@ -35,6 +35,7 @@
             this.productBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.productPanel = new System.Windows.Forms.Panel();
+            this.lblCardLinkedStatus = new System.Windows.Forms.Label();
             this.labelOrderInfo = new System.Windows.Forms.Label();
             this.itemLbx = new System.Windows.Forms.ListBox();
             this.label3 = new System.Windows.Forms.Label();
@@ -43,7 +44,6 @@
             this.foodRbtn = new System.Windows.Forms.RadioButton();
             this.quantitySelec = new System.Windows.Forms.NumericUpDown();
             this.startPanel = new System.Windows.Forms.Panel();
-            this.lblCardLinkedStatus = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.productPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantitySelec)).BeginInit();
@@ -129,6 +129,15 @@
             this.productPanel.Size = new System.Drawing.Size(997, 634);
             this.productPanel.TabIndex = 4;
             // 
+            // lblCardLinkedStatus
+            // 
+            this.lblCardLinkedStatus.AutoSize = true;
+            this.lblCardLinkedStatus.Location = new System.Drawing.Point(59, 391);
+            this.lblCardLinkedStatus.Name = "lblCardLinkedStatus";
+            this.lblCardLinkedStatus.Size = new System.Drawing.Size(88, 13);
+            this.lblCardLinkedStatus.TabIndex = 31;
+            this.lblCardLinkedStatus.Text = "...........................";
+            // 
             // labelOrderInfo
             // 
             this.labelOrderInfo.AutoSize = true;
@@ -177,7 +186,7 @@
             this.drinkRbtn.AutoSize = true;
             this.drinkRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.drinkRbtn.Location = new System.Drawing.Point(336, 97);
-            this.drinkRbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.drinkRbtn.Margin = new System.Windows.Forms.Padding(2);
             this.drinkRbtn.Name = "drinkRbtn";
             this.drinkRbtn.Size = new System.Drawing.Size(57, 20);
             this.drinkRbtn.TabIndex = 24;
@@ -190,7 +199,7 @@
             this.foodRbtn.Checked = true;
             this.foodRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.foodRbtn.Location = new System.Drawing.Point(242, 96);
-            this.foodRbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.foodRbtn.Margin = new System.Windows.Forms.Padding(2);
             this.foodRbtn.Name = "foodRbtn";
             this.foodRbtn.Size = new System.Drawing.Size(58, 20);
             this.foodRbtn.TabIndex = 23;
@@ -204,7 +213,7 @@
             this.quantitySelec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.quantitySelec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quantitySelec.Location = new System.Drawing.Point(172, 314);
-            this.quantitySelec.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.quantitySelec.Margin = new System.Windows.Forms.Padding(2);
             this.quantitySelec.Name = "quantitySelec";
             this.quantitySelec.Size = new System.Drawing.Size(92, 22);
             this.quantitySelec.TabIndex = 19;
@@ -216,15 +225,6 @@
             this.startPanel.Name = "startPanel";
             this.startPanel.Size = new System.Drawing.Size(1105, 687);
             this.startPanel.TabIndex = 9;
-            // 
-            // lblCardLinkedStatus
-            // 
-            this.lblCardLinkedStatus.AutoSize = true;
-            this.lblCardLinkedStatus.Location = new System.Drawing.Point(56, 391);
-            this.lblCardLinkedStatus.Name = "lblCardLinkedStatus";
-            this.lblCardLinkedStatus.Size = new System.Drawing.Size(88, 13);
-            this.lblCardLinkedStatus.TabIndex = 31;
-            this.lblCardLinkedStatus.Text = "...........................";
             // 
             // ShopForm
             // 

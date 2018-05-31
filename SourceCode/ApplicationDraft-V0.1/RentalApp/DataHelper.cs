@@ -28,13 +28,13 @@ namespace RentalApp
 
 
 
-        public List<Article> GetLoanArticles(int shopnr)
+        public List<LoanArticle> GetLoanArticles(int shopnr)
         {
             String sql = "SELECT * FROM loan_article WHERE ShopNr=" + Convert.ToString(shopnr);
             MySqlCommand command = new MySqlCommand(sql, connection);
 
-            List<Article> temp;
-            temp = new List<Article>();
+            List<LoanArticle> temp;
+            temp = new List<LoanArticle>();
 
             try
             {
@@ -47,19 +47,21 @@ namespace RentalApp
                 string img = "";
                 int stock;
                 //string shopname;
+                string rfidNo;
                 while (reader.Read())
                 {
                     name = Convert.ToString(reader["ArticleName"]);
                     //shopname = Convert.ToString(reader["ShopName"]);
                     nr = Convert.ToInt32(reader["ArticleNr"]);
                     shopnr = Convert.ToInt32(reader["ShopNr"]);
-                    price = Convert.ToInt32(reader["price"]);
+                    price = Convert.ToInt32(reader["LoanFee"]);
                     if (!(reader["Img"] is DBNull))
                     {
                         img = Convert.ToString(reader["Img"]);
                     }
-                    stock = Convert.ToInt32(reader["Available"]);
-                    temp.Add(new Article(shopnr, nr, name, price, stock));
+                    rfidNo = Convert.ToString(reader["RFIDNr"]);
+                    stock = Convert.ToInt32(reader["IsReturned"]);
+                    temp.Add(new LoanArticle(shopnr, nr, name, price, stock, rfidNo));
                 }
             }
             catch (Exception exc)
@@ -159,6 +161,132 @@ namespace RentalApp
                 connection.Close();
             }
 
+        }
+
+        /// <summary>
+        /// Reading data onto a visitor
+        /// </summary>
+        /// <param name="reader">MySQL's reader</param>
+        /// <param name="v">The selected visitor</param>
+        /// <returns>The selected visitor initialized</returns>
+        public Visitor ReadDataVisitor(MySqlDataReader reader, Visitor v)
+        {
+
+            // reading
+            while (reader.Read())
+            {
+                // temporary variables
+                int nr;
+                string first;
+                string last;
+                string phone;
+                string mail;
+                string rfidNr = "";
+                double cred = 0;
+                bool checkedIn;
+                int spot = 0; // not reserved by default
+
+                nr = Convert.ToInt32(reader["VisitorNr"]);
+                first = Convert.ToString(reader["FirstName"]);
+                last = Convert.ToString(reader["LastName"]);
+                phone = Convert.ToString(reader["Phone"]);
+                mail = Convert.ToString(reader["Email"]);
+                if (!(reader["RFIDNr"] is DBNull))
+                {
+                    rfidNr = Convert.ToString(reader["RFIDNr"]);
+                }
+                else
+                {
+                    rfidNr = "";
+                }
+
+                if (!(reader["Credit"] is DBNull))
+                {
+                    cred = Convert.ToDouble(reader["Credit"]);
+                }
+                checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
+                if (!(reader["SpotNr"] is DBNull))
+                {
+                    spot = Convert.ToInt32(reader["SpotNr"]);
+                }
+
+                v = (new Visitor(nr, first, last, phone, mail, rfidNr, checkedIn, cred, spot));
+            }
+            return v;
+        }
+
+        /// <summary>
+        /// Finds visitor by RFID tag
+        /// </summary>
+        /// <param name="rfidNr"></param>
+        /// <returns></returns>
+        public Visitor FindVisitorByTag(string rfidNr)
+        {
+            Visitor v = null;
+            string sql = "SELECT * FROM VISITOR WHERE RFIDNr = '" + rfidNr + "'";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                v = ReadDataVisitor(reader, v);
+            }
+            catch (MySqlException exc)
+            {
+                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return v;
+        }
+
+        ///////////////////////////////////////
+        // VISITOR'S HANDLING
+        ///////////////////////////////////////
+
+        /// <summary>
+        ///  Updates credit, checked in status and rfid of the selected visitor in the database 
+        /// </summary>
+        /// <param name="v">The selected visitor</param>
+        /// <returns>-1 if fails, otherwise returns nr. of record affected (should be 1)</returns>
+        public int UpdateSelectedVisitor(Visitor v)
+        {
+            string sql = "UPDATE VISITOR " +
+                        "SET Credit = " + v.Credit + "," +
+                        "CheckedIn = " + v.CheckedIn + "," +
+                        "RFIDNr = " + (v.RFIDNr == "" ? "NULL" : "'" + v.RFIDNr + "'");
+
+            if (v.SpotNr != 0) // if they reserve a spot
+            {
+                sql += ", SpotNr = " + v.SpotNr;
+            }
+
+            sql += " WHERE VisitorNr = " + v.IdNr;
+
+            //MessageBox.Show(sql);
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int nrOfRecordsChanged = command.ExecuteNonQuery();
+                return nrOfRecordsChanged;
+            }
+            catch (MySqlException exc)
+            {
+
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
 
     }
