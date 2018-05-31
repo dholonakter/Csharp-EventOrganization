@@ -178,9 +178,9 @@ namespace RentalApp
         {
             try
             {
-                if (((LoanArticle)itemLbx.SelectedItem).Available > 0)
+                if (((Article)itemLbx.SelectedItem).Available > 0)
                 {
-                    o.AddArticle((LoanArticle)itemLbx.SelectedItem, 1);
+                    o.AddArticle((Article)itemLbx.SelectedItem, 1);
                     labelOrderInfo.Text = o.ToString();
                     UpdateNumericUpDown();
                 }
@@ -203,9 +203,9 @@ namespace RentalApp
         {
             if (itemLbx.SelectedItem != null)
             {
-                if (o.Articles.Contains((LoanArticle)itemLbx.SelectedItem))
+                if (o.Articles.Contains((Article)itemLbx.SelectedItem))
                 {
-                    durationSelec.Value = o.Quantity[o.Articles.IndexOf((LoanArticle)itemLbx.SelectedItem)];
+                    durationSelec.Value = o.Quantity[o.Articles.IndexOf((Article)itemLbx.SelectedItem)];
                 }
             }
         }
