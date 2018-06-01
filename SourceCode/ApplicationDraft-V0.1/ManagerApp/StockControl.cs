@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,17 +10,16 @@ using System.Windows.Forms;
 
 namespace ManagerApp
 {
-    public partial class StockForm : Form
+    public partial class StockControl : UserControl
     {
         DataHelper dh;
         BindingSource dataTable;
 
-
-        public StockForm()
+        public StockControl()
         {
             InitializeComponent();
             dh = new DataHelper();
-            Display("select a.ArticleNr, s.ShopName, a.ShopNr, a.ArticleName, a.Price, a.Available, a.IsLoanable from article a, shop s where a.ShopNr = s.ShopNr ");
+            Display("select a.ArticleNr, s.ShopName, a.ArticleName, a.Price, a.Available, a.IsLoanable from article a, shop s where a.ShopNr = s.ShopNr ");
         }
 
         private void Display(string sql)
@@ -42,13 +41,14 @@ namespace ManagerApp
 
         private void buttonShow_Click(object sender, EventArgs e)
         {
-            Display("select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable from article_shop where Available < " + Convert.ToInt32(numericUpDown1.Value));
+            Display("select a.ArticleNr, s.ShopName, a.ArticleName, a.Price, a.Available, a.IsLoanable from article a, shop s where a.ShopNr = s.ShopNr " +
+               "and a.Available < " + Convert.ToInt32(textBox1.Text));
         }
 
         private void buttonShowAll_Click(object sender, EventArgs e)
         {
-            Display("select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable from article_shop");
+            Display("select a.ArticleNr, s.ShopName, a.ArticleName, a.Price, a.Available, a.IsLoanable from article a, shop s where a.ShopNr = s.ShopNr ");
         }
-    
+
     }
 }

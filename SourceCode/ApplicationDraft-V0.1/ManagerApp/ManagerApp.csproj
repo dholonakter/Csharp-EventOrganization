@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CampControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="CampControl.Designer.cs">
+      <DependentUpon>CampControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="CampForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -56,6 +62,12 @@
       <DependentUpon>CampForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DataHelper.cs" />
+    <Compile Include="ShopControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ShopControl.Designer.cs">
+      <DependentUpon>ShopControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShopForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -70,11 +82,29 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaffControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StaffControl.Designer.cs">
+      <DependentUpon>StaffControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="StockControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="StockControl.Designer.cs">
+      <DependentUpon>StockControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="StockForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="StockForm.Designer.cs">
       <DependentUpon>StockForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="VisitorControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="VisitorControl.Designer.cs">
+      <DependentUpon>VisitorControl.cs</DependentUpon>
     </Compile>
     <Compile Include="VisitorForm.cs">
       <SubType>Form</SubType>
@@ -82,6 +112,9 @@
     <Compile Include="VisitorForm.Designer.cs">
       <DependentUpon>VisitorForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="CampControl.resx">
+      <DependentUpon>CampControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CampForm.resx">
       <DependentUpon>CampForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -97,11 +130,23 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ShopControl.resx">
+      <DependentUpon>ShopControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ShopForm.resx">
       <DependentUpon>ShopForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="StaffControl.resx">
+      <DependentUpon>StaffControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StockControl.resx">
+      <DependentUpon>StockControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StockForm.resx">
       <DependentUpon>StockForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="VisitorControl.resx">
+      <DependentUpon>VisitorControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VisitorForm.resx">
       <DependentUpon>VisitorForm.cs</DependentUpon>

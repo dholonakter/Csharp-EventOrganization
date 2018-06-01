@@ -57,7 +57,7 @@ namespace ManagerApp
         private void buttonAllShops_Click(object sender, EventArgs e)
         {
             dataGridViewShop.ReadOnly = false;
-            Display("select s.ShopNr, s.ShopName, l.LocationName, s.IsStore from shop s , location l where s.LocationNr = l.LocationNr");
+            Display("select ShopNr, ShopName, LocationName, IsStore from shop_location");
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

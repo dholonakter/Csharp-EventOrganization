@@ -1,28 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ThanhDLL;
+
 
 namespace ManagerApp
 {
-    public partial class VisitorForm : Form
+    public partial class VisitorControl : UserControl
     {
         DataHelper dh;
         BindingSource visitorTable;
-
-        public VisitorForm()
+        public VisitorControl()
         {
             InitializeComponent();
             dh = new DataHelper();
 
             // Display data onto gridview
             visitorTable = new BindingSource();
-            visitorTable.DataSource = dh.DataTableFromSQL("SELECT VisitorNr, FirstName, LastName, Phone, Email, UserPassword, RFIDNr, Credit, CheckedIn, SpotNr" +
+            visitorTable.DataSource = dh.DataTableFromSQL("SELECT FirstName, LastName, Phone, Email, UserPassword, RFIDNr, Credit, CheckedIn, SpotNr" +
                 " FROM VISITOR");
             dataGridViewVisitor.DataSource = visitorTable;
 
@@ -48,3 +49,4 @@ namespace ManagerApp
         }
     }
 }
+
