@@ -14,13 +14,16 @@ namespace ManagerApp
     {
         DataHelper dh;
         BindingSource dataTable;
+        string sql;
 
 
         public StockForm()
         {
             InitializeComponent();
             dh = new DataHelper();
-            Display("select a.ArticleNr, s.ShopName, a.ShopNr, a.ArticleName, a.Price, a.Available, a.IsLoanable from article a, shop s where a.ShopNr = s.ShopNr ");
+            timerUpdate.Start();
+            sql = "select a.ArticleNr, s.ShopName, a.ShopNr, a.ArticleName, a.Price, a.Available, a.IsLoanable from article a, shop s where a.ShopNr = s.ShopNr ";
+            Display(sql);
         }
 
         private void Display(string sql)
@@ -42,13 +45,21 @@ namespace ManagerApp
 
         private void buttonShow_Click(object sender, EventArgs e)
         {
-            Display("select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable from article_shop where Available < " + Convert.ToInt32(numericUpDown1.Value));
+            timerUpdate.Start();
+            sql = "select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable from article_shop where Available < " + Convert.ToInt32(numericUpDown1.Value);
+            Display(sql);
         }
 
         private void buttonShowAll_Click(object sender, EventArgs e)
         {
-            Display("select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable from article_shop");
+            timerUpdate.Start();
+            sql = "select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable from article_shop";
+            Display(sql);
         }
-    
+        private void timerUpdate_Tick(object sender, EventArgs e)
+        {
+            Display(sql);
+        }
+
     }
 }

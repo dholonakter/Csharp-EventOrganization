@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StockForm));
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
@@ -36,6 +37,7 @@
             this.dataGridViewInventory = new System.Windows.Forms.DataGridView();
             this.buttonShowAll = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
@@ -53,7 +55,7 @@
             // buttonSave
             // 
             this.buttonSave.Location = new System.Drawing.Point(628, 401);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(77, 24);
             this.buttonSave.TabIndex = 39;
@@ -64,7 +66,7 @@
             // buttonShow
             // 
             this.buttonShow.Location = new System.Drawing.Point(402, 398);
-            this.buttonShow.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonShow.Margin = new System.Windows.Forms.Padding(2);
             this.buttonShow.Name = "buttonShow";
             this.buttonShow.Size = new System.Drawing.Size(77, 24);
             this.buttonShow.TabIndex = 37;
@@ -99,7 +101,7 @@
             this.dataGridViewInventory.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewInventory.Location = new System.Drawing.Point(74, 93);
-            this.dataGridViewInventory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewInventory.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewInventory.Name = "dataGridViewInventory";
             this.dataGridViewInventory.RowTemplate.Height = 24;
             this.dataGridViewInventory.Size = new System.Drawing.Size(745, 293);
@@ -108,7 +110,7 @@
             // buttonShowAll
             // 
             this.buttonShowAll.Location = new System.Drawing.Point(495, 396);
-            this.buttonShowAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonShowAll.Margin = new System.Windows.Forms.Padding(2);
             this.buttonShowAll.Name = "buttonShowAll";
             this.buttonShowAll.Size = new System.Drawing.Size(77, 24);
             this.buttonShowAll.TabIndex = 41;
@@ -123,6 +125,11 @@
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 42;
             // 
+            // timerUpdate
+            // 
+            this.timerUpdate.Interval = 3000;
+            this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
+            // 
             // StockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -135,7 +142,7 @@
             this.Controls.Add(this.buttonShow);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.dataGridViewInventory);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "StockForm";
             this.Text = "StockForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).EndInit();
@@ -154,5 +161,6 @@
         private System.Windows.Forms.DataGridView dataGridViewInventory;
         private System.Windows.Forms.Button buttonShowAll;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Timer timerUpdate;
     }
 }

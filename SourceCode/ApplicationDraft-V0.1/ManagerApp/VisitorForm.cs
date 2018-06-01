@@ -14,19 +14,26 @@ namespace ManagerApp
     {
         DataHelper dh;
         BindingSource visitorTable;
+        string sql;
 
         public VisitorForm()
         {
             InitializeComponent();
             dh = new DataHelper();
 
-            // Display data onto gridview
-            visitorTable = new BindingSource();
-            visitorTable.DataSource = dh.DataTableFromSQL("SELECT VisitorNr, FirstName, LastName, Phone, Email, UserPassword, RFIDNr, Credit, CheckedIn, SpotNr" +
-                " FROM VISITOR");
-            dataGridViewVisitor.DataSource = visitorTable;
+            timerUpdate.Start();
+            sql = "SELECT VisitorNr, FirstName, LastName, Phone, Email, UserPassword, RFIDNr, Credit, CheckedIn, SpotNr" + " FROM VISITOR";
+            Display(sql);
 
             UpdateLabels();
+        }
+        private void Display(string sql)
+        {
+            // Display data onto gridview
+            visitorTable = new BindingSource();
+            visitorTable.DataSource = dh.DataTableFromSQL(sql);
+            dataGridViewVisitor.DataSource = visitorTable;
+            dataGridViewVisitor.Refresh();
         }
 
         private void UpdateLabels()
@@ -45,6 +52,11 @@ namespace ManagerApp
                 dataGridViewVisitor.Refresh();
                 UpdateLabels();
             }
+        }
+
+        private void timerUpdate_Tick(object sender, EventArgs e)
+        {
+            Display(sql);
         }
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CampForm));
             this.buttonClean = new System.Windows.Forms.Button();
             this.buttonAvailable = new System.Windows.Forms.Button();
@@ -36,6 +37,7 @@
             this.dataGridViewCamp = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
             this.buttonAll = new System.Windows.Forms.Button();
+            this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCamp)).BeginInit();
             this.SuspendLayout();
             // 
@@ -49,10 +51,10 @@
             this.buttonClean.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonClean.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(122)))), ((int)(((byte)(17)))));
             this.buttonClean.Image = ((System.Drawing.Image)(resources.GetObject("buttonClean.Image")));
-            this.buttonClean.Location = new System.Drawing.Point(37, 374);
-            this.buttonClean.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonClean.Location = new System.Drawing.Point(28, 304);
+            this.buttonClean.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonClean.Name = "buttonClean";
-            this.buttonClean.Size = new System.Drawing.Size(191, 44);
+            this.buttonClean.Size = new System.Drawing.Size(143, 36);
             this.buttonClean.TabIndex = 40;
             this.buttonClean.Text = "     Spots to clean";
             this.buttonClean.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -70,10 +72,10 @@
             this.buttonAvailable.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAvailable.ForeColor = System.Drawing.Color.DarkGreen;
             this.buttonAvailable.Image = ((System.Drawing.Image)(resources.GetObject("buttonAvailable.Image")));
-            this.buttonAvailable.Location = new System.Drawing.Point(248, 374);
-            this.buttonAvailable.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonAvailable.Location = new System.Drawing.Point(186, 304);
+            this.buttonAvailable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAvailable.Name = "buttonAvailable";
-            this.buttonAvailable.Size = new System.Drawing.Size(191, 44);
+            this.buttonAvailable.Size = new System.Drawing.Size(143, 36);
             this.buttonAvailable.TabIndex = 39;
             this.buttonAvailable.Text = "    Available spots";
             this.buttonAvailable.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -91,10 +93,10 @@
             this.buttonBooked.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBooked.ForeColor = System.Drawing.Color.Black;
             this.buttonBooked.Image = ((System.Drawing.Image)(resources.GetObject("buttonBooked.Image")));
-            this.buttonBooked.Location = new System.Drawing.Point(460, 374);
-            this.buttonBooked.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonBooked.Location = new System.Drawing.Point(345, 304);
+            this.buttonBooked.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonBooked.Name = "buttonBooked";
-            this.buttonBooked.Size = new System.Drawing.Size(191, 44);
+            this.buttonBooked.Size = new System.Drawing.Size(143, 36);
             this.buttonBooked.TabIndex = 36;
             this.buttonBooked.Text = "       Booked spots";
             this.buttonBooked.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -112,11 +114,11 @@
             this.button9.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
             this.button9.ForeColor = System.Drawing.Color.DarkGreen;
             this.button9.Image = ((System.Drawing.Image)(resources.GetObject("button9.Image")));
-            this.button9.Location = new System.Drawing.Point(37, 17);
-            this.button9.Margin = new System.Windows.Forms.Padding(11, 2, 11, 2);
+            this.button9.Location = new System.Drawing.Point(28, 14);
+            this.button9.Margin = new System.Windows.Forms.Padding(8, 2, 8, 2);
             this.button9.Name = "button9";
-            this.button9.Padding = new System.Windows.Forms.Padding(29, 0, 0, 0);
-            this.button9.Size = new System.Drawing.Size(965, 65);
+            this.button9.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.button9.Size = new System.Drawing.Size(724, 53);
             this.button9.TabIndex = 35;
             this.button9.Text = "    Camps status";
             this.button9.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -127,17 +129,19 @@
             // 
             this.dataGridViewCamp.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewCamp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCamp.Location = new System.Drawing.Point(37, 102);
+            this.dataGridViewCamp.Location = new System.Drawing.Point(28, 83);
+            this.dataGridViewCamp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridViewCamp.Name = "dataGridViewCamp";
             this.dataGridViewCamp.RowTemplate.Height = 24;
-            this.dataGridViewCamp.Size = new System.Drawing.Size(965, 247);
+            this.dataGridViewCamp.Size = new System.Drawing.Size(724, 201);
             this.dataGridViewCamp.TabIndex = 42;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(926, 374);
+            this.button1.Location = new System.Drawing.Point(694, 304);
+            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(76, 44);
+            this.button1.Size = new System.Drawing.Size(57, 36);
             this.button1.TabIndex = 49;
             this.button1.Text = "save";
             this.button1.UseVisualStyleBackColor = true;
@@ -153,10 +157,10 @@
             this.buttonAll.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAll.ForeColor = System.Drawing.Color.MidnightBlue;
             this.buttonAll.Image = ((System.Drawing.Image)(resources.GetObject("buttonAll.Image")));
-            this.buttonAll.Location = new System.Drawing.Point(685, 373);
-            this.buttonAll.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonAll.Location = new System.Drawing.Point(514, 303);
+            this.buttonAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAll.Name = "buttonAll";
-            this.buttonAll.Size = new System.Drawing.Size(191, 44);
+            this.buttonAll.Size = new System.Drawing.Size(143, 36);
             this.buttonAll.TabIndex = 50;
             this.buttonAll.Text = "      Show all camps";
             this.buttonAll.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -164,11 +168,16 @@
             this.buttonAll.UseVisualStyleBackColor = false;
             this.buttonAll.Click += new System.EventHandler(this.buttonAll_Click);
             // 
+            // timerUpdate
+            // 
+            this.timerUpdate.Interval = 3000;
+            this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
+            // 
             // CampForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1081, 450);
+            this.ClientSize = new System.Drawing.Size(811, 366);
             this.Controls.Add(this.buttonAll);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridViewCamp);
@@ -176,6 +185,7 @@
             this.Controls.Add(this.buttonAvailable);
             this.Controls.Add(this.buttonBooked);
             this.Controls.Add(this.button9);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "CampForm";
             this.Text = "CampForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCamp)).EndInit();
@@ -191,5 +201,6 @@
         private System.Windows.Forms.DataGridView dataGridViewCamp;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button buttonAll;
+        private System.Windows.Forms.Timer timerUpdate;
     }
 }

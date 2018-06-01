@@ -49,20 +49,25 @@ namespace ManagerApp
 
         private void buttonAllStands_Click(object sender, EventArgs e)
         {
+            timerUpdate.Start();
+            sql = "select ShopNr, ShopName, LocationNr, LocationName from list_of_stands";
             dataGridViewShop.ReadOnly = false;
-            Display("select ShopNr, ShopName, LocationNr, LocationName from list_of_stands");
+            Display(sql);
         }
 
         private void buttonAllStores_Click(object sender, EventArgs e)
         {
+            timerUpdate.Start();
             dataGridViewShop.ReadOnly = false;
             Display("select ShopNr, ShopName, LocationNr, LocationName from list_of_stores");
         }
 
         private void buttonAllShops_Click(object sender, EventArgs e)
         {
+            timerUpdate.Start();
+            sql = "select ShopNr, ShopName, LocationName, IsStore from shop_location";
             dataGridViewShop.ReadOnly = false;
-            Display("select ShopNr, ShopName, LocationName, IsStore from shop_location");
+            Display(sql);
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

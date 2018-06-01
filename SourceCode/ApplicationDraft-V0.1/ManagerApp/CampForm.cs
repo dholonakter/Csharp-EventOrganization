@@ -14,6 +14,7 @@ namespace ManagerApp
     {
         DataHelper dh;
         BindingSource campTable;
+        string sql;
 
         public CampForm()
         {
@@ -22,6 +23,16 @@ namespace ManagerApp
             dh = new DataHelper();
             ShowAll();
         }
+
+        private void Display(string sql)
+        {
+            // Display data onto gridview
+            campTable = new BindingSource();
+            campTable.DataSource = dh.DataTableFromSQL(sql);
+            dataGridViewCamp.DataSource = campTable;
+            dataGridViewCamp.Refresh();
+        }
+
         private void ShowAll()
         {
             // Display data onto gridview
@@ -39,35 +50,34 @@ namespace ManagerApp
         }
 
         private void buttonClean_Click(object sender, EventArgs e)
-        {
-            // Display data onto gridview
-            campTable = new BindingSource();
-            campTable.DataSource = dh.DataTableFromSQL("SELECT * FROM CAMPING_SPOT WHERE ToBeServiced = 1");
-            dataGridViewCamp.DataSource = campTable;
-            dataGridViewCamp.Refresh();
+        {            
+            timerUpdate.Start();
+            sql = "SELECT * FROM CAMPING_SPOT WHERE ToBeServiced = 1";
+            Display(sql);
         }
 
         private void buttonAvailable_Click(object sender, EventArgs e)
         {
-            // Display data onto gridview
-            campTable = new BindingSource();
-            campTable.DataSource = dh.DataTableFromSQL("SELECT * FROM camping_spot s WHERE not exists (select 1 from camping_reservation r where r.SpotNr = s.SpotNr)");
-            dataGridViewCamp.DataSource = campTable;
-            dataGridViewCamp.Refresh();
+            timerUpdate.Start();
+            sql = "SELECT * FROM camping_spot s WHERE not exists (select 1 from camping_reservation r where r.SpotNr = s.SpotNr)";
+            Display(sql);
         }
 
         private void buttonBooked_Click(object sender, EventArgs e)
         {
-            // Display data onto gridview
-            campTable = new BindingSource();
-            campTable.DataSource = dh.DataTableFromSQL("SELECT * FROM camping_spot s WHERE exists (select 1 from camping_reservation r where r.SpotNr = s.SpotNr)");
-            dataGridViewCamp.DataSource = campTable;
-            dataGridViewCamp.Refresh();
+            timerUpdate.Start();
+            sql = "SELECT * FROM camping_spot s WHERE exists (select 1 from camping_reservation r where r.SpotNr = s.SpotNr)";
+            Display(sql);
         }
 
         private void buttonAll_Click(object sender, EventArgs e)
         {
             ShowAll();
+        }
+
+        private void timerUpdate_Tick(object sender, EventArgs e)
+        {
+            Display(sql);
         }
     }
 }
