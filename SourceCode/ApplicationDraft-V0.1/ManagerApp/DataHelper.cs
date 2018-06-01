@@ -66,7 +66,7 @@ namespace ManagerApp
             return true;
         }
 
-        
+
         public DataSet GetDataset(string sql)
         {
             try
@@ -79,13 +79,35 @@ namespace ManagerApp
             catch (MySqlException exc)
             {
                 System.Windows.Forms.MessageBox.Show(exc.Message);
-               // return false;
+                // return false;
             }
             finally
             {
                 connection.Close();
             }
             return null;
+        }
+
+        public int CheckCredentials(string username, string pwd)
+        {
+            string sql = "SELECT COUNT(*) 'Nr' FROM LOGIN WHERE Username = '" + username + "' AND Password='" + pwd + "'";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            int nr = 0;
+
+            try
+            {
+                connection.Open();
+                nr = Convert.ToInt32(command.ExecuteScalar());
+                return nr;
+            }
+            catch (MySqlException exc)
+            {
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
         }
         ///////////////////////////////////////
         // VISITOR'S HANDLING
@@ -122,7 +144,7 @@ namespace ManagerApp
             }
             catch (MySqlException exc)
             {
-                
+
                 return -1;
             }
             finally
@@ -203,11 +225,11 @@ namespace ManagerApp
             }
             catch (MySqlException exc)
             {
-                
+
             }
             catch (Exception exc)
             {
-                
+
             }
             finally
             {
@@ -223,8 +245,8 @@ namespace ManagerApp
         public void FindUnreturnedItems(Visitor v)
         {
             string sql = "SELECT ShopName, ArticleNr, ArticleName " +
-                "FROM ORDER_LOAN " +
-                "WHERE VisitorNr = " + v.IdNr + " AND IsReturned = 0";
+                "FROM all_order" +
+                "WHERE IsLoanable = 1 and VisitorNr = " + v.IdNr + " AND Available = 0";
 
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
@@ -255,7 +277,7 @@ namespace ManagerApp
             }
             catch (MySqlException exc)
             {
-                
+
             }
             finally
             {

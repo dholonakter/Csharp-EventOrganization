@@ -11,6 +11,8 @@ namespace ShopApp
 {
     static class Program
     {
+        static internal Login original;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -19,7 +21,8 @@ namespace ShopApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ShopForm());
+            original = new Login();
+            Application.Run(original);
         }
     }
 }

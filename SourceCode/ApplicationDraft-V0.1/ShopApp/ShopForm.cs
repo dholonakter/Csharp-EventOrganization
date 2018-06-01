@@ -23,7 +23,6 @@ namespace ShopApp
         RFID myRFIDReader;
 
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
-        public ProcessTag tagProcessor;
 
         ///////////////////////////////////////
         // CROSS-THREAD DISPLAY
@@ -85,7 +84,7 @@ namespace ShopApp
             }
         }
 
-        public ShopForm()
+        public ShopForm(Shop s)
         {
             InitializeComponent();
 
@@ -93,12 +92,25 @@ namespace ShopApp
             data = new DataHelper();
             myRFIDReader = new RFID();
 
-            tagProcessor += Pay;
-            myRFIDReader.Tag += new RFIDTagEventHandler(tagProcessor);
+            myRFIDReader.Tag += new RFIDTagEventHandler(Pay);
             myRFIDReader.Open();
+            
+            if (s != null)
+            {
+                selectedShop = s;
+                labelAdminShop.Hide();
+                comboBoxShop.Hide();
+            }
+            else
+            {
+                MessageBox.Show("You are logged in as admin");
 
-            // to be deleted
-            selectedShop = new Shop(3, "Topicstorm", "Beersel");
+                DataTable dt = data.DataTableFromSQL("SELECT ShopNr, ShopName FROM SHOP");
+
+                comboBoxShop.ValueMember = "ShopNr";
+                comboBoxShop.DisplayMember = "ShopName";
+                comboBoxShop.DataSource = dt;
+            }
 
             // GUI
             sideHighlight.Height = overviewBtn.Height;
@@ -135,18 +147,31 @@ namespace ShopApp
             sideHighlight.Height = productBtn.Height;
             sideHighlight.Top = productBtn.Top;
             productPanel.BringToFront();
-            DisplayProducts();
+            
+            if (selectedShop == null) // if admin is logged on 
+            {
+                foodRbtn.Enabled = false;
+                drinkRbtn.Enabled = false;
+                quantitySelec.Enabled = false;
+            }
+            else
+            {
+                DisplayProducts();
+            }
         }
 
         public void DisplayProducts()
         {
-            if (foodRbtn.Checked)
+            if (selectedShop != null)
             {
-                DisplayArticle(data.GetFoodArticles(selectedShop.ShopNr), itemLbx);
-            }
-            else
-            {
-                DisplayArticle(data.GetDrinkArticles(selectedShop.ShopNr), itemLbx);
+                if (foodRbtn.Checked)
+                {
+                    DisplayArticle(data.GetFoodArticles(selectedShop.ShopNr), itemLbx);
+                }
+                else
+                {
+                    DisplayArticle(data.GetDrinkArticles(selectedShop.ShopNr), itemLbx);
+                }
             }
         }
 
@@ -162,7 +187,6 @@ namespace ShopApp
 
         private void ShopForm_Load(object sender, EventArgs e)
         {
-
             o = new Order(selectedShop);
         }
 
@@ -237,6 +261,15 @@ namespace ShopApp
             }
         }
 
-       
+        private void ShopForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.original.Show();
+        }
+
+        private void comboBoxShop_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            selectedShop = data.GetShopByNr(comboBoxShop.SelectedValue.ToString());
+            DisplayProducts();
+        }
     }
 }

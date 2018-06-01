@@ -8,6 +8,8 @@ namespace ManagerApp
 {
     static class Program
     {
+        static internal Form home;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +18,8 @@ namespace ManagerApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new HomeForm());
+            home = new Login();
+            Application.Run(home);
         }
     }
 }

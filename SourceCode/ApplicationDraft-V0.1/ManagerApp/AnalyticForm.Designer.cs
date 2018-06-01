@@ -29,21 +29,21 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea7 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend7 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series7 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea8 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend8 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series8 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea9 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend9 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series9 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea10 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend10 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series10 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartIncomePerDay = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartIncomePerHour = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
@@ -64,38 +64,38 @@
             // 
             // chartIncomePerDay
             // 
-            chartArea6.Name = "ChartArea1";
-            this.chartIncomePerDay.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chartIncomePerDay.Legends.Add(legend6);
+            chartArea1.Name = "ChartArea1";
+            this.chartIncomePerDay.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chartIncomePerDay.Legends.Add(legend1);
             this.chartIncomePerDay.Location = new System.Drawing.Point(12, 48);
             this.chartIncomePerDay.Name = "chartIncomePerDay";
             this.chartIncomePerDay.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.EarthTones;
-            series6.ChartArea = "ChartArea1";
-            series6.IsValueShownAsLabel = true;
-            series6.IsVisibleInLegend = false;
-            series6.Legend = "Legend1";
-            series6.Name = "Income";
-            this.chartIncomePerDay.Series.Add(series6);
+            series1.ChartArea = "ChartArea1";
+            series1.IsValueShownAsLabel = true;
+            series1.IsVisibleInLegend = false;
+            series1.Legend = "Legend1";
+            series1.Name = "Income";
+            this.chartIncomePerDay.Series.Add(series1);
             this.chartIncomePerDay.Size = new System.Drawing.Size(429, 263);
             this.chartIncomePerDay.TabIndex = 0;
             this.chartIncomePerDay.Text = "chart1";
             // 
             // chartIncomePerHour
             // 
-            chartArea7.Name = "ChartArea1";
-            this.chartIncomePerHour.ChartAreas.Add(chartArea7);
-            legend7.Name = "Legend1";
-            this.chartIncomePerHour.Legends.Add(legend7);
+            chartArea2.Name = "ChartArea1";
+            this.chartIncomePerHour.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chartIncomePerHour.Legends.Add(legend2);
             this.chartIncomePerHour.Location = new System.Drawing.Point(466, 48);
             this.chartIncomePerHour.Name = "chartIncomePerHour";
             this.chartIncomePerHour.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Pastel;
-            series7.ChartArea = "ChartArea1";
-            series7.IsValueShownAsLabel = true;
-            series7.IsVisibleInLegend = false;
-            series7.Legend = "Legend1";
-            series7.Name = "Income";
-            this.chartIncomePerHour.Series.Add(series7);
+            series2.ChartArea = "ChartArea1";
+            series2.IsValueShownAsLabel = true;
+            series2.IsVisibleInLegend = false;
+            series2.Legend = "Legend1";
+            series2.Name = "Income";
+            this.chartIncomePerHour.Series.Add(series2);
             this.chartIncomePerHour.Size = new System.Drawing.Size(548, 263);
             this.chartIncomePerHour.TabIndex = 1;
             this.chartIncomePerHour.Text = "chart1";
@@ -121,37 +121,37 @@
             // 
             // chartIncomePerType
             // 
-            chartArea8.Name = "ChartArea1";
-            this.chartIncomePerType.ChartAreas.Add(chartArea8);
-            legend8.Name = "Legend1";
-            this.chartIncomePerType.Legends.Add(legend8);
+            chartArea3.Name = "ChartArea1";
+            this.chartIncomePerType.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chartIncomePerType.Legends.Add(legend3);
             this.chartIncomePerType.Location = new System.Drawing.Point(12, 329);
             this.chartIncomePerType.Name = "chartIncomePerType";
-            series8.ChartArea = "ChartArea1";
-            series8.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
-            series8.IsValueShownAsLabel = true;
-            series8.Legend = "Legend1";
-            series8.Name = "Income";
-            this.chartIncomePerType.Series.Add(series8);
+            series3.ChartArea = "ChartArea1";
+            series3.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
+            series3.IsValueShownAsLabel = true;
+            series3.Legend = "Legend1";
+            series3.Name = "Income";
+            this.chartIncomePerType.Series.Add(series3);
             this.chartIncomePerType.Size = new System.Drawing.Size(429, 263);
             this.chartIncomePerType.TabIndex = 4;
             this.chartIncomePerType.Text = "chart1";
             // 
             // chartTicketsPerDay
             // 
-            chartArea9.Name = "ChartArea1";
-            this.chartTicketsPerDay.ChartAreas.Add(chartArea9);
-            legend9.Name = "Legend1";
-            this.chartTicketsPerDay.Legends.Add(legend9);
+            chartArea4.Name = "ChartArea1";
+            this.chartTicketsPerDay.ChartAreas.Add(chartArea4);
+            legend4.Name = "Legend1";
+            this.chartTicketsPerDay.Legends.Add(legend4);
             this.chartTicketsPerDay.Location = new System.Drawing.Point(466, 329);
             this.chartTicketsPerDay.Name = "chartTicketsPerDay";
             this.chartTicketsPerDay.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Fire;
-            series9.ChartArea = "ChartArea1";
-            series9.IsValueShownAsLabel = true;
-            series9.IsVisibleInLegend = false;
-            series9.Legend = "Legend1";
-            series9.Name = "Income";
-            this.chartTicketsPerDay.Series.Add(series9);
+            series4.ChartArea = "ChartArea1";
+            series4.IsValueShownAsLabel = true;
+            series4.IsVisibleInLegend = false;
+            series4.Legend = "Legend1";
+            series4.Name = "Income";
+            this.chartTicketsPerDay.Series.Add(series4);
             this.chartTicketsPerDay.Size = new System.Drawing.Size(548, 263);
             this.chartTicketsPerDay.TabIndex = 5;
             this.chartTicketsPerDay.Text = "chart1";
@@ -176,19 +176,19 @@
             // 
             // chartIncomeShop
             // 
-            chartArea10.Name = "ChartArea1";
-            this.chartIncomeShop.ChartAreas.Add(chartArea10);
-            legend10.Name = "Legend1";
-            this.chartIncomeShop.Legends.Add(legend10);
+            chartArea5.Name = "ChartArea1";
+            this.chartIncomeShop.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chartIncomeShop.Legends.Add(legend5);
             this.chartIncomeShop.Location = new System.Drawing.Point(1031, 171);
             this.chartIncomeShop.Name = "chartIncomeShop";
             this.chartIncomeShop.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Grayscale;
-            series10.ChartArea = "ChartArea1";
-            series10.IsValueShownAsLabel = true;
-            series10.IsVisibleInLegend = false;
-            series10.Legend = "Legend1";
-            series10.Name = "Income";
-            this.chartIncomeShop.Series.Add(series10);
+            series5.ChartArea = "ChartArea1";
+            series5.IsValueShownAsLabel = true;
+            series5.IsVisibleInLegend = false;
+            series5.Legend = "Legend1";
+            series5.Name = "Income";
+            this.chartIncomeShop.Series.Add(series5);
             this.chartIncomeShop.Size = new System.Drawing.Size(498, 303);
             this.chartIncomeShop.TabIndex = 8;
             this.chartIncomeShop.Text = "chart1";
@@ -225,6 +225,7 @@
             this.Controls.Add(this.chartIncomePerDay);
             this.Name = "AnalyticForm";
             this.Text = "AnalyticForm";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.AnalyticForm_FormClosed);
             this.Load += new System.EventHandler(this.AnalyticForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.chartIncomePerDay)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartIncomePerHour)).EndInit();

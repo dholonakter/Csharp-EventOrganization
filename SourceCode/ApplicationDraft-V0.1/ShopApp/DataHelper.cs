@@ -7,12 +7,14 @@ using MySql;
 using MySql.Data.MySqlClient;
 using ThanhDLL;
 using System.Windows.Forms;
+using System.Data;
 
 namespace ShopApp
 {
     public class DataHelper
     {
         public MySqlConnection connection;
+        MySqlDataAdapter dataAdapter;
 
         public DataHelper()
         {
@@ -21,61 +23,36 @@ namespace ShopApp
                                     "user id=dbi387862;" +
                                     "password=blueberrypie;" +
                                     "connect timeout=30;";
-
+            dataAdapter = new MySqlDataAdapter();
             connection = new MySqlConnection(connectionInfo);
         }
 
-
-
-
-        public List<Article> GetFoodArticles(int shopnr)
+        public int CheckCredentials(string username, string pwd)
         {
-            String sql = "SELECT * FROM food_article WHERE ShopNr="+ Convert.ToString(shopnr);
+            string sql = "SELECT COUNT(*) 'Nr' FROM LOGIN WHERE Username = '" + username + "' AND Password='" + pwd + "'";
             MySqlCommand command = new MySqlCommand(sql, connection);
-
-            List<Article> temp;
-            temp = new List<Article>();
+            int nr = 0;
 
             try
             {
                 connection.Open();
-                MySqlDataReader reader = command.ExecuteReader();
-
-                String name;
-                int nr;
-                double price;
-                string img="";
-                int stock;
-                //string shopname;
-                while (reader.Read())
-                {
-                    name = Convert.ToString(reader["ArticleName"]);
-                    //shopname = Convert.ToString(reader["ShopName"]);
-                    nr = Convert.ToInt32(reader["ArticleNr"]);
-                    shopnr = Convert.ToInt32(reader["ShopNr"]);
-                    price = Convert.ToInt32(reader["price"]);
-                    if (!(reader["Img"] is DBNull))
-                    {
-                        img = Convert.ToString(reader["Img"]);
-                    }
-                    stock = Convert.ToInt32(reader["Available"]);
-                    temp.Add(new Article(shopnr, nr, name, price, stock));
-                }
+                nr = Convert.ToInt32(command.ExecuteScalar());
+                return nr;
             }
-            catch(Exception exc)
+            catch (MySqlException exc)
             {
-                MessageBox.Show(exc.Message);
+                return -1;
             }
             finally
             {
                 connection.Close();
             }
-            return temp;
         }
 
-        public List<Article> GetDrinkArticles(int shopnr)
+
+        public List<Article> GetFoodArticles(int shopnr)
         {
-            String sql = "SELECT * FROM drink_article WHERE ShopNr=" + Convert.ToString(shopnr);
+            String sql = "SELECT * FROM all_article WHERE Category = 'Food' and ShopNr=" + Convert.ToString(shopnr);
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             List<Article> temp;
@@ -118,7 +95,52 @@ namespace ShopApp
             return temp;
         }
 
-       
+        public List<Article> GetDrinkArticles(int shopnr)
+        {
+            String sql = "SELECT * FROM all_article WHERE Category = 'Drink' AND ShopNr=" + Convert.ToString(shopnr);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            List<Article> temp;
+            temp = new List<Article>();
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                String name;
+                int nr;
+                double price;
+                string img = "";
+                int stock;
+                //string shopname;
+                while (reader.Read())
+                {
+                    name = Convert.ToString(reader["ArticleName"]);
+                    //shopname = Convert.ToString(reader["ShopName"]);
+                    nr = Convert.ToInt32(reader["ArticleNr"]);
+                    shopnr = Convert.ToInt32(reader["ShopNr"]);
+                    price = Convert.ToInt32(reader["price"]);
+                    if (!(reader["Img"] is DBNull))
+                    {
+                        img = Convert.ToString(reader["Img"]);
+                    }
+                    stock = Convert.ToInt32(reader["Available"]);
+                    temp.Add(new Article(shopnr, nr, name, price, stock));
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
+
+
         public int CreateNewOrder(Order o)
         {
             string sql = "INSERT INTO SHOP_ORDER(OrderDate, OrderTime, ShopNr, VisitorNr) " +
@@ -132,7 +154,7 @@ namespace ShopApp
                 int rowsAffected = command.ExecuteNonQuery();
                 return rowsAffected;
             }
-            catch(MySqlException)
+            catch (MySqlException)
             {
                 return -1;
             }
@@ -341,6 +363,50 @@ namespace ShopApp
                 connection.Close();
             }
             return v;
+        }
+
+        public Shop GetShopByNr(string shopNr)
+        {
+            String sql = "SELECT * FROM all_shop WHERE ShopNr=" + shopNr;
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                string name = "";
+                string location = "";
+
+                //string shopname;
+                while (reader.Read())
+                {
+                    name = Convert.ToString(reader["ShopName"]);
+                    location = Convert.ToString(reader["LocationName"]);
+                }
+
+                return new Shop(Convert.ToInt32(shopNr), name, location);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return null;
+        }
+
+        public DataTable DataTableFromSQL(string sql)
+        {
+            dataAdapter.SelectCommand = new MySqlCommand(sql, connection);
+            MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
+
+            DataTable table = new DataTable();
+            dataAdapter.Fill(table);
+            return table;
         }
     }
 }

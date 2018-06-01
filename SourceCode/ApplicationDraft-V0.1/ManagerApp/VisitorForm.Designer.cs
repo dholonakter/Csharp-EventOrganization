@@ -45,10 +45,10 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(583, 159);
-            this.button1.Margin = new System.Windows.Forms.Padding(2);
+            this.button1.Location = new System.Drawing.Point(777, 196);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(50, 28);
+            this.button1.Size = new System.Drawing.Size(67, 34);
             this.button1.TabIndex = 48;
             this.button1.Text = "save";
             this.button1.UseVisualStyleBackColor = true;
@@ -58,10 +58,9 @@
             // 
             this.labelTotalSpent.AutoSize = true;
             this.labelTotalSpent.ForeColor = System.Drawing.Color.Black;
-            this.labelTotalSpent.Location = new System.Drawing.Point(267, 173);
-            this.labelTotalSpent.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelTotalSpent.Location = new System.Drawing.Point(356, 213);
             this.labelTotalSpent.Name = "labelTotalSpent";
-            this.labelTotalSpent.Size = new System.Drawing.Size(63, 13);
+            this.labelTotalSpent.Size = new System.Drawing.Size(83, 17);
             this.labelTotalSpent.TabIndex = 47;
             this.labelTotalSpent.Text = "Total spent:";
             // 
@@ -69,10 +68,9 @@
             // 
             this.labelTotalBalance.AutoSize = true;
             this.labelTotalBalance.ForeColor = System.Drawing.Color.Black;
-            this.labelTotalBalance.Location = new System.Drawing.Point(267, 154);
-            this.labelTotalBalance.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelTotalBalance.Location = new System.Drawing.Point(356, 190);
             this.labelTotalBalance.Name = "labelTotalBalance";
-            this.labelTotalBalance.Size = new System.Drawing.Size(75, 13);
+            this.labelTotalBalance.Size = new System.Drawing.Size(98, 17);
             this.labelTotalBalance.TabIndex = 46;
             this.labelTotalBalance.Text = "Total balance:";
             // 
@@ -81,21 +79,22 @@
             this.dataGridViewVisitor.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.dataGridViewVisitor.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewVisitor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewVisitor.Location = new System.Drawing.Point(52, 192);
-            this.dataGridViewVisitor.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewVisitor.Location = new System.Drawing.Point(69, 236);
+            this.dataGridViewVisitor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridViewVisitor.Name = "dataGridViewVisitor";
             this.dataGridViewVisitor.RowTemplate.Height = 24;
-            this.dataGridViewVisitor.Size = new System.Drawing.Size(890, 317);
+            this.dataGridViewVisitor.Size = new System.Drawing.Size(1187, 390);
             this.dataGridViewVisitor.TabIndex = 45;
+            this.dataGridViewVisitor.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewVisitor_CellBeginEdit);
+            this.dataGridViewVisitor.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVisitor_CellEndEdit);
             // 
             // labelTotalPresent
             // 
             this.labelTotalPresent.AutoSize = true;
             this.labelTotalPresent.ForeColor = System.Drawing.Color.Black;
-            this.labelTotalPresent.Location = new System.Drawing.Point(50, 173);
-            this.labelTotalPresent.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelTotalPresent.Location = new System.Drawing.Point(67, 213);
             this.labelTotalPresent.Name = "labelTotalPresent";
-            this.labelTotalPresent.Size = new System.Drawing.Size(107, 13);
+            this.labelTotalPresent.Size = new System.Drawing.Size(144, 17);
             this.labelTotalPresent.TabIndex = 44;
             this.labelTotalPresent.Text = "Total visitors present:";
             // 
@@ -103,10 +102,9 @@
             // 
             this.labelTotalVisitors.AutoSize = true;
             this.labelTotalVisitors.ForeColor = System.Drawing.Color.Black;
-            this.labelTotalVisitors.Location = new System.Drawing.Point(50, 154);
-            this.labelTotalVisitors.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelTotalVisitors.Location = new System.Drawing.Point(67, 190);
             this.labelTotalVisitors.Name = "labelTotalVisitors";
-            this.labelTotalVisitors.Size = new System.Drawing.Size(69, 13);
+            this.labelTotalVisitors.Size = new System.Drawing.Size(92, 17);
             this.labelTotalVisitors.TabIndex = 43;
             this.labelTotalVisitors.Text = "Total visitors:";
             // 
@@ -120,11 +118,11 @@
             this.buttonSave.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
             this.buttonSave.ForeColor = System.Drawing.Color.MidnightBlue;
             this.buttonSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonSave.Image")));
-            this.buttonSave.Location = new System.Drawing.Point(52, 94);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(8, 2, 8, 2);
+            this.buttonSave.Location = new System.Drawing.Point(69, 116);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(11, 2, 11, 2);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.buttonSave.Size = new System.Drawing.Size(890, 53);
+            this.buttonSave.Padding = new System.Windows.Forms.Padding(29, 0, 0, 0);
+            this.buttonSave.Size = new System.Drawing.Size(1187, 65);
             this.buttonSave.TabIndex = 42;
             this.buttonSave.Text = "    Visitors status";
             this.buttonSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -142,13 +140,14 @@
             this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
             this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button7.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button7.ForeColor = System.Drawing.Color.LightGray;
             this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
             this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(898, 12);
+            this.button7.Location = new System.Drawing.Point(1197, 15);
+            this.button7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(44, 42);
+            this.button7.Size = new System.Drawing.Size(59, 52);
             this.button7.TabIndex = 61;
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button7.UseVisualStyleBackColor = true;
@@ -159,13 +158,14 @@
             this.homeBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
             this.homeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
             this.homeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.homeBtn.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.homeBtn.ForeColor = System.Drawing.Color.DimGray;
             this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
             this.homeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.homeBtn.Location = new System.Drawing.Point(948, 12);
+            this.homeBtn.Location = new System.Drawing.Point(1264, 15);
+            this.homeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.homeBtn.Name = "homeBtn";
-            this.homeBtn.Size = new System.Drawing.Size(44, 42);
+            this.homeBtn.Size = new System.Drawing.Size(59, 52);
             this.homeBtn.TabIndex = 62;
             this.homeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.homeBtn.UseVisualStyleBackColor = true;
@@ -173,9 +173,9 @@
             // 
             // VisitorForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1004, 571);
+            this.ClientSize = new System.Drawing.Size(1339, 703);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.button1);
@@ -186,7 +186,7 @@
             this.Controls.Add(this.labelTotalVisitors);
             this.Controls.Add(this.buttonSave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "VisitorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visitors";

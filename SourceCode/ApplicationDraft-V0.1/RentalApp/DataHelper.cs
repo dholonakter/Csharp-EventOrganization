@@ -30,56 +30,7 @@ namespace RentalApp
 
 
 
-        public List<LoanArticle> GetLoanArticle(RFIDTag o)
-        {
-            String sql = "SELECT * FROM loan_article WHERE RFIDNr=" + o;
-            MySqlCommand command = new MySqlCommand(sql, connection);
-
-            List<LoanArticle> temp;
-            temp = new List<LoanArticle>();
-
-            try
-            {
-                connection.Open();
-                MySqlDataReader reader = command.ExecuteReader();
-
-                String name;
-                int shopnr;
-                int nr;
-                double price;
-                string img = "";
-                int stock;
-                //string shopname;
-                string rfidNo;
-                while (reader.Read())
-                {
-                    name = Convert.ToString(reader["ArticleName"]);
-                    //shopname = Convert.ToString(reader["ShopName"]);
-                    nr = Convert.ToInt32(reader["ArticleNr"]);
-                    shopnr = Convert.ToInt32(reader["ShopNr"]);
-                    price = Convert.ToInt32(reader["LoanFee"]);
-                    if (!(reader["Img"] is DBNull))
-                    {
-                        img = Convert.ToString(reader["Img"]);
-                    }
-                    rfidNo = Convert.ToString(reader["RFIDNr"]);
-                    stock = Convert.ToInt32(reader["IsReturned"]);
-                    temp.Add(new LoanArticle(shopnr, nr, name, price, stock, rfidNo));
-                }
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return temp;
-        }
-
-
-
+        
         public int CreateNewOrder(Order o)
         {
             string sql = "INSERT INTO SHOP_ORDER(OrderDate, OrderTime, ShopNr, VisitorNr) " +
@@ -103,22 +54,36 @@ namespace RentalApp
             }
         }
 
+
+
         /// <summary>
         /// Get the latest order number
         /// </summary>
         /// <returns>The biggest order number in database</returns>
-        public int GetLatestOrderNr()
+        public int GetRightOrderNr(Order o)
         {
-            string sql = "SELECT MAX(OrderNr) FROM SHOP_ORDER";
+            string sql = "SELECT OrderNr FROM SHOP_ORDER WHERE OrderDate = '" + o.OrderDate +
+                "' AND OrderTime = '" + o.OrderTime + "'";
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
             {
                 connection.Open();
-                return Convert.ToInt32(command.ExecuteScalar());
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        int nr = Convert.ToInt32(reader["OrderNr"]);
+                        return nr;
+                    }
+                }
+                return -1;
             }
-            catch (MySqlException)
+            catch (MySqlException exc)
             {
+                //MessageBox.Show(exc.Message);
                 return -1;
             }
             finally
@@ -139,7 +104,7 @@ namespace RentalApp
             for (int i = 0; i < o.Articles.Count; i++)
             {
                 sql += "INSERT INTO SHOP_ORDER_LINE(OrderNr, LineNr, ArticleNr, Quantity) " +
-                       "VALUES(" + GetLatestOrderNr() + ", " + (i + 1) + ", " + o.Articles[i].ArticleNr + ", "
+                       "VALUES(" + GetRightOrderNr(o) + ", " + (i + 1) + ", " + o.Articles[i].ArticleNr + ", "
                        + o.Quantity[i] + ");";
 
                 sql += " UPDATE ARTICLE SET Available = Available - " + o.Quantity[i] + " WHERE ArticleNr = " +
@@ -292,5 +257,91 @@ namespace RentalApp
             }
         }
 
+        public LoanArticle FindLoanArticleByTag(string rfidNr)
+        {
+            LoanArticle a = null;
+            string sql = "SELECT * FROM all_article WHERE IsLoanable = 1 and RFIDNr = '" + rfidNr + "'";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                int shopNr = 0; 
+                int articleNr = 0;
+                string articleName = "";
+                double price = 0;
+                int available = 0;
+                double deposit = 0;
+
+                while(reader.Read())
+                {
+                    shopNr = Convert.ToInt32(reader["ShopNr"]);
+                    articleNr = Convert.ToInt32(reader["ArticleNr"]);
+                    articleName = Convert.ToString(reader["ArticleName"]);
+                    price = Convert.ToDouble(reader["Price"]);
+                    available = Convert.ToInt32(reader["Available"]);
+                    deposit = Convert.ToDouble(reader["DepositValue"]);
+                }
+                return new LoanArticle(shopNr, articleNr, articleName, price, available, rfidNr, deposit);
+
+            }
+            catch (MySqlException exc)
+            {
+                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return null;
+        }
+
+        public List<LoanArticle> GetAllLoanArticles()
+        {
+            List<LoanArticle> temp = new List<LoanArticle>();
+
+            string sql = "SELECT * FROM all_article WHERE IsLoanable = 1";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                int shopNr = 0;
+                int articleNr = 0;
+                string articleName = "";
+                double price = 0;
+                int available = 0;
+                string rfid = "";
+                double deposit = 0;
+
+                while (reader.Read())
+                {
+                    shopNr = Convert.ToInt32(reader["ShopNr"]);
+                    articleNr = Convert.ToInt32(reader["ArticleNr"]);
+                    articleName = Convert.ToString(reader["ArticleName"]);
+                    price = Convert.ToDouble(reader["Price"]);
+                    available = Convert.ToInt32(reader["Available"]);
+                    rfid = Convert.ToString(reader["RFIDNr"]);
+                    deposit = Convert.ToDouble(reader["DepositValue"]);
+                }
+                temp.Add(new LoanArticle(shopNr, articleNr, articleName, price, available, rfid, deposit));
+
+            }
+            catch (MySqlException exc)
+            {
+                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
     }
 }

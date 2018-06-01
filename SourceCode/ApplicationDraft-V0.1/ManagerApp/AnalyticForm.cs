@@ -26,7 +26,7 @@ namespace ManagerApp
             fillChart();
             timerUpdate.Start();
         }
-        
+
         private void FillComboBoxShop()
         {
             DataTable dt = dh.DataTableFromSQL("SELECT ShopNr, ShopName FROM SHOP");
@@ -49,7 +49,7 @@ namespace ManagerApp
 
             // income by type
             chartIncomePerType.Titles.Clear();
-            DataSet ds = dh.GetDataset("select (select sum(Subtotal) from order_loan) 'Loan', (select sum(Subtotal) from order_store) 'Store' from dual ");
+            DataSet ds = dh.GetDataset("select (select sum(Subtotal) from all_order where IsLoanable = 1) 'Loan', (select sum(Subtotal) from all_order where IsLoanable = 0) 'Store' from dual ");
             chartIncomePerType.Series["Income"].Points.AddXY("Loan", ds.Tables[0].Rows[0]["Loan"].ToString());
             chartIncomePerType.Series["Income"].Points.AddXY("Store", ds.Tables[0].Rows[0]["Store"].ToString());
             chartIncomePerType.Titles.Add("Total earned by shop type");
@@ -143,6 +143,13 @@ namespace ManagerApp
             FillIncomePerHour();
             FillIncomeShop();
             fillChart();
+        }
+
+        private void AnalyticForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            HomeForm home = new HomeForm();
+            this.Dispose();
+            home.Show();
         }
     }
 }

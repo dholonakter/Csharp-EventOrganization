@@ -35,10 +35,8 @@ namespace ManagerApp
 
         private void ShowAll()
         {
-            // Display data onto gridview
-            campTable = new BindingSource();
-            campTable.DataSource = dh.DataTableFromSQL("SELECT * FROM CAMPING_SPOT");
-            dataGridViewCamp.DataSource = campTable;
+            sql = "Select * FROM CAMPING_SPOT";
+            Display(sql);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -50,7 +48,7 @@ namespace ManagerApp
         }
 
         private void buttonClean_Click(object sender, EventArgs e)
-        {            
+        {
             timerUpdate.Start();
             sql = "SELECT * FROM CAMPING_SPOT WHERE ToBeServiced = 1";
             Display(sql);
@@ -78,6 +76,16 @@ namespace ManagerApp
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
             Display(sql);
+        }
+
+        private void dataGridViewCamp_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            timerUpdate.Start();
+        }
+
+        private void dataGridViewCamp_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            timerUpdate.Stop();
         }
 
         private void homeBtn_Click(object sender, EventArgs e)

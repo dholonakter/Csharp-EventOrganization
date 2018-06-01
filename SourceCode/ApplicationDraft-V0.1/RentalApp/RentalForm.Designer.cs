@@ -36,15 +36,11 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.startPanel = new System.Windows.Forms.Panel();
             this.productPanel = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.labelOrderInfo = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.itemLbx = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.durationSelec = new System.Windows.Forms.NumericUpDown();
+            this.labelVisitor = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.productPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.durationSelec)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -55,8 +51,9 @@
             this.panel1.Controls.Add(this.productBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(166, 768);
+            this.panel1.Size = new System.Drawing.Size(221, 945);
             this.panel1.TabIndex = 0;
             // 
             // overviewBtn
@@ -65,13 +62,14 @@
             this.overviewBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
             this.overviewBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.overviewBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.overviewBtn.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.overviewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.overviewBtn.ForeColor = System.Drawing.Color.White;
             this.overviewBtn.Image = ((System.Drawing.Image)(resources.GetObject("overviewBtn.Image")));
             this.overviewBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.overviewBtn.Location = new System.Drawing.Point(11, 89);
+            this.overviewBtn.Location = new System.Drawing.Point(15, 110);
+            this.overviewBtn.Margin = new System.Windows.Forms.Padding(4);
             this.overviewBtn.Name = "overviewBtn";
-            this.overviewBtn.Size = new System.Drawing.Size(155, 54);
+            this.overviewBtn.Size = new System.Drawing.Size(207, 66);
             this.overviewBtn.TabIndex = 18;
             this.overviewBtn.Text = "Overview";
             this.overviewBtn.UseVisualStyleBackColor = true;
@@ -80,9 +78,10 @@
             // sideHighlight
             // 
             this.sideHighlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.sideHighlight.Location = new System.Drawing.Point(0, 89);
+            this.sideHighlight.Location = new System.Drawing.Point(0, 110);
+            this.sideHighlight.Margin = new System.Windows.Forms.Padding(4);
             this.sideHighlight.Name = "sideHighlight";
-            this.sideHighlight.Size = new System.Drawing.Size(11, 54);
+            this.sideHighlight.Size = new System.Drawing.Size(15, 66);
             this.sideHighlight.TabIndex = 14;
             // 
             // productBtn
@@ -91,13 +90,14 @@
             this.productBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
             this.productBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.productBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.productBtn.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productBtn.ForeColor = System.Drawing.Color.White;
             this.productBtn.Image = ((System.Drawing.Image)(resources.GetObject("productBtn.Image")));
             this.productBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.productBtn.Location = new System.Drawing.Point(11, 181);
+            this.productBtn.Location = new System.Drawing.Point(15, 223);
+            this.productBtn.Margin = new System.Windows.Forms.Padding(4);
             this.productBtn.Name = "productBtn";
-            this.productBtn.Size = new System.Drawing.Size(155, 54);
+            this.productBtn.Size = new System.Drawing.Size(207, 66);
             this.productBtn.TabIndex = 20;
             this.productBtn.Text = "Products";
             this.productBtn.UseVisualStyleBackColor = true;
@@ -107,103 +107,77 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(166, 0);
+            this.panel2.Location = new System.Drawing.Point(221, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1200, 10);
+            this.panel2.Size = new System.Drawing.Size(1600, 12);
             this.panel2.TabIndex = 1;
             // 
             // startPanel
             // 
-            this.startPanel.Location = new System.Drawing.Point(220, 73);
+            this.startPanel.Location = new System.Drawing.Point(293, 90);
+            this.startPanel.Margin = new System.Windows.Forms.Padding(4);
             this.startPanel.Name = "startPanel";
-            this.startPanel.Size = new System.Drawing.Size(1105, 687);
+            this.startPanel.Size = new System.Drawing.Size(1473, 846);
             this.startPanel.TabIndex = 10;
             // 
             // productPanel
             // 
-            this.productPanel.Controls.Add(this.button1);
+            this.productPanel.Controls.Add(this.button2);
             this.productPanel.Controls.Add(this.labelOrderInfo);
-            this.productPanel.Controls.Add(this.label1);
-            this.productPanel.Controls.Add(this.itemLbx);
-            this.productPanel.Controls.Add(this.label2);
-            this.productPanel.Controls.Add(this.durationSelec);
-            this.productPanel.Location = new System.Drawing.Point(223, 73);
+            this.productPanel.Controls.Add(this.labelVisitor);
+            this.productPanel.Location = new System.Drawing.Point(297, 90);
+            this.productPanel.Margin = new System.Windows.Forms.Padding(4);
             this.productPanel.Name = "productPanel";
-            this.productPanel.Size = new System.Drawing.Size(997, 634);
+            this.productPanel.Size = new System.Drawing.Size(1329, 780);
             this.productPanel.TabIndex = 11;
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(601, 479);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // labelOrderInfo
             // 
             this.labelOrderInfo.AutoSize = true;
             this.labelOrderInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelOrderInfo.ForeColor = System.Drawing.Color.DimGray;
-            this.labelOrderInfo.Location = new System.Drawing.Point(508, 97);
+            this.labelOrderInfo.Location = new System.Drawing.Point(616, 92);
+            this.labelOrderInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelOrderInfo.Name = "labelOrderInfo";
-            this.labelOrderInfo.Size = new System.Drawing.Size(17, 23);
-            this.labelOrderInfo.TabIndex = 28;
-            this.labelOrderInfo.Text = "-";
+            this.labelOrderInfo.Size = new System.Drawing.Size(84, 28);
+            this.labelOrderInfo.TabIndex = 27;
+            this.labelOrderInfo.Text = "Order";
             // 
-            // label1
+            // labelVisitor
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(56, 476);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(167, 23);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Loan Duration :";
+            this.labelVisitor.AutoSize = true;
+            this.labelVisitor.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVisitor.ForeColor = System.Drawing.Color.DimGray;
+            this.labelVisitor.Location = new System.Drawing.Point(72, 92);
+            this.labelVisitor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelVisitor.Name = "labelVisitor";
+            this.labelVisitor.Size = new System.Drawing.Size(95, 28);
+            this.labelVisitor.TabIndex = 26;
+            this.labelVisitor.Text = "Visitor";
             // 
-            // itemLbx
+            // button2
             // 
-            this.itemLbx.FormattingEnabled = true;
-            this.itemLbx.Location = new System.Drawing.Point(59, 136);
-            this.itemLbx.Name = "itemLbx";
-            this.itemLbx.Size = new System.Drawing.Size(330, 316);
-            this.itemLbx.TabIndex = 26;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(56, 93);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(184, 23);
-            this.label2.TabIndex = 25;
-            this.label2.Text = "Select Your Items";
-            // 
-            // durationSelec
-            // 
-            this.durationSelec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.durationSelec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.durationSelec.Location = new System.Drawing.Point(242, 480);
-            this.durationSelec.Margin = new System.Windows.Forms.Padding(2);
-            this.durationSelec.Name = "durationSelec";
-            this.durationSelec.Size = new System.Drawing.Size(92, 22);
-            this.durationSelec.TabIndex = 19;
+            this.button2.Location = new System.Drawing.Point(77, 587);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(166, 55);
+            this.button2.TabIndex = 29;
+            this.button2.Text = "stop scanning items";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // RentalForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1366, 768);
+            this.ClientSize = new System.Drawing.Size(1821, 945);
             this.Controls.Add(this.productPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.startPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "RentalForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RentalForm";
@@ -212,7 +186,6 @@
             this.panel1.ResumeLayout(false);
             this.productPanel.ResumeLayout(false);
             this.productPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.durationSelec)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -226,12 +199,9 @@
         private System.Windows.Forms.Button productBtn;
         private System.Windows.Forms.Panel startPanel;
         private System.Windows.Forms.Panel productPanel;
+        private System.Windows.Forms.Label labelVisitor;
         private System.Windows.Forms.Label labelOrderInfo;
-        private System.Windows.Forms.ListBox itemLbx;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.NumericUpDown durationSelec;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

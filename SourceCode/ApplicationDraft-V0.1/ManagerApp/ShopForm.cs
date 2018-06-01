@@ -50,7 +50,7 @@ namespace ManagerApp
         private void buttonAllStands_Click(object sender, EventArgs e)
         {
             timerUpdate.Start();
-            sql = "select ShopNr, ShopName, LocationNr, LocationName from list_of_stands";
+            sql = "select ShopNr, ShopName, LocationNr, LocationName from all_shop where IsStore = 0";
             dataGridViewShop.ReadOnly = false;
             Display(sql);
         }
@@ -59,13 +59,13 @@ namespace ManagerApp
         {
             timerUpdate.Start();
             dataGridViewShop.ReadOnly = false;
-            Display("select ShopNr, ShopName, LocationNr, LocationName from list_of_stores");
+            Display("select ShopNr, ShopName, LocationNr, LocationName from all_shop where IsStore = 1");
         }
 
         private void buttonAllShops_Click(object sender, EventArgs e)
         {
             timerUpdate.Start();
-            sql = "select ShopNr, ShopName, LocationName, IsStore from shop_location";
+            sql = "select ShopNr, ShopName, LocationName, IsStore from all_shop";
             dataGridViewShop.ReadOnly = false;
             Display(sql);
         }
@@ -76,6 +76,7 @@ namespace ManagerApp
             {
                 dataGridViewShop.Refresh();
             }
+            timerUpdate.Start();
         }
 
         private void timerUpdate_Tick(object sender, EventArgs e)
@@ -83,6 +84,15 @@ namespace ManagerApp
             Display(sql);
         }
 
+        private void dataGridViewShop_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            timerUpdate.Stop();
+        }
+
+        private void dataGridViewShop_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            timerUpdate.Start();
+        }
         private void homeBtn_Click(object sender, EventArgs e)
         {
             HomeForm home = new HomeForm();

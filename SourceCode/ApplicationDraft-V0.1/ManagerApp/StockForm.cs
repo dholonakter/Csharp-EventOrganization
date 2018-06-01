@@ -22,7 +22,7 @@ namespace ManagerApp
             InitializeComponent();
             dh = new DataHelper();
             timerUpdate.Start();
-            sql = "select a.ArticleNr, s.ShopName, a.ShopNr, a.ArticleName, a.Price, a.Available, a.IsLoanable from article a, shop s where a.ShopNr = s.ShopNr ";
+            sql = "select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable, DepositValue from all_article";
             Display(sql);
         }
 
@@ -46,19 +46,29 @@ namespace ManagerApp
         private void buttonShow_Click(object sender, EventArgs e)
         {
             timerUpdate.Start();
-            sql = "select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable from article_shop where Available < " + Convert.ToInt32(numericUpDown1.Value);
+            sql = "select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable from all_article where Available < " + Convert.ToInt32(numericUpDown1.Value);
             Display(sql);
         }
 
         private void buttonShowAll_Click(object sender, EventArgs e)
         {
             timerUpdate.Start();
-            sql = "select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable from article_shop";
+            sql = "select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable from all_article";
             Display(sql);
         }
         private void timerUpdate_Tick(object sender, EventArgs e)
         {
             Display(sql);
+        }
+
+        private void dataGridViewInventory_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            timerUpdate.Start();
+        }
+
+        private void dataGridViewInventory_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            timerUpdate.Stop();
         }
 
         private void homeBtn_Click(object sender, EventArgs e)

@@ -22,10 +22,8 @@ namespace RentalApp
         Shop selectedShop;
         Visitor v;
         RFID myRFIDReader;
-        RFIDTag tag;
 
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
-        public ProcessTag tagProcessor;
 
         ///////////////////////////////////////
         // CROSS-THREAD DISPLAY
@@ -96,7 +94,9 @@ namespace RentalApp
             myRFIDReader = new RFID();
 
             myRFIDReader.Open();
+            v = data.FindVisitorByTag("28007be1f9"); // to be deleted
 
+            myRFIDReader.Tag += ScanVisitor;
 
             // to be deleted
             selectedShop = new Shop(7, "Eire", "Beersel");
@@ -105,25 +105,6 @@ namespace RentalApp
             sideHighlight.Height = overviewBtn.Height;
             sideHighlight.Top = overviewBtn.Top;
             startPanel.BringToFront();
-        }
-
-
-
-        private void Pay(object sender, RFIDTagEventArgs e)
-        {
-            v = data.FindVisitorByTag(e.Tag);
-            o.VisitorNr = v.IdNr;
-
-            if (v.Credit < o.GetSum())
-            {
-                MessageBox.Show("Visitor does not have enough credit.");
-            }
-            else
-            {
-                v.Credit -= o.GetSum();
-                ProcessOrder();
-                data.UpdateSelectedVisitor(v);
-            }
         }
 
         private void overviewBtn_Click(object sender, EventArgs e)
@@ -138,79 +119,6 @@ namespace RentalApp
             sideHighlight.Height = productBtn.Height;
             sideHighlight.Top = productBtn.Top;
             productPanel.BringToFront();
-            DisplayProducts();
-        }
-
-        private void ProcessOrder()
-        {
-            o.OrderDate = DateTime.Now.ToString("yyyy-MM-dd");
-            o.OrderTime = DateTime.Now.ToString("hh:mm:ss");
-
-            if (data.CreateNewOrder(o) == 1 && data.AddOrderLine(o) != -1)
-            {
-                DisplayProducts();
-                SetText(o.ToString(), labelOrderInfo);
-                o = new Order(selectedShop);
-            }
-        }
-
-        public void DisplayProducts()
-        {
-                DisplayArticle(data.GetLoanArticle(tag), itemLbx);
-        }
-
-        private void quantitySelec_ValueChanged(object sender, EventArgs e)
-        {
-            if (itemLbx.SelectedItem != null && o.Articles.Contains((Article)itemLbx.SelectedItem))
-            {
-                int amount = Convert.ToInt32(durationSelec.Value);
-                if (((Article)itemLbx.SelectedItem).Available - amount <= 0)
-                {
-                    o.SetQuantity((Article)itemLbx.SelectedItem, ((Article)itemLbx.SelectedItem).Available);
-                }
-                else
-                {
-                    o.SetQuantity((Article)itemLbx.SelectedItem, amount);
-                }
-
-                labelOrderInfo.Text = o.ToString();
-            }
-        }
-
-        private void itemLbx_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                if (((Article)itemLbx.SelectedItem).Available > 0)
-                {
-                    o.AddArticle((Article)itemLbx.SelectedItem, 1);
-                    labelOrderInfo.Text = o.ToString();
-                    UpdateNumericUpDown();
-                }
-                else
-                {
-                    MessageBox.Show("Item is out of stock");
-                }
-            }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("Please select an item before double clicking");
-            }
-        }
-
-        private void itemLbx_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            UpdateNumericUpDown();
-        }
-        private void UpdateNumericUpDown()
-        {
-            if (itemLbx.SelectedItem != null)
-            {
-                if (o.Articles.Contains((Article)itemLbx.SelectedItem))
-                {
-                    durationSelec.Value = o.Quantity[o.Articles.IndexOf((Article)itemLbx.SelectedItem)];
-                }
-            }
         }
 
         private void RentalForm_Load(object sender, EventArgs e)
@@ -218,10 +126,63 @@ namespace RentalApp
             o = new Order(selectedShop);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        // RFID PROCESSING
+        private void ScanVisitor(object sender, RFIDTagEventArgs e)
         {
-            tagProcessor += Pay;
-            myRFIDReader.Tag += new RFIDTagEventHandler(tagProcessor);
+            v = data.FindVisitorByTag(e.Tag);
+            if (v != null)
+            {
+                SetText(v.ToString(), labelVisitor);
+                
+                if (MessageBox.Show("Please start scanning your items", "Confirm", MessageBoxButtons.OK) == DialogResult.OK)
+                {
+                    myRFIDReader.Tag -= ScanVisitor;
+                    myRFIDReader.Tag += ScanItem;
+                }
+            }
+        }
+    
+        private void ScanItem(object sender, RFIDTagEventArgs e)
+        {
+            LoanArticle a = data.FindLoanArticleByTag(e.Tag);
+            if (a != null)
+            {
+                v.ArticlesBorrowed.Add(a);
+                o.AddArticle(a, 1); // add to order
+                SetText(o.ToString(), labelOrderInfo    );
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            myRFIDReader.Tag -= ScanItem;
+            myRFIDReader.Tag += ScanVisitor;
+
+            if (MessageBox.Show("Confirm payment?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                if (v.Credit < o.GetSum())
+                {
+                    MessageBox.Show("Visitor does not have enough credit.");
+                }
+                else
+                {
+                    v.Credit -= o.GetSum();
+                    o.OrderDate = DateTime.Now.ToString("yyyy-MM-dd");
+                    o.OrderTime = DateTime.Now.ToString("hh:mm:ss");
+                    o.VisitorNr = v.IdNr;
+                    if (data.CreateNewOrder(o) == 1 && data.AddOrderLine(o) != -1)
+                    {
+                        SetText(o.ToString(), labelOrderInfo);
+                        o = new Order(selectedShop);
+                    }
+                    data.UpdateSelectedVisitor(v);
+                }
+            }
+            else
+            {
+                o = new Order(selectedShop);
+            }
+
         }
     }
 }

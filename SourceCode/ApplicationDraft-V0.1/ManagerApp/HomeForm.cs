@@ -12,7 +12,7 @@ namespace ManagerApp
 {
     public partial class HomeForm : Form
     {
-
+        Form selectedForm;
 
         public HomeForm()
         {
@@ -22,40 +22,53 @@ namespace ManagerApp
 
         private void closeBtn_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            //Application.Exit();
+            this.Dispose();
+            Program.home.Show(); // return to login
         }
 
         private void visitorBtn_Click(object sender, EventArgs e)
         {
-
-            VisitorForm visitor = new VisitorForm();
-            visitor.Show();
-            this.Hide();
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new VisitorForm();
+            selectedForm.Show();
+            this.Dispose();
         }
 
         private void shopBtn_Click(object sender, EventArgs e)
         {
-
-            ShopForm shop= new ShopForm();
-            shop.Show();
-            this.Hide();
-
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new ShopForm();
+            selectedForm.Show();
+            this.Dispose();
         }
 
         private void campBtn_Click(object sender, EventArgs e)
         {
-
-            CampForm camp = new CampForm();
-            camp.Show();
-            this.Hide();
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new CampForm();
+            selectedForm.Show();
+            this.Dispose();
         }
 
         private void inventoryBtn_Click(object sender, EventArgs e)
         {
-
-            StockForm inventory = new StockForm();
-            inventory.Show();
-            this.Hide();
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new StockForm();
+            selectedForm.Show();
+            this.Dispose();
         }
 
         private void staffBtn_Click(object sender, EventArgs e)
@@ -65,10 +78,13 @@ namespace ManagerApp
 
         private void analyticBtn_Click(object sender, EventArgs e)
         {
-          
-            AnalyticForm analytics = new AnalyticForm();
-            analytics.Show();
-            this.Hide();
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new AnalyticForm();
+            selectedForm.Show();
+            this.Dispose();
         }
     }
 }

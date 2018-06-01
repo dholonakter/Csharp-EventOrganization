@@ -16,7 +16,7 @@ namespace ThanhDLL
         // FIELDS AND PROPERTIES
         ///////////////////////////////////////
         public string RFIDNr { get; set; }
-
+        public double DepositValue { get; set; }
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////
@@ -24,11 +24,12 @@ namespace ThanhDLL
         /**
          * Constructor with full variables
          */
-        public LoanArticle(int shopNr, string shopName, int articleNr, string articleName, double price, int available, string img, string rfid)
+        public LoanArticle(int shopNr, string shopName, int articleNr, string articleName, double price, int available, string img, string rfid, double deposit)
             : base(shopNr, shopName, articleNr, articleName, price, available, img)
         {
             // using base 
             this.RFIDNr = rfid;
+            this.DepositValue = deposit;
         }
         /**
          * Constructors without ShopName
@@ -42,10 +43,11 @@ namespace ThanhDLL
         /**
          * Constructors without ShopName and Img
          */
-        public LoanArticle(int shopNr, int articleNr, string articleName, double price, int available, string rfid)
+        public LoanArticle(int shopNr, int articleNr, string articleName, double price, int available, string rfid, double deposit)
             : base(shopNr, articleNr, articleName, price, available)
         {
             // using base
+            this.DepositValue = deposit;
             this.RFIDNr = rfid;
         }
         /**

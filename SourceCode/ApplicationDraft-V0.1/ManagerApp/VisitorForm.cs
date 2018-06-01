@@ -59,6 +59,16 @@ namespace ManagerApp
             Display(sql);
         }
 
+        private void dataGridViewVisitor_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            timerUpdate.Start();
+        }
+
+        private void dataGridViewVisitor_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
+        {
+            timerUpdate.Stop();
+        }
+
         private void homeBtn_Click(object sender, EventArgs e)
         {
             HomeForm home = new HomeForm();
