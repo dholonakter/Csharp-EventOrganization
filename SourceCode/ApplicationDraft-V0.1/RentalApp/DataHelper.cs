@@ -7,6 +7,8 @@ using MySql;
 using MySql.Data.MySqlClient;
 using ThanhDLL;
 using System.Windows.Forms;
+using Phidget22;
+using Phidget22.Events;
 
 namespace RentalApp
 {
@@ -28,9 +30,9 @@ namespace RentalApp
 
 
 
-        public List<LoanArticle> GetLoanArticles(int shopnr)
+        public List<LoanArticle> GetLoanArticle(RFIDTag o)
         {
-            String sql = "SELECT * FROM loan_article WHERE ShopNr=" + Convert.ToString(shopnr);
+            String sql = "SELECT * FROM loan_article WHERE RFIDNr=" + o;
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             List<LoanArticle> temp;
@@ -42,6 +44,7 @@ namespace RentalApp
                 MySqlDataReader reader = command.ExecuteReader();
 
                 String name;
+                int shopnr;
                 int nr;
                 double price;
                 string img = "";

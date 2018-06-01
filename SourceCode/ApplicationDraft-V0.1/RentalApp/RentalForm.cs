@@ -22,6 +22,7 @@ namespace RentalApp
         Shop selectedShop;
         Visitor v;
         RFID myRFIDReader;
+        RFIDTag tag;
 
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
         public ProcessTag tagProcessor;
@@ -84,6 +85,9 @@ namespace RentalApp
                 }
             }
         }
+
+
+        //STARTUP
         public RentalForm()
         {
             InitializeComponent();
@@ -91,9 +95,8 @@ namespace RentalApp
             data = new DataHelper();
             myRFIDReader = new RFID();
 
-            tagProcessor += Pay;
-            myRFIDReader.Tag += new RFIDTagEventHandler(tagProcessor);
             myRFIDReader.Open();
+
 
             // to be deleted
             selectedShop = new Shop(7, "Eire", "Beersel");
@@ -103,6 +106,7 @@ namespace RentalApp
             sideHighlight.Top = overviewBtn.Top;
             startPanel.BringToFront();
         }
+
 
 
         private void Pay(object sender, RFIDTagEventArgs e)
@@ -152,8 +156,7 @@ namespace RentalApp
 
         public void DisplayProducts()
         {
-            
-                DisplayArticle(data.GetLoanArticles(selectedShop.ShopNr), itemLbx);
+                DisplayArticle(data.GetLoanArticle(tag), itemLbx);
         }
 
         private void quantitySelec_ValueChanged(object sender, EventArgs e)
@@ -213,6 +216,12 @@ namespace RentalApp
         private void RentalForm_Load(object sender, EventArgs e)
         {
             o = new Order(selectedShop);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            tagProcessor += Pay;
+            myRFIDReader.Tag += new RFIDTagEventHandler(tagProcessor);
         }
     }
 }

@@ -36,6 +36,7 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.startPanel = new System.Windows.Forms.Panel();
             this.productPanel = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.labelOrderInfo = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.itemLbx = new System.Windows.Forms.ListBox();
@@ -120,6 +121,7 @@
             // 
             // productPanel
             // 
+            this.productPanel.Controls.Add(this.button1);
             this.productPanel.Controls.Add(this.labelOrderInfo);
             this.productPanel.Controls.Add(this.label1);
             this.productPanel.Controls.Add(this.itemLbx);
@@ -129,6 +131,16 @@
             this.productPanel.Name = "productPanel";
             this.productPanel.Size = new System.Drawing.Size(997, 634);
             this.productPanel.TabIndex = 11;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(601, 479);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // labelOrderInfo
             // 
@@ -219,6 +231,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown durationSelec;
+        private System.Windows.Forms.Button button1;
     }
 }
 
