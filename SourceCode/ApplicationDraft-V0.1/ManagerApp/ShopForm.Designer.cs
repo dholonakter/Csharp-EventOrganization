@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShopForm));
             this.label13 = new System.Windows.Forms.Label();
             this.dataGridViewShop = new System.Windows.Forms.DataGridView();
@@ -39,6 +40,7 @@
             this.buttonAllShops = new System.Windows.Forms.Button();
             this.buttonMostPurchased = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
+            this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShop)).BeginInit();
             this.SuspendLayout();
             // 
@@ -155,6 +157,11 @@
             this.buttonSave.UseVisualStyleBackColor = true;
             this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
             // 
+            // timerUpdate
+            // 
+            this.timerUpdate.Interval = 3000;
+            this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
+            // 
             // ShopForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -190,5 +197,6 @@
         private System.Windows.Forms.Button buttonAllShops;
         private System.Windows.Forms.Button buttonMostPurchased;
         private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.Timer timerUpdate;
     }
 }
