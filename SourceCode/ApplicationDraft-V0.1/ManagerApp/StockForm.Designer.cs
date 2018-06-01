@@ -38,6 +38,8 @@
             this.buttonShowAll = new System.Windows.Forms.Button();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.timerUpdate = new System.Windows.Forms.Timer(this.components);
+            this.button7 = new System.Windows.Forms.Button();
+            this.homeBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
@@ -45,7 +47,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(71, 401);
+            this.label1.Location = new System.Drawing.Point(107, 492);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(187, 13);
@@ -54,7 +56,7 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(628, 401);
+            this.buttonSave.Location = new System.Drawing.Point(664, 492);
             this.buttonSave.Margin = new System.Windows.Forms.Padding(2);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(77, 24);
@@ -65,7 +67,7 @@
             // 
             // buttonShow
             // 
-            this.buttonShow.Location = new System.Drawing.Point(402, 398);
+            this.buttonShow.Location = new System.Drawing.Point(438, 489);
             this.buttonShow.Margin = new System.Windows.Forms.Padding(2);
             this.buttonShow.Name = "buttonShow";
             this.buttonShow.Size = new System.Drawing.Size(77, 24);
@@ -84,7 +86,7 @@
             this.button13.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
             this.button13.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(122)))), ((int)(((byte)(17)))));
             this.button13.Image = ((System.Drawing.Image)(resources.GetObject("button13.Image")));
-            this.button13.Location = new System.Drawing.Point(74, 20);
+            this.button13.Location = new System.Drawing.Point(110, 111);
             this.button13.Margin = new System.Windows.Forms.Padding(8, 2, 8, 2);
             this.button13.Name = "button13";
             this.button13.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
@@ -100,7 +102,7 @@
             this.dataGridViewInventory.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.dataGridViewInventory.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewInventory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewInventory.Location = new System.Drawing.Point(74, 93);
+            this.dataGridViewInventory.Location = new System.Drawing.Point(110, 184);
             this.dataGridViewInventory.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewInventory.Name = "dataGridViewInventory";
             this.dataGridViewInventory.RowTemplate.Height = 24;
@@ -109,7 +111,7 @@
             // 
             // buttonShowAll
             // 
-            this.buttonShowAll.Location = new System.Drawing.Point(495, 396);
+            this.buttonShowAll.Location = new System.Drawing.Point(531, 487);
             this.buttonShowAll.Margin = new System.Windows.Forms.Padding(2);
             this.buttonShowAll.Name = "buttonShowAll";
             this.buttonShowAll.Size = new System.Drawing.Size(77, 24);
@@ -120,7 +122,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(263, 400);
+            this.numericUpDown1.Location = new System.Drawing.Point(299, 491);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 42;
@@ -130,11 +132,48 @@
             this.timerUpdate.Interval = 3000;
             this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
             // 
+            // button7
+            // 
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.ForeColor = System.Drawing.Color.LightGray;
+            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
+            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button7.Location = new System.Drawing.Point(898, 12);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(44, 42);
+            this.button7.TabIndex = 59;
+            this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // homeBtn
+            // 
+            this.homeBtn.FlatAppearance.BorderSize = 0;
+            this.homeBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.homeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
+            this.homeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.homeBtn.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homeBtn.ForeColor = System.Drawing.Color.DimGray;
+            this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
+            this.homeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.homeBtn.Location = new System.Drawing.Point(948, 12);
+            this.homeBtn.Name = "homeBtn";
+            this.homeBtn.Size = new System.Drawing.Size(44, 42);
+            this.homeBtn.TabIndex = 60;
+            this.homeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.homeBtn.UseVisualStyleBackColor = true;
+            this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
+            // 
             // StockForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 446);
+            this.ClientSize = new System.Drawing.Size(1004, 571);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.buttonShowAll);
             this.Controls.Add(this.label1);
@@ -142,8 +181,10 @@
             this.Controls.Add(this.buttonShow);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.dataGridViewInventory);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "StockForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StockForm";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewInventory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -162,5 +203,7 @@
         private System.Windows.Forms.Button buttonShowAll;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.Timer timerUpdate;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button homeBtn;
     }
 }

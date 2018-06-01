@@ -63,17 +63,17 @@
       <DependentUpon>CampForm.cs</DependentUpon>
     </Compile>
     <Compile Include="DataHelper.cs" />
+    <Compile Include="HomeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="HomeForm.Designer.cs">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ShopForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ShopForm.Designer.cs">
       <DependentUpon>ShopForm.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ManagerForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ManagerForm.Designer.cs">
-      <DependentUpon>ManagerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,8 +95,8 @@
     <EmbeddedResource Include="CampForm.resx">
       <DependentUpon>CampForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ManagerForm.resx">
-      <DependentUpon>ManagerForm.cs</DependentUpon>
+    <EmbeddedResource Include="HomeForm.resx">
+      <DependentUpon>HomeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

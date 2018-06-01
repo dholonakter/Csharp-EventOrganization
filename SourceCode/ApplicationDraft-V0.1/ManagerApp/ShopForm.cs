@@ -82,5 +82,12 @@ namespace ManagerApp
         {
             Display(sql);
         }
+
+        private void homeBtn_Click(object sender, EventArgs e)
+        {
+            HomeForm home = new HomeForm();
+            home.Show();
+            this.Hide();
+        }
     }
 }

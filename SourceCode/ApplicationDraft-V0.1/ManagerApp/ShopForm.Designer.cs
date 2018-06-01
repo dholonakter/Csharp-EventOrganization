@@ -41,6 +41,8 @@
             this.buttonMostPurchased = new System.Windows.Forms.Button();
             this.buttonSave = new System.Windows.Forms.Button();
             this.timerUpdate = new System.Windows.Forms.Timer(this.components);
+            this.button7 = new System.Windows.Forms.Button();
+            this.homeBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShop)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,9 +50,10 @@
             // 
             this.label13.AutoSize = true;
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(121, 118);
+            this.label13.Location = new System.Drawing.Point(140, 164);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(139, 17);
+            this.label13.Size = new System.Drawing.Size(104, 13);
             this.label13.TabIndex = 38;
             this.label13.Text = "Total money earned:";
             // 
@@ -59,11 +62,11 @@
             this.dataGridViewShop.BackgroundColor = System.Drawing.Color.Gainsboro;
             this.dataGridViewShop.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewShop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewShop.Location = new System.Drawing.Point(124, 149);
-            this.dataGridViewShop.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dataGridViewShop.Location = new System.Drawing.Point(142, 189);
+            this.dataGridViewShop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridViewShop.Name = "dataGridViewShop";
             this.dataGridViewShop.RowTemplate.Height = 24;
-            this.dataGridViewShop.Size = new System.Drawing.Size(673, 357);
+            this.dataGridViewShop.Size = new System.Drawing.Size(505, 290);
             this.dataGridViewShop.TabIndex = 37;
             // 
             // button12
@@ -76,11 +79,11 @@
             this.button12.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
             this.button12.ForeColor = System.Drawing.Color.DarkGreen;
             this.button12.Image = ((System.Drawing.Image)(resources.GetObject("button12.Image")));
-            this.button12.Location = new System.Drawing.Point(120, 40);
-            this.button12.Margin = new System.Windows.Forms.Padding(11, 2, 11, 2);
+            this.button12.Location = new System.Drawing.Point(139, 100);
+            this.button12.Margin = new System.Windows.Forms.Padding(8, 2, 8, 2);
             this.button12.Name = "button12";
-            this.button12.Padding = new System.Windows.Forms.Padding(29, 0, 0, 0);
-            this.button12.Size = new System.Drawing.Size(977, 65);
+            this.button12.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.button12.Size = new System.Drawing.Size(733, 53);
             this.button12.TabIndex = 34;
             this.button12.Text = "    Shops status";
             this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -91,17 +94,19 @@
             // 
             this.label18.AutoSize = true;
             this.label18.BackColor = System.Drawing.Color.Gainsboro;
-            this.label18.Location = new System.Drawing.Point(180, 209);
+            this.label18.Location = new System.Drawing.Point(184, 238);
+            this.label18.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(146, 34);
+            this.label18.Size = new System.Drawing.Size(110, 26);
             this.label18.TabIndex = 40;
             this.label18.Text = "Section to import data\r\n\r\n";
             // 
             // buttonTop5
             // 
-            this.buttonTop5.Location = new System.Drawing.Point(841, 148);
+            this.buttonTop5.Location = new System.Drawing.Point(680, 188);
+            this.buttonTop5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonTop5.Name = "buttonTop5";
-            this.buttonTop5.Size = new System.Drawing.Size(157, 43);
+            this.buttonTop5.Size = new System.Drawing.Size(118, 35);
             this.buttonTop5.TabIndex = 51;
             this.buttonTop5.Text = "Show top 5 shops";
             this.buttonTop5.UseVisualStyleBackColor = true;
@@ -109,9 +114,10 @@
             // 
             // buttonAllStands
             // 
-            this.buttonAllStands.Location = new System.Drawing.Point(841, 200);
+            this.buttonAllStands.Location = new System.Drawing.Point(680, 230);
+            this.buttonAllStands.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAllStands.Name = "buttonAllStands";
-            this.buttonAllStands.Size = new System.Drawing.Size(157, 43);
+            this.buttonAllStands.Size = new System.Drawing.Size(118, 35);
             this.buttonAllStands.TabIndex = 52;
             this.buttonAllStands.Text = "Show all loan stands";
             this.buttonAllStands.UseVisualStyleBackColor = true;
@@ -119,9 +125,10 @@
             // 
             // buttonAllStores
             // 
-            this.buttonAllStores.Location = new System.Drawing.Point(841, 249);
+            this.buttonAllStores.Location = new System.Drawing.Point(680, 270);
+            this.buttonAllStores.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAllStores.Name = "buttonAllStores";
-            this.buttonAllStores.Size = new System.Drawing.Size(157, 43);
+            this.buttonAllStores.Size = new System.Drawing.Size(118, 35);
             this.buttonAllStores.TabIndex = 53;
             this.buttonAllStores.Text = "Show all stores";
             this.buttonAllStores.UseVisualStyleBackColor = true;
@@ -129,9 +136,10 @@
             // 
             // buttonAllShops
             // 
-            this.buttonAllShops.Location = new System.Drawing.Point(841, 298);
+            this.buttonAllShops.Location = new System.Drawing.Point(680, 310);
+            this.buttonAllShops.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonAllShops.Name = "buttonAllShops";
-            this.buttonAllShops.Size = new System.Drawing.Size(157, 43);
+            this.buttonAllShops.Size = new System.Drawing.Size(118, 35);
             this.buttonAllShops.TabIndex = 54;
             this.buttonAllShops.Text = "Show all shops";
             this.buttonAllShops.UseVisualStyleBackColor = true;
@@ -139,9 +147,10 @@
             // 
             // buttonMostPurchased
             // 
-            this.buttonMostPurchased.Location = new System.Drawing.Point(841, 347);
+            this.buttonMostPurchased.Location = new System.Drawing.Point(680, 350);
+            this.buttonMostPurchased.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonMostPurchased.Name = "buttonMostPurchased";
-            this.buttonMostPurchased.Size = new System.Drawing.Size(157, 43);
+            this.buttonMostPurchased.Size = new System.Drawing.Size(118, 35);
             this.buttonMostPurchased.TabIndex = 55;
             this.buttonMostPurchased.Text = "Most purchased items";
             this.buttonMostPurchased.UseVisualStyleBackColor = true;
@@ -149,9 +158,10 @@
             // 
             // buttonSave
             // 
-            this.buttonSave.Location = new System.Drawing.Point(841, 396);
+            this.buttonSave.Location = new System.Drawing.Point(680, 390);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(157, 43);
+            this.buttonSave.Size = new System.Drawing.Size(118, 35);
             this.buttonSave.TabIndex = 56;
             this.buttonSave.Text = "Save changes";
             this.buttonSave.UseVisualStyleBackColor = true;
@@ -162,11 +172,48 @@
             this.timerUpdate.Interval = 3000;
             this.timerUpdate.Tick += new System.EventHandler(this.timerUpdate_Tick);
             // 
+            // button7
+            // 
+            this.button7.FlatAppearance.BorderSize = 0;
+            this.button7.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+            this.button7.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+            this.button7.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button7.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button7.ForeColor = System.Drawing.Color.LightGray;
+            this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
+            this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button7.Location = new System.Drawing.Point(898, 12);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(44, 42);
+            this.button7.TabIndex = 57;
+            this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // homeBtn
+            // 
+            this.homeBtn.FlatAppearance.BorderSize = 0;
+            this.homeBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.homeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
+            this.homeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.homeBtn.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homeBtn.ForeColor = System.Drawing.Color.DimGray;
+            this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
+            this.homeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.homeBtn.Location = new System.Drawing.Point(948, 12);
+            this.homeBtn.Name = "homeBtn";
+            this.homeBtn.Size = new System.Drawing.Size(44, 42);
+            this.homeBtn.TabIndex = 58;
+            this.homeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.homeBtn.UseVisualStyleBackColor = true;
+            this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
+            // 
             // ShopForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1179, 587);
+            this.ClientSize = new System.Drawing.Size(1004, 571);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonAllShops);
             this.Controls.Add(this.buttonMostPurchased);
@@ -177,7 +224,10 @@
             this.Controls.Add(this.dataGridViewShop);
             this.Controls.Add(this.button12);
             this.Controls.Add(this.label18);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "ShopForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShop)).EndInit();
             this.ResumeLayout(false);
@@ -198,5 +248,7 @@
         private System.Windows.Forms.Button buttonMostPurchased;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Timer timerUpdate;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button homeBtn;
     }
 }
