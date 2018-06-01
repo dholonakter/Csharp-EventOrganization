@@ -20,6 +20,7 @@ namespace CampReserVation
         {
             this.FullName = name;
             this.RFID = rfid;
+            this.Balance = balance;
         }
         public Visitor()
         {

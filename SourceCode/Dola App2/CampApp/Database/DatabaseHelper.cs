@@ -65,56 +65,65 @@ namespace CampReserVation.Database
                 logger.LogMessage(errorType, message);
             }
         }
-
        
-        private bool AddToParticipantTable()
-        {
+            private bool AddToParticipantTable()
+           {
+            Participant foundparticipant = null;
             bool onSuccess = false;
-            String sql = "INSERT INTO reservation (ReservationId,Start_Date,End_Date,TotalNumber)" +
-              "VALUES  (@ParticipantId,@Participant_Name,@RFID,@ReservationId,@SpotNumber,@IsLeader,@CheckedIn)";
-            MySqlCommand command = new MySqlCommand(sql, connection);
-            Participant participant = new Participant();
-            command.Parameters.AddWithValue("@ParticipantId", participant.Id);
-            command.Parameters.AddWithValue("@Participant_Name", participant.FullName);
-            command.Parameters.AddWithValue("@RFID", participant.RFID);
-            command.Parameters.AddWithValue("@ReservationId", participant.ReservationId);
-            command.Parameters.AddWithValue("@SpotNumber", participant.SpotNr);
-            command.Parameters.AddWithValue("@IsLeader", participant.IsLeader);
-            command.Parameters.AddWithValue("@CheckedIn", participant.IsCheckedIn);
-
-            try
+            //foundparticipant = FindParticipant(foundparticipant.RFID);
+            if (foundparticipant == null)
             {
-                connection.Open();
-                if (command.ExecuteNonQuery() > 0)
+                String sql = "INSERT INTO participant (participantId,Participant_Name,RFID)" +
+                  "VALUES  (@ParticipantId,@Participant_Name,@RFID,@ReservationId)";
+                MySqlCommand command = new MySqlCommand(sql, connection);
+                Participant participant = null;
+                command.Parameters.AddWithValue("@ParticipantId", participant.Id);
+                command.Parameters.AddWithValue("@Participant_Name", participant.FullName);
+                command.Parameters.AddWithValue("@RFID", participant.RFID);
+                command.Parameters.AddWithValue("@ReservationId", participant.ReservationId);
+                command.Parameters.AddWithValue("@SpotNumber", participant.SpotNr);
+                command.Parameters.AddWithValue("@IsLeader", participant.IsLeader);
+                command.Parameters.AddWithValue("@CheckedIn", participant.IsCheckedIn);
+
+                try
+                {
+                    connection.Open();
+                    if (command.ExecuteNonQuery() > 0)
+                    {
+                        connection.Close();
+                        onSuccess = true;
+                    }
+
+
+                }
+                catch
+                {
+                    LogMessage(ErrorType.MySqlException, "Reservation: Error while adding visitor");
+                }
+                finally
                 {
                     connection.Close();
-                    onSuccess = true;
                 }
+            }
 
-
-            }
-            catch
-            {
-                LogMessage(ErrorType.MySqlException, "Reservation: Error while adding visitor");
-            }
-            finally
-            {
-                connection.Close();
-            }
             return onSuccess;
+
         }
 
         private bool AddToReserverationTable(Reservation reservationAdd)
         {
             bool onSuccess = false;
-            String sql = "INSERT INTO reservation (ReservationId,Start_Date,End_Date,TotalNumber)" +
-              "VALUES  (@ReservationId,@Start_Date,@End_Date,@SpotNumber,@TotalNumber)";
+            String sql = "INSERT INTO reservation (ReservationId,Start_Date,End_Date,SpotNumber,LocationNr,TotalMember,Paid)" +
+              "VALUES  (@ReservationId,@Start_Date,@End_Date,@SpotNumber,@LocationNr,@TotalMember,@Paid)";
             MySqlCommand command = new MySqlCommand(sql, connection);
-            command.Parameters.AddWithValue("@ReservationId", reservationAdd.ReservationStartDate);
-            command.Parameters.AddWithValue("@Start_Date", reservationAdd.ReservationEndDate);
-            command.Parameters.AddWithValue("@End_Date", reservationAdd.SpotNr);
-            command.Parameters.AddWithValue("@SpotNumber", reservationAdd.Id);
-            command.Parameters.AddWithValue("@TotalNumber", reservationAdd.Id);
+            command.Parameters.AddWithValue("@ReservationId", reservationAdd.Id);
+            command.Parameters.AddWithValue("@Start_Date", reservationAdd.ReservationStartDate);
+            command.Parameters.AddWithValue("@End_Date", reservationAdd.ReservationEndDate);
+            command.Parameters.AddWithValue("@LocationNr", reservationAdd.LocationNr);
+            command.Parameters.AddWithValue("@SpotNumber", reservationAdd.SpotNr);
+            command.Parameters.AddWithValue("@TotalMember", reservationAdd.TotalMember);
+            command.Parameters.AddWithValue("@Paid", reservationAdd.IsPaid);
+
 
 
 
@@ -143,6 +152,149 @@ namespace CampReserVation.Database
         #endregion
 
         #region Public Methods
+        public bool UpdateVisitorTableBalanceColumn(string rfidcode, double balance)
+        {
+            return false;
+        }
+
+        public bool CampReservation(Reservation reservationAdd)
+        {
+            bool onSucess = false;
+            if (reservationAdd != null)
+            {
+                onSucess = AddToReserverationTable(reservationAdd);
+                onSucess = AddToParticipantTable();
+                return onSucess = true;
+            }
+
+            return onSucess;
+        }
+        public Participant FindParticipant(string rfidCode)
+        {
+            Participant foundParticipant = null;
+
+
+            if (FindVisitor(rfidCode) != null)
+            {
+                string sql = "SELECT * FROM participant WHERE RFID ='" + rfidCode + "'";
+                int id;
+                string rfid;
+                int reservnr;
+                bool checkedin;
+                int spotNr;
+                bool isleader;
+                try
+                {
+                    connection.Open();
+
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+
+                    // reading
+                    while (reader.Read())
+                    {
+                        id = Convert.ToInt32(reader["ParticipantId"]);
+                        rfid = Convert.ToString(reader["Participant_Name"]);
+                        rfid = Convert.ToString(reader["RFID"]);
+                        reservnr = Convert.ToInt32(reader["ReservationId"]);
+                        spotNr = Convert.ToInt32(reader["SpotNumber"]);
+                        isleader = Convert.ToBoolean(reader["IsLeader"]);
+                        checkedin = Convert.ToBoolean(reader["CheckedIn"]);
+
+                    }
+
+                }
+                catch (MySqlException)
+                {
+                    LogMessage(ErrorType.MySqlException, "Something went wrong while querying");
+                }
+                finally
+                {
+                    connection.Close();
+                }
+
+            }
+            return foundParticipant;
+
+
+        }
+
+
+
+        public List<CampSpot> GetAllSpotName()
+        {
+            string sql = "select * from camp_spot";
+            List<CampSpot> getAllSpotName = new List<CampSpot>();
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string spotname;
+                    int locationId;
+                    spotname = Convert.ToString(reader["SpotName"]);
+                    locationId = Convert.ToInt32(reader["LocationNr"]);
+                    CampSpot campSpot = new CampSpot();
+                    campSpot.Name = spotname;
+                    campSpot.LocationId = locationId;
+                    getAllSpotName.Add(campSpot);
+                }
+                return getAllSpotName;
+            }
+            catch (MySqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return getAllSpotName;
+        }
+        public Location GetLocation(int locationId)
+        {
+            string sql = "select * from camp_location where LocationNr='" + locationId + "'";
+            Location foundLocation = null;
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    string Locationname;
+                    Locationname = Convert.ToString(reader["LocationName"]);
+                    foundLocation = new Location
+                    {
+                        LocationId = locationId,
+                        LocationName = Locationname
+                    };
+                }
+
+            }
+            catch (MySqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return foundLocation;
+        }
+       
         public Visitor FindVisitor(string rfidCode)
         {
             Visitor foundVisitor = null;
@@ -187,92 +339,7 @@ namespace CampReserVation.Database
         }
 
 
-        public bool UpdateVisitorTableBalanceColumn(string rfidcode, double balance)
-        {
-            return false;
-        }
-
-        public bool CampReservation(Reservation reservationAdd)
-        {
-            bool onSucess = false;
-            onSucess = AddToReserverationTable(reservationAdd);
-            onSucess = AddToParticipantTable();
-            return onSucess;
-        }
-
-
-        public List<CampSpot> GetAllSpotName()
-        {
-            string sql = "select * from camp_spot";
-            List<CampSpot> getAllSpotName = new List<CampSpot>();
-            MySqlCommand command = new MySqlCommand(sql, connection);
-
-            try
-            {
-                connection.Open();
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    string spotname;
-                    int locationId;
-                    spotname = Convert.ToString(reader["SpotName"]);
-                    locationId = Convert.ToInt32(reader["LocationNr"]);
-                    CampSpot campSpot = new CampSpot();
-                    campSpot.Name = spotname;
-                    campSpot.LocationId = locationId;
-                    getAllSpotName.Add(campSpot);
-                }
-                return getAllSpotName;
-            }
-            catch (MySqlException exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return getAllSpotName;
-        }
-        public Location GetLocation(int locationId)
-        {
-            string sql = "select * from camp_location where LocationNr='"+locationId+"'";
-            Location foundLocation = null;
-            MySqlCommand command = new MySqlCommand(sql, connection);
-            try
-            {
-                connection.Open();
-                MySqlDataReader reader = command.ExecuteReader();
-                while (reader.Read())
-                {
-                    string Locationname;
-                    Locationname = Convert.ToString(reader["LocationName"]);
-                    foundLocation = new Location
-                    {
-                        LocationId=locationId,
-                        LocationName = Locationname
-                    };
-                }
-               
-            }
-            catch (MySqlException exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return foundLocation;
-        }
+       
     }
 
 }

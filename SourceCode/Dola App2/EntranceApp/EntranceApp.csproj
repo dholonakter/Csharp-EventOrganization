@@ -52,7 +52,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Database\DatabaseHelper.cs" />
     <Compile Include="Helper\ErrorType.cs" />
     <Compile Include="Helper\ILogger.cs" />
     <Compile Include="MainForm.cs">
@@ -92,11 +91,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\propcommonclass\propcommonclass.csproj">
-      <Project>{66c9eb6e-aace-49b5-8b9f-d29b95c74a28}</Project>
-      <Name>propcommonclass</Name>
-    </ProjectReference>
+    <Folder Include="Database\" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

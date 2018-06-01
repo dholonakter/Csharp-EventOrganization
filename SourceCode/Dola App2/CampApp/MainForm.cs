@@ -126,7 +126,7 @@ namespace CampReserVation
         {
             return !String.IsNullOrEmpty(dtpStartDate.Text) &&
                    !String.IsNullOrEmpty(dtpEndDate.Text) &&
-                   !String.IsNullOrEmpty(tbParticipantType.Text) &&
+                  // !String.IsNullOrEmpty(tbParticipantType.Text) &&
                    !String.IsNullOrEmpty(nmUpNrOfMember.Text) &&
                    !String.IsNullOrEmpty(cbxSelectedAmount.Text);
         }
@@ -134,7 +134,31 @@ namespace CampReserVation
 
         private void btnReservation_Click(object sender, EventArgs e)
         {
+            DateTime startDate, endDate;
+            int totalMember;
 
+            if (InputValidation())
+            {
+                startDate =Convert.ToDateTime(dtpStartDate.Text);
+                endDate =Convert.ToDateTime(dtpEndDate.Text);
+                totalMember = Convert.ToInt32(nmUpNrOfMember.Text);
+                Reservation reservation = new Reservation(startDate,endDate,totalMember);
+                if (databaseHelper.CampReservation(reservation))
+                {
+
+                    lblReserveMessage.Text = "Reserved Successfully";
+
+                }
+                else
+                {
+                    lblReserveMessage.Text = "Unable to reserve";
+
+                }
+            }
+            else
+            {
+                MessageBox.Show("Not All Fields are complete!!!");
+            }
         }
         #endregion
 

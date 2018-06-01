@@ -60,6 +60,7 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lbxLogMessage = new System.Windows.Forms.ListBox();
             this.btnClearLogs = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nmUpNrOfMember)).BeginInit();
             this.groupBox4.SuspendLayout();
@@ -102,7 +103,7 @@
             // lblLocationName
             // 
             this.lblLocationName.AutoSize = true;
-            this.lblLocationName.Location = new System.Drawing.Point(100, 225);
+            this.lblLocationName.Location = new System.Drawing.Point(100, 216);
             this.lblLocationName.Name = "lblLocationName";
             this.lblLocationName.Size = new System.Drawing.Size(211, 13);
             this.lblLocationName.TabIndex = 49;
@@ -111,7 +112,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(9, 228);
+            this.label13.Location = new System.Drawing.Point(9, 219);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(79, 13);
             this.label13.TabIndex = 48;
@@ -173,7 +174,7 @@
             this.tbParticipantType.Items.AddRange(new object[] {
             "Member",
             "Leader"});
-            this.tbParticipantType.Location = new System.Drawing.Point(100, 256);
+            this.tbParticipantType.Location = new System.Drawing.Point(100, 247);
             this.tbParticipantType.Name = "tbParticipantType";
             this.tbParticipantType.Size = new System.Drawing.Size(205, 21);
             this.tbParticipantType.TabIndex = 33;
@@ -181,7 +182,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(7, 265);
+            this.label5.Location = new System.Drawing.Point(7, 256);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(84, 13);
             this.label5.TabIndex = 32;
@@ -189,7 +190,7 @@
             // 
             // nmUpNrOfMember
             // 
-            this.nmUpNrOfMember.Location = new System.Drawing.Point(101, 288);
+            this.nmUpNrOfMember.Location = new System.Drawing.Point(101, 279);
             this.nmUpNrOfMember.Name = "nmUpNrOfMember";
             this.nmUpNrOfMember.Size = new System.Drawing.Size(205, 20);
             this.nmUpNrOfMember.TabIndex = 29;
@@ -197,7 +198,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 294);
+            this.label1.Location = new System.Drawing.Point(8, 285);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 28;
@@ -221,7 +222,7 @@
             "20",
             "30",
             "50"});
-            this.cbxSelectedAmount.Location = new System.Drawing.Point(101, 322);
+            this.cbxSelectedAmount.Location = new System.Drawing.Point(101, 313);
             this.cbxSelectedAmount.Name = "cbxSelectedAmount";
             this.cbxSelectedAmount.Size = new System.Drawing.Size(205, 21);
             this.cbxSelectedAmount.TabIndex = 24;
@@ -230,7 +231,7 @@
             // 
             this.groupBox4.Controls.Add(this.btnReservation);
             this.groupBox4.Controls.Add(this.btnClear);
-            this.groupBox4.Location = new System.Drawing.Point(16, 378);
+            this.groupBox4.Location = new System.Drawing.Point(16, 372);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(295, 58);
             this.groupBox4.TabIndex = 23;
@@ -259,7 +260,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(8, 327);
+            this.label4.Location = new System.Drawing.Point(8, 318);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 21;
@@ -295,7 +296,7 @@
             // lblReserveMessage
             // 
             this.lblReserveMessage.AutoSize = true;
-            this.lblReserveMessage.Location = new System.Drawing.Point(99, 351);
+            this.lblReserveMessage.Location = new System.Drawing.Point(99, 342);
             this.lblReserveMessage.Name = "lblReserveMessage";
             this.lblReserveMessage.Size = new System.Drawing.Size(211, 13);
             this.lblReserveMessage.TabIndex = 12;
@@ -304,7 +305,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 352);
+            this.label3.Location = new System.Drawing.Point(9, 343);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(53, 13);
             this.label3.TabIndex = 12;
@@ -330,6 +331,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button2);
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.lbMembers);
             this.groupBox1.Location = new System.Drawing.Point(355, -2);
@@ -341,7 +343,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(116, 151);
+            this.button1.Location = new System.Drawing.Point(60, 151);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(122, 23);
             this.button1.TabIndex = 1;
@@ -384,6 +386,16 @@
             this.btnClearLogs.TabIndex = 14;
             this.btnClearLogs.Text = "ClearLogs";
             this.btnClearLogs.UseVisualStyleBackColor = true;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(200, 151);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(122, 23);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "button1";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button1_Click);
             // 
             // CampRegistrationForm
             // 
@@ -443,6 +455,7 @@
         private System.Windows.Forms.ListBox lbMembers;
         private System.Windows.Forms.Label lblLocationName;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 
