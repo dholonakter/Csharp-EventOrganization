@@ -56,9 +56,6 @@ namespace ManagerApp
         {
             try
             {
-                /*dataAdapter.Update(changes);
-                MySqlCommandBuilder mcb = new MySqlCommandBuilder(dataAdapter);
-                dataAdapter.UpdateCommand = mcb.GetUpdateCommand();*/
                 dataAdapter.Update(changes);
             }
             catch (MySqlException)
@@ -69,6 +66,27 @@ namespace ManagerApp
             return true;
         }
 
+        
+        public DataSet GetDataset(string sql)
+        {
+            try
+            {
+                DataSet ds = new DataSet();
+                dataAdapter.SelectCommand = new MySqlCommand(sql, connection);
+                dataAdapter.Fill(ds);
+                return ds;
+            }
+            catch (MySqlException exc)
+            {
+                System.Windows.Forms.MessageBox.Show(exc.Message);
+               // return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return null;
+        }
         ///////////////////////////////////////
         // VISITOR'S HANDLING
         ///////////////////////////////////////

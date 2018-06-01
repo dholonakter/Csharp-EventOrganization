@@ -18,11 +18,8 @@ namespace ManagerApp
         ///////////////////////////////////////
 
         // Variables
-        Visitor visitor;
         DataHelper dh;
-        BindingSource visitorTable;
-        BindingSource activityTable;
-        BindingSource problemTable;
+        Form selectedForm;
 
 
         public ManagerForm()
@@ -40,10 +37,13 @@ namespace ManagerApp
             sideHighlight.Height = eventBtn.Height;
             sideHighlight.Top = eventBtn.Top;
 
-            VisitorForm tf = new VisitorForm();
-            tf.Show();
-            tf.Focus();
-            
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new VisitorForm();
+            selectedForm.Show();
+            selectedForm.Focus();
         }
 
         private void shopBtn_Click(object sender, EventArgs e)
@@ -51,9 +51,13 @@ namespace ManagerApp
             sideHighlight.Height = shopBtn.Height;
             sideHighlight.Top = shopBtn.Top;
 
-            ShopForm sf = new ShopForm();
-            sf.Show();
-            sf.Focus();
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new ShopForm();
+            selectedForm.Show();
+            selectedForm.Focus();
         }
 
         private void campBtn_Click(object sender, EventArgs e)
@@ -61,24 +65,41 @@ namespace ManagerApp
             sideHighlight.Height = campBtn.Height;
             sideHighlight.Top = campBtn.Top;
 
-            CampForm cf = new CampForm();
-            cf.Show();
-            cf.Focus();
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new CampForm();
+            selectedForm.Show();
+            selectedForm.Focus();
         }
 
         private void inventoryBtn_Click(object sender, EventArgs e)
         {
             sideHighlight.Height = inventoryBtn.Height;
             sideHighlight.Top = inventoryBtn.Top;
-            StockForm sf = new StockForm();
-            sf.Show();
-            sf.Focus();
+
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new StockForm();
+            selectedForm.Show();
+            selectedForm.Focus();
         }
 
         private void analyticBtn_Click(object sender, EventArgs e)
         {
             sideHighlight.Height = analyticBtn.Height;
             sideHighlight.Top = analyticBtn.Top;
+
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new AnalyticForm();
+            selectedForm.Show();
+            selectedForm.Focus();
         }
 
         private void transBtn_Click(object sender, EventArgs e)

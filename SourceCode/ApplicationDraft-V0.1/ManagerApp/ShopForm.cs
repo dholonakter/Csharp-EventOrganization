@@ -14,6 +14,7 @@ namespace ManagerApp
     {
         DataHelper dh;
         BindingSource dataTable;
+        string sql;
 
         public ShopForm()
         {
@@ -32,14 +33,18 @@ namespace ManagerApp
 
         private void buttonMostPurchased_Click(object sender, EventArgs e)
         {
-            Display("select s.ShopName, ArticleNr, COUNT(*) 'Nr. of purchases' from all_order o, shop s where o.ShopNr = s.ShopNr group by o.ShopNr, ArticleNr, ShopName");
+            timerUpdate.Start();
+            sql = "select s.ShopName, ArticleNr, COUNT(*) 'Nr. of purchases' from all_order o, shop s where o.ShopNr = s.ShopNr group by o.ShopNr, ArticleNr, ShopName";
+            Display(sql);
             dataGridViewShop.ReadOnly = true;
         }
 
         private void buttonTop5_Click(object sender, EventArgs e)
         {
+            timerUpdate.Start();
+            sql = "select s.ShopName, sum(Subtotal) 'Total earned' from all_order o, shop s where o.ShopNr = s.ShopNr group by o.ShopNr, ShopName LIMIT 5";
             dataGridViewShop.ReadOnly = true;
-            Display("select s.ShopName, sum(Subtotal) 'Total earned' from all_order o, shop s where o.ShopNr = s.ShopNr group by o.ShopNr, ShopName LIMIT 5");
+            Display(sql);
         }
 
         private void buttonAllStands_Click(object sender, EventArgs e)
@@ -66,6 +71,11 @@ namespace ManagerApp
             {
                 dataGridViewShop.Refresh();
             }
+        }
+
+        private void timerUpdate_Tick(object sender, EventArgs e)
+        {
+            Display(sql);
         }
     }
 }
