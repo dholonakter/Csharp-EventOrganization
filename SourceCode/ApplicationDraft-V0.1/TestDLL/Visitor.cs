@@ -47,6 +47,12 @@ namespace ThanhDLL
             ArticlesBorrowed = new List<LoanArticle>();
         }
 
+        public Visitor (int visitorNr, string firstName, string lastName, string phone, string mail) 
+            : base(visitorNr, firstName, lastName, phone, mail)
+        {
+            // base
+        }
+
         ///////////////////////////////////////
         // METHODS
         ///////////////////////////////////////

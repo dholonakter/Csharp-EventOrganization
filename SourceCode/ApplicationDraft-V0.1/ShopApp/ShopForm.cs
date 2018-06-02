@@ -24,77 +24,10 @@ namespace ShopApp
 
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
 
-        ///////////////////////////////////////
-        // CROSS-THREAD DISPLAY
-        ///////////////////////////////////////
-
-        // Delegates for cross-thread processing
-        delegate void LabelDelegate(string text, Label lb);
-        delegate void ListboxDelegate(Object o, ListBox lb);
-        delegate void VoidListboxDelegate(ListBox lb);
-
-        // Clearing the given listbox
-        private void ClearListbox(ListBox lb)
-        {
-            if (lb.InvokeRequired)
-            {
-                VoidListboxDelegate d = new VoidListboxDelegate(ClearListbox);
-                this.Invoke(d, new object[] { lb });
-            }
-            else
-            {
-                lb.Items.Clear();
-            }
-        }
-
-        // Set text to label
-        private void SetText(string text, Label lb)
-        {
-            // InvokeRequired required compares the thread ID of the  
-            // calling thread to the thread ID of the creating thread.  
-            // If these threads are different, it returns true.  
-            if (lb.InvokeRequired)
-            {
-                LabelDelegate d = new LabelDelegate(SetText);
-                this.Invoke(d, new object[] { text, lb });
-            }
-            else
-            {
-                lb.Text = text;
-            }
-        }
-
-        // Display an article in a given listbox
-        private void DisplayArticle(Object o, ListBox lb)
-        {
-            List<Article> list = (List<Article>)o;
-
-            if (lb.InvokeRequired)
-            {
-                ListboxDelegate d = new ListboxDelegate(DisplayArticle);
-                this.Invoke(d, new object[] { list, lb });
-            }
-            else
-            {
-                lb.Items.Clear();
-                foreach (Article a in list)
-                {
-                    lb.Items.Add(a);
-                }
-            }
-        }
 
         public ShopForm(Shop s)
         {
             InitializeComponent();
-
-            // init values
-            data = new DataHelper();
-            myRFIDReader = new RFID();
-
-            myRFIDReader.Tag += new RFIDTagEventHandler(Pay);
-            myRFIDReader.Open();
-            
             if (s != null)
             {
                 selectedShop = s;
@@ -111,11 +44,6 @@ namespace ShopApp
                 comboBoxShop.DisplayMember = "ShopName";
                 comboBoxShop.DataSource = dt;
             }
-
-            // GUI
-            sideHighlight.Height = overviewBtn.Height;
-            sideHighlight.Top = overviewBtn.Top;
-            startPanel.BringToFront();
         }
 
         private void Pay(object sender, RFIDTagEventArgs e)
@@ -147,7 +75,7 @@ namespace ShopApp
             sideHighlight.Height = productBtn.Height;
             sideHighlight.Top = productBtn.Top;
             productPanel.BringToFront();
-            
+
             if (selectedShop == null) // if admin is logged on 
             {
                 foodRbtn.Enabled = false;
@@ -164,14 +92,16 @@ namespace ShopApp
         {
             if (selectedShop != null)
             {
+                CrossThreadDisplay display = new CrossThreadDisplay(this);
                 if (foodRbtn.Checked)
                 {
-                    DisplayArticle(data.GetFoodArticles(selectedShop.ShopNr), itemLbx);
+                    display.DisplayArticle(data.GetFoodArticles(selectedShop.ShopNr), itemLbx);
                 }
                 else
                 {
-                    DisplayArticle(data.GetDrinkArticles(selectedShop.ShopNr), itemLbx);
+                    display.DisplayArticle(data.GetDrinkArticles(selectedShop.ShopNr), itemLbx);
                 }
+                display.Dispose();
             }
         }
 
@@ -187,7 +117,18 @@ namespace ShopApp
 
         private void ShopForm_Load(object sender, EventArgs e)
         {
+            // init values
             o = new Order(selectedShop);
+            data = new DataHelper();
+            myRFIDReader = new RFID();
+
+            myRFIDReader.Tag += new RFIDTagEventHandler(Pay);
+            myRFIDReader.Open();
+
+            // GUI
+            sideHighlight.Height = overviewBtn.Height;
+            sideHighlight.Top = overviewBtn.Top;
+            startPanel.BringToFront();
         }
 
         private void foodRbtn_CheckedChanged(object sender, EventArgs e)
@@ -256,7 +197,10 @@ namespace ShopApp
             if (data.CreateNewOrder(o) == 1 && data.AddOrderLine(o) != -1)
             {
                 DisplayProducts();
-                SetText(o.ToString(), labelOrderInfo);
+                using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                {
+                    display.SetText(o.ToString(), labelOrderInfo);
+                }
                 o = new Order(selectedShop);
             }
         }

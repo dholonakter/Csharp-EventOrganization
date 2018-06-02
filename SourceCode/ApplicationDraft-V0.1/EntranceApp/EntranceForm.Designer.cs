@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EntranceForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.ticketsBtn = new System.Windows.Forms.Button();
@@ -38,11 +37,14 @@
             this.checkoutBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkinPanel = new System.Windows.Forms.Panel();
+            this.button2 = new System.Windows.Forms.Button();
             this.statusIn = new System.Windows.Forms.Label();
             this.labelStatusIn = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.labelTagNr = new System.Windows.Forms.Label();
             this.lbCheckIn = new System.Windows.Forms.ListBox();
+            this.buttonStartWC = new System.Windows.Forms.Button();
+            this.pictureBoxSource = new System.Windows.Forms.PictureBox();
             this.checkoutPanel = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.statusOut = new System.Windows.Forms.Label();
@@ -67,18 +69,16 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbPhoneNumber = new System.Windows.Forms.TextBox();
             this.tbEmailAddress = new System.Windows.Forms.TextBox();
-            this.buttonStartWC = new System.Windows.Forms.Button();
-            this.pictureBoxSource = new System.Windows.Forms.PictureBox();
-            this.webCamTimer = new System.Windows.Forms.Timer(this.components);
+            this.webCamTimer = new System.Windows.Forms.Timer();
             this.panel1.SuspendLayout();
             this.checkinPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSource)).BeginInit();
             this.checkoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.searchPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVisitor)).BeginInit();
             this.ticketPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSource)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -193,6 +193,7 @@
             // 
             // checkinPanel
             // 
+            this.checkinPanel.Controls.Add(this.button2);
             this.checkinPanel.Controls.Add(this.statusIn);
             this.checkinPanel.Controls.Add(this.labelStatusIn);
             this.checkinPanel.Controls.Add(this.pictureBox2);
@@ -205,6 +206,27 @@
             this.checkinPanel.Name = "checkinPanel";
             this.checkinPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkinPanel.TabIndex = 3;
+            // 
+            // button2
+            // 
+            this.button2.BackColor = System.Drawing.Color.DimGray;
+            this.button2.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.button2.FlatAppearance.BorderSize = 0;
+            this.button2.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.button2.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button2.ForeColor = System.Drawing.Color.White;
+            this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
+            this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button2.Location = new System.Drawing.Point(946, 278);
+            this.button2.Margin = new System.Windows.Forms.Padding(4);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(207, 49);
+            this.button2.TabIndex = 30;
+            this.button2.Text = "Pay";
+            this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // statusIn
             // 
@@ -263,8 +285,28 @@
             this.lbCheckIn.Location = new System.Drawing.Point(483, 187);
             this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4);
             this.lbCheckIn.Name = "lbCheckIn";
-            this.lbCheckIn.Size = new System.Drawing.Size(565, 229);
+            this.lbCheckIn.Size = new System.Drawing.Size(437, 229);
             this.lbCheckIn.TabIndex = 1;
+            // 
+            // buttonStartWC
+            // 
+            this.buttonStartWC.Location = new System.Drawing.Point(516, 486);
+            this.buttonStartWC.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonStartWC.Name = "buttonStartWC";
+            this.buttonStartWC.Size = new System.Drawing.Size(205, 62);
+            this.buttonStartWC.TabIndex = 3;
+            this.buttonStartWC.Text = "Start webcam";
+            this.buttonStartWC.UseVisualStyleBackColor = true;
+            this.buttonStartWC.Click += new System.EventHandler(this.buttonStartWC_Click);
+            // 
+            // pictureBoxSource
+            // 
+            this.pictureBoxSource.Location = new System.Drawing.Point(176, 461);
+            this.pictureBoxSource.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBoxSource.Name = "pictureBoxSource";
+            this.pictureBoxSource.Size = new System.Drawing.Size(284, 249);
+            this.pictureBoxSource.TabIndex = 2;
+            this.pictureBoxSource.TabStop = false;
             // 
             // checkoutPanel
             // 
@@ -541,26 +583,6 @@
             this.tbEmailAddress.Size = new System.Drawing.Size(272, 22);
             this.tbEmailAddress.TabIndex = 30;
             // 
-            // buttonStartWC
-            // 
-            this.buttonStartWC.Location = new System.Drawing.Point(516, 486);
-            this.buttonStartWC.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonStartWC.Name = "buttonStartWC";
-            this.buttonStartWC.Size = new System.Drawing.Size(205, 62);
-            this.buttonStartWC.TabIndex = 3;
-            this.buttonStartWC.Text = "Start webcam";
-            this.buttonStartWC.UseVisualStyleBackColor = true;
-            this.buttonStartWC.Click += new System.EventHandler(this.buttonStartWC_Click);
-            // 
-            // pictureBoxSource
-            // 
-            this.pictureBoxSource.Location = new System.Drawing.Point(176, 461);
-            this.pictureBoxSource.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.pictureBoxSource.Name = "pictureBoxSource";
-            this.pictureBoxSource.Size = new System.Drawing.Size(284, 249);
-            this.pictureBoxSource.TabIndex = 2;
-            this.pictureBoxSource.TabStop = false;
-            // 
             // webCamTimer
             // 
             this.webCamTimer.Tick += new System.EventHandler(this.webCamTimer_Tick);
@@ -571,12 +593,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
-            this.Controls.Add(this.ticketPanel);
+            this.Controls.Add(this.searchPanel);
+            this.Controls.Add(this.checkoutPanel);
             this.Controls.Add(this.checkinPanel);
+            this.Controls.Add(this.ticketPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.checkoutPanel);
-            this.Controls.Add(this.searchPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EntranceForm";
@@ -588,6 +610,7 @@
             this.checkinPanel.ResumeLayout(false);
             this.checkinPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSource)).EndInit();
             this.checkoutPanel.ResumeLayout(false);
             this.checkoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -596,7 +619,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridVisitor)).EndInit();
             this.ticketPanel.ResumeLayout(false);
             this.ticketPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -643,6 +665,7 @@
         private System.Windows.Forms.TextBox tbPhoneNumber;
         private System.Windows.Forms.TextBox tbEmailAddress;
         private System.Windows.Forms.Timer webCamTimer;
+        private System.Windows.Forms.Button button2;
     }
 }
 

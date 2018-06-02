@@ -38,6 +38,15 @@ namespace ThanhDLL
             this.CheckedIn = checkedIn;
         }
 
+        public Participant(int idNr, string firstName, string lastName, string phone, string mail)
+        {
+            this.IdNr = idNr;
+            this.FirstName = firstName;
+            this.LastName = lastName;
+            this.Phone = phone;
+            this.Email = mail;
+        }
+
         ///////////////////////////////////////
         // METHODS
         ///////////////////////////////////////

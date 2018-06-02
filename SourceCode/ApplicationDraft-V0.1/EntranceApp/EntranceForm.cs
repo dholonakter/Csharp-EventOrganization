@@ -27,6 +27,7 @@ namespace EntranceApp
         ///////////////////////////////////////
 
         // Variables
+        Ticket t;
         Visitor visitor;
         DataHelper dh;
         BindingSource visitorTable;
@@ -43,72 +44,6 @@ namespace EntranceApp
         SoundPlayer successSound = new SoundPlayer("../../../connect.wav");
         SoundPlayer errorSound = new SoundPlayer("../../../error.wav");
 
-
-        ///////////////////////////////////////
-        // CROSS-THREAD DISPLAY
-        ///////////////////////////////////////
-
-        // Delegates for cross-thread processing
-        delegate void LabelDelegate(string text, Label lb);
-        delegate void ListboxDelegate(Object o, ListBox lb);
-
-        // Set text to label
-        private void SetText(string text, Label lb)
-        {
-            // InvokeRequired required compares the thread ID of the  
-            // calling thread to the thread ID of the creating thread.  
-            // If these threads are different, it returns true.  
-            if (lb.InvokeRequired)
-            {
-                LabelDelegate d = new LabelDelegate(SetText);
-                this.Invoke(d, new object[] { text, lb });
-            }
-            else
-            {
-                lb.Text = text;
-            }
-        }
-
-        // Display a ticket in a given listbox
-        private void DisplayTicket(Object o, ListBox lb)
-        {
-            Ticket t = (Ticket)o;
-
-            if (lb.InvokeRequired)
-            {
-                ListboxDelegate d = new ListboxDelegate(DisplayTicket);
-                this.Invoke(d, new object[] { t, lb });
-            }
-            else
-            {
-                // Display them info
-                lb.Items.Clear();
-                lb.Items.Add("TICKET #" + t.TicketNr);
-                lb.Items.Add("Bought: " + t.TicketDate + " " + t.TicketTime);
-                lb.Items.Add("Type: " + t.TicketType);
-                lb.Items.Add("Status: " + (t.Paid ? "PAID" : "NOT PAID"));
-            }
-        }
-
-        // Display an article in a given listbox
-        private void DisplayArticle(Object o, ListBox lb)
-        {
-            List<LoanArticle> list = (List<LoanArticle>)o;
-
-            if (lb.InvokeRequired)
-            {
-                ListboxDelegate d = new ListboxDelegate(DisplayArticle);
-                this.Invoke(d, new object[] { list, lb });
-            }
-            else
-            {
-                lb.Items.Clear();
-                foreach (LoanArticle a in list)
-                {
-                    lb.Items.Add(a);
-                }
-            }
-        }
 
         ///////////////////////////////////////
         // STARTUP STUFF
@@ -128,16 +63,6 @@ namespace EntranceApp
             // Connecting to DB
             dh = new DataHelper();
             visitor = dh.FindVisitorByNr("4"); // DEMO
-
-            /* thanh tests qr
-            videoDevices = new FilterInfoCollection(FilterCategory.VideoInputDevice);
-            foreach (FilterInfo device in videoDevices)
-            {
-                comboBoxCameraSource.Items.Add(device.Name);
-            }
-            comboBoxCameraSource.SelectedIndex = 0;
-
-            videoSource = new VideoCaptureDevice();*/
 
             // Connecting RFID reader
             try
@@ -201,7 +126,7 @@ namespace EntranceApp
 
             // Display data onto gridview
             visitorTable = new BindingSource();
-            visitorTable.DataSource = dh.LoadVisitors();
+            visitorTable.DataSource = dh.DataTableFromSQL("SELECT * FROM VISITOR");
             dataGridVisitor.DataSource = visitorTable;
         }
 
@@ -210,7 +135,7 @@ namespace EntranceApp
         ///////////////////////////////////////
         private void buttonSaveChanges_Click(object sender, EventArgs e)
         {
-            if (dh.UpdateVisitorsTable((DataTable)visitorTable.DataSource))
+            if (dh.UpdateTable((DataTable)visitorTable.DataSource))
             {
                 MessageBox.Show("Data updated");
                 dataGridVisitor.Refresh();
@@ -248,7 +173,11 @@ namespace EntranceApp
 
                     if (dh.UpdateSelectedVisitor(visitor) != -1)
                     {
-                        SetText(e.Tag, labelTagNr);
+                        using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                        {
+                            display.SetText(e.Tag, labelTagNr);
+                        }
+
                         successSound.Play();
                     }
                     else
@@ -270,6 +199,7 @@ namespace EntranceApp
         /////////////////////////////////////// 
         private void CheckOut(object sender, RFIDTagEventArgs e)
         {
+            CrossThreadDisplay display = new CrossThreadDisplay(this);
             Visitor v = dh.FindVisitorByTag(e.Tag);
             dh.FindUnreturnedItems(v);
 
@@ -277,7 +207,7 @@ namespace EntranceApp
             {
                 if (dh.MoveToDeletedVisitor(v) != -1)
                 {
-                    SetText("OK", labelStatusOut);
+                    display.SetText("OK", labelStatusOut);
                 }
                 else
                 {
@@ -288,10 +218,10 @@ namespace EntranceApp
             else
             {
                 errorSound.Play();
-                DisplayArticle(v.ArticlesBorrowed, lbCheckOut);
-                SetText("NOT OK", labelStatusOut);
+                display.DisplayLoanArticle(v.ArticlesBorrowed, lbCheckOut);
+                display.SetText("NOT OK", labelStatusOut);
             }
-
+            display.Dispose();
         }
 
         ///////////////////////////////////////
@@ -323,27 +253,30 @@ namespace EntranceApp
                 return;
             var reader = new BarcodeReader();
             var result = reader.Decode(bitmap);
+            CrossThreadDisplay display = new CrossThreadDisplay(this);
+
             if (result != null)
             {
                 /// Find visitor with scanned QR code
                 visitor = dh.FindVisitorByNr(result.Text);
 
                 // Find their ticket
-                Ticket t = dh.GetTicketStatusForVisitor(visitor.IdNr);
+                t = dh.GetTicketStatusForVisitor(visitor.IdNr);
 
                 if (t != null) // if ticket exists
                 {
-                    DisplayTicket(t, lbCheckIn);
+                    display.DisplayTicket(t, lbCheckIn);
 
                     if (t.Paid)
                     {
-                        SetText("OK", labelStatusIn);
+                        display.SetText("OK", labelStatusIn);
                         StopWebcam();
+                        t = null;
                     }
                     else
                     {
                         errorSound.Play();
-                        SetText("UNPAID", labelStatusIn);
+                        display.SetText("UNPAID", labelStatusIn);
                     }
                 }
                 else
@@ -367,6 +300,26 @@ namespace EntranceApp
             else
             {
                 StopWebcam();
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (t != null)
+            {
+                t.ChangeStatus();
+                if (dh.UpdateSelectedTicket(t) != -1)
+                {
+                    using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                    {
+                        display.SetText("OK", labelStatusIn);
+                    }
+                }
+                else
+                {
+                    t.ChangeStatus(); // revert
+                    MessageBox.Show("Error while updating status");
+                }
             }
         }
     }

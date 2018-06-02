@@ -48,5 +48,10 @@ namespace ThanhDLL
             return "Ticket #" + this.TicketNr + " - " + this.TicketDate + " " + this.TicketTime +
                 " Type: " + this.TicketType + " - Buyer: " + this.BuyerNr + " - " + (Paid ? "PAID" : "NOT PAID");
         }
+
+        public void ChangeStatus()
+        {
+            Paid = !Paid;
+        }
     }
 }

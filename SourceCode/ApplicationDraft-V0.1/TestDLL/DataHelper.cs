@@ -1,0 +1,989 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using MySql;
+using MySql.Data.MySqlClient;
+
+namespace ThanhDLL
+{
+    public class DataHelper
+    {
+        ///////////////////////////////////////
+        // CONNECTING TO DATABASE
+        ///////////////////////////////////////
+        MySqlConnection connection;
+        MySqlDataAdapter dataAdapter;
+
+        /**
+         * Constructors
+         */
+        public DataHelper()
+        {
+            string connectionInfo = "server=studmysql01.fhict.local;" +
+                                    "database=dbi387862;" +
+                                    "user id=dbi387862;" +
+                                    "password=blueberrypie;" +
+                                    "connect timeout=30;";
+
+            connection = new MySqlConnection(connectionInfo);
+            dataAdapter = new MySqlDataAdapter();
+        }
+
+        ///////////////////////////////////////
+        // DATA TABLES
+        ///////////////////////////////////////
+
+        public DataTable DataTableFromSQL(string sql)
+        {
+            dataAdapter.SelectCommand = new MySqlCommand(sql, connection);
+            MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
+
+            DataTable table = new DataTable();
+            dataAdapter.Fill(table);
+            return table;
+        }
+
+        /// <summary>
+        /// Updates datatable
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public bool UpdateTable(DataTable changes)
+        {
+            try
+            {
+                dataAdapter.Update(changes);
+            }
+            catch (MySqlException)
+            {
+                //System.Windows.Forms.MessageBox.Show(exc.Message);
+                return false;
+            }
+            return true;
+        }
+
+
+        public DataSet GetDataset(string sql)
+        {
+            try
+            {
+                DataSet ds = new DataSet();
+                dataAdapter.SelectCommand = new MySqlCommand(sql, connection);
+                dataAdapter.Fill(ds);
+                return ds;
+            }
+            catch (MySqlException exc)
+            {
+                return null;
+                //System.Windows.Forms.MessageBox.Show(exc.Message);
+                // return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return null;
+        }
+
+        public int CheckCredentials(string username, string pwd)
+        {
+            string sql = "SELECT COUNT(*) 'Nr' FROM LOGIN WHERE Username = '" + username + "' AND Password='" + pwd + "'";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            int nr = 0;
+
+            try
+            {
+                connection.Open();
+                nr = Convert.ToInt32(command.ExecuteScalar());
+                return nr;
+            }
+            catch (MySqlException exc)
+            {
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        ///////////////////////////////////////
+        // VISITOR'S HANDLING
+        ///////////////////////////////////////
+
+        /// <summary>
+        ///  Updates credit, checked in status and rfid of the selected visitor in the database 
+        /// </summary>
+        /// <param name="v">The selected visitor</param>
+        /// <returns>-1 if fails, otherwise returns nr. of record affected (should be 1)</returns>
+        public int UpdateSelectedVisitor(Visitor v)
+        {
+            string sql = "UPDATE VISITOR " +
+                        "SET Credit = " + v.Credit + "," +
+                        "CheckedIn = " + v.CheckedIn + "," +
+                        "RFIDNr = " + (v.RFIDNr == "" ? "NULL" : "'" + v.RFIDNr + "'");
+
+            if (v.SpotNr != 0) // if they reserve a spot
+            {
+                sql += ", SpotNr = " + v.SpotNr;
+            }
+
+            sql += " WHERE VisitorNr = " + v.IdNr;
+
+            //MessageBox.Show(sql);
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int nrOfRecordsChanged = command.ExecuteNonQuery();
+                return nrOfRecordsChanged;
+            }
+            catch (MySqlException exc)
+            {
+
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Reading data onto a visitor
+        /// </summary>
+        /// <param name="reader">MySQL's reader</param>
+        /// <param name="v">The selected visitor</param>
+        /// <returns>The selected visitor initialized</returns>
+        public Visitor ReadDataVisitor(MySqlDataReader reader, Visitor v)
+        {
+
+            // reading
+            while (reader.Read())
+            {
+                // temporary variables
+                int nr;
+                string first;
+                string last;
+                string phone;
+                string mail;
+                string rfidNr = "";
+                double cred = 0;
+                bool checkedIn;
+                int spot = 0; // not reserved by default
+
+                nr = Convert.ToInt32(reader["VisitorNr"]);
+                first = Convert.ToString(reader["FirstName"]);
+                last = Convert.ToString(reader["LastName"]);
+                phone = Convert.ToString(reader["Phone"]);
+                mail = Convert.ToString(reader["Email"]);
+                if (!(reader["RFIDNr"] is DBNull))
+                {
+                    rfidNr = Convert.ToString(reader["RFIDNr"]);
+                }
+                else
+                {
+                    rfidNr = "";
+                }
+
+                if (!(reader["Credit"] is DBNull))
+                {
+                    cred = Convert.ToDouble(reader["Credit"]);
+                }
+                checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
+                if (!(reader["SpotNr"] is DBNull))
+                {
+                    spot = Convert.ToInt32(reader["SpotNr"]);
+                }
+
+                v = (new Visitor(nr, first, last, phone, mail, rfidNr, checkedIn, cred, spot));
+            }
+            return v;
+        }
+
+        /// <summary>
+        ///  Finds the visitor with a given visitorNr
+        /// </summary>
+        /// <param name="visitorNr"></param>
+        /// <returns>Returns null if fails and the object visitor initiated if found</returns>
+        public Visitor FindVisitorByNr(string visitorNr)
+        {
+            Visitor v = null;
+            string sql = "SELECT * FROM VISITOR WHERE VisitorNr = " + visitorNr;
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                v = ReadDataVisitor(reader, v);
+            }
+            catch (MySqlException exc)
+            {
+
+            }
+            catch (Exception exc)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return v;
+        }
+
+        /// <summary>
+        /// Finds all unreturned items and adds it to the selected visitor's object list
+        /// </summary>
+        /// <param name="v">Selected visitor</param>
+        public void FindUnreturnedItems(Visitor v)
+        {
+            string sql = "SELECT ShopName, ArticleNr, ArticleName " +
+                "FROM all_order" +
+                "WHERE IsLoanable = 1 and VisitorNr = " + v.IdNr + " AND Available = 0";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                if (!reader.HasRows)
+                {
+                    return;
+                }
+                else
+                {
+                    while (reader.Read())
+                    {
+                        // temporary variables
+                        string shopName;
+                        int articleNr;
+                        string articleName;
+
+                        shopName = Convert.ToString(reader["ShopName"]);
+                        articleNr = Convert.ToInt32(reader["ArticleNr"]);
+                        articleName = Convert.ToString(reader["ArticleName"]);
+
+                        LoanArticle a = (new LoanArticle(shopName, articleNr, articleName));
+                        v.ArticlesBorrowed.Add(a);
+                    }
+                }
+            }
+            catch (MySqlException exc)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Checks if a certain RFID tag exists in the database
+        /// </summary>
+        /// <param name="rfidNr"></param>
+        /// <returns></returns>
+        public string existsRFID(string rfidNr)
+        {
+            string sql = "SELECT RFIDNr FROM VISITOR WHERE RFIDNr IS NOT NULL";
+            List<string> usedRIFD = new List<string>();
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (rfidNr == (Convert.ToString(reader["RFIDNr"])))
+                    {
+                        return rfidNr;
+                    }
+                }
+            }
+            catch (MySqlException exc)
+            {
+                //LoggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Returns the ticket with a specified visitorNr
+        /// </summary>
+        /// <param name="visitorNr"></param>
+        /// <returns></returns>
+        public Ticket GetTicketStatusForVisitor(int visitorNr)
+        {
+            string sql = "SELECT * " +
+                "FROM TICKET " +
+                "WHERE BuyerNr = " + visitorNr;
+
+            Ticket t = null;
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // temporary variables
+                int nr;
+                string date;
+                string time;
+                string type;
+                bool paid;
+
+                while (reader.Read())
+                {
+                    // reading
+                    nr = Convert.ToInt32(reader["TicketNr"]);
+                    date = Convert.ToString(reader["TicketDate"]);
+                    time = Convert.ToString(reader["TicketTime"]);
+                    type = Convert.ToString(reader["TicketType"]);
+                    paid = Convert.ToBoolean(reader["Paid"]);
+                    t = new Ticket(nr, date, time, visitorNr, type, paid);
+                }
+
+            }
+            catch (MySqlException exc)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return t;
+        }
+
+        /// <summary>
+        /// Finds visitor by RFID tag
+        /// </summary>
+        /// <param name="rfidNr"></param>
+        /// <returns></returns>
+        public Visitor FindVisitorByTag(string rfidNr)
+        {
+            Visitor v = null;
+            string sql = "SELECT * FROM VISITOR WHERE RFIDNr = '" + rfidNr + "'";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                v = ReadDataVisitor(reader, v);
+            }
+            catch (MySqlException exc)
+            {
+                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return v;
+        }
+
+        public int MoveToDeletedVisitor(Visitor v)
+        {
+            string sql = "INSERT INTO DELETED_VISITOR(IdNr, FirstName, LastName, Phone, Email, RFIDNr, SpotNr)" +
+                "VALUES(@IdNr, @FirstName, @LastName, @Phone, @Email, @RFIDNr, @SpotNr); ";
+            sql += "SET FOREIGN_KEY_CHECKS=0; DELETE FROM PARTICIPANT WHERE IdNr = " + v.IdNr + "; SET FOREIGN_KEY_CHECKS= 1;";
+            // temporarily turning off foreign key checks
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            // add values
+            command.Parameters.AddWithValue("@IdNr", v.IdNr);
+            command.Parameters.AddWithValue("@FirstName", v.FirstName);
+            command.Parameters.AddWithValue("@LastName", v.LastName);
+            command.Parameters.AddWithValue("@Phone", v.Phone);
+            command.Parameters.AddWithValue("@Email", v.Email);
+            command.Parameters.AddWithValue("@RFIDNr", v.RFIDNr);
+            command.Parameters.AddWithValue("@SpotNr", v.SpotNr);
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected;
+            }
+            catch (MySqlException exc)
+            {
+                return -1;
+                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+        ///////////////////////////////////////
+        // COUNT ROWS
+        ///////////////////////////////////////
+        public int CountRowTable(string table)
+        {
+            string sql = "SELECT COUNT(*) FROM " + table;
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                return Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (MySqlException exc)
+            {
+                return -1;
+                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        ///////////////////////////////////////
+        // STATISTICS
+        ///////////////////////////////////////
+        public double GetTotalBalance()
+        {
+            string sql = "SELECT SUM(Credit) 'Total' FROM VISITOR";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                double sum = 0;
+
+                while (reader.Read())
+                {
+                    sum = Convert.ToDouble(reader["Total"]);
+                }
+                return sum;
+            }
+            catch (MySqlException)
+            {
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public double GetTotalSpent()
+        {
+            string sql = "SELECT SUM(Subtotal) 'Total' FROM ALL_ORDER";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                double sum = 0;
+
+                while (reader.Read())
+                {
+                    sum = Convert.ToDouble(reader["Total"]);
+                }
+                return sum;
+            }
+            catch (MySqlException)
+            {
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        //shop
+        public List<Article> GetFoodArticles(int shopnr)
+        {
+            String sql = "SELECT * FROM all_article WHERE Category = 'Food' and ShopNr=" + Convert.ToString(shopnr);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            List<Article> temp;
+            temp = new List<Article>();
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                String name;
+                int nr;
+                double price;
+                string img = "";
+                int stock;
+                //string shopname;
+                while (reader.Read())
+                {
+                    name = Convert.ToString(reader["ArticleName"]);
+                    //shopname = Convert.ToString(reader["ShopName"]);
+                    nr = Convert.ToInt32(reader["ArticleNr"]);
+                    shopnr = Convert.ToInt32(reader["ShopNr"]);
+                    price = Convert.ToInt32(reader["price"]);
+                    if (!(reader["Img"] is DBNull))
+                    {
+                        img = Convert.ToString(reader["Img"]);
+                    }
+                    stock = Convert.ToInt32(reader["Available"]);
+                    temp.Add(new Article(shopnr, nr, name, price, stock));
+                }
+            }
+            catch (Exception exc)
+            {
+                //MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
+
+        public List<Article> GetDrinkArticles(int shopnr)
+        {
+            String sql = "SELECT * FROM all_article WHERE Category = 'Drink' AND ShopNr=" + Convert.ToString(shopnr);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            List<Article> temp;
+            temp = new List<Article>();
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                String name;
+                int nr;
+                double price;
+                string img = "";
+                int stock;
+                //string shopname;
+                while (reader.Read())
+                {
+                    name = Convert.ToString(reader["ArticleName"]);
+                    //shopname = Convert.ToString(reader["ShopName"]);
+                    nr = Convert.ToInt32(reader["ArticleNr"]);
+                    shopnr = Convert.ToInt32(reader["ShopNr"]);
+                    price = Convert.ToInt32(reader["price"]);
+                    if (!(reader["Img"] is DBNull))
+                    {
+                        img = Convert.ToString(reader["Img"]);
+                    }
+                    stock = Convert.ToInt32(reader["Available"]);
+                    temp.Add(new Article(shopnr, nr, name, price, stock));
+                }
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
+
+
+        public int CreateNewOrder(Order o)
+        {
+            string sql = "INSERT INTO SHOP_ORDER(OrderDate, OrderTime, ShopNr, VisitorNr) " +
+                       "VALUES(CONVERT('" + o.OrderDate + "', DATE), CONVERT('" + o.OrderTime + "', TIME), " + o.Shop.ShopNr + ", " + o.VisitorNr + ")";
+            //MessageBox.Show(sql);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected;
+            }
+            catch (MySqlException)
+            {
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+        /// <summary>
+        /// Get the right order number
+        /// </summary>
+        /// <returns>The right order nr for a given order</returns>
+        public int GetRightOrderNr(Order o)
+        {
+            string sql = "SELECT OrderNr FROM SHOP_ORDER WHERE OrderDate = '" + o.OrderDate +
+                "' AND OrderTime = '" + o.OrderTime + "'";
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        int nr = Convert.ToInt32(reader["OrderNr"]);
+                        return nr;
+                    }
+                }
+                return -1;
+            }
+            catch (MySqlException exc)
+            {
+                //MessageBox.Show(exc.Message);
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        /// <summary>
+        /// Add order lines for a given order 
+        /// </summary>
+        /// <param name="o">The given order</param>
+        /// <returns>Number of rows affected</returns>
+        public int AddOrderLine(Order o)
+        {
+            string sql = "";
+
+            for (int i = 0; i < o.Articles.Count; i++)
+            {
+                sql += "INSERT INTO SHOP_ORDER_LINE(OrderNr, LineNr, ArticleNr, Quantity) " +
+                       "VALUES(" + GetRightOrderNr(o) + ", " + (i + 1) + ", " + o.Articles[i].ArticleNr + ", "
+                       + o.Quantity[i] + ");";
+
+                sql += " UPDATE ARTICLE SET Available = Available - " + o.Quantity[i] + " WHERE ArticleNr = " +
+                    o.Articles[i].ArticleNr + " AND ShopNr = " + o.Shop.ShopNr + ";";
+            }
+
+            //MessageBox.Show(sql);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected;
+            }
+            catch (MySqlException)
+            {
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+
+        public Shop GetShopByNr(string shopNr)
+        {
+            String sql = "SELECT * FROM all_shop WHERE ShopNr=" + shopNr;
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                string name = "";
+                string location = "";
+
+                //string shopname;
+                while (reader.Read())
+                {
+                    name = Convert.ToString(reader["ShopName"]);
+                    location = Convert.ToString(reader["LocationName"]);
+                }
+
+                return new Shop(Convert.ToInt32(shopNr), name, location);
+            }
+            catch (Exception exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+            return null;
+        }
+
+        //loan stuff
+        public LoanArticle FindLoanArticleByTag(string rfidNr)
+        {
+            LoanArticle a = null;
+            string sql = "SELECT * FROM all_article WHERE IsLoanable = 1 and RFIDNr = '" + rfidNr + "'";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                int shopNr = 0;
+                int articleNr = 0;
+                string articleName = "";
+                double price = 0;
+                int available = 0;
+                double deposit = 0;
+
+                while (reader.Read())
+                {
+                    shopNr = Convert.ToInt32(reader["ShopNr"]);
+                    articleNr = Convert.ToInt32(reader["ArticleNr"]);
+                    articleName = Convert.ToString(reader["ArticleName"]);
+                    price = Convert.ToDouble(reader["Price"]);
+                    available = Convert.ToInt32(reader["Available"]);
+                    deposit = Convert.ToDouble(reader["DepositValue"]);
+                }
+                return new LoanArticle(shopNr, articleNr, articleName, price, available, rfidNr, deposit);
+
+            }
+            catch (MySqlException exc)
+            {
+                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return null;
+        }
+
+        public List<LoanArticle> GetAllLoanArticles()
+        {
+            List<LoanArticle> temp = new List<LoanArticle>();
+
+            string sql = "SELECT * FROM all_article WHERE IsLoanable = 1";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                int shopNr = 0;
+                int articleNr = 0;
+                string articleName = "";
+                double price = 0;
+                int available = 0;
+                string rfid = "";
+                double deposit = 0;
+
+                while (reader.Read())
+                {
+                    shopNr = Convert.ToInt32(reader["ShopNr"]);
+                    articleNr = Convert.ToInt32(reader["ArticleNr"]);
+                    articleName = Convert.ToString(reader["ArticleName"]);
+                    price = Convert.ToDouble(reader["Price"]);
+                    available = Convert.ToInt32(reader["Available"]);
+                    rfid = Convert.ToString(reader["RFIDNr"]);
+                    deposit = Convert.ToDouble(reader["DepositValue"]);
+                }
+                temp.Add(new LoanArticle(shopNr, articleNr, articleName, price, available, rfid, deposit));
+
+            }
+            catch (MySqlException exc)
+            {
+                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
+        
+        public int UpdateSelectedReservation(Reservation r)
+        {
+            string sql = "UPDATE camping_reservation " +
+                        "SET Paid = " + r.Paid + ", " +
+                        " NrCheckedIn = " + r.NrCheckedIn +
+                        " WHERE ReservNr =" + r.ReservNr;
+
+            //MessageBox.Show(sql);
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int nrOfRecordsChanged = command.ExecuteNonQuery();
+                return nrOfRecordsChanged;
+            }
+            catch (MySqlException exc)
+            {
+
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public int UpdateSelectedTicket(Ticket t)
+        {
+            string sql = "UPDATE ticket " +
+                        "SET Paid = " + t.Paid +
+                        " WHERE TicketNr =" + t.TicketNr;
+
+            //MessageBox.Show(sql);
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int nrOfRecordsChanged = command.ExecuteNonQuery();
+                return nrOfRecordsChanged;
+            }
+            catch (MySqlException exc)
+            {
+
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public Reservation FindReservationByVisitor(Visitor visitor)
+        {
+            string sql = "SELECT * FROM reservation_info WHERE Reserver = " + visitor.IdNr;
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                int reservNr = 0;
+                string reservDate = "";
+                string reservTime = "";
+                string endDate = "";
+                string startDate = "";
+                CampingSpot spot = null; 
+                int nrOfRegistered = 0;
+                int nrCheckedIn = 0;
+                bool paid = false;
+
+                while(reader.Read())
+                {
+                    reservNr = Convert.ToInt32(reader["ReservNr"]);
+                    reservDate = Convert.ToString(reader["ReservDate"]);
+                    reservTime = Convert.ToString(reader["ReservTime"]);
+                    spot = new CampingSpot(Convert.ToInt32(reader["SpotNr"]), Convert.ToString(reader["SpotName"]));
+                    nrOfRegistered = Convert.ToInt32(reader["NrOfRegistered"]);
+                    nrCheckedIn = Convert.ToInt32(reader["NrCheckedIn"]);
+                    paid = Convert.ToBoolean(reader["Paid"]);
+                    startDate = Convert.ToString(reader["StartDate"]);
+                    endDate = Convert.ToString(reader["EndDate"]);
+                }
+
+                return new Reservation(reservNr, reservDate, reservTime, spot, visitor, nrOfRegistered, nrCheckedIn, paid, startDate, endDate);
+            }
+            catch (MySqlException exc)
+            {
+                return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        public Reservation FindReservationByNr(string reservNr)
+        {
+            string sql = "SELECT * FROM reservation_info WHERE ReservNr = " + reservNr;
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+                
+                if (!reader.HasRows)
+                {
+                    return null;
+                }
+
+                string reservDate = "";
+                string reservTime = "";
+                string endDate = "";
+                string startDate = "";
+                Visitor reserver = null;
+                CampingSpot spot = null;
+                int nrOfRegistered = 0;
+                int nrCheckedIn = 0;
+                bool paid = false;
+
+                while (reader.Read())
+                {
+                    reservDate = Convert.ToString(reader["ReservDate"]);
+                    reservTime = Convert.ToString(reader["ReservTime"]);
+                    spot = new CampingSpot(Convert.ToInt32(reader["SpotNr"]), Convert.ToString(reader["SpotName"]));
+                    reserver = new Visitor(Convert.ToInt32(reader["Reserver"]), Convert.ToString(reader["FirstName"]), Convert.ToString(reader["LastName"]), Convert.ToString(reader["Phone"]), Convert.ToString(reader["Email"]));
+                    nrOfRegistered = Convert.ToInt32(reader["NrOfRegistered"]);
+                    nrCheckedIn = Convert.ToInt32(reader["NrCheckedIn"]);
+                    paid = Convert.ToBoolean(reader["Paid"]);
+                    startDate = Convert.ToString(reader["StartDate"]);
+                    endDate = Convert.ToString(reader["EndDate"]);
+                }
+
+                return new Reservation(Convert.ToInt32(reservNr), reservDate, reservTime, spot, reserver, nrOfRegistered, nrCheckedIn, paid, startDate, endDate);
+            }
+            catch (MySqlException exc)
+            {
+                return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+    }
+}

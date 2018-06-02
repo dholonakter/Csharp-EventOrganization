@@ -62,7 +62,6 @@
     <Compile Include="CampForm.Designer.cs">
       <DependentUpon>CampForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DataHelper.cs" />
     <Compile Include="HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
