@@ -1,4 +1,4 @@
-﻿namespace BuyTicketApp
+﻿namespace EntranceApp
 {
     partial class MainForm
     {

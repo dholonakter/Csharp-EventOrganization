@@ -1,10 +1,11 @@
-﻿using System;
+﻿using EntranceApp.Helper;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CampReserVation.Helper
+namespace EntranceApp.Helper
 {
     public interface ILogger
     {

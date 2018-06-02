@@ -3,22 +3,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CampReserVation
+namespace CampApp
 {
     public class Visitor
     {
         #region Properties
         public int Id { get; set; }
         public string FullName { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string RFID { get; set; }
         public double Balance { get; set; }
         public bool IsCheckedIn { get; set; }
         #endregion
 
         #region constructor
-        public Visitor(string name,string rfid,double balance)
+        public Visitor(string firstname,string lastname,string rfid,double balance)
         {
-            this.FullName = name;
+            this.FirstName = firstname;
+            this.FirstName = firstname;
             this.RFID = rfid;
             this.Balance = balance;
         }

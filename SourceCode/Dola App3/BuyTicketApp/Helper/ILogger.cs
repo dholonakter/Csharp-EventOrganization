@@ -1,6 +1,5 @@
-﻿using BuyTicketApp.Models;
-
-namespace BuyTicketApp.Helper
+﻿
+namespace BuyTicketApp
 {
     public interface ILogger
     {

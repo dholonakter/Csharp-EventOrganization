@@ -1,11 +1,9 @@
-﻿using CampReserVation.Helper;
-using CampReserVation.Models;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace CampReserVation.Database
+namespace CampApp
 
 {
     public class DatabaseHelper
@@ -38,14 +36,13 @@ namespace CampReserVation.Database
                 }
                 else
                 {
-                    LogMessage(ErrorType.Database, "Cannot connect");
+                    LogMessage(ErrorType.Database, "DatabaseHelper: Cannot connect");
                 }
             }
             catch
             {
               
-                LogMessage(ErrorType.Database, "Something went wrong cannot connect");
-                
+                LogMessage(ErrorType.Database, "DatabaseHelper: Something went wrong cannot connect");
             }
         }
         #endregion
@@ -57,48 +54,6 @@ namespace CampReserVation.Database
             {
                 logger.LogMessage(errorType, message);
             }
-        }
-        private void LoggingError(ErrorType errorType, String message)
-        {
-            if (this.logger != null)
-            {
-                logger.LogMessage(errorType, message);
-            }
-        }
-        private bool AddToParticipantTable(List<Participant> pariticpants)
-        {
-            bool onSuccess = false;
-            String sql = "INSERT INTO participant (FullName,RFIDCode,Role,LeaderRFIDCode)" +
-              "VALUES    (@FullName,@RFIDCode,@Role,@LeaderRFIDCode)";
-       
-            try
-            {
-                connection.Open();
-
-                foreach (Participant participant in pariticpants)
-                {
-                    MySqlCommand command = new MySqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@FullName",participant.FullName );
-                    command.Parameters.AddWithValue("@RFIDCode",participant.RFID);
-                    command.Parameters.AddWithValue("@Role", participant.Role);
-                    command.Parameters.AddWithValue("@LeaderRFIDCode",participant.LeaderRFIDCode);
-                    if (command.ExecuteNonQuery() > 0)
-                    {    
-                        onSuccess = true;
-                    }
-                }
-                connection.Close();
-            }
-            catch
-            {
-                LogMessage(ErrorType.MySqlException, "Reservation: Error while adding visitor");
-            }
-            finally
-            {
-                connection.Close();
-               
-            }
-            return onSuccess;
         }
         private bool AddToReservationTable(Reservation newReservation)
         {
@@ -135,10 +90,40 @@ namespace CampReserVation.Database
             }
             return onSuccess;
         }
+        private bool AddToParticipantTable(List<Participant> pariticpants)
+        {
+            bool onSuccess = false;
+            String sql = "INSERT INTO participant (FullName,RFIDCode,Role,LeaderRFIDCode)" +
+              "VALUES    (@FullName,@RFIDCode,@Role,@LeaderRFIDCode)";
+       
+            try
+            {
+                connection.Open();
 
-        #endregion
-
-        #region Public Methods
+                foreach (Participant participant in pariticpants)
+                {
+                    MySqlCommand command = new MySqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@FullName",participant.FullName );
+                    command.Parameters.AddWithValue("@RFIDCode",participant.RFID);
+                    command.Parameters.AddWithValue("@Role", participant.Role);
+                    command.Parameters.AddWithValue("@LeaderRFIDCode",participant.LeaderRFIDCode);
+                    if (command.ExecuteNonQuery() > 0)
+                    {    
+                        onSuccess = true;
+                    }
+                }
+            }
+            catch
+            {
+                LogMessage(ErrorType.MySqlException, "Reservation: Error while adding visitor");
+            }
+            finally
+            {
+                connection.Close();
+               
+            }
+            return onSuccess;
+        }
         private bool UpdateVisitorTableBalanceColumn(Visitor visitor)
         {
             bool onSuccess = false;
@@ -160,7 +145,7 @@ namespace CampReserVation.Database
             catch (MySqlException)
             {
 
-                LogMessage(ErrorType.MySqlException, "Something went wrong while querying");
+                LogMessage(ErrorType.MySqlException, "UpdateVisitorTableBalanceColumn: Something went wrong while Updating");
 
             }
             finally
@@ -169,7 +154,9 @@ namespace CampReserVation.Database
             }
             return onSuccess;
         }
+        #endregion
 
+        #region Public Methods
         public bool CampReservation(Reservation reservationAdd,List<Participant> participants)
         {
             bool onSucess = false;
@@ -189,10 +176,10 @@ namespace CampReserVation.Database
             return onSucess;
         }
       
-        public List<CampSpot> GetAllSpotName()
+        public List<CampSpot> GetAllCampSpot()
         {
             string sql = "select * from camp_spot";
-            List<CampSpot> getAllSpotName = new List<CampSpot>();
+            List<CampSpot> getAllCampSpot = new List<CampSpot>();
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
@@ -208,23 +195,19 @@ namespace CampReserVation.Database
                     CampSpot campSpot = new CampSpot();
                     campSpot.Name = spotname;
                     campSpot.LocationId = locationId;
-                    getAllSpotName.Add(campSpot);
+                    getAllCampSpot.Add(campSpot);
                 }
-                return getAllSpotName;
+                return getAllCampSpot;
             }
-            catch (MySqlException exc)
+            catch
             {
-                MessageBox.Show(exc.Message);
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
+                LogMessage(ErrorType.MySqlException, "GetAllCampSpot: Something went wrong while querying");
             }
             finally
             {
                 connection.Close();
             }
-            return getAllSpotName;
+            return getAllCampSpot;
         }
         public Location GetLocation(int locationId)
         {
@@ -247,13 +230,9 @@ namespace CampReserVation.Database
                 }
 
             }
-            catch (MySqlException exc)
+            catch
             {
-                MessageBox.Show(exc.Message);
-            }
-            catch (Exception exc)
-            {
-                MessageBox.Show(exc.Message);
+                LogMessage(ErrorType.MySqlException, "GetLocation: Something went wrong while querying");
             }
             finally
             {
@@ -261,7 +240,6 @@ namespace CampReserVation.Database
             }
             return foundLocation;
         }
-       
         public Visitor FindVisitor(string rfidCode)
         {
             Visitor foundVisitor = null;
@@ -296,7 +274,7 @@ namespace CampReserVation.Database
             }
             catch (MySqlException)
             {
-                LoggingError(ErrorType.MySqlException, "Something went wrong while querying");
+                LogMessage(ErrorType.MySqlException, "FindVisitor: Something went wrong while querying");
             }
             finally
             {

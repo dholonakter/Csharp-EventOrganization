@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MySql.Data">
+      <HintPath>..\CampApp\bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,17 +49,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Database\DatabaseHelper.cs" />
+    <Compile Include="Helper\ErrorType.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helper\ErrorType.cs" />
     <Compile Include="Helper\ILogger.cs" />
     <Compile Include="Models\CampSpot.cs" />
     <Compile Include="Models\Location.cs" />
     <Compile Include="Models\Participant.cs" />
+    <Compile Include="Models\ParticipantRole.cs" />
     <Compile Include="Models\Reservation.cs" />
     <Compile Include="Models\Visitor.cs" />
     <Compile Include="Program.cs" />

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CampReserVation
+namespace EntranceApp.Models
 {
-    public  abstract class Visitor
+    public class Visitor
     {
         #region Properties
         public int Id { get; set; }
@@ -19,12 +19,25 @@ namespace CampReserVation
         #endregion
 
         #region constructor
+        public Visitor(string name,string emailaddress, int telephoneNumber,double balance ,string rfid)
+        {
+            this.FullName = name;
+            this.PhoneNumber = telephoneNumber;
+            this.EmailAddress = emailaddress;
+            this.Balance = balance;
+            this.RFID = rfid;
+        }
         public Visitor(string rfid)
         {
             this.RFID = rfid;
         }
-        public abstract double ExpenseFromEventAccount();
-        public abstract double DepositeToEventAccount();
         #endregion
+
+        #region public method
+        public override string ToString()
+        {
+            return FullName + PhoneNumber +  EmailAddress  + Balance + RFID;
+        }
+       #endregion
     }
 }

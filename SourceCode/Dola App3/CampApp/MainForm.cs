@@ -9,19 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Phidget22;
 using Phidget22.Events;
-using CampReserVation.Helper;
-using CampReserVation.Database;
-using CampReserVation.Models;
-using CampApp.BusinessLogic;
-using CampApp.Models;
 
-namespace CampReserVation
+namespace CampApp
 {
     public partial class CampRegistrationForm : Form, ILogger
     {
+        # region private
         private const string DEFAULT_LABEL_TEXT = "....................................................................";
-        
-        #region Private Fields
         private RFID myRFIDReader;
         private DatabaseHelper databaseHelper;
         private ParticipantManager participantManager;
@@ -100,7 +94,7 @@ namespace CampReserVation
         }
         #endregion
 
-        # region Event
+        # region Private Method
         private void Form1_Load(object sender, EventArgs e)
         {
             try
@@ -112,7 +106,7 @@ namespace CampReserVation
                 cbxSpotName.Items.Clear();
                 cbxParticipantRole.Items.Clear();
      
-                cbxSpotName.Items.AddRange(databaseHelper.GetAllSpotName().ToArray());
+                cbxSpotName.Items.AddRange(databaseHelper.GetAllCampSpot().ToArray());
                 cbxParticipantRole.Items.Add(ParticipantRole.Leader);
                 cbxParticipantRole.Items.Add(ParticipantRole.Member);
                 //comboBox3.Items.AddRange(databaseHelper.GetAllLocationName().ToArray());
@@ -132,14 +126,11 @@ namespace CampReserVation
             LogMessage(ErrorType.RFID, "Closed");
 
         }
-        #endregion
 
-       #region PrivateMethod
         private bool InputValidation()
         {
             return !String.IsNullOrEmpty(dtpStartDate.Text) &&
                    !String.IsNullOrEmpty(dtpEndDate.Text) &&
-                  // !String.IsNullOrEmpty(tbParticipantType.Text) &&
                    !String.IsNullOrEmpty(nmUpNrOfMember.Text) &&
                    !String.IsNullOrEmpty(cbxSelectedAmount.Text);
         }
@@ -176,12 +167,6 @@ namespace CampReserVation
                 MessageBox.Show("Not All Fields are complete!!!");
             }
         }
-        #endregion
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void cbxParticipantRole_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -209,9 +194,9 @@ namespace CampReserVation
                 selectedCampSpot = combox.SelectedItem as CampSpot;
                 if (selectedCampSpot != null)
                 {
-                    CampReserVation.Location foundLocation = databaseHelper.GetLocation(selectedCampSpot.LocationId);
+                    //EntranceApp.Location foundLocation = databaseHelper.GetLocation(selectedCampSpot.LocationId);
 
-                    lblLocationName.Text = foundLocation.LocationName;
+                  //  lblLocationName.Text = foundLocation.LocationName;
                 }
             }
         }
@@ -242,5 +227,7 @@ namespace CampReserVation
             participantManager.RemoveParticipant(selectedParticipant);
             AddToMembersListBox(participantManager.GetAllParticipant().ToArray());
         }
+        #endregion
+
     }
 }

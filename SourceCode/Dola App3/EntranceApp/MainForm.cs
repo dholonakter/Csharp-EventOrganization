@@ -1,15 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Windows.Forms;
 using Phidget22;
 using Phidget22.Events;
-using CampReserVation.Helper;
 using System.Drawing;
-using System.Threading;
-using CampReserVation.Models;
-using CampReserVation.Database;
+using EntranceApp.Helper;
+using EntranceApp.Models;
 
-namespace CampReserVation
+namespace EntranceApp
 {
     public partial class MainForm : Form, ILogger
     {
@@ -83,16 +80,18 @@ namespace CampReserVation
                 }
             }
         }
-        private void CheckIn (Visitor checkinvisitor)//Rfid rfid)
+        private void CheckIn (string rfid)//Rfid rfid)
         {
-            if (!String.IsNullOrEmpty(checkinvisitor.RFID))//rfid != null)
+            if (!String.IsNullOrEmpty(rfid))//rfid != null)
             {
-                if (dh.MakeCheckIn(checkinvisitor))//rfid.Code, out checkedInVisitor))
+                Visitor checkinvisitor=new Visitor(rfid);
+
+                if (dh.CheckIn(checkinvisitor))//rfid.Code, out checkedInVisitor))
                 {
                     SetLabelsTextOfCheckInCheckOutGroupBox(checkinvisitor);
                     timerResetControls.Start();
                 }
-                else if (dh.MakeCheckOut(checkinvisitor))
+                else if (dh.Checkout(checkinvisitor))
                 {
                     SetLabelsTextOfCheckInCheckOutGroupBox(checkinvisitor);
                     timerResetControls.Start();
@@ -109,7 +108,8 @@ namespace CampReserVation
 
         private void ProcessThisTag(object sender, RFIDTagEventArgs e)
         {
-             
+               CheckIn(e.Tag);
+          
         }
 
         private void MainForm_Load(object sender, EventArgs e)

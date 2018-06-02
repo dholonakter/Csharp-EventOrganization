@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace BuyTicketApp.Models
+namespace BuyTicketApp
+
 {
     public class Visitor
     {
@@ -28,5 +29,9 @@ namespace BuyTicketApp.Models
             this.RFID = rfid;
         }
         #endregion
+        public override string ToString()
+        {
+            return FullName + PhoneNumber +  EmailAddress  + Balance + RFID;
+        }
     }
 }

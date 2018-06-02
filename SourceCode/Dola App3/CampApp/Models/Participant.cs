@@ -1,12 +1,10 @@
-﻿using CampApp.Models;
-using CampReserVation;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CampReserVation.Models
+namespace CampApp
 {
  public  class Participant:Visitor
     {
@@ -14,7 +12,7 @@ namespace CampReserVation.Models
 
         public string LeaderRFIDCode { get; set; }
 
-        public Participant(string rfid,string fullname,double balance, ParticipantRole role,string leaderRFIDCode):base(fullname,rfid,balance)
+        public Participant(string rfid,string fullname,double balance, ParticipantRole role,string leaderRFIDCode):base(fullname,balance,rfid)
         {
             Role = role;
             LeaderRFIDCode = leaderRFIDCode;

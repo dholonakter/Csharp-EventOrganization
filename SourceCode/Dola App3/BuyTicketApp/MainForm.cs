@@ -1,6 +1,4 @@
-﻿using BuyTicketApp.Database;
-using BuyTicketApp.Helper;
-using BuyTicketApp.Models;
+﻿using BuyTicketApp;
 using Phidget22;
 using Phidget22.Events;
 using System;
@@ -13,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace BuyTicketApp
+namespace EntranceApp
 {
     public partial class MainForm : Form,ILogger
     {
@@ -27,6 +25,7 @@ namespace BuyTicketApp
         private Visitor foundVisitor;
         #endregion
 
+        #region Constructor
         public MainForm()
         {
             InitializeComponent();
@@ -41,6 +40,13 @@ namespace BuyTicketApp
                 LogMessage(ErrorType.RFID, "startup: so far so good.");
             }
         }
+        #endregion
+
+        #region  private Method
+        /// <summary>
+        /// the information of visitor can not be empty in textbox
+        /// </summary>
+        /// <returns></returns>
         private bool InputValidation()
         {
             return !String.IsNullOrEmpty(tbName.Text) &&
@@ -128,12 +134,6 @@ namespace BuyTicketApp
         }
 
 
-        #region ILogger Implementation
-        public void LogMessage(ErrorType errorType, string message)
-        {
-            lbxLogMessage.Items.Add(errorType + ":" + message);
-        }
-        #endregion
 
         private void tbPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
@@ -196,12 +196,16 @@ namespace BuyTicketApp
         private void btnClear_Click(object sender, EventArgs e)
         {
             ResetBuyTicketsGroupControls();
-            //tbName.Clear();
-            //tbEmailAddress.Clear();
-            //tbPhoneNumber.Clear();
-            //tbrfid.Clear();
-            //lblCardLinkedStatus.Text ="----------------";
            
         }
+        #endregion
+
+        #region ILogger Implementation
+        public void LogMessage(ErrorType errorType, string message)
+        {
+            lbxLogMessage.Items.Add(errorType + ":" + message);
+        }
+        #endregion
+
     }
 }

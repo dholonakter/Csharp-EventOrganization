@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CampEntranceApp.Properties
+namespace CampApp.Properties
 {
 
 
