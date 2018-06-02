@@ -1,4 +1,4 @@
-﻿namespace CampReserVation
+﻿namespace CampApp
 {
     partial class CampRegistrationForm
     {

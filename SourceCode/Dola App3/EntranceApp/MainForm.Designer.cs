@@ -1,4 +1,4 @@
-﻿namespace CampReserVation
+﻿namespace EntranceApp
 {
     partial class MainForm
     {
@@ -200,7 +200,7 @@
             // timerResetControls
             // 
             this.timerResetControls.Interval = 3000;
-          //  this.timerResetControls.Tick += new System.EventHandler(this.TimerToResetControls_Tick);
+            //  this.timerResetControls.Tick += new System.EventHandler(this.TimerToResetControls_Tick);
             // 
             // MainForm
             // 

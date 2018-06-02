@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
-using BuyTicketApp.Helper;
-using BuyTicketApp.Models;
 
-namespace BuyTicketApp.Database
+namespace BuyTicketApp
 {
     public class DatabaseHelper
     {
@@ -14,11 +12,8 @@ namespace BuyTicketApp.Database
         private ILogger logger;
         #endregion
 
-        #region Properties
-        public bool Isconnected { get; set; }
-        #endregion
-
         #region Constructor
+        //Connecting to the database
         public DatabaseHelper(ILogger logger)
         {
             this.logger = logger;
@@ -232,76 +227,17 @@ namespace BuyTicketApp.Database
         }
         #endregion
 
-        /*
-        private void change(ref Visitor visitor)
-        {
-            visitor.FullName = "";
-        }
-        */
-        #region Public Methods
+        #region Public Method
         /// <summary>
-        /// Update IscheckedIn column value of database true or flase
+        /// If visitor exist with rfid in table,visitor can not linked and
+        /// it returns false and if not exist then return true.
         /// </summary>
-        /// <param name="rfidCode"></param>
-        /// <param name="foundVistor"></param>
+        /// <param name="name"></param>
+        /// <param name="emailAddress"></param>
+        /// <param name="phoneNumber"></param>
+        /// <param name="balance"></param>
+        /// <param name="rfid"></param>
         /// <returns></returns>
-        public bool MakeCheckInOrOut(string rfidCode, out Visitor foundVistor)
-        {
-            foundVistor = FindVisitor(rfidCode);            
-            bool onSuccess = false;
-            if(foundVistor!=null)
-            {
-               if(foundVistor.IsCheckedIn && foundVistor.IsCardLinked)
-                {
-                    foundVistor.IsCheckedIn = false;
-                    onSuccess= UpdateVisitorTableIsCheckedInColumn(rfidCode, false);
-                }
-                else if(foundVistor.IsCardLinked)
-                {
-                    foundVistor.IsCheckedIn = true;
-                    onSuccess= UpdateVisitorTableIsCheckedInColumn(rfidCode, true);
-                }
-            }
-            return onSuccess;
-        }
-
-
-        public List<Visitor> GetAllVisitors()
-        {
-            String sql = "SELECT * FROM Visitor";
-            MySqlCommand command = new MySqlCommand(sql, connection);
-            List<Visitor> temp = new List<Visitor>();
-            try
-            {
-                MySqlDataReader reader = command.ExecuteReader();
-                int id;
-                string name;
-                string emailAddress;
-                int phoneNumber;
-                double balance;
-                string rfid;
-                while (reader.Read())
-                {
-                    id = Convert.ToInt32(reader["Id"]);
-                    name = Convert.ToString(reader["FullName"]);
-                    emailAddress = Convert.ToString(reader["EmailAddress"]);
-                    phoneNumber = Convert.ToInt32(reader["PhoneNumber"]);
-                    balance = Convert.ToDouble(reader["Balance"]);
-                    rfid = Convert.ToString(reader["RFID"]);
-                    temp.Add(new Visitor(name, emailAddress,phoneNumber, balance, rfid));
-                }
-            }
-            catch
-            {
-                MessageBox.Show("error while loading the Visitors");
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return temp;
-        }
-
         public bool LinKCard(string name, string emailAddress, int phoneNumber, double balance, string rfid)
         {
             bool onSuccess = false;
@@ -345,6 +281,12 @@ namespace BuyTicketApp.Database
  
             return onSuccess;
         }
+        /// <summary>
+        /// if it exist with visitor rfid table then return true
+        /// and othrwise return false
+        /// </summary>
+        /// <param name="foundvisitor"></param>
+        /// <returns></returns>
         public bool UnlinkCard(Visitor foundvisitor)
         {
             bool onSuccess = false;

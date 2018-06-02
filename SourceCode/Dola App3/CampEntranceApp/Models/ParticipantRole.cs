@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace CampEntranceApp
 {
-    public interface ILogger
+    public enum ParticipantRole
     {
-        void LogMessage(ErrorType errorType,string message);
+        None,
+        Leader,
+        Member
     }
 }

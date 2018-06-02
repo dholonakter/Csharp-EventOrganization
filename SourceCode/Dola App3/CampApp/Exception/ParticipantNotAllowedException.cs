@@ -1,4 +1,4 @@
-﻿namespace CampApp.Exception
+﻿namespace CampApp
 {
     public class ParticipantNotAllowedException:System.Exception
     {

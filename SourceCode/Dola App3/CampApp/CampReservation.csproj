@@ -52,10 +52,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BusinessLogic\ParticipantManager.cs" />
     <Compile Include="Database\DatabaseHelper.cs" />
     <Compile Include="Exception\ParticipantNotAllowedException.cs" />
     <Compile Include="Helper\ErrorType.cs" />
+    <Compile Include="Helper\ParticipantManager.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

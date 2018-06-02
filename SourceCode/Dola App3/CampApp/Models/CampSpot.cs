@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CampReserVation.Models
+namespace CampApp
 {
- public class CampSpot
+       public class CampSpot
 
-      {
+        {
         public int Id { get; set; }
         public string Name { get; set; }
         public bool IsFree { get; set; }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace BuyTicketApp.Properties
+namespace EntranceApp.Properties
 {
 
 

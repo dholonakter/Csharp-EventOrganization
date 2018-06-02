@@ -1,30 +1,29 @@
-﻿using CampApp.Exception;
-using CampApp.Models;
-using CampReserVation;
-using CampReserVation.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CampApp.BusinessLogic
+namespace CampApp
 {
     public class ParticipantManager
     {
+        #region private constant fields
         private const double CAMP_BOOKING_PRICE_PER_PERSON = 10;
-
         private const int MAX_ALLOWED_PARTICIPANT=6;
         private const string PARTICIPANTNOTALLOWEDEXCEPTION_MESSAGE = "Cannot Add more participant max allowed is ";
-
         private List<Participant> participants;
-        
+        #endregion
 
+        #region constructor
         public ParticipantManager()
         {
             participants = new List<Participant>(MAX_ALLOWED_PARTICIPANT);
             
         }
+        #endregion
+
+        #region private Method
 
         private bool IsParticipantExist(string rfidCode)
         {
@@ -35,6 +34,9 @@ namespace CampApp.BusinessLogic
             }
             return false;
         }
+        #endregion
+
+        #region public Method
         public bool AddParticipant(Visitor visitor)
         {
             bool onSuccess = false;
@@ -61,7 +63,6 @@ namespace CampApp.BusinessLogic
             }
             return onSuccess;
         }
-
 
         public bool UpdateAllParticipants(ParticipantRole role,double topUp)
         {
@@ -99,5 +100,7 @@ namespace CampApp.BusinessLogic
         {
             return participants.Remove(participant);
         }
+        #endregion
+
     }
 }

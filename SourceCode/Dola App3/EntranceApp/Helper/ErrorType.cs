@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CampReserVation.Helper
+namespace EntranceApp.Helper
 {
     public enum ErrorType
     {
