@@ -37,12 +37,6 @@ namespace ShopApp
             else
             {
                 MessageBox.Show("You are logged in as admin");
-
-                DataTable dt = data.DataTableFromSQL("SELECT ShopNr, ShopName FROM SHOP");
-
-                comboBoxShop.ValueMember = "ShopNr";
-                comboBoxShop.DisplayMember = "ShopName";
-                comboBoxShop.DataSource = dt;
             }
         }
 
@@ -124,6 +118,15 @@ namespace ShopApp
 
             myRFIDReader.Tag += new RFIDTagEventHandler(Pay);
             myRFIDReader.Open();
+
+            if (selectedShop == null)
+            {
+                DataTable dt = data.DataTableFromSQL("SELECT ShopNr, ShopName FROM SHOP");
+
+                comboBoxShop.ValueMember = "ShopNr";
+                comboBoxShop.DisplayMember = "ShopName";
+                comboBoxShop.DataSource = dt;
+            }
 
             // GUI
             sideHighlight.Height = overviewBtn.Height;

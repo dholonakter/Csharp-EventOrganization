@@ -22,9 +22,7 @@ namespace ManagerApp
 
         private void closeBtn_Click(object sender, EventArgs e)
         {
-            //Application.Exit();
-            this.Dispose();
-            Program.home.Show(); // return to login
+            Application.Exit();
         }
 
         private void visitorBtn_Click(object sender, EventArgs e)

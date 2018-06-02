@@ -64,8 +64,8 @@ namespace ThanhDLL
         public override string ToString()
         {
             return "Visitor #" + base.ToString()
-                + " - Credit: " + this.Credit +
-                (this.SpotNr != 0 ? " - Reserved camp: " + this.SpotNr : " - Not reserved camp");
+                + "\nCredit: " + this.Credit +
+                (this.SpotNr != 0 ? "\nReserved camp: " + this.SpotNr : "\nNot reserved camp");
         }
 
         /// <summary>

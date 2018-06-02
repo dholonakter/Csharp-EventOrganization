@@ -148,14 +148,23 @@ namespace EntranceApp
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            visitor = dh.FindVisitorByNr(textBoxVisitorNrSearch.Text);
-            if (visitor != null)
+            labelMonitor.Text = "";
+            int i;
+            if (int.TryParse(textBoxSearch.Text, out i))
             {
-                listBoxSearch.Items.Add(visitor);
+                visitor = dh.FindVisitorByNr(i.ToString());
+                if (visitor != null)
+                {
+                    labelMonitor.Text = visitor.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Visitor not found");
+                }
             }
             else
             {
-                MessageBox.Show("Visitor not found");
+                MessageBox.Show("Please enter a number");
             }
         }
 
@@ -236,6 +245,8 @@ namespace EntranceApp
             webCamTimer.Tick += webCamTimer_Tick;
             webCamTimer.Interval = 200;
             webCamTimer.Start();
+            labelStatusIn.Text = "No QR";
+            lbCheckIn.Text = "No ticket found";
         }
 
         private void StopWebcam()
@@ -265,7 +276,7 @@ namespace EntranceApp
 
                 if (t != null) // if ticket exists
                 {
-                    display.DisplayTicket(t, lbCheckIn);
+                    display.SetText(t.ToString(), lbCheckIn);
 
                     if (t.Paid)
                     {
@@ -321,6 +332,11 @@ namespace EntranceApp
                     MessageBox.Show("Error while updating status");
                 }
             }
+        }
+
+        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+            MessageBox.Show("Please enter a number");
         }
     }
 }

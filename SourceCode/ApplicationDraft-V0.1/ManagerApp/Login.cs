@@ -32,14 +32,12 @@ namespace ManagerApp
         {
             if (textBox1.Text != "" && textBox2.Text != "")
             {
-                if (textBox1.Text.StartsWith("admin"))
+                if (textBox1.Text.StartsWith("admin") && dh.CheckCredentials(textBox1.Text, textBox2.Text) == 1)
                 {
-                    if (dh.CheckCredentials(textBox1.Text, textBox2.Text) == 1)
-                    {
-                        this.Hide();
-                        Form mf = new HomeForm();
-                        mf.ShowDialog();
-                    }
+                    this.Hide();
+                    Form mf = new HomeForm();
+                    mf.ShowDialog();
+
                 }
                 else
                 {

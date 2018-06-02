@@ -39,12 +39,20 @@ namespace ThanhDLL
 
         public DataTable DataTableFromSQL(string sql)
         {
-            dataAdapter.SelectCommand = new MySqlCommand(sql, connection);
-            MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
+            try
+            {
+                dataAdapter.SelectCommand = new MySqlCommand(sql, connection);
+                MySqlCommandBuilder commandBuilder = new MySqlCommandBuilder(dataAdapter);
 
-            DataTable table = new DataTable();
-            dataAdapter.Fill(table);
-            return table;
+                DataTable table = new DataTable();
+                dataAdapter.Fill(table);
+                return table;
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Error trying to build data table");
+                return null;
+            }
         }
 
         /// <summary>
@@ -60,7 +68,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                //System.Windows.Forms.MessageBox.Show(exc.Message);
+                MessageBox.Show("Error trying to update dat table");
                 return false;
             }
             return true;
@@ -78,8 +86,8 @@ namespace ThanhDLL
             }
             catch (MySqlException exc)
             {
+                MessageBox.Show("Error trying to get the dataset");
                 return null;
-                //System.Windows.Forms.MessageBox.Show(exc.Message);
                 // return false;
             }
             finally
@@ -101,8 +109,9 @@ namespace ThanhDLL
                 nr = Convert.ToInt32(command.ExecuteScalar());
                 return nr;
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
+                MessageBox.Show("Error checking credentials");
                 return -1;
             }
             finally
@@ -146,7 +155,7 @@ namespace ThanhDLL
             }
             catch (MySqlException exc)
             {
-
+                MessageBox.Show("Error trying to update visitor");
                 return -1;
             }
             finally
@@ -175,7 +184,7 @@ namespace ThanhDLL
                 string mail;
                 string rfidNr = "";
                 double cred = 0;
-                bool checkedIn;
+                bool checkedIn = false;
                 int spot = 0; // not reserved by default
 
                 nr = Convert.ToInt32(reader["VisitorNr"]);
@@ -196,7 +205,10 @@ namespace ThanhDLL
                 {
                     cred = Convert.ToDouble(reader["Credit"]);
                 }
-                checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
+                if (!(reader["CheckedIn"] is DBNull))
+                {
+                    checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
+                }
                 if (!(reader["SpotNr"] is DBNull))
                 {
                     spot = Convert.ToInt32(reader["SpotNr"]);
@@ -225,13 +237,9 @@ namespace ThanhDLL
 
                 v = ReadDataVisitor(reader, v);
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
-
-            }
-            catch (Exception exc)
-            {
-
+                MessageBox.Show("Error trying to find visitor by nr.");
             }
             finally
             {
@@ -277,9 +285,9 @@ namespace ThanhDLL
                     }
                 }
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
-
+                MessageBox.Show("Error trying to find unreturned items");
             }
             finally
             {
@@ -312,9 +320,9 @@ namespace ThanhDLL
                     }
                 }
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
-                //LoggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+                MessageBox.Show("Error trying to find RFID");
             }
             finally
             {
@@ -364,7 +372,7 @@ namespace ThanhDLL
             }
             catch (MySqlException exc)
             {
-
+                MessageBox.Show("Error trying to get ticket");
             }
             finally
             {
@@ -394,7 +402,7 @@ namespace ThanhDLL
             }
             catch (MySqlException exc)
             {
-                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+                MessageBox.Show("Error trying to find visitor");
             }
             finally
             {
@@ -429,8 +437,8 @@ namespace ThanhDLL
             }
             catch (MySqlException exc)
             {
+                MessageBox.Show("Error trying to check out visitor");
                 return -1;
-                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
             }
             finally
             {
@@ -453,10 +461,10 @@ namespace ThanhDLL
                 connection.Open();
                 return Convert.ToInt32(command.ExecuteScalar());
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
+                MessageBox.Show("Error counting rows");
                 return -1;
-                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
             }
             finally
             {
@@ -488,6 +496,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
+                MessageBox.Show("Error getting the total balance");
                 return -1;
             }
             finally
@@ -517,6 +526,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
+                MessageBox.Show("Error getting total credit spent");
                 return -1;
             }
             finally
@@ -560,9 +570,9 @@ namespace ThanhDLL
                     temp.Add(new Article(shopnr, nr, name, price, stock));
                 }
             }
-            catch (Exception exc)
+            catch (MySqlException)
             {
-                //MessageBox.Show(exc.Message);
+                MessageBox.Show("Error getting food articles");
             }
             finally
             {
@@ -605,9 +615,9 @@ namespace ThanhDLL
                     temp.Add(new Article(shopnr, nr, name, price, stock));
                 }
             }
-            catch (Exception exc)
+            catch (MySqlException)
             {
-                MessageBox.Show(exc.Message);
+                MessageBox.Show("Error getting drink articles");
             }
             finally
             {
@@ -632,6 +642,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
+                MessageBox.Show("Error adding new order");
                 return -1;
             }
             finally
@@ -664,9 +675,9 @@ namespace ThanhDLL
                 }
                 return -1;
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
-                //MessageBox.Show(exc.Message);
+                MessageBox.Show("Error getting the right order number");
                 return -1;
             }
             finally
@@ -705,6 +716,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
+                MessageBox.Show("Error adding information to order");
                 return -1;
             }
             finally
@@ -736,9 +748,9 @@ namespace ThanhDLL
 
                 return new Shop(Convert.ToInt32(shopNr), name, location);
             }
-            catch (Exception exc)
+            catch (MySqlException)
             {
-                MessageBox.Show(exc.Message);
+                MessageBox.Show("Error getting shop by nr");
             }
             finally
             {
@@ -780,9 +792,9 @@ namespace ThanhDLL
                 return new LoanArticle(shopNr, articleNr, articleName, price, available, rfidNr, deposit);
 
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
-                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+                MessageBox.Show("Error getting article by tag");
             }
             finally
             {
@@ -825,9 +837,9 @@ namespace ThanhDLL
                 temp.Add(new LoanArticle(shopNr, articleNr, articleName, price, available, rfid, deposit));
 
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
-                //ggingError(ErrorTypes.ErrorType.DATABASE, exc.Message);
+                MessageBox.Show("Error getting all loan articles");
             }
             finally
             {
@@ -853,9 +865,9 @@ namespace ThanhDLL
                 int nrOfRecordsChanged = command.ExecuteNonQuery();
                 return nrOfRecordsChanged;
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
-
+                MessageBox.Show("Error updating reservation");
                 return -1;
             }
             finally
@@ -880,9 +892,9 @@ namespace ThanhDLL
                 int nrOfRecordsChanged = command.ExecuteNonQuery();
                 return nrOfRecordsChanged;
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
-
+                MessageBox.Show("Error updating ticket");
                 return -1;
             }
             finally
@@ -926,8 +938,9 @@ namespace ThanhDLL
 
                 return new Reservation(reservNr, reservDate, reservTime, spot, visitor, nrOfRegistered, nrCheckedIn, paid, startDate, endDate);
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
+                MessageBox.Show("Error getting resrevation");
                 return null;
             }
             finally
@@ -976,8 +989,9 @@ namespace ThanhDLL
 
                 return new Reservation(Convert.ToInt32(reservNr), reservDate, reservTime, spot, reserver, nrOfRegistered, nrCheckedIn, paid, startDate, endDate);
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
+                MessageBox.Show("Error getting reservation");
                 return null;
             }
             finally

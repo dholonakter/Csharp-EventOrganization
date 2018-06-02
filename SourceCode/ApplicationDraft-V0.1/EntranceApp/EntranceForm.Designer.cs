@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EntranceForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.ticketsBtn = new System.Windows.Forms.Button();
@@ -37,12 +38,12 @@
             this.checkoutBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkinPanel = new System.Windows.Forms.Panel();
+            this.lbCheckIn = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.statusIn = new System.Windows.Forms.Label();
             this.labelStatusIn = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.labelTagNr = new System.Windows.Forms.Label();
-            this.lbCheckIn = new System.Windows.Forms.ListBox();
             this.buttonStartWC = new System.Windows.Forms.Button();
             this.pictureBoxSource = new System.Windows.Forms.PictureBox();
             this.checkoutPanel = new System.Windows.Forms.Panel();
@@ -51,13 +52,12 @@
             this.labelStatusOut = new System.Windows.Forms.Label();
             this.lbCheckOut = new System.Windows.Forms.ListBox();
             this.searchPanel = new System.Windows.Forms.Panel();
+            this.labelMonitor = new System.Windows.Forms.Label();
             this.buttonSaveChanges = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.dataGridVisitor = new System.Windows.Forms.DataGridView();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.textBoxVisitorNrSearch = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.listBoxSearch = new System.Windows.Forms.ListBox();
             this.ticketPanel = new System.Windows.Forms.Panel();
             this.cbxSelectedAmount = new System.Windows.Forms.ComboBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
@@ -69,7 +69,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tbPhoneNumber = new System.Windows.Forms.TextBox();
             this.tbEmailAddress = new System.Windows.Forms.TextBox();
-            this.webCamTimer = new System.Windows.Forms.Timer();
+            this.webCamTimer = new System.Windows.Forms.Timer(this.components);
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.checkinPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -193,12 +194,12 @@
             // 
             // checkinPanel
             // 
+            this.checkinPanel.Controls.Add(this.lbCheckIn);
             this.checkinPanel.Controls.Add(this.button2);
             this.checkinPanel.Controls.Add(this.statusIn);
             this.checkinPanel.Controls.Add(this.labelStatusIn);
             this.checkinPanel.Controls.Add(this.pictureBox2);
             this.checkinPanel.Controls.Add(this.labelTagNr);
-            this.checkinPanel.Controls.Add(this.lbCheckIn);
             this.checkinPanel.Controls.Add(this.buttonStartWC);
             this.checkinPanel.Controls.Add(this.pictureBoxSource);
             this.checkinPanel.Location = new System.Drawing.Point(235, 20);
@@ -206,6 +207,18 @@
             this.checkinPanel.Name = "checkinPanel";
             this.checkinPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkinPanel.TabIndex = 3;
+            // 
+            // lbCheckIn
+            // 
+            this.lbCheckIn.AutoSize = true;
+            this.lbCheckIn.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCheckIn.ForeColor = System.Drawing.Color.DimGray;
+            this.lbCheckIn.Location = new System.Drawing.Point(434, 187);
+            this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCheckIn.Name = "lbCheckIn";
+            this.lbCheckIn.Size = new System.Drawing.Size(163, 28);
+            this.lbCheckIn.TabIndex = 37;
+            this.lbCheckIn.Text = "Tag Number";
             // 
             // button2
             // 
@@ -219,7 +232,7 @@
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(946, 278);
+            this.button2.Location = new System.Drawing.Point(773, 491);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(207, 49);
@@ -276,21 +289,9 @@
             this.labelTagNr.TabIndex = 2;
             this.labelTagNr.Text = "Tag Number";
             // 
-            // lbCheckIn
-            // 
-            this.lbCheckIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCheckIn.FormattingEnabled = true;
-            this.lbCheckIn.HorizontalScrollbar = true;
-            this.lbCheckIn.ItemHeight = 25;
-            this.lbCheckIn.Location = new System.Drawing.Point(483, 187);
-            this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4);
-            this.lbCheckIn.Name = "lbCheckIn";
-            this.lbCheckIn.Size = new System.Drawing.Size(437, 229);
-            this.lbCheckIn.TabIndex = 1;
-            // 
             // buttonStartWC
             // 
-            this.buttonStartWC.Location = new System.Drawing.Point(516, 486);
+            this.buttonStartWC.Location = new System.Drawing.Point(520, 486);
             this.buttonStartWC.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonStartWC.Name = "buttonStartWC";
             this.buttonStartWC.Size = new System.Drawing.Size(205, 62);
@@ -369,18 +370,29 @@
             // 
             // searchPanel
             // 
+            this.searchPanel.Controls.Add(this.textBoxSearch);
+            this.searchPanel.Controls.Add(this.labelMonitor);
             this.searchPanel.Controls.Add(this.buttonSaveChanges);
             this.searchPanel.Controls.Add(this.label1);
             this.searchPanel.Controls.Add(this.dataGridVisitor);
             this.searchPanel.Controls.Add(this.buttonSearch);
-            this.searchPanel.Controls.Add(this.textBoxVisitorNrSearch);
             this.searchPanel.Controls.Add(this.label9);
-            this.searchPanel.Controls.Add(this.listBoxSearch);
             this.searchPanel.Location = new System.Drawing.Point(235, 20);
             this.searchPanel.Margin = new System.Windows.Forms.Padding(4);
             this.searchPanel.Name = "searchPanel";
             this.searchPanel.Size = new System.Drawing.Size(1473, 846);
             this.searchPanel.TabIndex = 5;
+            // 
+            // labelMonitor
+            // 
+            this.labelMonitor.AutoSize = true;
+            this.labelMonitor.Font = new System.Drawing.Font("Century", 13F, System.Drawing.FontStyle.Bold);
+            this.labelMonitor.ForeColor = System.Drawing.Color.DimGray;
+            this.labelMonitor.Location = new System.Drawing.Point(48, 90);
+            this.labelMonitor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelMonitor.Name = "labelMonitor";
+            this.labelMonitor.Size = new System.Drawing.Size(0, 27);
+            this.labelMonitor.TabIndex = 29;
             // 
             // buttonSaveChanges
             // 
@@ -435,15 +447,6 @@
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
-            // textBoxVisitorNrSearch
-            // 
-            this.textBoxVisitorNrSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxVisitorNrSearch.Location = new System.Drawing.Point(284, 57);
-            this.textBoxVisitorNrSearch.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxVisitorNrSearch.Name = "textBoxVisitorNrSearch";
-            this.textBoxVisitorNrSearch.Size = new System.Drawing.Size(249, 26);
-            this.textBoxVisitorNrSearch.TabIndex = 12;
-            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -455,18 +458,6 @@
             this.label9.Size = new System.Drawing.Size(219, 28);
             this.label9.TabIndex = 11;
             this.label9.Text = "Enter Visitor ID ";
-            // 
-            // listBoxSearch
-            // 
-            this.listBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxSearch.FormattingEnabled = true;
-            this.listBoxSearch.HorizontalScrollbar = true;
-            this.listBoxSearch.ItemHeight = 25;
-            this.listBoxSearch.Location = new System.Drawing.Point(53, 92);
-            this.listBoxSearch.Margin = new System.Windows.Forms.Padding(4);
-            this.listBoxSearch.Name = "listBoxSearch";
-            this.listBoxSearch.Size = new System.Drawing.Size(1025, 154);
-            this.listBoxSearch.TabIndex = 1;
             // 
             // ticketPanel
             // 
@@ -587,6 +578,13 @@
             // 
             this.webCamTimer.Tick += new System.EventHandler(this.webCamTimer_Tick);
             // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Location = new System.Drawing.Point(272, 60);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(259, 22);
+            this.textBoxSearch.TabIndex = 30;
+            // 
             // EntranceForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -594,8 +592,8 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
             this.Controls.Add(this.searchPanel);
-            this.Controls.Add(this.checkoutPanel);
             this.Controls.Add(this.checkinPanel);
+            this.Controls.Add(this.checkoutPanel);
             this.Controls.Add(this.ticketPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -634,15 +632,11 @@
         private System.Windows.Forms.Button checkoutBtn;
         private System.Windows.Forms.Panel checkinPanel;
         private System.Windows.Forms.Label labelTagNr;
-        private System.Windows.Forms.ListBox lbCheckIn;
         private System.Windows.Forms.Panel checkoutPanel;
         private System.Windows.Forms.Label statusOut;
         private System.Windows.Forms.Label labelStatusOut;
-        private System.Windows.Forms.ListBox lbCheckOut;
         private System.Windows.Forms.Panel searchPanel;
-        private System.Windows.Forms.TextBox textBoxVisitorNrSearch;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ListBox listBoxSearch;
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.PictureBox pictureBox1;
@@ -666,6 +660,10 @@
         private System.Windows.Forms.TextBox tbEmailAddress;
         private System.Windows.Forms.Timer webCamTimer;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Label labelMonitor;
+        private System.Windows.Forms.ListBox lbCheckOut;
+        private System.Windows.Forms.Label lbCheckIn;
+        private System.Windows.Forms.TextBox textBoxSearch;
     }
 }
 

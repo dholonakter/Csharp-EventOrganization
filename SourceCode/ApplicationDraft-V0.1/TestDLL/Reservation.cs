@@ -50,11 +50,15 @@ namespace ThanhDLL
         /// <returns></returns>
         public override string ToString()
         {
-            return "Reservation #" + this.ReservNr + " - " + this.ReservDate + " " + this.ReservTime
-                  + " Spot #" + Spot.SpotNr + " " + Spot.SpotName 
-                  + " - Reserver: " + Reserver.FirstName + " " + Reserver.LastName + " - Phone: " + Reserver.Phone 
-                  + " - Email: " + Reserver.Email
-                  + " - " + (Paid ? "PAID" : "NOT PAID") + " - Status: " + NrCheckedIn + "/" + NrOfRegistered;
+            return "Reservation #" + this.ReservNr 
+                  + "\nReserved on " + this.ReservDate + " at " + this.ReservTime
+                  + "\nSpot #" + Spot.SpotNr + " " + Spot.SpotName 
+                  + "\nReserved by: " + Reserver.FirstName + " " + Reserver.LastName 
+                  + "\nPhone: " + Reserver.Phone 
+                  + "\nEmail: " + Reserver.Email
+                  + "\nPeriod: " + StartDate + " to " + EndDate
+                  + "\nStatus: " + (Paid ? "PAID" : "NOT PAID") 
+                  + "\nPeople: " + NrCheckedIn + "/" + NrOfRegistered;
         }
 
         public void CheckIn()

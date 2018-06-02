@@ -55,8 +55,9 @@ namespace ManagerApp
             this.panel1.Controls.Add(this.shopBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1004, 571);
+            this.panel1.Size = new System.Drawing.Size(1339, 703);
             this.panel1.TabIndex = 0;
             // 
             // analyticBtn
@@ -69,9 +70,10 @@ namespace ManagerApp
             this.analyticBtn.ForeColor = System.Drawing.Color.White;
             this.analyticBtn.Image = ((System.Drawing.Image)(resources.GetObject("analyticBtn.Image")));
             this.analyticBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.analyticBtn.Location = new System.Drawing.Point(646, 285);
+            this.analyticBtn.Location = new System.Drawing.Point(861, 351);
+            this.analyticBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.analyticBtn.Name = "analyticBtn";
-            this.analyticBtn.Size = new System.Drawing.Size(177, 54);
+            this.analyticBtn.Size = new System.Drawing.Size(236, 66);
             this.analyticBtn.TabIndex = 22;
             this.analyticBtn.Text = "Analytics";
             this.analyticBtn.UseVisualStyleBackColor = true;
@@ -87,9 +89,10 @@ namespace ManagerApp
             this.staffBtn.ForeColor = System.Drawing.Color.White;
             this.staffBtn.Image = ((System.Drawing.Image)(resources.GetObject("staffBtn.Image")));
             this.staffBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.staffBtn.Location = new System.Drawing.Point(429, 285);
+            this.staffBtn.Location = new System.Drawing.Point(572, 351);
+            this.staffBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.staffBtn.Name = "staffBtn";
-            this.staffBtn.Size = new System.Drawing.Size(177, 54);
+            this.staffBtn.Size = new System.Drawing.Size(236, 66);
             this.staffBtn.TabIndex = 21;
             this.staffBtn.Text = "Staff";
             this.staffBtn.UseVisualStyleBackColor = true;
@@ -105,9 +108,10 @@ namespace ManagerApp
             this.inventoryBtn.ForeColor = System.Drawing.Color.White;
             this.inventoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("inventoryBtn.Image")));
             this.inventoryBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.inventoryBtn.Location = new System.Drawing.Point(210, 285);
+            this.inventoryBtn.Location = new System.Drawing.Point(280, 351);
+            this.inventoryBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.inventoryBtn.Name = "inventoryBtn";
-            this.inventoryBtn.Size = new System.Drawing.Size(177, 54);
+            this.inventoryBtn.Size = new System.Drawing.Size(236, 66);
             this.inventoryBtn.TabIndex = 20;
             this.inventoryBtn.Text = "Inventory";
             this.inventoryBtn.UseVisualStyleBackColor = true;
@@ -123,9 +127,10 @@ namespace ManagerApp
             this.visitorBtn.ForeColor = System.Drawing.Color.White;
             this.visitorBtn.Image = ((System.Drawing.Image)(resources.GetObject("visitorBtn.Image")));
             this.visitorBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.visitorBtn.Location = new System.Drawing.Point(210, 171);
+            this.visitorBtn.Location = new System.Drawing.Point(280, 210);
+            this.visitorBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.visitorBtn.Name = "visitorBtn";
-            this.visitorBtn.Size = new System.Drawing.Size(177, 54);
+            this.visitorBtn.Size = new System.Drawing.Size(236, 66);
             this.visitorBtn.TabIndex = 19;
             this.visitorBtn.Text = "Visitors";
             this.visitorBtn.UseVisualStyleBackColor = true;
@@ -137,13 +142,14 @@ namespace ManagerApp
             this.closeBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
             this.closeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.closeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.closeBtn.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.closeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.closeBtn.ForeColor = System.Drawing.Color.White;
             this.closeBtn.Image = ((System.Drawing.Image)(resources.GetObject("closeBtn.Image")));
             this.closeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.closeBtn.Location = new System.Drawing.Point(429, 395);
+            this.closeBtn.Location = new System.Drawing.Point(572, 486);
+            this.closeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.closeBtn.Name = "closeBtn";
-            this.closeBtn.Size = new System.Drawing.Size(177, 54);
+            this.closeBtn.Size = new System.Drawing.Size(236, 66);
             this.closeBtn.TabIndex = 2;
             this.closeBtn.Text = "Close";
             this.closeBtn.UseVisualStyleBackColor = true;
@@ -155,13 +161,14 @@ namespace ManagerApp
             this.campBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
             this.campBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.campBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.campBtn.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.campBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.campBtn.ForeColor = System.Drawing.Color.White;
             this.campBtn.Image = ((System.Drawing.Image)(resources.GetObject("campBtn.Image")));
             this.campBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.campBtn.Location = new System.Drawing.Point(646, 171);
+            this.campBtn.Location = new System.Drawing.Point(861, 210);
+            this.campBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.campBtn.Name = "campBtn";
-            this.campBtn.Size = new System.Drawing.Size(177, 54);
+            this.campBtn.Size = new System.Drawing.Size(236, 66);
             this.campBtn.TabIndex = 2;
             this.campBtn.Text = "Camping";
             this.campBtn.UseVisualStyleBackColor = true;
@@ -173,13 +180,14 @@ namespace ManagerApp
             this.shopBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
             this.shopBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.shopBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.shopBtn.Font = new System.Drawing.Font("Century Gothic", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shopBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.shopBtn.ForeColor = System.Drawing.Color.White;
             this.shopBtn.Image = ((System.Drawing.Image)(resources.GetObject("shopBtn.Image")));
             this.shopBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.shopBtn.Location = new System.Drawing.Point(429, 171);
+            this.shopBtn.Location = new System.Drawing.Point(572, 210);
+            this.shopBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.shopBtn.Name = "shopBtn";
-            this.shopBtn.Size = new System.Drawing.Size(177, 54);
+            this.shopBtn.Size = new System.Drawing.Size(236, 66);
             this.shopBtn.TabIndex = 2;
             this.shopBtn.Text = "Shops";
             this.shopBtn.UseVisualStyleBackColor = true;
@@ -190,20 +198,22 @@ namespace ManagerApp
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1004, 56);
+            this.panel2.Size = new System.Drawing.Size(1339, 69);
             this.panel2.TabIndex = 1;
             // 
             // HomeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1004, 571);
+            this.ClientSize = new System.Drawing.Size(1339, 703);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "HomeForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

@@ -105,7 +105,7 @@ namespace CampingApp
 
             if (r != null)
             {
-                display.DisplayReservation(r, lbCheckIn);
+                display.SetText(r.ToString(), lbCheckIn);
 
                 DateTime endDate = DateTime.ParseExact(r.EndDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
 
@@ -137,7 +137,7 @@ namespace CampingApp
                 if (dh.UpdateSelectedReservation(r) != -1)
                 {
                     display.SetText("OK", labelStatusOut);
-                    display.DisplayReservation(r, listBoxCheckOut); //update reservation info on lb
+                    display.SetText(r.ToString(), lbCheckOut); //update reservation info on lb
                     r = null;
                 }
                 else
@@ -162,7 +162,7 @@ namespace CampingApp
                     using (CrossThreadDisplay display = new CrossThreadDisplay(this))
                     {
                         display.SetText("OK", labelStatusIn);
-                        display.DisplayReservation(r, lbCheckIn);
+                        display.SetText(r.ToString(), lbCheckIn);
                         r = null;
                     }
                 }
@@ -189,21 +189,24 @@ namespace CampingApp
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            listBoxMonitor.Items.Clear();
-            r = dh.FindReservationByNr(textBoxResrvID.Text);
-            if (r != null)
+            labelMonitor.Text = "";
+            int i;
+
+            if (int.TryParse(textBoxResrvID.Text, out i))
             {
-                listBoxMonitor.Items.Add("RESERVATION #" + r.ReservNr);
-                listBoxMonitor.Items.Add("Reserved: " + r.ReservDate + " " + r.ReservTime);
-                listBoxMonitor.Items.Add("Reserver: " + r.Reserver.FirstName + ", " + r.Reserver.LastName);
-                listBoxMonitor.Items.Add("Spot: Spot #" + r.Spot.SpotNr + " - " + r.Spot.SpotName);
-                listBoxMonitor.Items.Add("Number of people: " + r.NrCheckedIn + "/" + r.NrOfRegistered);
-                listBoxMonitor.Items.Add("Period: " + r.StartDate + " - " + r.EndDate);
-                listBoxMonitor.Items.Add("Status: " + (r.Paid ? "PAID" : "NOT PAID"));
+                r = dh.FindReservationByNr(i.ToString());
+                if (r != null)
+                {
+                    labelMonitor.Text = r.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Reservation not found");
+                }
             }
             else
             {
-                listBoxMonitor.Items.Add("Reservation not found");
+                MessageBox.Show("Please enter a number");
             }
         }
     }

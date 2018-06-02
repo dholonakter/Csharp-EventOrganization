@@ -56,9 +56,10 @@ namespace ThanhDLL
         /// <returns></returns>
         public override string ToString()
         {
-            return this.IdNr + " - " + this.FirstName + " " + this.LastName + " - Phone: " + this.Phone
-                + " - Checked in: " + this.CheckedIn.ToString()
-                + " - RFID: " + this.RFIDNr;
+            return this.IdNr + " " + this.FirstName + " " + this.LastName 
+                + "\nPhone: " + this.Phone
+                + "\nChecked in: " + this.CheckedIn.ToString()
+                + "\nRFID: " + this.RFIDNr;
         }
 
         /// <summary>

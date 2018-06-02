@@ -25,9 +25,12 @@ namespace ManagerApp
         {
             dh = new DataHelper();
             fillChart();
+            //FillComboBoxShop();
+            //comboBoxShop.SelectedIndex = -1;
             timerUpdate.Start();
         }
 
+        /* SHELVED IDEA
         private void FillComboBoxShop()
         {
             DataTable dt = dh.DataTableFromSQL("SELECT ShopNr, ShopName FROM SHOP");
@@ -35,7 +38,7 @@ namespace ManagerApp
             comboBoxShop.ValueMember = "ShopNr";
             comboBoxShop.DisplayMember = "ShopName";
             comboBoxShop.DataSource = dt;
-        }
+        }*/
 
         private void fillChart()
         {
@@ -88,27 +91,29 @@ namespace ManagerApp
             FillIncomePerHour();
         }
 
+        /* SHELVED IDEA 
         private void FillIncomeShop()
         {
-            chartIncomeShop.Titles.Clear();
-            chartIncomeShop.DataSource = dh.GetDataset("select DATE_FORMAT(all_order.OrderDate,'%d/%m') 'OrderDate', sum(Subtotal) 'Revenue' from all_order " +
-                "where all_order.ShopNr = " + comboBoxShop.SelectedValue.ToString() + " group by OrderDate ");
-            if (((DataSet)chartIncomeShop.DataSource).Tables[0].Rows.Count != 0)
+            if (comboBoxShop.SelectedIndex != -1)
             {
-                chartIncomeShop.Series["Income"].XValueMember = "OrderDate";
-                chartIncomeShop.Series["Income"].YValueMembers = "Revenue";
-                chartIncomeShop.Titles.Add("Total earned per day of " + comboBoxShop.SelectedText);
+                chartIncomeShop.Titles.Clear();
+                chartIncomeShop.DataSource = dh.GetDataset("select DATE_FORMAT(all_order.OrderDate,'%d/%m') 'OrderDate', sum(Subtotal) 'Revenue' from all_order " +
+                    "where all_order.ShopNr = " + comboBoxShop.SelectedValue.ToString() + " group by OrderDate ");
+                if (((DataSet)chartIncomeShop.DataSource).Tables[0].Rows.Count != 0)
+                {
+                    chartIncomeShop.Series["Income"].XValueMember = "OrderDate";
+                    chartIncomeShop.Series["Income"].YValueMembers = "Revenue";
+                    if (chartIncomeShop.Titles.Count == 0)
+                    {
+                        chartIncomeShop.Titles.Add("Total earned per day of " + comboBoxShop.SelectedText);
+                    }
+                }
+                else
+                {
+                    chartIncomeShop.Titles.Add("No data");
+                }
             }
-            else
-            {
-                chartIncomeShop.Titles.Add("No data");
-            }
-        }
-
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            FillIncomeShop();
-        }
+        }*/
 
         private void ClearChart(Chart c)
         {
@@ -123,12 +128,11 @@ namespace ManagerApp
             ClearChart(chartIncomePerHour);
             ClearChart(chartIncomePerDay);
             ClearChart(chartIncomePerType);
-            ClearChart(chartIncomeShop);
             ClearChart(chartTicketsPerDay);
 
-            FillComboBoxShop();
+            //FillComboBoxShop();
             FillIncomePerHour();
-            FillIncomeShop();
+            //FillIncomeShop();
             fillChart();
         }
 
@@ -137,12 +141,11 @@ namespace ManagerApp
             ClearChart(chartIncomePerHour);
             ClearChart(chartIncomePerDay);
             ClearChart(chartIncomePerType);
-            ClearChart(chartIncomeShop);
             ClearChart(chartTicketsPerDay);
 
-            FillComboBoxShop();
+            //FillComboBoxShop();
             FillIncomePerHour();
-            FillIncomeShop();
+            //FillIncomeShop();
             fillChart();
         }
 

@@ -36,35 +36,35 @@
             this.monitorBtn = new System.Windows.Forms.Button();
             this.sideHighlight = new System.Windows.Forms.Panel();
             this.checkoutBtn = new System.Windows.Forms.Button();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.checkinPanel = new System.Windows.Forms.Panel();
+            this.lbCheckIn = new System.Windows.Forms.Label();
             this.statusIn = new System.Windows.Forms.Label();
             this.labelStatusIn = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.labelTagNr = new System.Windows.Forms.Label();
-            this.lbCheckIn = new System.Windows.Forms.ListBox();
             this.buttonPay = new System.Windows.Forms.Button();
             this.searchPanel = new System.Windows.Forms.Panel();
+            this.labelMonitor = new System.Windows.Forms.Label();
+            this.buttonSaveChanges = new System.Windows.Forms.Button();
+            this.dataGridViewCamp = new System.Windows.Forms.DataGridView();
+            this.label2 = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.textBoxResrvID = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
-            this.listBoxMonitor = new System.Windows.Forms.ListBox();
             this.checkoutPanel = new System.Windows.Forms.Panel();
+            this.lbCheckOut = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.labelStatusOut = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.listBoxCheckOut = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.dataGridViewCamp = new System.Windows.Forms.DataGridView();
-            this.buttonSaveChanges = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel3.SuspendLayout();
             this.checkinPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.searchPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCamp)).BeginInit();
             this.checkoutPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCamp)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -167,29 +167,31 @@
             this.checkoutBtn.UseVisualStyleBackColor = true;
             this.checkoutBtn.Click += new System.EventHandler(this.checkoutBtn_Click);
             // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(221, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1600, 12);
-            this.panel2.TabIndex = 1;
-            // 
             // checkinPanel
             // 
+            this.checkinPanel.Controls.Add(this.lbCheckIn);
             this.checkinPanel.Controls.Add(this.statusIn);
             this.checkinPanel.Controls.Add(this.labelStatusIn);
             this.checkinPanel.Controls.Add(this.pictureBox2);
             this.checkinPanel.Controls.Add(this.labelTagNr);
-            this.checkinPanel.Controls.Add(this.lbCheckIn);
             this.checkinPanel.Controls.Add(this.buttonPay);
-            this.checkinPanel.Location = new System.Drawing.Point(295, 85);
+            this.checkinPanel.Location = new System.Drawing.Point(221, 15);
             this.checkinPanel.Margin = new System.Windows.Forms.Padding(4);
             this.checkinPanel.Name = "checkinPanel";
             this.checkinPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkinPanel.TabIndex = 5;
+            // 
+            // lbCheckIn
+            // 
+            this.lbCheckIn.AutoSize = true;
+            this.lbCheckIn.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCheckIn.ForeColor = System.Drawing.Color.DimGray;
+            this.lbCheckIn.Location = new System.Drawing.Point(331, 169);
+            this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCheckIn.Name = "lbCheckIn";
+            this.lbCheckIn.Size = new System.Drawing.Size(163, 28);
+            this.lbCheckIn.TabIndex = 27;
+            this.lbCheckIn.Text = "Tag Number";
             // 
             // statusIn
             // 
@@ -239,18 +241,6 @@
             this.labelTagNr.TabIndex = 23;
             this.labelTagNr.Text = "Tag Number";
             // 
-            // lbCheckIn
-            // 
-            this.lbCheckIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbCheckIn.FormattingEnabled = true;
-            this.lbCheckIn.HorizontalScrollbar = true;
-            this.lbCheckIn.ItemHeight = 25;
-            this.lbCheckIn.Location = new System.Drawing.Point(311, 169);
-            this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4);
-            this.lbCheckIn.Name = "lbCheckIn";
-            this.lbCheckIn.Size = new System.Drawing.Size(565, 229);
-            this.lbCheckIn.TabIndex = 22;
-            // 
             // buttonPay
             // 
             this.buttonPay.BackColor = System.Drawing.Color.DimGray;
@@ -274,18 +264,61 @@
             // 
             // searchPanel
             // 
+            this.searchPanel.Controls.Add(this.labelMonitor);
             this.searchPanel.Controls.Add(this.buttonSaveChanges);
             this.searchPanel.Controls.Add(this.dataGridViewCamp);
             this.searchPanel.Controls.Add(this.label2);
             this.searchPanel.Controls.Add(this.buttonSearch);
             this.searchPanel.Controls.Add(this.textBoxResrvID);
             this.searchPanel.Controls.Add(this.label9);
-            this.searchPanel.Controls.Add(this.listBoxMonitor);
-            this.searchPanel.Location = new System.Drawing.Point(276, 81);
+            this.searchPanel.Location = new System.Drawing.Point(221, 15);
             this.searchPanel.Margin = new System.Windows.Forms.Padding(4);
             this.searchPanel.Name = "searchPanel";
             this.searchPanel.Size = new System.Drawing.Size(1942, 846);
             this.searchPanel.TabIndex = 6;
+            // 
+            // labelMonitor
+            // 
+            this.labelMonitor.AutoSize = true;
+            this.labelMonitor.Font = new System.Drawing.Font("Century", 13F, System.Drawing.FontStyle.Bold);
+            this.labelMonitor.ForeColor = System.Drawing.Color.DimGray;
+            this.labelMonitor.Location = new System.Drawing.Point(44, 131);
+            this.labelMonitor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelMonitor.Name = "labelMonitor";
+            this.labelMonitor.Size = new System.Drawing.Size(0, 27);
+            this.labelMonitor.TabIndex = 28;
+            // 
+            // buttonSaveChanges
+            // 
+            this.buttonSaveChanges.Location = new System.Drawing.Point(173, 419);
+            this.buttonSaveChanges.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonSaveChanges.Name = "buttonSaveChanges";
+            this.buttonSaveChanges.Size = new System.Drawing.Size(81, 28);
+            this.buttonSaveChanges.TabIndex = 18;
+            this.buttonSaveChanges.Text = "Save";
+            this.buttonSaveChanges.UseVisualStyleBackColor = true;
+            this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
+            // 
+            // dataGridViewCamp
+            // 
+            this.dataGridViewCamp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCamp.Location = new System.Drawing.Point(49, 472);
+            this.dataGridViewCamp.Name = "dataGridViewCamp";
+            this.dataGridViewCamp.RowTemplate.Height = 24;
+            this.dataGridViewCamp.Size = new System.Drawing.Size(1251, 328);
+            this.dataGridViewCamp.TabIndex = 15;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.DimGray;
+            this.label2.Location = new System.Drawing.Point(46, 419);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(109, 28);
+            this.label2.TabIndex = 14;
+            this.label2.Text = "Monitor";
             // 
             // buttonSearch
             // 
@@ -328,30 +361,29 @@
             this.label9.TabIndex = 11;
             this.label9.Text = "Enter Reservation ID ";
             // 
-            // listBoxMonitor
-            // 
-            this.listBoxMonitor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBoxMonitor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxMonitor.FormattingEnabled = true;
-            this.listBoxMonitor.HorizontalScrollbar = true;
-            this.listBoxMonitor.ItemHeight = 25;
-            this.listBoxMonitor.Location = new System.Drawing.Point(49, 129);
-            this.listBoxMonitor.Margin = new System.Windows.Forms.Padding(4);
-            this.listBoxMonitor.Name = "listBoxMonitor";
-            this.listBoxMonitor.Size = new System.Drawing.Size(1250, 225);
-            this.listBoxMonitor.TabIndex = 1;
-            // 
             // checkoutPanel
             // 
+            this.checkoutPanel.Controls.Add(this.lbCheckOut);
             this.checkoutPanel.Controls.Add(this.label6);
             this.checkoutPanel.Controls.Add(this.labelStatusOut);
             this.checkoutPanel.Controls.Add(this.pictureBox1);
-            this.checkoutPanel.Controls.Add(this.listBoxCheckOut);
-            this.checkoutPanel.Location = new System.Drawing.Point(280, 78);
+            this.checkoutPanel.Location = new System.Drawing.Point(221, 15);
             this.checkoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.checkoutPanel.Name = "checkoutPanel";
             this.checkoutPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkoutPanel.TabIndex = 7;
+            // 
+            // lbCheckOut
+            // 
+            this.lbCheckOut.AutoSize = true;
+            this.lbCheckOut.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCheckOut.ForeColor = System.Drawing.Color.DimGray;
+            this.lbCheckOut.Location = new System.Drawing.Point(439, 303);
+            this.lbCheckOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCheckOut.Name = "lbCheckOut";
+            this.lbCheckOut.Size = new System.Drawing.Size(163, 28);
+            this.lbCheckOut.TabIndex = 36;
+            this.lbCheckOut.Text = "Tag Number";
             // 
             // label6
             // 
@@ -389,49 +421,15 @@
             this.pictureBox1.TabIndex = 33;
             this.pictureBox1.TabStop = false;
             // 
-            // listBoxCheckOut
+            // panel2
             // 
-            this.listBoxCheckOut.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBoxCheckOut.FormattingEnabled = true;
-            this.listBoxCheckOut.HorizontalScrollbar = true;
-            this.listBoxCheckOut.ItemHeight = 25;
-            this.listBoxCheckOut.Location = new System.Drawing.Point(446, 303);
-            this.listBoxCheckOut.Margin = new System.Windows.Forms.Padding(4);
-            this.listBoxCheckOut.Name = "listBoxCheckOut";
-            this.listBoxCheckOut.Size = new System.Drawing.Size(565, 229);
-            this.listBoxCheckOut.TabIndex = 31;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(42, 374);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 28);
-            this.label2.TabIndex = 14;
-            this.label2.Text = "Monitor";
-            // 
-            // dataGridViewCamp
-            // 
-            this.dataGridViewCamp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCamp.Location = new System.Drawing.Point(45, 427);
-            this.dataGridViewCamp.Name = "dataGridViewCamp";
-            this.dataGridViewCamp.RowTemplate.Height = 24;
-            this.dataGridViewCamp.Size = new System.Drawing.Size(1251, 328);
-            this.dataGridViewCamp.TabIndex = 15;
-            // 
-            // buttonSaveChanges
-            // 
-            this.buttonSaveChanges.Location = new System.Drawing.Point(169, 374);
-            this.buttonSaveChanges.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.buttonSaveChanges.Name = "buttonSaveChanges";
-            this.buttonSaveChanges.Size = new System.Drawing.Size(81, 28);
-            this.buttonSaveChanges.TabIndex = 18;
-            this.buttonSaveChanges.Text = "Save";
-            this.buttonSaveChanges.UseVisualStyleBackColor = true;
-            this.buttonSaveChanges.Click += new System.EventHandler(this.buttonSaveChanges_Click);
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(221, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1600, 12);
+            this.panel2.TabIndex = 1;
             // 
             // CampingForm
             // 
@@ -440,8 +438,8 @@
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
             this.Controls.Add(this.searchPanel);
-            this.Controls.Add(this.checkinPanel);
             this.Controls.Add(this.checkoutPanel);
+            this.Controls.Add(this.checkinPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -459,10 +457,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.searchPanel.ResumeLayout(false);
             this.searchPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCamp)).EndInit();
             this.checkoutPanel.ResumeLayout(false);
             this.checkoutPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCamp)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -470,7 +468,6 @@
         #endregion
 
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel sideHighlight;
         private System.Windows.Forms.Button checkinBtn;
         private System.Windows.Forms.Button monitorBtn;
@@ -478,25 +475,26 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel checkinPanel;
-        private System.Windows.Forms.Panel searchPanel;
-        private System.Windows.Forms.Panel checkoutPanel;
-        private System.Windows.Forms.Button buttonPay;
-        private System.Windows.Forms.Button buttonSearch;
-        private System.Windows.Forms.TextBox textBoxResrvID;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.ListBox listBoxMonitor;
+        private System.Windows.Forms.Label lbCheckIn;
         private System.Windows.Forms.Label statusIn;
         private System.Windows.Forms.Label labelStatusIn;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.Label labelTagNr;
-        private System.Windows.Forms.ListBox lbCheckIn;
+        private System.Windows.Forms.Button buttonPay;
+        private System.Windows.Forms.Panel searchPanel;
+        private System.Windows.Forms.Label labelMonitor;
+        private System.Windows.Forms.Button buttonSaveChanges;
+        private System.Windows.Forms.DataGridView dataGridViewCamp;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.TextBox textBoxResrvID;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel checkoutPanel;
+        private System.Windows.Forms.Label lbCheckOut;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label labelStatusOut;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ListBox listBoxCheckOut;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridViewCamp;
-        private System.Windows.Forms.Button buttonSaveChanges;
+        private System.Windows.Forms.Panel panel2;
     }
 }
 

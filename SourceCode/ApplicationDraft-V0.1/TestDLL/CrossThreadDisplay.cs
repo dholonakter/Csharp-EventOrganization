@@ -80,7 +80,7 @@ namespace ThanhDLL
         // Display an article in a given listbox
         public void DisplayArticle(Object o, ListBox lb)
         {
-            List<LoanArticle> list = (List<LoanArticle>)o;
+            List<Article> list = (List<Article>)o;
 
             if (lb.InvokeRequired)
             {
@@ -90,57 +90,13 @@ namespace ThanhDLL
             else
             {
                 lb.Items.Clear();
-                foreach (LoanArticle a in list)
+                foreach (Article a in list)
                 {
                     lb.Items.Add(a);
                 }
             }
         }
 
-        // Display a ticket in a given listbox
-        public void DisplayTicket(Object o, ListBox lb)
-        {
-            Ticket t = (Ticket)o;
-
-            if (lb.InvokeRequired)
-            {
-                ListboxDelegate d = new ListboxDelegate(DisplayTicket);
-                myForm.Invoke(d, new object[] { t, lb });
-            }
-            else
-            {
-                // Display them info
-                lb.Items.Clear();
-                lb.Items.Add("TICKET #" + t.TicketNr);
-                lb.Items.Add("Bought: " + t.TicketDate + " " + t.TicketTime);
-                lb.Items.Add("Type: " + t.TicketType);
-                lb.Items.Add("Status: " + (t.Paid ? "PAID" : "NOT PAID"));
-            }
-        }
-
-        // Display a ticket in a given listbox
-        public void DisplayReservation(Object o, ListBox lb)
-        {
-            Reservation r = (Reservation)o;
-
-            if (lb.InvokeRequired)
-            {
-                ListboxDelegate d = new ListboxDelegate(DisplayTicket);
-                myForm.Invoke(d, new object[] { r, lb });
-            }
-            else
-            {
-                // Display them info
-                lb.Items.Clear();
-                lb.Items.Add("RESERVATION #" + r.ReservNr);
-                lb.Items.Add("Reserved: " + r.ReservDate + " " + r.ReservTime);
-                lb.Items.Add("Reserver: " + r.Reserver.FirstName + ", " + r.Reserver.LastName);
-                lb.Items.Add("Spot: Spot #" + r.Spot.SpotNr + " - " + r.Spot.SpotName);
-                lb.Items.Add("Number of people: " + r.NrCheckedIn + "/" + r.NrOfRegistered);
-                lb.Items.Add("Period: " + r.StartDate + " - " + r.EndDate);
-                lb.Items.Add("Status: " + (r.Paid ? "PAID" : "NOT PAID"));
-            }
-        }
         public void Dispose()
         {
             Dispose(true);

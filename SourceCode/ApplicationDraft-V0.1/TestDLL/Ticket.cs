@@ -45,8 +45,11 @@ namespace ThanhDLL
         /// <returns></returns>
         public override string ToString()
         {
-            return "Ticket #" + this.TicketNr + " - " + this.TicketDate + " " + this.TicketTime +
-                " Type: " + this.TicketType + " - Buyer: " + this.BuyerNr + " - " + (Paid ? "PAID" : "NOT PAID");
+            return "Ticket #" + this.TicketNr 
+                + "\nBought on " + this.TicketDate + " at " + this.TicketTime
+                + "\nType: " + this.TicketType 
+                + "\nBuyer: " + this.BuyerNr 
+                + "\nStatus: " + (Paid ? "PAID" : "NOT PAID");
         }
 
         public void ChangeStatus()

@@ -41,25 +41,18 @@
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea4 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend4 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series4 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.chartIncomePerDay = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartIncomePerHour = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
             this.chartIncomePerType = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.chartTicketsPerDay = new System.Windows.Forms.DataVisualization.Charting.Chart();
-            this.comboBoxShop = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.chartIncomeShop = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.button1 = new System.Windows.Forms.Button();
             this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.chartIncomePerDay)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartIncomePerHour)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartIncomePerType)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartTicketsPerDay)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartIncomeShop)).BeginInit();
             this.SuspendLayout();
             // 
             // chartIncomePerDay
@@ -113,7 +106,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(763, 17);
+            this.label1.Location = new System.Drawing.Point(736, 17);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(184, 17);
             this.label1.TabIndex = 3;
@@ -156,48 +149,11 @@
             this.chartTicketsPerDay.TabIndex = 5;
             this.chartTicketsPerDay.Text = "chart1";
             // 
-            // comboBoxShop
-            // 
-            this.comboBoxShop.FormattingEnabled = true;
-            this.comboBoxShop.Location = new System.Drawing.Point(1316, 141);
-            this.comboBoxShop.Name = "comboBoxShop";
-            this.comboBoxShop.Size = new System.Drawing.Size(213, 24);
-            this.comboBoxShop.TabIndex = 6;
-            this.comboBoxShop.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1031, 141);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(279, 17);
-            this.label2.TabIndex = 7;
-            this.label2.Text = "Select a shop to show their income per day";
-            // 
-            // chartIncomeShop
-            // 
-            chartArea5.Name = "ChartArea1";
-            this.chartIncomeShop.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chartIncomeShop.Legends.Add(legend5);
-            this.chartIncomeShop.Location = new System.Drawing.Point(1031, 171);
-            this.chartIncomeShop.Name = "chartIncomeShop";
-            this.chartIncomeShop.Palette = System.Windows.Forms.DataVisualization.Charting.ChartColorPalette.Grayscale;
-            series5.ChartArea = "ChartArea1";
-            series5.IsValueShownAsLabel = true;
-            series5.IsVisibleInLegend = false;
-            series5.Legend = "Legend1";
-            series5.Name = "Income";
-            this.chartIncomeShop.Series.Add(series5);
-            this.chartIncomeShop.Size = new System.Drawing.Size(498, 303);
-            this.chartIncomeShop.TabIndex = 8;
-            this.chartIncomeShop.Text = "chart1";
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(1228, 46);
+            this.button1.Location = new System.Drawing.Point(926, 14);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(144, 45);
+            this.button1.Size = new System.Drawing.Size(88, 22);
             this.button1.TabIndex = 9;
             this.button1.Text = "Refresh";
             this.button1.UseVisualStyleBackColor = true;
@@ -212,11 +168,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1573, 616);
+            this.ClientSize = new System.Drawing.Size(1029, 616);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.chartIncomeShop);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.comboBoxShop);
             this.Controls.Add(this.chartTicketsPerDay);
             this.Controls.Add(this.chartIncomePerType);
             this.Controls.Add(this.label1);
@@ -231,7 +184,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartIncomePerHour)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartIncomePerType)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chartTicketsPerDay)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.chartIncomeShop)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -245,9 +197,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartIncomePerType;
         private System.Windows.Forms.DataVisualization.Charting.Chart chartTicketsPerDay;
-        private System.Windows.Forms.ComboBox comboBoxShop;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chartIncomeShop;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Timer timerUpdate;
     }
