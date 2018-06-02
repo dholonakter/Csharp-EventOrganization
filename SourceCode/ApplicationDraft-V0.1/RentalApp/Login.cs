@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ThanhDLL;
 
-namespace ShopApp
+namespace RentalApp
 {
     public partial class Login : Form
     {
@@ -21,11 +21,12 @@ namespace ShopApp
             InitializeComponent();
             dh = new DataHelper();
         }
+
         private void ValidateLogin()
         {
             if (textBox1.Text != "" && textBox2.Text != "")
             {
-                if (textBox1.Text.StartsWith("store") || textBox1.Text.StartsWith("admin"))
+                if (textBox1.Text.StartsWith("loan") || textBox1.Text.StartsWith("admin"))
                 {
                     if (dh.CheckCredentials(textBox1.Text, textBox2.Text) == 1)
                     {
@@ -36,11 +37,11 @@ namespace ShopApp
                         Form mf;
                         if (textBox1.Text.StartsWith("admin"))
                         {
-                            mf = new ShopForm(null);
+                            mf = new RentalForm(null);
                         }
                         else
                         {
-                            mf = new ShopForm(dh.GetShopByNr(nr));
+                            mf = new RentalForm(dh.GetShopByNr(nr));
                         }
                         mf.ShowDialog();
                     }
@@ -51,6 +52,7 @@ namespace ShopApp
                 }
             }
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             ValidateLogin();

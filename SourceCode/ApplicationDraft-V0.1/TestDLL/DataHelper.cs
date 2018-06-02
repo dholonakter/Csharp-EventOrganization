@@ -84,7 +84,7 @@ namespace ThanhDLL
                 dataAdapter.Fill(ds);
                 return ds;
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
                 MessageBox.Show("Error trying to get the dataset");
                 return null;
@@ -94,7 +94,6 @@ namespace ThanhDLL
             {
                 connection.Close();
             }
-            return null;
         }
 
         public int CheckCredentials(string username, string pwd)
@@ -256,7 +255,7 @@ namespace ThanhDLL
         {
             string sql = "SELECT ShopName, ArticleNr, ArticleName " +
                 "FROM all_order" +
-                "WHERE IsLoanable = 1 and VisitorNr = " + v.IdNr + " AND Available = 0";
+                "WHERE IsLoanable = 1 and VisitorNr = " + v.IdNr + " AND ReturnDate IS NULL";
 
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
@@ -337,11 +336,11 @@ namespace ThanhDLL
         /// </summary>
         /// <param name="visitorNr"></param>
         /// <returns></returns>
-        public Ticket GetTicketStatusForVisitor(int visitorNr)
+        public Ticket GetTicketStatusForVisitor(int nr)
         {
             string sql = "SELECT * " +
                 "FROM TICKET " +
-                "WHERE BuyerNr = " + visitorNr;
+                "WHERE TicketNr = " + nr;
 
             Ticket t = null;
 
@@ -352,25 +351,23 @@ namespace ThanhDLL
                 MySqlDataReader reader = command.ExecuteReader();
 
                 // temporary variables
-                int nr;
-                string date;
-                string time;
+                int buyerNr;
+                DateTime date;
                 string type;
                 bool paid;
 
                 while (reader.Read())
                 {
                     // reading
-                    nr = Convert.ToInt32(reader["TicketNr"]);
-                    date = Convert.ToString(reader["TicketDate"]);
-                    time = Convert.ToString(reader["TicketTime"]);
+                    buyerNr = Convert.ToInt32(reader["BuyerNr"]);
+                    date = Convert.ToDateTime(reader["TicketDate"]);
                     type = Convert.ToString(reader["TicketType"]);
                     paid = Convert.ToBoolean(reader["Paid"]);
-                    t = new Ticket(nr, date, time, visitorNr, type, paid);
+                    t = new Ticket(nr, date, buyerNr, type, paid);
                 }
 
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
                 MessageBox.Show("Error trying to get ticket");
             }
@@ -627,10 +624,10 @@ namespace ThanhDLL
         }
 
 
-        public int CreateNewOrder(Order o)
+        public int CreateNewLoanOrder(Order o)
         {
-            string sql = "INSERT INTO SHOP_ORDER(OrderDate, OrderTime, ShopNr, VisitorNr) " +
-                       "VALUES(CONVERT('" + o.OrderDate + "', DATE), CONVERT('" + o.OrderTime + "', TIME), " + o.Shop.ShopNr + ", " + o.VisitorNr + ")";
+            string sql = "INSERT INTO SHOP_ORDER(OrderDate, ShopNr, VisitorNr, IsLoanable) " +
+                       "VALUES(CONVERT('" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "', DATETIME), " + o.Shop.ShopNr + ", " + o.VisitorNr + ", 1)";
             //MessageBox.Show(sql);
             MySqlCommand command = new MySqlCommand(sql, connection);
 
@@ -650,14 +647,40 @@ namespace ThanhDLL
                 connection.Close();
             }
         }
+
+        public int CreateNewStoreOrder(Order o)
+        {
+            string sql = "INSERT INTO SHOP_ORDER(OrderDate, OrderTime, ShopNr, VisitorNr, IsLoanable) " +
+                       "VALUES(CONVERT('" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "', DATETIME), " + o.Shop.ShopNr + ", " + o.VisitorNr + ", 0)";
+            //MessageBox.Show(sql);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected;
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Error adding new order");
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
         /// <summary>
         /// Get the right order number
         /// </summary>
         /// <returns>The right order nr for a given order</returns>
         public int GetRightOrderNr(Order o)
         {
-            string sql = "SELECT OrderNr FROM SHOP_ORDER WHERE OrderDate = '" + o.OrderDate +
-                "' AND OrderTime = '" + o.OrderTime + "'";
+            string sql = "SELECT OrderNr FROM SHOP_ORDER WHERE OrderDate = '" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+            
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
@@ -691,7 +714,7 @@ namespace ThanhDLL
         /// </summary>
         /// <param name="o">The given order</param>
         /// <returns>Number of rows affected</returns>
-        public int AddOrderLine(Order o)
+        public int AddStoreOrderLine(Order o)
         {
             string sql = "";
 
@@ -717,6 +740,113 @@ namespace ThanhDLL
             catch (MySqlException)
             {
                 MessageBox.Show("Error adding information to order");
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+
+        public int AddLoanOrderLine(Order o)
+        {
+            string sql = "";
+
+            for (int i = 0; i < o.Articles.Count; i++)
+            {
+                sql += "INSERT INTO SHOP_ORDER_LINE(OrderNr, LineNr, ArticleNr) " +
+                       "VALUES(" + GetRightOrderNr(o) + ", " + (i + 1) + ", " + o.Articles[i].ArticleNr + ");";
+                // quantity by default 0 as there have been 0 hours of borrowed time
+
+                sql += " UPDATE ARTICLE SET Available = Available = 0 WHERE ArticleNr = " +
+                    o.Articles[i].ArticleNr + " AND ShopNr = " + o.Shop.ShopNr + ";";
+            }
+
+            //MessageBox.Show(sql);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected;
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Error adding information to order");
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
+
+        public DateTime GetOrderDateOfArticle(LoanArticle a, string visitorNr)
+        {
+            string sql = "select OrderDate from all_order"
+                + " where ArticleNr = " + a.ArticleNr
+                + " and ShopNr = " + a.ShopNr
+                + " and VisitorNr = " + visitorNr
+                + " and ReturnDate is null;";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (reader.HasRows)
+                    {
+                        return (Convert.ToDateTime(reader["OrderDate"]));
+                    }
+                }
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Error getting the right order number");
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return DateTime.MinValue;
+        }
+
+
+        public int ProcessLoanReturn(Order o, string visitorNr)
+        {
+            string sql = "";
+
+            for (int i = 0; i < o.Articles.Count; i++)
+            {
+                sql += "update all_order"
+                + " set ReturnDate = CONVERT('" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "', DATETIME)"
+                + ", Quantity = " + o.Quantity[i]
+                + " where ArticleNr = " + o.Articles[i].ArticleNr
+                + " and ShopNr = " + o.Articles[i].ShopNr
+                + " and VisitorNr = " + visitorNr
+                + " and ReturnDate is null;";
+
+                sql += "update article set Available = 1 where ArticleNr = " + o.Articles[i].ArticleNr + " and ShopNr = " + o.Articles[i].ShopNr;
+            }
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected;
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Error processing loan return");
                 return -1;
             }
             finally
@@ -765,7 +895,7 @@ namespace ThanhDLL
         {
             LoanArticle a = null;
             string sql = "SELECT * FROM all_article WHERE IsLoanable = 1 and RFIDNr = '" + rfidNr + "'";
-
+            
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
@@ -847,7 +977,7 @@ namespace ThanhDLL
             }
             return temp;
         }
-        
+
         public int UpdateSelectedReservation(Reservation r)
         {
             string sql = "UPDATE camping_reservation " +
@@ -903,6 +1033,34 @@ namespace ThanhDLL
             }
         }
 
+        public int UpdateSelectedArticle(Article a)
+        {
+            string sql = "UPDATE article" +
+                        " SET Available = " + a.Available +
+                        " WHERE ArticleNr =" + a.ArticleNr +
+                        " AND ShopNr =" + a.ShopNr;
+
+            //MessageBox.Show(sql);
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int nrOfRecordsChanged = command.ExecuteNonQuery();
+                return nrOfRecordsChanged;
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Error updating article");
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
         public Reservation FindReservationByVisitor(Visitor visitor)
         {
             string sql = "SELECT * FROM reservation_info WHERE Reserver = " + visitor.IdNr;
@@ -918,12 +1076,12 @@ namespace ThanhDLL
                 string reservTime = "";
                 string endDate = "";
                 string startDate = "";
-                CampingSpot spot = null; 
+                CampingSpot spot = null;
                 int nrOfRegistered = 0;
                 int nrCheckedIn = 0;
                 bool paid = false;
 
-                while(reader.Read())
+                while (reader.Read())
                 {
                     reservNr = Convert.ToInt32(reader["ReservNr"]);
                     reservDate = Convert.ToString(reader["ReservDate"]);
@@ -958,7 +1116,7 @@ namespace ThanhDLL
             {
                 connection.Open();
                 MySqlDataReader reader = command.ExecuteReader();
-                
+
                 if (!reader.HasRows)
                 {
                     return null;

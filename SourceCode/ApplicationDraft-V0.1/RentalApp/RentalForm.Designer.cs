@@ -30,50 +30,38 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RentalForm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.overviewBtn = new System.Windows.Forms.Button();
             this.sideHighlight = new System.Windows.Forms.Panel();
-            this.productBtn = new System.Windows.Forms.Button();
+            this.borrowBtn = new System.Windows.Forms.Button();
+            this.returnBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.startPanel = new System.Windows.Forms.Panel();
-            this.productPanel = new System.Windows.Forms.Panel();
-            this.labelOrderInfo = new System.Windows.Forms.Label();
-            this.labelVisitor = new System.Windows.Forms.Label();
-            this.button2 = new System.Windows.Forms.Button();
+            this.borrowPanel = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buttonStopBorrow = new System.Windows.Forms.Button();
+            this.labelBorrowInfo = new System.Windows.Forms.Label();
+            this.labelVisitorB = new System.Windows.Forms.Label();
+            this.returnPanel = new System.Windows.Forms.Panel();
+            this.buttonStopReturn = new System.Windows.Forms.Button();
+            this.labelVisitorR = new System.Windows.Forms.Label();
+            this.labelReturnInfo = new System.Windows.Forms.Label();
+            this.labelShopName = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
-            this.productPanel.SuspendLayout();
+            this.borrowPanel.SuspendLayout();
+            this.returnPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(43)))), ((int)(((byte)(48)))));
-            this.panel1.Controls.Add(this.overviewBtn);
             this.panel1.Controls.Add(this.sideHighlight);
-            this.panel1.Controls.Add(this.productBtn);
+            this.panel1.Controls.Add(this.borrowBtn);
+            this.panel1.Controls.Add(this.returnBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(221, 945);
             this.panel1.TabIndex = 0;
-            // 
-            // overviewBtn
-            // 
-            this.overviewBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.overviewBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.overviewBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.overviewBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.overviewBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.overviewBtn.ForeColor = System.Drawing.Color.White;
-            this.overviewBtn.Image = ((System.Drawing.Image)(resources.GetObject("overviewBtn.Image")));
-            this.overviewBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.overviewBtn.Location = new System.Drawing.Point(15, 110);
-            this.overviewBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.overviewBtn.Name = "overviewBtn";
-            this.overviewBtn.Size = new System.Drawing.Size(207, 66);
-            this.overviewBtn.TabIndex = 18;
-            this.overviewBtn.Text = "Overview";
-            this.overviewBtn.UseVisualStyleBackColor = true;
-            this.overviewBtn.Click += new System.EventHandler(this.overviewBtn_Click);
             // 
             // sideHighlight
             // 
@@ -84,24 +72,43 @@
             this.sideHighlight.Size = new System.Drawing.Size(15, 66);
             this.sideHighlight.TabIndex = 14;
             // 
-            // productBtn
+            // borrowBtn
             // 
-            this.productBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.productBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.productBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.productBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.productBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.productBtn.ForeColor = System.Drawing.Color.White;
-            this.productBtn.Image = ((System.Drawing.Image)(resources.GetObject("productBtn.Image")));
-            this.productBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.productBtn.Location = new System.Drawing.Point(15, 223);
-            this.productBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.productBtn.Name = "productBtn";
-            this.productBtn.Size = new System.Drawing.Size(207, 66);
-            this.productBtn.TabIndex = 20;
-            this.productBtn.Text = "Products";
-            this.productBtn.UseVisualStyleBackColor = true;
-            this.productBtn.Click += new System.EventHandler(this.productBtn_Click);
+            this.borrowBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.borrowBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.borrowBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.borrowBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.borrowBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.borrowBtn.ForeColor = System.Drawing.Color.White;
+            this.borrowBtn.Image = ((System.Drawing.Image)(resources.GetObject("borrowBtn.Image")));
+            this.borrowBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.borrowBtn.Location = new System.Drawing.Point(15, 110);
+            this.borrowBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.borrowBtn.Name = "borrowBtn";
+            this.borrowBtn.Size = new System.Drawing.Size(207, 66);
+            this.borrowBtn.TabIndex = 20;
+            this.borrowBtn.Text = "Borrow";
+            this.borrowBtn.UseVisualStyleBackColor = true;
+            this.borrowBtn.Click += new System.EventHandler(this.productBtn_Click);
+            // 
+            // returnBtn
+            // 
+            this.returnBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.returnBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.returnBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.returnBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.returnBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.returnBtn.ForeColor = System.Drawing.Color.White;
+            this.returnBtn.Image = ((System.Drawing.Image)(resources.GetObject("returnBtn.Image")));
+            this.returnBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.returnBtn.Location = new System.Drawing.Point(15, 193);
+            this.returnBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.returnBtn.Name = "returnBtn";
+            this.returnBtn.Size = new System.Drawing.Size(207, 66);
+            this.returnBtn.TabIndex = 21;
+            this.returnBtn.Text = "Return";
+            this.returnBtn.UseVisualStyleBackColor = true;
+            this.returnBtn.Click += new System.EventHandler(this.returnBtn_Click);
             // 
             // panel2
             // 
@@ -121,50 +128,120 @@
             this.startPanel.Size = new System.Drawing.Size(1473, 846);
             this.startPanel.TabIndex = 10;
             // 
-            // productPanel
+            // borrowPanel
             // 
-            this.productPanel.Controls.Add(this.button2);
-            this.productPanel.Controls.Add(this.labelOrderInfo);
-            this.productPanel.Controls.Add(this.labelVisitor);
-            this.productPanel.Location = new System.Drawing.Point(297, 90);
-            this.productPanel.Margin = new System.Windows.Forms.Padding(4);
-            this.productPanel.Name = "productPanel";
-            this.productPanel.Size = new System.Drawing.Size(1329, 780);
-            this.productPanel.TabIndex = 11;
+            this.borrowPanel.Controls.Add(this.label3);
+            this.borrowPanel.Controls.Add(this.buttonStopBorrow);
+            this.borrowPanel.Controls.Add(this.labelBorrowInfo);
+            this.borrowPanel.Controls.Add(this.labelVisitorB);
+            this.borrowPanel.Location = new System.Drawing.Point(297, 90);
+            this.borrowPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.borrowPanel.Name = "borrowPanel";
+            this.borrowPanel.Size = new System.Drawing.Size(1329, 780);
+            this.borrowPanel.TabIndex = 11;
             // 
-            // labelOrderInfo
+            // label3
             // 
-            this.labelOrderInfo.AutoSize = true;
-            this.labelOrderInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelOrderInfo.ForeColor = System.Drawing.Color.DimGray;
-            this.labelOrderInfo.Location = new System.Drawing.Point(616, 92);
-            this.labelOrderInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelOrderInfo.Name = "labelOrderInfo";
-            this.labelOrderInfo.Size = new System.Drawing.Size(84, 28);
-            this.labelOrderInfo.TabIndex = 27;
-            this.labelOrderInfo.Text = "Order";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DimGray;
+            this.label3.Location = new System.Drawing.Point(72, 37);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(213, 28);
+            this.label3.TabIndex = 30;
+            this.label3.Text = "Borrowing items";
             // 
-            // labelVisitor
+            // buttonStopBorrow
             // 
-            this.labelVisitor.AutoSize = true;
-            this.labelVisitor.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVisitor.ForeColor = System.Drawing.Color.DimGray;
-            this.labelVisitor.Location = new System.Drawing.Point(72, 92);
-            this.labelVisitor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelVisitor.Name = "labelVisitor";
-            this.labelVisitor.Size = new System.Drawing.Size(95, 28);
-            this.labelVisitor.TabIndex = 26;
-            this.labelVisitor.Text = "Visitor";
+            this.buttonStopBorrow.Location = new System.Drawing.Point(77, 587);
+            this.buttonStopBorrow.Name = "buttonStopBorrow";
+            this.buttonStopBorrow.Size = new System.Drawing.Size(166, 55);
+            this.buttonStopBorrow.TabIndex = 29;
+            this.buttonStopBorrow.Text = "stop scanning items";
+            this.buttonStopBorrow.UseVisualStyleBackColor = true;
+            this.buttonStopBorrow.Click += new System.EventHandler(this.button2_Click);
             // 
-            // button2
+            // labelBorrowInfo
             // 
-            this.button2.Location = new System.Drawing.Point(77, 587);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(166, 55);
-            this.button2.TabIndex = 29;
-            this.button2.Text = "stop scanning items";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.labelBorrowInfo.AutoSize = true;
+            this.labelBorrowInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBorrowInfo.ForeColor = System.Drawing.Color.DimGray;
+            this.labelBorrowInfo.Location = new System.Drawing.Point(616, 92);
+            this.labelBorrowInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelBorrowInfo.Name = "labelBorrowInfo";
+            this.labelBorrowInfo.Size = new System.Drawing.Size(84, 28);
+            this.labelBorrowInfo.TabIndex = 27;
+            this.labelBorrowInfo.Text = "Order";
+            // 
+            // labelVisitorB
+            // 
+            this.labelVisitorB.AutoSize = true;
+            this.labelVisitorB.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVisitorB.ForeColor = System.Drawing.Color.DimGray;
+            this.labelVisitorB.Location = new System.Drawing.Point(72, 92);
+            this.labelVisitorB.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelVisitorB.Name = "labelVisitorB";
+            this.labelVisitorB.Size = new System.Drawing.Size(95, 28);
+            this.labelVisitorB.TabIndex = 26;
+            this.labelVisitorB.Text = "Visitor";
+            // 
+            // returnPanel
+            // 
+            this.returnPanel.Controls.Add(this.buttonStopReturn);
+            this.returnPanel.Controls.Add(this.labelVisitorR);
+            this.returnPanel.Controls.Add(this.labelReturnInfo);
+            this.returnPanel.Location = new System.Drawing.Point(297, 86);
+            this.returnPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.returnPanel.Name = "returnPanel";
+            this.returnPanel.Size = new System.Drawing.Size(1329, 780);
+            this.returnPanel.TabIndex = 30;
+            // 
+            // buttonStopReturn
+            // 
+            this.buttonStopReturn.Location = new System.Drawing.Point(632, 522);
+            this.buttonStopReturn.Name = "buttonStopReturn";
+            this.buttonStopReturn.Size = new System.Drawing.Size(166, 55);
+            this.buttonStopReturn.TabIndex = 29;
+            this.buttonStopReturn.Text = "stop scanning items";
+            this.buttonStopReturn.UseVisualStyleBackColor = true;
+            this.buttonStopReturn.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // labelVisitorR
+            // 
+            this.labelVisitorR.AutoSize = true;
+            this.labelVisitorR.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVisitorR.ForeColor = System.Drawing.Color.DimGray;
+            this.labelVisitorR.Location = new System.Drawing.Point(72, 107);
+            this.labelVisitorR.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelVisitorR.Name = "labelVisitorR";
+            this.labelVisitorR.Size = new System.Drawing.Size(95, 28);
+            this.labelVisitorR.TabIndex = 27;
+            this.labelVisitorR.Text = "Visitor";
+            // 
+            // labelReturnInfo
+            // 
+            this.labelReturnInfo.AutoSize = true;
+            this.labelReturnInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelReturnInfo.ForeColor = System.Drawing.Color.DimGray;
+            this.labelReturnInfo.Location = new System.Drawing.Point(627, 107);
+            this.labelReturnInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelReturnInfo.Name = "labelReturnInfo";
+            this.labelReturnInfo.Size = new System.Drawing.Size(84, 28);
+            this.labelReturnInfo.TabIndex = 26;
+            this.labelReturnInfo.Text = "Order";
+            // 
+            // labelShopName
+            // 
+            this.labelShopName.AutoSize = true;
+            this.labelShopName.Font = new System.Drawing.Font("Century", 16F, System.Drawing.FontStyle.Bold);
+            this.labelShopName.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelShopName.Location = new System.Drawing.Point(330, 38);
+            this.labelShopName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelShopName.Name = "labelShopName";
+            this.labelShopName.Size = new System.Drawing.Size(197, 33);
+            this.labelShopName.TabIndex = 31;
+            this.labelShopName.Text = "SHOP NAME";
             // 
             // RentalForm
             // 
@@ -172,7 +249,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
-            this.Controls.Add(this.productPanel);
+            this.Controls.Add(this.labelShopName);
+            this.Controls.Add(this.borrowPanel);
+            this.Controls.Add(this.returnPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.startPanel);
@@ -182,11 +261,15 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RentalForm";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.RentalForm_FormClosed);
             this.Load += new System.EventHandler(this.RentalForm_Load);
             this.panel1.ResumeLayout(false);
-            this.productPanel.ResumeLayout(false);
-            this.productPanel.PerformLayout();
+            this.borrowPanel.ResumeLayout(false);
+            this.borrowPanel.PerformLayout();
+            this.returnPanel.ResumeLayout(false);
+            this.returnPanel.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -195,13 +278,19 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel sideHighlight;
-        private System.Windows.Forms.Button overviewBtn;
-        private System.Windows.Forms.Button productBtn;
+        private System.Windows.Forms.Button borrowBtn;
         private System.Windows.Forms.Panel startPanel;
-        private System.Windows.Forms.Panel productPanel;
-        private System.Windows.Forms.Label labelVisitor;
-        private System.Windows.Forms.Label labelOrderInfo;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Panel borrowPanel;
+        private System.Windows.Forms.Label labelVisitorB;
+        private System.Windows.Forms.Label labelBorrowInfo;
+        private System.Windows.Forms.Button buttonStopBorrow;
+        private System.Windows.Forms.Panel returnPanel;
+        private System.Windows.Forms.Button buttonStopReturn;
+        private System.Windows.Forms.Label labelVisitorR;
+        private System.Windows.Forms.Label labelReturnInfo;
+        private System.Windows.Forms.Button returnBtn;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label labelShopName;
     }
 }
 

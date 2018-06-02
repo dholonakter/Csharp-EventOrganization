@@ -268,11 +268,9 @@ namespace EntranceApp
 
             if (result != null)
             {
-                /// Find visitor with scanned QR code
-                visitor = dh.FindVisitorByNr(result.Text);
-
                 // Find their ticket
-                t = dh.GetTicketStatusForVisitor(visitor.IdNr);
+                t = dh.GetTicketStatusForVisitor(Convert.ToInt32(result.Text));
+                visitor = dh.FindVisitorByNr(t.BuyerNr.ToString());
 
                 if (t != null) // if ticket exists
                 {

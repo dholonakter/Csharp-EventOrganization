@@ -127,6 +127,10 @@ namespace ShopApp
                 comboBoxShop.DisplayMember = "ShopName";
                 comboBoxShop.DataSource = dt;
             }
+            else
+            {
+                labelShopName.Text = "Store " + selectedShop.ShopName;
+            }
 
             // GUI
             sideHighlight.Height = overviewBtn.Height;
@@ -194,10 +198,9 @@ namespace ShopApp
         }
         private void ProcessOrder()
         {
-            o.OrderDate = DateTime.Now.ToString("yyyy-MM-dd");
-            o.OrderTime = DateTime.Now.ToString("hh:mm:ss");
+            o.OrderDate = DateTime.Now;
 
-            if (data.CreateNewOrder(o) == 1 && data.AddOrderLine(o) != -1)
+            if (data.CreateNewStoreOrder(o) == 1 && data.AddStoreOrderLine(o) != -1)
             {
                 DisplayProducts();
                 using (CrossThreadDisplay display = new CrossThreadDisplay(this))
@@ -216,6 +219,7 @@ namespace ShopApp
         private void comboBoxShop_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedShop = data.GetShopByNr(comboBoxShop.SelectedValue.ToString());
+            labelShopName.Text = "Store " + selectedShop.ShopName;
             DisplayProducts();
         }
     }

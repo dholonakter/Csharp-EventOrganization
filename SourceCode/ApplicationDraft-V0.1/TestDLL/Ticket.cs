@@ -16,8 +16,7 @@ namespace ThanhDLL
         // FIELDS AND PROPERTIES
         ///////////////////////////////////////
         public int TicketNr { get; set; }
-        public string TicketDate { get; set; }
-        public string TicketTime { get; set; }
+        public DateTime TicketDate { get; set; }
         public int BuyerNr { get; set; }
         public string TicketType { get; set; }
         public bool Paid { get; set; }
@@ -25,11 +24,10 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////
-        public Ticket(int ticketNr, string date, string time, int buyer, string type, bool paid)
+        public Ticket(int ticketNr, DateTime date, int buyer, string type, bool paid)
         {
             this.TicketNr = ticketNr;
             this.TicketDate = date;
-            this.TicketTime = time;
             this.BuyerNr = buyer;
             this.TicketType = type;
             this.Paid = paid;
@@ -46,7 +44,7 @@ namespace ThanhDLL
         public override string ToString()
         {
             return "Ticket #" + this.TicketNr 
-                + "\nBought on " + this.TicketDate + " at " + this.TicketTime
+                + "\nBought on " + this.TicketDate 
                 + "\nType: " + this.TicketType 
                 + "\nBuyer: " + this.BuyerNr 
                 + "\nStatus: " + (Paid ? "PAID" : "NOT PAID");

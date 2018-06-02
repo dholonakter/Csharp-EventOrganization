@@ -35,6 +35,8 @@
             this.productBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.productPanel = new System.Windows.Forms.Panel();
+            this.labelAdminShop = new System.Windows.Forms.Label();
+            this.comboBoxShop = new System.Windows.Forms.ComboBox();
             this.lblCardLinkedStatus = new System.Windows.Forms.Label();
             this.labelOrderInfo = new System.Windows.Forms.Label();
             this.itemLbx = new System.Windows.Forms.ListBox();
@@ -44,8 +46,7 @@
             this.foodRbtn = new System.Windows.Forms.RadioButton();
             this.quantitySelec = new System.Windows.Forms.NumericUpDown();
             this.startPanel = new System.Windows.Forms.Panel();
-            this.comboBoxShop = new System.Windows.Forms.ComboBox();
-            this.labelAdminShop = new System.Windows.Forms.Label();
+            this.labelShopName = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.productPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantitySelec)).BeginInit();
@@ -138,6 +139,24 @@
             this.productPanel.Name = "productPanel";
             this.productPanel.Size = new System.Drawing.Size(1329, 780);
             this.productPanel.TabIndex = 4;
+            // 
+            // labelAdminShop
+            // 
+            this.labelAdminShop.AutoSize = true;
+            this.labelAdminShop.Location = new System.Drawing.Point(83, 73);
+            this.labelAdminShop.Name = "labelAdminShop";
+            this.labelAdminShop.Size = new System.Drawing.Size(91, 17);
+            this.labelAdminShop.TabIndex = 33;
+            this.labelAdminShop.Text = "Choose shop";
+            // 
+            // comboBoxShop
+            // 
+            this.comboBoxShop.FormattingEnabled = true;
+            this.comboBoxShop.Location = new System.Drawing.Point(323, 66);
+            this.comboBoxShop.Name = "comboBoxShop";
+            this.comboBoxShop.Size = new System.Drawing.Size(195, 24);
+            this.comboBoxShop.TabIndex = 32;
+            this.comboBoxShop.SelectedIndexChanged += new System.EventHandler(this.comboBoxShop_SelectedIndexChanged);
             // 
             // lblCardLinkedStatus
             // 
@@ -243,23 +262,17 @@
             this.startPanel.Size = new System.Drawing.Size(1473, 846);
             this.startPanel.TabIndex = 9;
             // 
-            // comboBoxShop
+            // labelShopName
             // 
-            this.comboBoxShop.FormattingEnabled = true;
-            this.comboBoxShop.Location = new System.Drawing.Point(323, 66);
-            this.comboBoxShop.Name = "comboBoxShop";
-            this.comboBoxShop.Size = new System.Drawing.Size(195, 24);
-            this.comboBoxShop.TabIndex = 32;
-            this.comboBoxShop.SelectedIndexChanged += new System.EventHandler(this.comboBoxShop_SelectedIndexChanged);
-            // 
-            // labelAdminShop
-            // 
-            this.labelAdminShop.AutoSize = true;
-            this.labelAdminShop.Location = new System.Drawing.Point(83, 73);
-            this.labelAdminShop.Name = "labelAdminShop";
-            this.labelAdminShop.Size = new System.Drawing.Size(91, 17);
-            this.labelAdminShop.TabIndex = 33;
-            this.labelAdminShop.Text = "Choose shop";
+            this.labelShopName.AutoSize = true;
+            this.labelShopName.Font = new System.Drawing.Font("Century", 16F, System.Drawing.FontStyle.Bold);
+            this.labelShopName.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelShopName.Location = new System.Drawing.Point(314, 39);
+            this.labelShopName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelShopName.Name = "labelShopName";
+            this.labelShopName.Size = new System.Drawing.Size(197, 33);
+            this.labelShopName.TabIndex = 32;
+            this.labelShopName.Text = "SHOP NAME";
             // 
             // ShopForm
             // 
@@ -267,6 +280,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1387, 788);
+            this.Controls.Add(this.labelShopName);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.productPanel);
@@ -284,6 +298,7 @@
             this.productPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantitySelec)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -306,6 +321,7 @@
         private System.Windows.Forms.Label lblCardLinkedStatus;
         private System.Windows.Forms.Label labelAdminShop;
         private System.Windows.Forms.ComboBox comboBoxShop;
+        private System.Windows.Forms.Label labelShopName;
     }
 }
 

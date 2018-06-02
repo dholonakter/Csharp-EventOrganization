@@ -11,7 +11,7 @@ using ThanhDLL;
 using MySql;
 using Phidget22;
 using Phidget22.Events;
-
+using System.Globalization;
 
 namespace RentalApp
 {
@@ -19,122 +19,194 @@ namespace RentalApp
     {
         Order o;
         DataHelper data;
+        bool borrow;
         Shop selectedShop;
         Visitor v;
         RFID myRFIDReader;
-        
+
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
 
         //STARTUP
-        public RentalForm()
+        public RentalForm(Shop s)
         {
             InitializeComponent();
-        }
-
-        private void overviewBtn_Click(object sender, EventArgs e)
-        {
-            sideHighlight.Height = overviewBtn.Height;
-            sideHighlight.Top = overviewBtn.Top;
-            startPanel.BringToFront();
+            selectedShop = s;
         }
 
         private void productBtn_Click(object sender, EventArgs e)
         {
-            sideHighlight.Height = productBtn.Height;
-            sideHighlight.Top = productBtn.Top;
-            productPanel.BringToFront();
+            sideHighlight.Height = borrowBtn.Height;
+            sideHighlight.Top = borrowBtn.Top;
+            borrowPanel.BringToFront();
+
+            // switchy switch
+            borrow = true;
+        }
+        private void returnBtn_Click(object sender, EventArgs e)
+        {
+            sideHighlight.Height = returnBtn.Height;
+            sideHighlight.Top = returnBtn.Top;
+            returnPanel.BringToFront();
+
+            // switchy switch
+            borrow = false;
         }
 
         private void RentalForm_Load(object sender, EventArgs e)
         {
             // init values
-            o = new Order(selectedShop);
+            borrow = true;
             data = new DataHelper();
             myRFIDReader = new RFID();
+            myRFIDReader.Tag += ScanVisitor;
+            o = new Order(selectedShop);
 
             myRFIDReader.Open();
-            v = data.FindVisitorByTag("28007be1f9"); // to be deleted
-
-            myRFIDReader.Tag += ScanVisitor;
-
-            // to be deleted
-            selectedShop = new Shop(7, "Eire", "Beersel");
 
             // GUI
-            sideHighlight.Height = overviewBtn.Height;
-            sideHighlight.Top = overviewBtn.Top;
-            startPanel.BringToFront();
+            labelShopName.Text = "Loan Stand " + selectedShop.ShopName;
+            sideHighlight.Height = borrowBtn.Height;
+            sideHighlight.Top = borrowBtn.Top;
+            borrowPanel.BringToFront();
         }
 
         // RFID PROCESSING
         private void ScanVisitor(object sender, RFIDTagEventArgs e)
         {
+            o = new Order(selectedShop);
+
             v = data.FindVisitorByTag(e.Tag);
             if (v != null)
             {
                 using (CrossThreadDisplay display = new CrossThreadDisplay(this))
                 {
-                   display.SetText(v.ToString(), labelVisitor);
+                    display.SetText(v.ToString(), labelVisitorB);
                 }
-                  
+
                 if (MessageBox.Show("Please start scanning your items", "Confirm", MessageBoxButtons.OK) == DialogResult.OK)
                 {
                     myRFIDReader.Tag -= ScanVisitor;
-                    myRFIDReader.Tag += ScanItem;
+                    if (borrow)
+                    {
+                        myRFIDReader.Tag += ScanToBorrow;
+                    }
+                    else
+                    {
+                        myRFIDReader.Tag += ScanToReturn;
+                    }
                 }
             }
         }
-    
-        private void ScanItem(object sender, RFIDTagEventArgs e)
+
+        private void ScanToBorrow(object sender, RFIDTagEventArgs e)
         {
             LoanArticle a = data.FindLoanArticleByTag(e.Tag);
-            if (a != null)
-            {
-                v.ArticlesBorrowed.Add(a);
-                o.AddArticle(a, 1); // add to order
 
-                using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+            try
+            {
+                if (o.ExistsArticle(a))
                 {
-                    display.SetText(v.ToString(), labelVisitor);
-                    display.SetText(o.ToString(), labelOrderInfo);
+                    MessageBox.Show("Items already added");
                 }
+                else
+                {
+                    o.AddArticle(a, 1); // borrowing 1 article
+                    using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                    {
+                        display.SetText(o.GetDepositReceipt(), labelBorrowInfo);
+                    }
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Item not found");
+            }
+        }
+
+        private void ScanToReturn(object sender, RFIDTagEventArgs e)
+        {
+            LoanArticle a = data.FindLoanArticleByTag(e.Tag);
+
+            try
+            {
+                if (o.ExistsArticle(a))
+                {
+                    MessageBox.Show("Items already added");
+                }
+                else
+                {
+                    DateTime timeOfOrder = data.GetOrderDateOfArticle(a, v.IdNr.ToString());
+
+                    int quantity = DateTime.Now.Subtract(timeOfOrder).Hours; // get number of hours borrowed
+
+                    o.AddArticle(a, quantity); // add that as quantity
+
+                    using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                    {
+                        display.SetText(o.GetReturnReceipt(), labelReturnInfo);
+                    }
+                }
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Item not found");
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            myRFIDReader.Tag -= ScanItem;
+            // reset
+            myRFIDReader.Tag -= ScanToBorrow;
+            myRFIDReader.Tag -= ScanToReturn;
             myRFIDReader.Tag += ScanVisitor;
 
             if (MessageBox.Show("Confirm payment?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                if (v.Credit < o.GetSum())
+                if (borrow)
                 {
-                    MessageBox.Show("Visitor does not have enough credit.");
+                    if (v.Credit < o.GetLoanDeposit())
+                    {
+                        MessageBox.Show("Visitor does not have enough credit.");
+                    }
+                    else
+                    {
+                        v.Credit -= o.GetLoanDeposit();
+                        o.OrderDate = DateTime.Now;
+                        o.VisitorNr = v.IdNr;
+
+                        if (data.CreateNewLoanOrder(o) == 1 && data.AddLoanOrderLine(o) != -1 && data.UpdateSelectedVisitor(v) != -1)
+                        {
+                            labelBorrowInfo.Text = o.GetDepositReceipt();
+                            labelVisitorB.Text = v.ToString();
+                        }
+                    }
                 }
                 else
                 {
-                    v.Credit -= o.GetSum();
-                    o.OrderDate = DateTime.Now.ToString("yyyy-MM-dd");
-                    o.OrderTime = DateTime.Now.ToString("hh:mm:ss");
-                    o.VisitorNr = v.IdNr;
-                    if (data.CreateNewOrder(o) == 1 && data.AddOrderLine(o) != -1)
+                    if (v.Credit < o.GetLoanFee())
                     {
-                        using (CrossThreadDisplay display = new CrossThreadDisplay(this))
-                        {
-                            display.SetText(o.ToString(), labelOrderInfo);
-                        }
-                        
-                        o = new Order(selectedShop);
+                        MessageBox.Show("Visitor does not have enough credit.");
                     }
-                    data.UpdateSelectedVisitor(v);
+                    else
+                    {
+                        // return deposit take fees
+                        v.Credit = v.Credit + o.GetLoanDeposit() - o.GetLoanFee();
+                        o.OrderDate = DateTime.Now; // the date of the "return order" 
+
+                        if (data.ProcessLoanReturn(o, v.IdNr.ToString()) != -1 && data.UpdateSelectedVisitor(v) != -1)
+                        {
+                            labelReturnInfo.Text = o.GetReturnReceipt();
+                            labelVisitorR.Text = v.ToString();
+                        }
+                    }
                 }
             }
-            else
-            {
-                o = new Order(selectedShop);
-            }
+            o = new Order(selectedShop);
+        }
 
+        private void RentalForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Program.original.Show();
         }
     }
 }

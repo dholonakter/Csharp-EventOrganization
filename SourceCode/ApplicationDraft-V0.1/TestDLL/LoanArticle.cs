@@ -17,6 +17,8 @@ namespace ThanhDLL
         ///////////////////////////////////////
         public string RFIDNr { get; set; }
         public double DepositValue { get; set; }
+
+
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////

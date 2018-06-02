@@ -44,7 +44,7 @@ namespace ManagerApp
         {
             // income per day
             chartIncomePerDay.Titles.Clear();
-            chartIncomePerDay.DataSource = dh.GetDataset("select DATE_FORMAT(all_order.OrderDate,'%d/%m') 'OrderDate' , sum(Subtotal) 'Revenue' from all_order group by all_order.OrderDate ");
+            chartIncomePerDay.DataSource = dh.GetDataset("select date_format(date(all_order.OrderDate), '%d/%m') 'OrderDate', sum(Subtotal) 'Revenue' from all_order group by date(all_order.OrderDate)");
             //set the member of the chart data source used to data bind to the X-values of the series  
             chartIncomePerDay.Series["Income"].XValueMember = "OrderDate";
             //set the member columns of the chart data source used to data bind to the X-values of the series  
@@ -60,7 +60,7 @@ namespace ManagerApp
 
             // nr of tickets per day
             chartTicketsPerDay.Titles.Clear();
-            chartTicketsPerDay.DataSource = dh.GetDataset("select DATE_FORMAT(ticket.TicketDate,'%d/%m') 'TicketDate', COUNT(*) 'NumberSold' from ticket group by TicketDate");
+            chartTicketsPerDay.DataSource = dh.GetDataset("select date_format(date(ticket.TicketDate), '%d/%m') 'TicketDate', COUNT(*) 'NumberSold' from ticket group by date(ticket.TicketDate)");
             //set the member of the chart data source used to data bind to the X-values of the series  
             chartTicketsPerDay.Series["Income"].XValueMember = "TicketDate";
             //set the member columns of the chart data source used to data bind to the X-values of the series  
@@ -71,9 +71,9 @@ namespace ManagerApp
         private void FillIncomePerHour()
         {
             chartIncomePerHour.Titles.Clear(); // clearing titles
-            chartIncomePerHour.DataSource = dh.GetDataset("select all_order.OrderDate, HOUR(all_order.OrderTime) 'Hour' , sum(Subtotal) 'Revenue'" +
-                "from all_order where all_order.OrderDate = '" + (dateTimePicker1.Value.ToString("yyyy-MM-dd")) + "' " +
-            "group by HOUR(all_order.OrderTime) ");
+            chartIncomePerHour.DataSource = dh.GetDataset("select hour(all_order.OrderDate) 'Hour', sum(Subtotal) 'Revenue' " +
+                "from all_order where date(all_order.OrderDate) = '" + (dateTimePicker1.Value.ToString("yyyy-MM-dd")) + "' " +
+            "group by hour(all_order.OrderDate) ");
 
             if (((DataSet)chartIncomePerHour.DataSource).Tables[0].Rows.Count != 0)
             {

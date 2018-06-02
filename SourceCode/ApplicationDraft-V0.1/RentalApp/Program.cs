@@ -8,6 +8,8 @@ namespace RentalApp
 {
     static class Program
     {
+        static internal Login original;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +18,8 @@ namespace RentalApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new RentalForm());
+            original = new Login();
+            Application.Run(original);
         }
     }
 }
