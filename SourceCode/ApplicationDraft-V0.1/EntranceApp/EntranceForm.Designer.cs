@@ -52,6 +52,7 @@
             this.labelStatusOut = new System.Windows.Forms.Label();
             this.lbCheckOut = new System.Windows.Forms.ListBox();
             this.searchPanel = new System.Windows.Forms.Panel();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.labelMonitor = new System.Windows.Forms.Label();
             this.buttonSaveChanges = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -70,7 +71,7 @@
             this.tbPhoneNumber = new System.Windows.Forms.TextBox();
             this.tbEmailAddress = new System.Windows.Forms.TextBox();
             this.webCamTimer = new System.Windows.Forms.Timer(this.components);
-            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.labelVisitorInfo = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.checkinPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -194,6 +195,7 @@
             // 
             // checkinPanel
             // 
+            this.checkinPanel.Controls.Add(this.labelVisitorInfo);
             this.checkinPanel.Controls.Add(this.lbCheckIn);
             this.checkinPanel.Controls.Add(this.button2);
             this.checkinPanel.Controls.Add(this.statusIn);
@@ -216,9 +218,9 @@
             this.lbCheckIn.Location = new System.Drawing.Point(434, 187);
             this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCheckIn.Name = "lbCheckIn";
-            this.lbCheckIn.Size = new System.Drawing.Size(163, 28);
+            this.lbCheckIn.Size = new System.Drawing.Size(143, 28);
             this.lbCheckIn.TabIndex = 37;
-            this.lbCheckIn.Text = "Tag Number";
+            this.lbCheckIn.Text = "Ticket info";
             // 
             // button2
             // 
@@ -232,7 +234,7 @@
             this.button2.ForeColor = System.Drawing.Color.White;
             this.button2.Image = ((System.Drawing.Image)(resources.GetObject("button2.Image")));
             this.button2.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.Location = new System.Drawing.Point(773, 491);
+            this.button2.Location = new System.Drawing.Point(520, 571);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(207, 49);
@@ -382,6 +384,13 @@
             this.searchPanel.Name = "searchPanel";
             this.searchPanel.Size = new System.Drawing.Size(1473, 846);
             this.searchPanel.TabIndex = 5;
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Location = new System.Drawing.Point(272, 60);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(259, 22);
+            this.textBoxSearch.TabIndex = 30;
             // 
             // labelMonitor
             // 
@@ -578,12 +587,17 @@
             // 
             this.webCamTimer.Tick += new System.EventHandler(this.webCamTimer_Tick);
             // 
-            // textBoxSearch
+            // labelVisitorInfo
             // 
-            this.textBoxSearch.Location = new System.Drawing.Point(272, 60);
-            this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(259, 22);
-            this.textBoxSearch.TabIndex = 30;
+            this.labelVisitorInfo.AutoSize = true;
+            this.labelVisitorInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVisitorInfo.ForeColor = System.Drawing.Color.DimGray;
+            this.labelVisitorInfo.Location = new System.Drawing.Point(924, 189);
+            this.labelVisitorInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelVisitorInfo.Name = "labelVisitorInfo";
+            this.labelVisitorInfo.Size = new System.Drawing.Size(150, 28);
+            this.labelVisitorInfo.TabIndex = 38;
+            this.labelVisitorInfo.Text = "Visitor info";
             // 
             // EntranceForm
             // 
@@ -591,8 +605,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
-            this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.checkinPanel);
+            this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.checkoutPanel);
             this.Controls.Add(this.ticketPanel);
             this.Controls.Add(this.panel2);
@@ -664,6 +678,7 @@
         private System.Windows.Forms.ListBox lbCheckOut;
         private System.Windows.Forms.Label lbCheckIn;
         private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.Label labelVisitorInfo;
     }
 }
 

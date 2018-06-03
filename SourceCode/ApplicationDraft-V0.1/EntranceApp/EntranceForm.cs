@@ -247,6 +247,8 @@ namespace EntranceApp
             webCamTimer.Start();
             labelStatusIn.Text = "No QR";
             lbCheckIn.Text = "No ticket found";
+            labelVisitorInfo.Text = "No visitor found";
+            buttonStartWC.Text = "Stop webcam";
         }
 
         private void StopWebcam()
@@ -255,6 +257,7 @@ namespace EntranceApp
             webCamTimer = null;
             wCam.Dispose();
             wCam = null;
+            buttonStartWC.Text = "Start webcam";
         }
 
         private void webCamTimer_Tick(object sender, EventArgs e)
@@ -269,17 +272,17 @@ namespace EntranceApp
             if (result != null)
             {
                 // Find their ticket
-                t = dh.GetTicketStatusForVisitor(Convert.ToInt32(result.Text));
-                visitor = dh.FindVisitorByNr(t.BuyerNr.ToString());
+                t = dh.GetTicket(Convert.ToInt32(result.Text));
 
                 if (t != null) // if ticket exists
                 {
+                    visitor = dh.FindVisitorByNr(t.BuyerNr.ToString());
                     display.SetText(t.ToString(), lbCheckIn);
+                    display.SetText(visitor.ToString(), labelVisitorInfo);
 
                     if (t.Paid)
                     {
                         display.SetText("OK", labelStatusIn);
-                        StopWebcam();
                         t = null;
                     }
                     else
@@ -287,6 +290,8 @@ namespace EntranceApp
                         errorSound.Play();
                         display.SetText("UNPAID", labelStatusIn);
                     }
+
+                    StopWebcam();
                 }
                 else
                 {
@@ -304,7 +309,6 @@ namespace EntranceApp
             if (wCam == null)
             {
                 StartWebcam();
-
             }
             else
             {
@@ -314,13 +318,14 @@ namespace EntranceApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (t != null)
+            if (t != null && !t.Paid)
             {
                 t.ChangeStatus();
                 if (dh.UpdateSelectedTicket(t) != -1)
                 {
                     using (CrossThreadDisplay display = new CrossThreadDisplay(this))
                     {
+                        display.SetText(t.ToString(), lbCheckIn);
                         display.SetText("OK", labelStatusIn);
                     }
                 }
@@ -330,11 +335,10 @@ namespace EntranceApp
                     MessageBox.Show("Error while updating status");
                 }
             }
-        }
-
-        private void maskedTextBox1_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-            MessageBox.Show("Please enter a number");
+            else
+            {
+                MessageBox.Show("Ticket not found or already paid");
+            }
         }
     }
 }

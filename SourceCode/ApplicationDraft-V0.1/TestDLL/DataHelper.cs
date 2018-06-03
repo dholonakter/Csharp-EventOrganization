@@ -336,10 +336,10 @@ namespace ThanhDLL
         /// </summary>
         /// <param name="visitorNr"></param>
         /// <returns></returns>
-        public Ticket GetTicketStatusForVisitor(int nr)
+        public Ticket GetTicket(int nr)
         {
             string sql = "SELECT * " +
-                "FROM TICKET " +
+                "FROM ticket_info " +
                 "WHERE TicketNr = " + nr;
 
             Ticket t = null;
@@ -355,6 +355,7 @@ namespace ThanhDLL
                 DateTime date;
                 string type;
                 bool paid;
+                double price;
 
                 while (reader.Read())
                 {
@@ -363,7 +364,8 @@ namespace ThanhDLL
                     date = Convert.ToDateTime(reader["TicketDate"]);
                     type = Convert.ToString(reader["TicketType"]);
                     paid = Convert.ToBoolean(reader["Paid"]);
-                    t = new Ticket(nr, date, buyerNr, type, paid);
+                    price = Convert.ToDouble(reader["TicketPrice"]);
+                    t = new Ticket(nr, date, buyerNr, type, paid, price);
                 }
 
             }
@@ -1151,6 +1153,32 @@ namespace ThanhDLL
             {
                 MessageBox.Show("Error getting reservation");
                 return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+
+        public int CreateNewLog(Log l)
+        {
+            string sql = "INSERT INTO ATM_LOG(StartPeriod, EndPeriod, SenderNr, ReceiverNr, Amount) " +
+                       "VALUES('" + l.StartPeriod + "', '" + l.EndPeriod + "', '"
+                       + l.SenderNr + "', '" + l.ReceiverNr + "', " + l.Amount + ")";
+            //MessageBox.Show(sql);
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                int rowsAffected = command.ExecuteNonQuery();
+                return rowsAffected;
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Error adding new order");
+                return -1;
             }
             finally
             {

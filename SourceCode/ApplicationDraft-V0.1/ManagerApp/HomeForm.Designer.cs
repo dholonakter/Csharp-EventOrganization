@@ -40,12 +40,14 @@ namespace ManagerApp
             this.campBtn = new System.Windows.Forms.Button();
             this.shopBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.buttonTransactions = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(43)))), ((int)(((byte)(48)))));
+            this.panel1.Controls.Add(this.buttonTransactions);
             this.panel1.Controls.Add(this.analyticBtn);
             this.panel1.Controls.Add(this.staffBtn);
             this.panel1.Controls.Add(this.inventoryBtn);
@@ -55,7 +57,7 @@ namespace ManagerApp
             this.panel1.Controls.Add(this.shopBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1339, 703);
             this.panel1.TabIndex = 0;
@@ -71,7 +73,7 @@ namespace ManagerApp
             this.analyticBtn.Image = ((System.Drawing.Image)(resources.GetObject("analyticBtn.Image")));
             this.analyticBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.analyticBtn.Location = new System.Drawing.Point(861, 351);
-            this.analyticBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.analyticBtn.Margin = new System.Windows.Forms.Padding(4);
             this.analyticBtn.Name = "analyticBtn";
             this.analyticBtn.Size = new System.Drawing.Size(236, 66);
             this.analyticBtn.TabIndex = 22;
@@ -90,7 +92,7 @@ namespace ManagerApp
             this.staffBtn.Image = ((System.Drawing.Image)(resources.GetObject("staffBtn.Image")));
             this.staffBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.staffBtn.Location = new System.Drawing.Point(572, 351);
-            this.staffBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.staffBtn.Margin = new System.Windows.Forms.Padding(4);
             this.staffBtn.Name = "staffBtn";
             this.staffBtn.Size = new System.Drawing.Size(236, 66);
             this.staffBtn.TabIndex = 21;
@@ -109,7 +111,7 @@ namespace ManagerApp
             this.inventoryBtn.Image = ((System.Drawing.Image)(resources.GetObject("inventoryBtn.Image")));
             this.inventoryBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.inventoryBtn.Location = new System.Drawing.Point(280, 351);
-            this.inventoryBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.inventoryBtn.Margin = new System.Windows.Forms.Padding(4);
             this.inventoryBtn.Name = "inventoryBtn";
             this.inventoryBtn.Size = new System.Drawing.Size(236, 66);
             this.inventoryBtn.TabIndex = 20;
@@ -128,7 +130,7 @@ namespace ManagerApp
             this.visitorBtn.Image = ((System.Drawing.Image)(resources.GetObject("visitorBtn.Image")));
             this.visitorBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.visitorBtn.Location = new System.Drawing.Point(280, 210);
-            this.visitorBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.visitorBtn.Margin = new System.Windows.Forms.Padding(4);
             this.visitorBtn.Name = "visitorBtn";
             this.visitorBtn.Size = new System.Drawing.Size(236, 66);
             this.visitorBtn.TabIndex = 19;
@@ -146,8 +148,8 @@ namespace ManagerApp
             this.closeBtn.ForeColor = System.Drawing.Color.White;
             this.closeBtn.Image = ((System.Drawing.Image)(resources.GetObject("closeBtn.Image")));
             this.closeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.closeBtn.Location = new System.Drawing.Point(572, 486);
-            this.closeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.closeBtn.Location = new System.Drawing.Point(743, 487);
+            this.closeBtn.Margin = new System.Windows.Forms.Padding(4);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(236, 66);
             this.closeBtn.TabIndex = 2;
@@ -166,7 +168,7 @@ namespace ManagerApp
             this.campBtn.Image = ((System.Drawing.Image)(resources.GetObject("campBtn.Image")));
             this.campBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.campBtn.Location = new System.Drawing.Point(861, 210);
-            this.campBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.campBtn.Margin = new System.Windows.Forms.Padding(4);
             this.campBtn.Name = "campBtn";
             this.campBtn.Size = new System.Drawing.Size(236, 66);
             this.campBtn.TabIndex = 2;
@@ -185,7 +187,7 @@ namespace ManagerApp
             this.shopBtn.Image = ((System.Drawing.Image)(resources.GetObject("shopBtn.Image")));
             this.shopBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.shopBtn.Location = new System.Drawing.Point(572, 210);
-            this.shopBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.shopBtn.Margin = new System.Windows.Forms.Padding(4);
             this.shopBtn.Name = "shopBtn";
             this.shopBtn.Size = new System.Drawing.Size(236, 66);
             this.shopBtn.TabIndex = 2;
@@ -198,10 +200,29 @@ namespace ManagerApp
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1339, 69);
             this.panel2.TabIndex = 1;
+            // 
+            // buttonTransactions
+            // 
+            this.buttonTransactions.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonTransactions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.buttonTransactions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.buttonTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTransactions.ForeColor = System.Drawing.Color.White;
+            this.buttonTransactions.Image = ((System.Drawing.Image)(resources.GetObject("buttonTransactions.Image")));
+            this.buttonTransactions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTransactions.Location = new System.Drawing.Point(430, 487);
+            this.buttonTransactions.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonTransactions.Name = "buttonTransactions";
+            this.buttonTransactions.Size = new System.Drawing.Size(236, 66);
+            this.buttonTransactions.TabIndex = 23;
+            this.buttonTransactions.Text = "Transactions";
+            this.buttonTransactions.UseVisualStyleBackColor = true;
+            this.buttonTransactions.Click += new System.EventHandler(this.buttonTransactions_Click);
             // 
             // HomeForm
             // 
@@ -213,7 +234,7 @@ namespace ManagerApp
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "HomeForm";
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -234,6 +255,7 @@ namespace ManagerApp
         private System.Windows.Forms.Button inventoryBtn;
         private System.Windows.Forms.Button analyticBtn;
         private System.Windows.Forms.Button staffBtn;
+        private System.Windows.Forms.Button buttonTransactions;
     }
 }
 

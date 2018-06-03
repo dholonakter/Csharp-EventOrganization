@@ -51,6 +51,7 @@
     <Compile Include="CampingSpot.cs" />
     <Compile Include="CrossThreadDisplay.cs" />
     <Compile Include="DataHelper.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Participant.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

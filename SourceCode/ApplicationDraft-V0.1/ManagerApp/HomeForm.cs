@@ -84,5 +84,16 @@ namespace ManagerApp
             selectedForm.Show();
             this.Dispose();
         }
+
+        private void buttonTransactions_Click(object sender, EventArgs e)
+        {
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new TransactionForm();
+            selectedForm.Show();
+            this.Dispose();
+        }
     }
 }
