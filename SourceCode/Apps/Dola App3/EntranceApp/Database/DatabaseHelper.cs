@@ -54,11 +54,13 @@ namespace EntranceApp
         }
         #endregion
 
+        #region Public Method
         /// <summary>
         /// read data from visitor
         /// </summary>
         /// <param name="rfidCode"></param>
         /// <returns></returns>
+
         public Visitor FindVisitor(string rfidCode)
         {
             Visitor foundVisitor = null;
@@ -149,67 +151,34 @@ namespace EntranceApp
         /// <param name="foundVistor"></param>
         /// <returns></returns>
 
-        public bool CheckIn(Visitor foundVisitor)
-        {
-            bool onsuccess = false;
-            foundVisitor = FindVisitor(foundVisitor.RFID);
-            if (foundVisitor != null)
-            {
-                if (foundVisitor.IsCheckedIn)
-                {
-                    foundVisitor.IsCheckedIn = true;
-                    onsuccess = UpdateVisitorTableIsCheckedInColumn(foundVisitor.RFID, true);
-                }
-                else
-                {
-                    onsuccess = UpdateVisitorTableIsCheckedInColumn(foundVisitor.RFID, false);
-
-                }
-
-            }
-            return onsuccess;
-
-        }
-        public bool Checkout(Visitor foundVisitor)
-        {
-            bool onsuccess = false;
-            foundVisitor = FindVisitor(foundVisitor.RFID);
-            if (foundVisitor != null)
-            {
-                if (foundVisitor.IsCheckedIn)
-                {
-                    foundVisitor.IsCheckedIn = true;
-                    onsuccess = UpdateVisitorTableIsCheckedInColumn(foundVisitor.RFID, true);
-                }
-                else
-                {
-                    onsuccess = UpdateVisitorTableIsCheckedInColumn(foundVisitor.RFID, false);
-
-                }
-
-            }
-            return onsuccess;
-
-        }
-        public bool MakeCheckInOrOut(string rfidCode, out Visitor foundVistor)
-        {
+          public bool MakeCheckInOrOut(string rfidCode, out Visitor visitor)
+         {
             bool onSuccess = false;
-            foundVistor = FindVisitor(rfidCode);
+           Visitor foundVistor = FindVisitor(rfidCode);
 
             if (foundVistor != null)
             {
-                if (foundVistor.IsCheckedIn && foundVistor.IsCardLinked)
+                if (foundVistor.IsCheckedIn)
                 {
                     onSuccess = UpdateVisitorTableIsCheckedInColumn(rfidCode, false);
                 }
-                else if (foundVistor.IsCardLinked)
+                else 
                 {
-                    foundVistor.IsCheckedIn = true;
                     onSuccess = UpdateVisitorTableIsCheckedInColumn(rfidCode, true);
                 }
             }
+            if (onSuccess)
+            {
+                visitor = foundVistor;
+            }
+            else
+            {
+                visitor = null;
+            }
+
             return onSuccess;
-        }
+         }
+         #endregion
 
     }
 

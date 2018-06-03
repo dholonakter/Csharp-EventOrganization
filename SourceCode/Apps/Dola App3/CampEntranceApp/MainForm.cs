@@ -1,33 +1,37 @@
-﻿using System;
-using System.Windows.Forms;
-using Phidget22;
+﻿using Phidget22;
 using Phidget22.Events;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
 using System.Drawing;
-using EntranceApp.Helper;
-using EntranceApp.Models;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
-namespace EntranceApp
+namespace CampEntranceApp
 {
-    public partial class MainForm : Form, ILogger
+    public partial class CampEntrance : Form,ILogger
     {
-        #region Public Constants
-        public const string lblDefaultText = "...........................";
-        #endregion
 
         #region Private Fields
         private DatabaseHelper dh;
         private RFID myRFIDReader;
+        #region Public Constants
+        public const string lblDefaultText = "...........................";
+        #endregion
+
         #endregion
 
         #region Constructor
-        public MainForm()
+        public CampEntrance()
         {
             InitializeComponent();
             try
             {
                 dh = new DatabaseHelper(this);
                 myRFIDReader = new RFID();
-
             }
             catch (PhidgetException)
             {
@@ -35,33 +39,34 @@ namespace EntranceApp
 
             }
         }
-        #endregion
+         #endregion 
 
-        #region Private Methods
+        #region Private Event Handlers Methods
+
         private void ShowErrorMessage(string message)
         {
-            lblMessage.Text = "Cannot find visitor";
-            lblMessage.BackColor = Color.Red;
+            lblStatus.Text = "not paid yet";
+            lblStatus.BackColor = Color.Red;
         }
         private void ShowSuccessMessage(string message)
         {
-            lblMessage.BackColor = Color.Green;
-            lblMessage.Text = message;
+            lblStatus.BackColor = Color.Green;
+            lblStatus.Text = message;
         }
         private void ResetControlsBackColor()
         {
-            lblMessage.BackColor = SystemColors.Control;
+            lblStatus.BackColor = SystemColors.Control;
             btnCheckIn.BackColor = SystemColors.Control;
             btnCheckOut.BackColor = SystemColors.Control;
         }
-        private void SetLabelsTextOfCheckInCheckOutGroupBox(Visitor visitor)
+        private void SetLabelsTextOfCheckInCheckOutGroupBox(Participant participant)
         {
-            if (visitor != null)
+            if (participant != null)
             {
-                lblFullName.Text = visitor.FullName;
-                lblEmailAddress.Text = visitor.EmailAddress;
-                lblRFIDCode.Text = visitor.RFID;
-                if (visitor.IsCheckedIn)
+                 lblFirstName.Text = participant.FirstName;
+                 lbLastName.Text = participant.LastName;
+                  lblRFIDCode.Text = participant.RFID;
+                if (participant.IsCheckedIn)
                 {
                     ShowSuccessMessage("Check In Success");
                     btnCheckIn.BackColor = Color.Green;
@@ -75,13 +80,13 @@ namespace EntranceApp
                 }
             }
         }
-        private void CheckInorCheckout(string rfid)//Rfid rfid)
+        private void CheckInOrCheckout(string rfid)
         {
-            if (!String.IsNullOrEmpty(rfid))//rfid != null)
+            if (!String.IsNullOrEmpty(rfid))
             {
-                Visitor checkinvisitor;
+                Participant checkinvisitor=dh.GetParticipant(rfid);
 
-                if (dh.MakeCheckInOrOut(rfid, out checkinvisitor))//rfid.Code, out checkedInVisitor))
+                if (dh.CheckInOrCheckout(checkinvisitor))//rfid.Code, out checkedInVisitor))
                 {
                     SetLabelsTextOfCheckInCheckOutGroupBox(checkinvisitor);
                     timerResetControls.Start();
@@ -89,24 +94,23 @@ namespace EntranceApp
                 else
                 {
                     ResetControlsBackColor();
-                    ShowErrorMessage("Cannot find vistor");
+                    ShowErrorMessage("Not paid yet");
                     timerResetControls.Start();
                 }
             }
         }
 
 
-        #endregion
-
-        #region Private Event Handlers Methods
         private void ProcessThisTag(object sender, RFIDTagEventArgs e)
         {
-               CheckInorCheckout(e.Tag);
-          
+            CheckInOrCheckout(e.Tag);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+
+
+        private void Form1_Load(object sender, EventArgs e)
         {
+
             try
             {
                 myRFIDReader.Tag += new RFIDTagEventHandler(ProcessThisTag);
@@ -118,24 +122,14 @@ namespace EntranceApp
                 LogMessage(ErrorType.RFID, "No RFID-reader opened");
             }
         }
-        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
-        {
 
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
             myRFIDReader.Tag -= new RFIDTagEventHandler(ProcessThisTag);
             myRFIDReader.Close();
             LogMessage(ErrorType.RFID, "Closed");
-        }
-        private void tbPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
-        }
 
-        private void btnClearLogs_Click(object sender, EventArgs e)
-        {
-            lbxLogMessage.Items.Clear();
         }
-        #endregion
-
         #region ILogger Implementation
         public void LogMessage(ErrorType errorType, string message)
         {
@@ -144,20 +138,25 @@ namespace EntranceApp
         #endregion
         private void ResetControls()
         {
-            lblFullName.Text = lblDefaultText;
-            lblEmailAddress.Text = lblDefaultText;
+            lblFirstName.Text = lblDefaultText;
+            lbLastName.Text = lblDefaultText;
             lblRFIDCode.Text = lblDefaultText;
-            lblMessage.Text = lblDefaultText;
-            lblMessage.BackColor = SystemColors.Control;
+            lblStatus.Text = lblDefaultText;
+            lblStatus.BackColor = SystemColors.Control;
             btnCheckIn.BackColor = SystemColors.Control;
             btnCheckOut.BackColor = SystemColors.Control;
         }
 
-        private void timerResetControls_Tick(object sender, EventArgs e)
+        private void lblLastName_Click(object sender, EventArgs e)
         {
-            ResetControls();
-            timerResetControls.Stop();
 
         }
+
+        private void timerResetControls_Tick(object sender, EventArgs e)
+        {
+            timerResetControls.Stop();
+            ResetControls();
+        }
     }
+    #endregion
 }

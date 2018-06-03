@@ -12,7 +12,7 @@ namespace CampApp
 
         public string LeaderRFIDCode { get; set; }
 
-        public Participant(string rfid,string fullname,double balance, ParticipantRole role,string leaderRFIDCode):base(fullname,balance,rfid)
+        public Participant(string rfid,string fullname,double balance, ParticipantRole role,string leaderRFIDCode):base(fullname,rfid,balance)
         {
             Role = role;
             LeaderRFIDCode = leaderRFIDCode;

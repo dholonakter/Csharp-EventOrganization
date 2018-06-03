@@ -76,7 +76,18 @@ namespace CampApp
             if (participantManager.GetAllParticipant().Count > 0)
             {
                 SetGroupLeaderInfo(participantManager.GetAllParticipant()[0]);
-                AddToMembersListBox(participantManager.GetAllParticipant().Skip(1).ToArray());
+
+                List<Participant> members = new List<Participant>();
+                foreach (Participant participant in participantManager.GetAllParticipant())
+                {
+                    if(participant.Role==ParticipantRole.Member)
+                    {
+                        members.Add(participant);
+                    }
+                }
+                AddToMembersListBox(members.ToArray());
+
+        //AddToMembersListBox(participantManager.GetAllParticipant().Skip(1).ToArray());
             }
         }
 

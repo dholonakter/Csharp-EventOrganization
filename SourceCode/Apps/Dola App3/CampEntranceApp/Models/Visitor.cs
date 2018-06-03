@@ -7,7 +7,7 @@ namespace CampEntranceApp
 {
     public class Visitor
     {
-        #region Properties
+         #region Properties
         public int Id { get; set; }
         public string FullName { get; set; }
         public string FirstName { get; set; }
@@ -19,11 +19,11 @@ namespace CampEntranceApp
         public bool IsCheckedIn { get; set; }
         #endregion
 
-        #region constructor
+         #region constructor
         public Visitor(string firstname,string lastname,string rfid,double balance)
         {
             this.FirstName = firstname;
-            this.FirstName = firstname;
+            this.LastName = lastname;
             this.RFID = rfid;
             this.Balance = balance;
         }
@@ -31,9 +31,12 @@ namespace CampEntranceApp
         {
 
         }
+        #endregion
+
+         #region  Public Method
         public override string ToString()
         {
-            return FullName + "," + Balance + "," + RFID;
+            return FirstName + "," + LastName + "," + RFID;
 
         }
         #endregion

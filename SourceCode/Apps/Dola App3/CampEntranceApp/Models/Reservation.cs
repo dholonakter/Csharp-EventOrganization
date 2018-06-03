@@ -8,33 +8,38 @@ namespace CampEntranceApp
 {
     public class Reservation
     {
+        #region Properties
         public int Id { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
+        public string Time { get; set; }
         public int TotalMember { get; set; }
         public int SpotNumber { get; set; }
         public int LocationNumber { get; set; }
         public string LeaderRFIDCode { get; set; }
         public bool IsPaid { get; set; }
-        public Reservation(DateTime startDate, DateTime endDate, int totalnr, int spotNr, int locationNr, string rfid, bool isPaid)
+        public int NrOfCheckedIn { get; set; }
+        public int Reserver { get; set; }//this column should be in reservation in participant_id in participant table.
+        #endregion
+
+        #region Constructor
+        public Reservation(string startDate, string endDate, int spotNr,int totalnr, int nrofcheckedIn,bool isPaid)
         {
             StartDate = startDate;
             EndDate = endDate;
             TotalMember = totalnr;
             SpotNumber = spotNr;
-            LocationNumber = locationNr;
-            LeaderRFIDCode = rfid;
             IsPaid = isPaid;
+            NrOfCheckedIn = nrofcheckedIn;
         }
-        public Reservation()
-        {
+        #endregion
 
-        }
-
+        #region Public Method
         public override string ToString()
         {
             return base.ToString() + StartDate + EndDate + TotalMember;
         }
+        #endregion
 
     }
 }
