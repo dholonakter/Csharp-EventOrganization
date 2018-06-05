@@ -12,25 +12,23 @@ namespace ThanhDLL
         // FIELDS AND PROPERTIES
         ///////////////////////////////////////
         public int ReservNr { get; set; }
-        public string ReservDate { get; set; }
-        public string ReservTime { get; set; }
+        public DateTime ReservDate { get; set; }
         public CampingSpot Spot { get; set; }
         public Visitor Reserver { get; set; }
         public int NrOfRegistered { get; set; }
         public int NrCheckedIn { get; set; }
         public bool Paid { get; set; }
-        public string StartDate { get; set; }
-        public string EndDate { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
 
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////
-        public Reservation (int reservNr, string reservDate, string reservTime, CampingSpot spot, 
-            Visitor reserver, int nrOfRegistered, int nrCheckedIn, bool paid, string startDate, string endDate)
+        public Reservation (int reservNr, DateTime reservDate, CampingSpot spot, 
+            Visitor reserver, int nrOfRegistered, int nrCheckedIn, bool paid, DateTime startDate, DateTime endDate)
         {
             this.ReservNr = reservNr;
-            this.ReservDate = ReservDate;
-            this.ReservTime = reservTime;
+            this.ReservDate = reservDate;
             this.Spot = spot;
             this.Reserver = reserver;
             this.NrOfRegistered = nrOfRegistered;
@@ -51,7 +49,7 @@ namespace ThanhDLL
         public override string ToString()
         {
             return "Reservation #" + this.ReservNr 
-                  + "\nReserved on " + this.ReservDate + " at " + this.ReservTime
+                  + "\nReserved on " + this.ReservDate
                   + "\nSpot #" + Spot.SpotNr + " " + Spot.SpotName 
                   + "\nReserved by: " + Reserver.FirstName + " " + Reserver.LastName 
                   + "\nPhone: " + Reserver.Phone 

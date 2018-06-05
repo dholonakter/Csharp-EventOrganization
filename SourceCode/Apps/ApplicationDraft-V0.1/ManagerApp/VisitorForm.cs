@@ -22,8 +22,8 @@ namespace ManagerApp
             InitializeComponent();
             dh = new DataHelper();
 
-            timerUpdate.Start();
-            sql = "SELECT VisitorNr, FirstName, LastName, Phone, Email, UserPassword, RFIDNr, Credit, CheckedIn, SpotNr" + " FROM VISITOR";
+            //timerUpdate.Start();
+            sql = "SELECT VisitorNr, FirstName, LastName, Phone, Email, UserPassword, RFIDNr, Credit, CheckedIn, ReservNr, IsInCamp" + " FROM VISITOR";
             Display(sql);
 
             UpdateLabels();

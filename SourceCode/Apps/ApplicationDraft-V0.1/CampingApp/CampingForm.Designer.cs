@@ -41,7 +41,6 @@
             this.statusIn = new System.Windows.Forms.Label();
             this.labelStatusIn = new System.Windows.Forms.Label();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.labelTagNr = new System.Windows.Forms.Label();
             this.buttonPay = new System.Windows.Forms.Button();
             this.searchPanel = new System.Windows.Forms.Panel();
             this.labelMonitor = new System.Windows.Forms.Label();
@@ -173,9 +172,8 @@
             this.checkinPanel.Controls.Add(this.statusIn);
             this.checkinPanel.Controls.Add(this.labelStatusIn);
             this.checkinPanel.Controls.Add(this.pictureBox2);
-            this.checkinPanel.Controls.Add(this.labelTagNr);
             this.checkinPanel.Controls.Add(this.buttonPay);
-            this.checkinPanel.Location = new System.Drawing.Point(221, 15);
+            this.checkinPanel.Location = new System.Drawing.Point(215, 0);
             this.checkinPanel.Margin = new System.Windows.Forms.Padding(4);
             this.checkinPanel.Name = "checkinPanel";
             this.checkinPanel.Size = new System.Drawing.Size(1473, 846);
@@ -229,18 +227,6 @@
             this.pictureBox2.TabIndex = 24;
             this.pictureBox2.TabStop = false;
             // 
-            // labelTagNr
-            // 
-            this.labelTagNr.AutoSize = true;
-            this.labelTagNr.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTagNr.ForeColor = System.Drawing.Color.DimGray;
-            this.labelTagNr.Location = new System.Drawing.Point(88, 382);
-            this.labelTagNr.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelTagNr.Name = "labelTagNr";
-            this.labelTagNr.Size = new System.Drawing.Size(163, 28);
-            this.labelTagNr.TabIndex = 23;
-            this.labelTagNr.Text = "Tag Number";
-            // 
             // buttonPay
             // 
             this.buttonPay.BackColor = System.Drawing.Color.DimGray;
@@ -253,10 +239,10 @@
             this.buttonPay.ForeColor = System.Drawing.Color.White;
             this.buttonPay.Image = ((System.Drawing.Image)(resources.GetObject("buttonPay.Image")));
             this.buttonPay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonPay.Location = new System.Drawing.Point(908, 290);
+            this.buttonPay.Location = new System.Drawing.Point(93, 377);
             this.buttonPay.Margin = new System.Windows.Forms.Padding(4);
             this.buttonPay.Name = "buttonPay";
-            this.buttonPay.Size = new System.Drawing.Size(160, 65);
+            this.buttonPay.Size = new System.Drawing.Size(173, 42);
             this.buttonPay.TabIndex = 10;
             this.buttonPay.Text = "Pay";
             this.buttonPay.UseVisualStyleBackColor = false;
@@ -276,6 +262,7 @@
             this.searchPanel.Name = "searchPanel";
             this.searchPanel.Size = new System.Drawing.Size(1942, 846);
             this.searchPanel.TabIndex = 6;
+            this.searchPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.searchPanel_Paint);
             // 
             // labelMonitor
             // 
@@ -437,9 +424,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
+            this.Controls.Add(this.checkinPanel);
             this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.checkoutPanel);
-            this.Controls.Add(this.checkinPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -479,7 +466,6 @@
         private System.Windows.Forms.Label statusIn;
         private System.Windows.Forms.Label labelStatusIn;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Label labelTagNr;
         private System.Windows.Forms.Button buttonPay;
         private System.Windows.Forms.Panel searchPanel;
         private System.Windows.Forms.Label labelMonitor;

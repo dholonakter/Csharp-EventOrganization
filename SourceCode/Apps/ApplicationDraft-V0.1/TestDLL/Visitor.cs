@@ -32,18 +32,19 @@ namespace ThanhDLL
                 }
             }
         }
-        public int SpotNr { get; set; }
+        public int ReservNr { get; set; }
         public List<LoanArticle> ArticlesBorrowed { get; set; } // need for checking out
-
+        public bool IsInCamp { get; set; }
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////
         public Visitor(int visitorNr, string firstName, string lastName, string phone, string mail,
-                      string rfidNr, bool checkedIn, double credit, int spotNr)
+                      string rfidNr, bool checkedIn, double credit, int reservNr, bool isInCamp)
                       : base(visitorNr, firstName, lastName, phone, mail, rfidNr, checkedIn)
         {  
             this.Credit = credit;
-            this.SpotNr = spotNr;
+            this.ReservNr = reservNr;
+            this.IsInCamp = isInCamp;
             ArticlesBorrowed = new List<LoanArticle>();
         }
 
@@ -65,17 +66,10 @@ namespace ThanhDLL
         {
             return "Visitor #" + base.ToString()
                 + "\nCredit: " + this.Credit +
-                (this.SpotNr != 0 ? "\nReserved camp: " + this.SpotNr : "\nNot reserved camp");
+                (this.ReservNr != 0 ? "\nReserved camp: " + this.ReservNr : "\nNot reserved camp");
         }
 
-        /// <summary>
-        /// Changes SpotNr attribute to the reserved spot
-        /// </summary>
-        public void ReserveACamp(int spot)
-        {
-            this.SpotNr = spot;
-        }
-
+       
         /// <summary>
         /// Changes a visitor's credit by amount. Send negative number to reduce.
         /// </summary>

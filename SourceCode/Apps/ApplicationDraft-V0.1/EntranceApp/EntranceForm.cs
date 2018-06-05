@@ -62,7 +62,6 @@ namespace EntranceApp
         {
             // Connecting to DB
             dh = new DataHelper();
-            visitor = dh.FindVisitorByNr("4"); // DEMO
 
             // Connecting RFID reader
             try
@@ -185,8 +184,10 @@ namespace EntranceApp
                         using (CrossThreadDisplay display = new CrossThreadDisplay(this))
                         {
                             display.SetText(e.Tag, labelTagNr);
+                            display.SetText(t.ToString(), lbCheckIn);
+                            display.SetText(visitor.ToString(), labelVisitorInfo);
+                            display.SetText("OK", statusIn);
                         }
-
                         successSound.Play();
                     }
                     else
@@ -199,7 +200,6 @@ namespace EntranceApp
                 {
                     MessageBox.Show("RFID already used");
                 }
-                StartWebcam(); // restart webcam
             }
         }
 
@@ -228,6 +228,7 @@ namespace EntranceApp
             {
                 errorSound.Play();
                 display.DisplayLoanArticle(v.ArticlesBorrowed, lbCheckOut);
+                display.SetText(v.ToString(), labelVisitor);
                 display.SetText("NOT OK", labelStatusOut);
             }
             display.Dispose();
@@ -262,45 +263,48 @@ namespace EntranceApp
 
         private void webCamTimer_Tick(object sender, EventArgs e)
         {
-            var bitmap = wCam.GetCurrentImage();
-            if (bitmap == null)
-                return;
-            var reader = new BarcodeReader();
-            var result = reader.Decode(bitmap);
-            CrossThreadDisplay display = new CrossThreadDisplay(this);
-
-            if (result != null)
+            if (wCam != null)
             {
-                // Find their ticket
-                t = dh.GetTicket(Convert.ToInt32(result.Text));
+                var bitmap = wCam.GetCurrentImage();
+                if (bitmap == null)
+                    return;
+                var reader = new BarcodeReader();
+                var result = reader.Decode(bitmap);
+                CrossThreadDisplay display = new CrossThreadDisplay(this);
 
-                if (t != null) // if ticket exists
+                if (result != null)
                 {
-                    visitor = dh.FindVisitorByNr(t.BuyerNr.ToString());
-                    display.SetText(t.ToString(), lbCheckIn);
-                    display.SetText(visitor.ToString(), labelVisitorInfo);
+                    // Find their ticket
+                    t = dh.GetTicket(Convert.ToInt32(result.Text));
 
-                    if (t.Paid)
+                    if (t != null) // if ticket exists
                     {
-                        display.SetText("OK", labelStatusIn);
-                        t = null;
+                        visitor = dh.FindVisitorByNr(t.BuyerNr.ToString());
+                        display.SetText(t.ToString(), lbCheckIn);
+                        display.SetText(visitor.ToString(), labelVisitorInfo);
+
+                        if (t.Paid)
+                        {
+                            display.SetText("OK", labelStatusIn);
+                            t = null;
+                        }
+                        else
+                        {
+                            errorSound.Play();
+                            display.SetText("UNPAID", labelStatusIn);
+                        }
+
+                        StopWebcam();
                     }
                     else
                     {
-                        errorSound.Play();
-                        display.SetText("UNPAID", labelStatusIn);
+                        MessageBox.Show("Ticket not found");
                     }
-
-                    StopWebcam();
                 }
                 else
                 {
-                    MessageBox.Show("Ticket not found");
+                    labelStatusIn.Text = "No QR";
                 }
-            }
-            else
-            {
-                labelStatusIn.Text = "No QR";
             }
         }
 

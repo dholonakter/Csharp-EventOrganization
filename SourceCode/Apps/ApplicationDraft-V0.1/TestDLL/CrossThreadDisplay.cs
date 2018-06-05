@@ -72,7 +72,7 @@ namespace ThanhDLL
                 lb.Items.Clear();
                 foreach (LoanArticle a in list)
                 {
-                    lb.Items.Add(a);
+                    lb.Items.Add("#" + a.ArticleNr + " - " + a.ArticleName + " at " + a.ShopName);
                 }
             }
         }

@@ -133,12 +133,8 @@ namespace ThanhDLL
             string sql = "UPDATE VISITOR " +
                         "SET Credit = " + v.Credit + "," +
                         "CheckedIn = " + v.CheckedIn + "," +
+                        "IsInCamp = " + v.IsInCamp + ", " +
                         "RFIDNr = " + (v.RFIDNr == "" ? "NULL" : "'" + v.RFIDNr + "'");
-
-            if (v.SpotNr != 0) // if they reserve a spot
-            {
-                sql += ", SpotNr = " + v.SpotNr;
-            }
 
             sql += " WHERE VisitorNr = " + v.IdNr;
 
@@ -185,6 +181,7 @@ namespace ThanhDLL
                 double cred = 0;
                 bool checkedIn = false;
                 int spot = 0; // not reserved by default
+                bool isInCamp;
 
                 nr = Convert.ToInt32(reader["VisitorNr"]);
                 first = Convert.ToString(reader["FirstName"]);
@@ -208,12 +205,13 @@ namespace ThanhDLL
                 {
                     checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
                 }
-                if (!(reader["SpotNr"] is DBNull))
+                if (!(reader["ReservNr"] is DBNull))
                 {
-                    spot = Convert.ToInt32(reader["SpotNr"]);
+                    spot = Convert.ToInt32(reader["ReservNr"]);
                 }
+                isInCamp = Convert.ToBoolean(reader["IsInCamp"]);
 
-                v = (new Visitor(nr, first, last, phone, mail, rfidNr, checkedIn, cred, spot));
+                v = (new Visitor(nr, first, last, phone, mail, rfidNr, checkedIn, cred, spot, isInCamp));
             }
             return v;
         }
@@ -253,9 +251,9 @@ namespace ThanhDLL
         /// <param name="v">Selected visitor</param>
         public void FindUnreturnedItems(Visitor v)
         {
-            string sql = "SELECT ShopName, ArticleNr, ArticleName " +
-                "FROM all_order" +
-                "WHERE IsLoanable = 1 and VisitorNr = " + v.IdNr + " AND ReturnDate IS NULL";
+            string sql = "SELECT ShopName, ArticleNr, ArticleName" +
+                " FROM all_order" +
+                " WHERE IsLoanable = 1 and VisitorNr = " + v.IdNr + " AND ReturnDate IS NULL";
 
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
@@ -412,8 +410,8 @@ namespace ThanhDLL
 
         public int MoveToDeletedVisitor(Visitor v)
         {
-            string sql = "INSERT INTO DELETED_VISITOR(IdNr, FirstName, LastName, Phone, Email, RFIDNr, SpotNr)" +
-                "VALUES(@IdNr, @FirstName, @LastName, @Phone, @Email, @RFIDNr, @SpotNr); ";
+            string sql = "INSERT INTO DELETED_VISITOR(IdNr, FirstName, LastName, Phone, Email, RFIDNr, ReservNr)" +
+                "VALUES(@IdNr, @FirstName, @LastName, @Phone, @Email, @RFIDNr, @ReservNr); ";
             sql += "SET FOREIGN_KEY_CHECKS=0; DELETE FROM PARTICIPANT WHERE IdNr = " + v.IdNr + "; SET FOREIGN_KEY_CHECKS= 1;";
             // temporarily turning off foreign key checks
 
@@ -426,7 +424,7 @@ namespace ThanhDLL
             command.Parameters.AddWithValue("@Phone", v.Phone);
             command.Parameters.AddWithValue("@Email", v.Email);
             command.Parameters.AddWithValue("@RFIDNr", v.RFIDNr);
-            command.Parameters.AddWithValue("@SpotNr", v.SpotNr);
+            command.Parameters.AddWithValue("@ReservNr", v.ReservNr);
 
             try
             {
@@ -652,8 +650,8 @@ namespace ThanhDLL
 
         public int CreateNewStoreOrder(Order o)
         {
-            string sql = "INSERT INTO SHOP_ORDER(OrderDate, OrderTime, ShopNr, VisitorNr, IsLoanable) " +
-                       "VALUES(CONVERT('" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "', DATETIME), " + o.Shop.ShopNr + ", " + o.VisitorNr + ", 0)";
+            string sql = "INSERT INTO SHOP_ORDER(OrderDate, ShopNr, VisitorNr, IsLoanable) " +
+                       "VALUES(CONVERT('" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "', DATETIME)" + ", " + o.Shop.ShopNr + ", " + o.VisitorNr + ", 0)";
             //MessageBox.Show(sql);
             MySqlCommand command = new MySqlCommand(sql, connection);
 
@@ -1073,30 +1071,35 @@ namespace ThanhDLL
                 connection.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                int reservNr = 0;
-                string reservDate = "";
-                string reservTime = "";
-                string endDate = "";
-                string startDate = "";
-                CampingSpot spot = null;
-                int nrOfRegistered = 0;
-                int nrCheckedIn = 0;
-                bool paid = false;
-
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    reservNr = Convert.ToInt32(reader["ReservNr"]);
-                    reservDate = Convert.ToString(reader["ReservDate"]);
-                    reservTime = Convert.ToString(reader["ReservTime"]);
-                    spot = new CampingSpot(Convert.ToInt32(reader["SpotNr"]), Convert.ToString(reader["SpotName"]));
-                    nrOfRegistered = Convert.ToInt32(reader["NrOfRegistered"]);
-                    nrCheckedIn = Convert.ToInt32(reader["NrCheckedIn"]);
-                    paid = Convert.ToBoolean(reader["Paid"]);
-                    startDate = Convert.ToString(reader["StartDate"]);
-                    endDate = Convert.ToString(reader["EndDate"]);
-                }
+                    int reservNr = 0;
+                    DateTime reservDate = DateTime.MinValue;
+                    DateTime startDate = DateTime.MinValue;
+                    DateTime endDate = DateTime.MinValue;
+                    CampingSpot spot = null;
+                    int nrOfRegistered = 0;
+                    int nrCheckedIn = 0;
+                    bool paid = false;
 
-                return new Reservation(reservNr, reservDate, reservTime, spot, visitor, nrOfRegistered, nrCheckedIn, paid, startDate, endDate);
+                    while (reader.Read())
+                    {
+                        reservNr = Convert.ToInt32(reader["ReservNr"]);
+                        reservDate = Convert.ToDateTime(reader["ReservDate"]);
+                        spot = new CampingSpot(Convert.ToInt32(reader["SpotNr"]), Convert.ToString(reader["SpotName"]));
+                        nrOfRegistered = Convert.ToInt32(reader["NrOfRegistered"]);
+                        nrCheckedIn = Convert.ToInt32(reader["NrCheckedIn"]);
+                        paid = Convert.ToBoolean(reader["Paid"]);
+                        startDate = Convert.ToDateTime(reader["StartDate"]);
+                        endDate = Convert.ToDateTime(reader["EndDate"]);
+                    }
+
+                    return new Reservation(reservNr, reservDate, spot, visitor, nrOfRegistered, nrCheckedIn, paid, startDate, endDate);
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (MySqlException)
             {
@@ -1124,10 +1127,9 @@ namespace ThanhDLL
                     return null;
                 }
 
-                string reservDate = "";
-                string reservTime = "";
-                string endDate = "";
-                string startDate = "";
+                DateTime reservDate = DateTime.MinValue;
+                DateTime startDate = DateTime.MinValue;
+                DateTime endDate = DateTime.MinValue;
                 Visitor reserver = null;
                 CampingSpot spot = null;
                 int nrOfRegistered = 0;
@@ -1136,18 +1138,17 @@ namespace ThanhDLL
 
                 while (reader.Read())
                 {
-                    reservDate = Convert.ToString(reader["ReservDate"]);
-                    reservTime = Convert.ToString(reader["ReservTime"]);
+                    reservDate = Convert.ToDateTime(reader["ReservDate"]);
                     spot = new CampingSpot(Convert.ToInt32(reader["SpotNr"]), Convert.ToString(reader["SpotName"]));
                     reserver = new Visitor(Convert.ToInt32(reader["Reserver"]), Convert.ToString(reader["FirstName"]), Convert.ToString(reader["LastName"]), Convert.ToString(reader["Phone"]), Convert.ToString(reader["Email"]));
                     nrOfRegistered = Convert.ToInt32(reader["NrOfRegistered"]);
                     nrCheckedIn = Convert.ToInt32(reader["NrCheckedIn"]);
                     paid = Convert.ToBoolean(reader["Paid"]);
-                    startDate = Convert.ToString(reader["StartDate"]);
-                    endDate = Convert.ToString(reader["EndDate"]);
+                    startDate = Convert.ToDateTime(reader["StartDate"]);
+                    endDate = Convert.ToDateTime(reader["EndDate"]);
                 }
 
-                return new Reservation(Convert.ToInt32(reservNr), reservDate, reservTime, spot, reserver, nrOfRegistered, nrCheckedIn, paid, startDate, endDate);
+                return new Reservation(Convert.ToInt32(reservNr), reservDate, spot, reserver, nrOfRegistered, nrCheckedIn, paid, startDate, endDate);
             }
             catch (MySqlException)
             {

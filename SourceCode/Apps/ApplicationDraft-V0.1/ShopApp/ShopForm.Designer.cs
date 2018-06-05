@@ -47,6 +47,7 @@
             this.quantitySelec = new System.Windows.Forms.NumericUpDown();
             this.startPanel = new System.Windows.Forms.Panel();
             this.labelShopName = new System.Windows.Forms.Label();
+            this.buttonRestart = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.productPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantitySelec)).BeginInit();
@@ -124,6 +125,7 @@
             // 
             // productPanel
             // 
+            this.productPanel.Controls.Add(this.buttonRestart);
             this.productPanel.Controls.Add(this.labelAdminShop);
             this.productPanel.Controls.Add(this.comboBoxShop);
             this.productPanel.Controls.Add(this.lblCardLinkedStatus);
@@ -274,6 +276,16 @@
             this.labelShopName.TabIndex = 32;
             this.labelShopName.Text = "SHOP NAME";
             // 
+            // buttonRestart
+            // 
+            this.buttonRestart.Location = new System.Drawing.Point(79, 546);
+            this.buttonRestart.Name = "buttonRestart";
+            this.buttonRestart.Size = new System.Drawing.Size(166, 55);
+            this.buttonRestart.TabIndex = 34;
+            this.buttonRestart.Text = "restart order";
+            this.buttonRestart.UseVisualStyleBackColor = true;
+            this.buttonRestart.Click += new System.EventHandler(this.buttonRestart_Click);
+            // 
             // ShopForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -322,6 +334,7 @@
         private System.Windows.Forms.Label labelAdminShop;
         private System.Windows.Forms.ComboBox comboBoxShop;
         private System.Windows.Forms.Label labelShopName;
+        private System.Windows.Forms.Button buttonRestart;
     }
 }
 

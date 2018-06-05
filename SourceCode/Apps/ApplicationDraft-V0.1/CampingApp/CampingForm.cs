@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ThanhDLL;
 using Phidget22;
 using Phidget22.Events;
+using System.Threading;
 
 namespace CampingApp
 {
@@ -43,6 +44,10 @@ namespace CampingApp
             sideHighlight.Top = checkinBtn.Top;
             checkinPanel.BringToFront();
 
+            // clear gui
+            lbCheckIn.Text = "";
+            labelStatusIn.Text = "STATUS";
+
             // Switching delegate's method
             myRFIDReader.Tag -= CheckOut;
             myRFIDReader.Tag += CheckIn;
@@ -54,6 +59,10 @@ namespace CampingApp
             sideHighlight.Height = checkoutBtn.Height;
             sideHighlight.Top = checkoutBtn.Top;
             checkoutPanel.BringToFront();
+
+            // clear gui
+            lbCheckOut.Text = "";
+            labelStatusOut.Text = "STATUS";
 
             // Switching delegate's method
             myRFIDReader.Tag -= CheckIn;
@@ -78,13 +87,17 @@ namespace CampingApp
         {
             // Connecting to DB
             dh = new DataHelper();
-            visitor = dh.FindVisitorByNr("10"); // DEMO
+
 
             // Connecting RFID reader
             try
             {
                 myRFIDReader = new RFID();
                 myRFIDReader.Open();
+                // Switching delegate's method
+                myRFIDReader.Tag -= CheckOut;
+                myRFIDReader.Tag += CheckIn;
+                r = null;
 
             }
             catch (PhidgetException)
@@ -107,16 +120,37 @@ namespace CampingApp
             {
                 display.SetText(r.ToString(), lbCheckIn);
 
-                DateTime endDate = DateTime.ParseExact(r.EndDate, "yyyy-MM-dd", System.Globalization.CultureInfo.InvariantCulture);
-
-                if (r.Paid && DateTime.Compare(endDate, DateTime.Now) > 0) // if endDate is earlier than now
+                if (r.Paid) // if endDate is earlier than now
                 {
-                    display.SetText("OK", labelStatusIn);
-                    r = null;
+                    if (DateTime.Compare(r.EndDate, DateTime.Now) > 0)
+                    {
+                        display.SetText("OK", labelStatusIn);
+
+                        if (!visitor.IsInCamp)
+                        {
+                            r.NrCheckedIn += 1;
+                            visitor.IsInCamp = true;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Visitor is already checked in");
+                        }
+
+                        if (dh.UpdateSelectedReservation(r) != -1 && dh.UpdateSelectedVisitor(visitor) != -1)
+                        {
+                            display.SetText(r.ToString(), lbCheckIn); //update reservation info on lb
+                            r = null;
+                        }
+                    }
+                    else
+                    {
+                        display.SetText("EXPIRED", labelStatusIn);
+                    }
+                    
                 }
                 else
                 {
-                    display.SetText("NOT OK", labelStatusIn);
+                    display.SetText("NOT PAID", labelStatusIn);
                 }
             }
             else
@@ -133,17 +167,25 @@ namespace CampingApp
 
             if (r != null)
             {
-                r.NrCheckedIn -= 1;
-                if (dh.UpdateSelectedReservation(r) != -1)
+                if (visitor.IsInCamp)
                 {
-                    display.SetText("OK", labelStatusOut);
-                    display.SetText(r.ToString(), lbCheckOut); //update reservation info on lb
-                    r = null;
+                    r.NrCheckedIn -= 1;
+                    visitor.IsInCamp = false;
+                    if (dh.UpdateSelectedReservation(r) != -1 && dh.UpdateSelectedVisitor(visitor) != -1)
+                    {
+                        display.SetText("OK", labelStatusOut);
+                        display.SetText(r.ToString(), lbCheckOut); //update reservation info on lb
+                        r = null;
+                    }
+                    else
+                    {
+                        r.NrCheckedIn += 1; //revert
+                        MessageBox.Show("Error while checking out");
+                    }
                 }
                 else
                 {
-                    r.NrCheckedIn += 1; //revert
-                    MessageBox.Show("Error while checking out");
+                    MessageBox.Show("Visitor is already checked out");
                 }
             }
             else
@@ -154,7 +196,7 @@ namespace CampingApp
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (r != null)
+            if (r != null && labelStatusIn.Text == "NOT OK") // only in cases where it's unpaid and not expired
             {
                 r.ChangeStatus();
                 if (dh.UpdateSelectedReservation(r) != -1)
@@ -208,6 +250,11 @@ namespace CampingApp
             {
                 MessageBox.Show("Please enter a number");
             }
+        }
+
+        private void searchPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

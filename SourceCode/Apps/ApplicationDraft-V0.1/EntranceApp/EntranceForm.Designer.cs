@@ -38,6 +38,7 @@
             this.checkoutBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkinPanel = new System.Windows.Forms.Panel();
+            this.labelVisitorInfo = new System.Windows.Forms.Label();
             this.lbCheckIn = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.statusIn = new System.Windows.Forms.Label();
@@ -71,7 +72,7 @@
             this.tbPhoneNumber = new System.Windows.Forms.TextBox();
             this.tbEmailAddress = new System.Windows.Forms.TextBox();
             this.webCamTimer = new System.Windows.Forms.Timer(this.components);
-            this.labelVisitorInfo = new System.Windows.Forms.Label();
+            this.labelVisitor = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.checkinPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -210,6 +211,18 @@
             this.checkinPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkinPanel.TabIndex = 3;
             // 
+            // labelVisitorInfo
+            // 
+            this.labelVisitorInfo.AutoSize = true;
+            this.labelVisitorInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVisitorInfo.ForeColor = System.Drawing.Color.DimGray;
+            this.labelVisitorInfo.Location = new System.Drawing.Point(924, 189);
+            this.labelVisitorInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelVisitorInfo.Name = "labelVisitorInfo";
+            this.labelVisitorInfo.Size = new System.Drawing.Size(150, 28);
+            this.labelVisitorInfo.TabIndex = 38;
+            this.labelVisitorInfo.Text = "Visitor info";
+            // 
             // lbCheckIn
             // 
             this.lbCheckIn.AutoSize = true;
@@ -313,6 +326,7 @@
             // 
             // checkoutPanel
             // 
+            this.checkoutPanel.Controls.Add(this.labelVisitor);
             this.checkoutPanel.Controls.Add(this.pictureBox1);
             this.checkoutPanel.Controls.Add(this.statusOut);
             this.checkoutPanel.Controls.Add(this.labelStatusOut);
@@ -367,7 +381,7 @@
             this.lbCheckOut.Location = new System.Drawing.Point(439, 187);
             this.lbCheckOut.Margin = new System.Windows.Forms.Padding(4);
             this.lbCheckOut.Name = "lbCheckOut";
-            this.lbCheckOut.Size = new System.Drawing.Size(565, 404);
+            this.lbCheckOut.Size = new System.Drawing.Size(377, 354);
             this.lbCheckOut.TabIndex = 1;
             // 
             // searchPanel
@@ -587,17 +601,17 @@
             // 
             this.webCamTimer.Tick += new System.EventHandler(this.webCamTimer_Tick);
             // 
-            // labelVisitorInfo
+            // labelVisitor
             // 
-            this.labelVisitorInfo.AutoSize = true;
-            this.labelVisitorInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVisitorInfo.ForeColor = System.Drawing.Color.DimGray;
-            this.labelVisitorInfo.Location = new System.Drawing.Point(924, 189);
-            this.labelVisitorInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.labelVisitorInfo.Name = "labelVisitorInfo";
-            this.labelVisitorInfo.Size = new System.Drawing.Size(150, 28);
-            this.labelVisitorInfo.TabIndex = 38;
-            this.labelVisitorInfo.Text = "Visitor info";
+            this.labelVisitor.AutoSize = true;
+            this.labelVisitor.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVisitor.ForeColor = System.Drawing.Color.DimGray;
+            this.labelVisitor.Location = new System.Drawing.Point(875, 187);
+            this.labelVisitor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelVisitor.Name = "labelVisitor";
+            this.labelVisitor.Size = new System.Drawing.Size(150, 28);
+            this.labelVisitor.TabIndex = 39;
+            this.labelVisitor.Text = "Visitor info";
             // 
             // EntranceForm
             // 
@@ -605,9 +619,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
+            this.Controls.Add(this.checkoutPanel);
             this.Controls.Add(this.checkinPanel);
             this.Controls.Add(this.searchPanel);
-            this.Controls.Add(this.checkoutPanel);
             this.Controls.Add(this.ticketPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -679,6 +693,7 @@
         private System.Windows.Forms.Label lbCheckIn;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Label labelVisitorInfo;
+        private System.Windows.Forms.Label labelVisitor;
     }
 }
 

@@ -47,7 +47,7 @@ namespace ThanhDLL
                 string info = "--- WELCOME TO " + Shop.ShopName.ToUpper() + " ---\n";
                 info += "\nYour order: \n";
 
-                if (OrderDate != null)
+                if (OrderDate != DateTime.MinValue)
                 {
                     info += "Purchased at: " + OrderDate.ToString() + "\n\n";
                 }
@@ -61,7 +61,7 @@ namespace ThanhDLL
 
                 info += "\nTOTAL: €" + GetSum().ToString("0.00") + "\n";
 
-                if (OrderDate != null)
+                if (OrderDate != DateTime.MinValue)
                 {
                     info += "\nThank you for your purchase!";
                 }

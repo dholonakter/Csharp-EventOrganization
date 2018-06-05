@@ -43,17 +43,19 @@ namespace ShopApp
         private void Pay(object sender, RFIDTagEventArgs e)
         {
             v = data.FindVisitorByTag(e.Tag);
-            o.VisitorNr = v.IdNr;
-
-            if (v.Credit < o.GetSum())
+            if (v != null)
             {
-                MessageBox.Show("Visitor does not have enough credit.");
-            }
-            else
-            {
-                v.Credit -= o.GetSum();
-                ProcessOrder();
-                data.UpdateSelectedVisitor(v);
+                o.VisitorNr = v.IdNr;
+                if (v.Credit < o.GetSum())
+                {
+                    MessageBox.Show("Visitor does not have enough credit.");
+                }
+                else
+                {
+                    v.Credit -= o.GetSum();
+                    ProcessOrder();
+                    data.UpdateSelectedVisitor(v);
+                }
             }
         }
 
@@ -221,6 +223,12 @@ namespace ShopApp
             selectedShop = data.GetShopByNr(comboBoxShop.SelectedValue.ToString());
             labelShopName.Text = "Store " + selectedShop.ShopName;
             DisplayProducts();
+        }
+
+        private void buttonRestart_Click(object sender, EventArgs e)
+        {
+            o = new Order(selectedShop);
+            labelOrderInfo.Text = o.ToString();
         }
     }
 }

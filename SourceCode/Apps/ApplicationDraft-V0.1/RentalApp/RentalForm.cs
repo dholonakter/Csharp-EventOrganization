@@ -81,6 +81,7 @@ namespace RentalApp
                 using (CrossThreadDisplay display = new CrossThreadDisplay(this))
                 {
                     display.SetText(v.ToString(), labelVisitorB);
+                    display.SetText(v.ToString(), labelVisitorR);
                 }
 
                 if (MessageBox.Show("Please start scanning your items", "Confirm", MessageBoxButtons.OK) == DialogResult.OK)
@@ -137,7 +138,8 @@ namespace RentalApp
                 {
                     DateTime timeOfOrder = data.GetOrderDateOfArticle(a, v.IdNr.ToString());
 
-                    int quantity = DateTime.Now.Subtract(timeOfOrder).Hours; // get number of hours borrowed
+                    // DEMO
+                    int quantity = DateTime.Now.AddHours(2).Subtract(timeOfOrder).Hours; // get number of hours borrowed
 
                     o.AddArticle(a, quantity); // add that as quantity
 
@@ -183,7 +185,7 @@ namespace RentalApp
                 }
                 else
                 {
-                    if (v.Credit < o.GetLoanFee())
+                    if (v.Credit + o.GetLoanDeposit() < o.GetLoanFee())
                     {
                         MessageBox.Show("Visitor does not have enough credit.");
                     }
