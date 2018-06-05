@@ -71,7 +71,13 @@ namespace ManagerApp
 
         private void staffBtn_Click(object sender, EventArgs e)
         {
-
+            if (selectedForm != null)
+            {
+                selectedForm.Dispose();
+            }
+            selectedForm = new StaffForm();
+            selectedForm.Show();
+            this.Dispose();
         }
 
         private void analyticBtn_Click(object sender, EventArgs e)

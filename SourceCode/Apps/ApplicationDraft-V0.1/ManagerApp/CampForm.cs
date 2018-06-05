@@ -31,12 +31,13 @@ namespace ManagerApp
             campTable = new BindingSource();
             campTable.DataSource = dh.DataTableFromSQL(sql);
             dataGridViewCamp.DataSource = campTable;
+            dataGridViewCamp.Columns[0].Visible = false;
             dataGridViewCamp.Refresh();
         }
 
         private void ShowAll()
         {
-            sql = "Select * FROM CAMPING_SPOT";
+            sql = "Select * FROM all_SPOT";
             Display(sql);
         }
 
@@ -51,21 +52,21 @@ namespace ManagerApp
         private void buttonClean_Click(object sender, EventArgs e)
         {
             timerUpdate.Start();
-            sql = "SELECT * FROM CAMPING_SPOT WHERE ToBeServiced = 1";
+            sql = "SELECT * FROM all_SPOT WHERE ToBeServiced = 1";
             Display(sql);
         }
 
         private void buttonAvailable_Click(object sender, EventArgs e)
         {
             timerUpdate.Start();
-            sql = "SELECT * FROM camping_spot s WHERE not exists (select 1 from camping_reservation r where r.SpotNr = s.SpotNr)";
+            sql = "SELECT * FROM free_spots";
             Display(sql);
         }
 
         private void buttonBooked_Click(object sender, EventArgs e)
         {
             timerUpdate.Start();
-            sql = "SELECT * FROM camping_spot s WHERE exists (select 1 from camping_reservation r where r.SpotNr = s.SpotNr)";
+            sql = "SELECT * FROM all_spot s WHERE exists (select 1 from camping_reservation r where r.SpotNr = s.SpotNr)";
             Display(sql);
         }
 

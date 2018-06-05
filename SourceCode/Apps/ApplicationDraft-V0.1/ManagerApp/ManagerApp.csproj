@@ -50,6 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActivityForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ActivityForm.Designer.cs">
+      <DependentUpon>ActivityForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AnalyticForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,6 +88,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StaffForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="StaffForm.Designer.cs">
+      <DependentUpon>StaffForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="StockForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -100,6 +112,9 @@
     <Compile Include="VisitorForm.Designer.cs">
       <DependentUpon>VisitorForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="ActivityForm.resx">
+      <DependentUpon>ActivityForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AnalyticForm.resx">
       <DependentUpon>AnalyticForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -123,6 +138,9 @@
     </Compile>
     <EmbeddedResource Include="ShopForm.resx">
       <DependentUpon>ShopForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="StaffForm.resx">
+      <DependentUpon>StaffForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="StockForm.resx">
       <DependentUpon>StockForm.cs</DependentUpon>

@@ -32,6 +32,7 @@ namespace ManagerApp
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HomeForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.buttonTransactions = new System.Windows.Forms.Button();
             this.analyticBtn = new System.Windows.Forms.Button();
             this.staffBtn = new System.Windows.Forms.Button();
             this.inventoryBtn = new System.Windows.Forms.Button();
@@ -40,13 +41,14 @@ namespace ManagerApp
             this.campBtn = new System.Windows.Forms.Button();
             this.shopBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.buttonTransactions = new System.Windows.Forms.Button();
+            this.buttonActivitiy = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(43)))), ((int)(((byte)(48)))));
+            this.panel1.Controls.Add(this.buttonActivitiy);
             this.panel1.Controls.Add(this.buttonTransactions);
             this.panel1.Controls.Add(this.analyticBtn);
             this.panel1.Controls.Add(this.staffBtn);
@@ -61,6 +63,25 @@ namespace ManagerApp
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1339, 703);
             this.panel1.TabIndex = 0;
+            // 
+            // buttonTransactions
+            // 
+            this.buttonTransactions.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonTransactions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.buttonTransactions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.buttonTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonTransactions.ForeColor = System.Drawing.Color.White;
+            this.buttonTransactions.Image = ((System.Drawing.Image)(resources.GetObject("buttonTransactions.Image")));
+            this.buttonTransactions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonTransactions.Location = new System.Drawing.Point(572, 487);
+            this.buttonTransactions.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonTransactions.Name = "buttonTransactions";
+            this.buttonTransactions.Size = new System.Drawing.Size(236, 66);
+            this.buttonTransactions.TabIndex = 23;
+            this.buttonTransactions.Text = "Transactions";
+            this.buttonTransactions.UseVisualStyleBackColor = true;
+            this.buttonTransactions.Click += new System.EventHandler(this.buttonTransactions_Click);
             // 
             // analyticBtn
             // 
@@ -148,7 +169,7 @@ namespace ManagerApp
             this.closeBtn.ForeColor = System.Drawing.Color.White;
             this.closeBtn.Image = ((System.Drawing.Image)(resources.GetObject("closeBtn.Image")));
             this.closeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.closeBtn.Location = new System.Drawing.Point(743, 487);
+            this.closeBtn.Location = new System.Drawing.Point(861, 487);
             this.closeBtn.Margin = new System.Windows.Forms.Padding(4);
             this.closeBtn.Name = "closeBtn";
             this.closeBtn.Size = new System.Drawing.Size(236, 66);
@@ -205,24 +226,23 @@ namespace ManagerApp
             this.panel2.Size = new System.Drawing.Size(1339, 69);
             this.panel2.TabIndex = 1;
             // 
-            // buttonTransactions
+            // buttonActivitiy
             // 
-            this.buttonTransactions.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonTransactions.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.buttonTransactions.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.buttonTransactions.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonTransactions.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonTransactions.ForeColor = System.Drawing.Color.White;
-            this.buttonTransactions.Image = ((System.Drawing.Image)(resources.GetObject("buttonTransactions.Image")));
-            this.buttonTransactions.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonTransactions.Location = new System.Drawing.Point(430, 487);
-            this.buttonTransactions.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonTransactions.Name = "buttonTransactions";
-            this.buttonTransactions.Size = new System.Drawing.Size(236, 66);
-            this.buttonTransactions.TabIndex = 23;
-            this.buttonTransactions.Text = "Transactions";
-            this.buttonTransactions.UseVisualStyleBackColor = true;
-            this.buttonTransactions.Click += new System.EventHandler(this.buttonTransactions_Click);
+            this.buttonActivitiy.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonActivitiy.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.buttonActivitiy.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.buttonActivitiy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonActivitiy.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonActivitiy.ForeColor = System.Drawing.Color.White;
+            this.buttonActivitiy.Image = ((System.Drawing.Image)(resources.GetObject("buttonActivitiy.Image")));
+            this.buttonActivitiy.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonActivitiy.Location = new System.Drawing.Point(280, 487);
+            this.buttonActivitiy.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonActivitiy.Name = "buttonActivitiy";
+            this.buttonActivitiy.Size = new System.Drawing.Size(236, 66);
+            this.buttonActivitiy.TabIndex = 24;
+            this.buttonActivitiy.Text = "Activities";
+            this.buttonActivitiy.UseVisualStyleBackColor = true;
             // 
             // HomeForm
             // 
@@ -256,6 +276,7 @@ namespace ManagerApp
         private System.Windows.Forms.Button analyticBtn;
         private System.Windows.Forms.Button staffBtn;
         private System.Windows.Forms.Button buttonTransactions;
+        private System.Windows.Forms.Button buttonActivitiy;
     }
 }
 
