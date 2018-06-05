@@ -200,16 +200,24 @@ namespace ShopApp
         }
         private void ProcessOrder()
         {
-            o.OrderDate = DateTime.Now;
-
-            if (data.CreateNewStoreOrder(o) == 1 && data.AddStoreOrderLine(o) != -1)
+            if(MessageBox.Show("Confirm payment", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                DisplayProducts();
-                using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                o.OrderDate = DateTime.Now;
+
+                if (data.CreateNewStoreOrder(o) == 1 && data.AddStoreOrderLine(o) != -1)
                 {
-                    display.SetText(o.ToString(), labelOrderInfo);
+                    DisplayProducts();
+                    using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                    {
+                        display.SetText(o.ToString(), labelOrderInfo);
+                    }
+                    o = new Order(selectedShop);
                 }
+            }
+            else
+            {
                 o = new Order(selectedShop);
+
             }
         }
 

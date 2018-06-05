@@ -45,6 +45,7 @@
             this.labelVisitorR = new System.Windows.Forms.Label();
             this.labelReturnInfo = new System.Windows.Forms.Label();
             this.labelShopName = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.borrowPanel.SuspendLayout();
             this.returnPanel.SuspendLayout();
@@ -130,6 +131,7 @@
             // 
             // borrowPanel
             // 
+            this.borrowPanel.Controls.Add(this.button1);
             this.borrowPanel.Controls.Add(this.label3);
             this.borrowPanel.Controls.Add(this.buttonStopBorrow);
             this.borrowPanel.Controls.Add(this.labelBorrowInfo);
@@ -243,6 +245,16 @@
             this.labelShopName.TabIndex = 31;
             this.labelShopName.Text = "SHOP NAME";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(276, 587);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(166, 55);
+            this.button1.TabIndex = 31;
+            this.button1.Text = "restart";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // RentalForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -291,6 +303,7 @@
         private System.Windows.Forms.Button returnBtn;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label labelShopName;
+        private System.Windows.Forms.Button button1;
     }
 }
 

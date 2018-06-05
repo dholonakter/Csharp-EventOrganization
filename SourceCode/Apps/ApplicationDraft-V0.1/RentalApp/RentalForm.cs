@@ -210,5 +210,11 @@ namespace RentalApp
         {
             Program.original.Show();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            o = new Order(selectedShop);
+            labelBorrowInfo.Text = o.ToString();
+        }
     }
 }
