@@ -70,33 +70,30 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(40)))), ((int)(((byte)(43)))), ((int)(((byte)(48)))));
             this.panel1.Controls.Add(this.panel3);
-            this.panel1.Controls.Add(this.checkinBtn);
             this.panel1.Controls.Add(this.monitorBtn);
             this.panel1.Controls.Add(this.sideHighlight);
             this.panel1.Controls.Add(this.checkoutBtn);
+            this.panel1.Controls.Add(this.checkinBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(221, 945);
+            this.panel1.Size = new System.Drawing.Size(166, 640);
             this.panel1.TabIndex = 0;
             // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label1);
-            this.panel3.Location = new System.Drawing.Point(221, 12);
-            this.panel3.Margin = new System.Windows.Forms.Padding(4);
+            this.panel3.Location = new System.Drawing.Point(166, 10);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1600, 933);
+            this.panel3.Size = new System.Drawing.Size(1200, 758);
             this.panel3.TabIndex = 3;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(144, 85);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(108, 69);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(46, 17);
+            this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "label1";
             // 
@@ -110,10 +107,9 @@
             this.checkinBtn.ForeColor = System.Drawing.Color.White;
             this.checkinBtn.Image = ((System.Drawing.Image)(resources.GetObject("checkinBtn.Image")));
             this.checkinBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkinBtn.Location = new System.Drawing.Point(15, 110);
-            this.checkinBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.checkinBtn.Location = new System.Drawing.Point(11, 89);
             this.checkinBtn.Name = "checkinBtn";
-            this.checkinBtn.Size = new System.Drawing.Size(207, 66);
+            this.checkinBtn.Size = new System.Drawing.Size(155, 54);
             this.checkinBtn.TabIndex = 12;
             this.checkinBtn.Text = "Check In";
             this.checkinBtn.UseVisualStyleBackColor = true;
@@ -129,10 +125,9 @@
             this.monitorBtn.ForeColor = System.Drawing.Color.White;
             this.monitorBtn.Image = ((System.Drawing.Image)(resources.GetObject("monitorBtn.Image")));
             this.monitorBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.monitorBtn.Location = new System.Drawing.Point(15, 334);
-            this.monitorBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.monitorBtn.Location = new System.Drawing.Point(11, 271);
             this.monitorBtn.Name = "monitorBtn";
-            this.monitorBtn.Size = new System.Drawing.Size(207, 66);
+            this.monitorBtn.Size = new System.Drawing.Size(155, 54);
             this.monitorBtn.TabIndex = 13;
             this.monitorBtn.Text = "    Monitoring";
             this.monitorBtn.UseVisualStyleBackColor = true;
@@ -141,10 +136,9 @@
             // sideHighlight
             // 
             this.sideHighlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.sideHighlight.Location = new System.Drawing.Point(0, 110);
-            this.sideHighlight.Margin = new System.Windows.Forms.Padding(4);
+            this.sideHighlight.Location = new System.Drawing.Point(0, 89);
             this.sideHighlight.Name = "sideHighlight";
-            this.sideHighlight.Size = new System.Drawing.Size(15, 66);
+            this.sideHighlight.Size = new System.Drawing.Size(11, 54);
             this.sideHighlight.TabIndex = 14;
             // 
             // checkoutBtn
@@ -157,10 +151,9 @@
             this.checkoutBtn.ForeColor = System.Drawing.Color.White;
             this.checkoutBtn.Image = ((System.Drawing.Image)(resources.GetObject("checkoutBtn.Image")));
             this.checkoutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkoutBtn.Location = new System.Drawing.Point(15, 223);
-            this.checkoutBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.checkoutBtn.Location = new System.Drawing.Point(11, 181);
             this.checkoutBtn.Name = "checkoutBtn";
-            this.checkoutBtn.Size = new System.Drawing.Size(207, 66);
+            this.checkoutBtn.Size = new System.Drawing.Size(155, 54);
             this.checkoutBtn.TabIndex = 14;
             this.checkoutBtn.Text = "  Check Out";
             this.checkoutBtn.UseVisualStyleBackColor = true;
@@ -173,10 +166,9 @@
             this.checkinPanel.Controls.Add(this.labelStatusIn);
             this.checkinPanel.Controls.Add(this.pictureBox2);
             this.checkinPanel.Controls.Add(this.buttonPay);
-            this.checkinPanel.Location = new System.Drawing.Point(215, 0);
-            this.checkinPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.checkinPanel.Location = new System.Drawing.Point(161, 0);
             this.checkinPanel.Name = "checkinPanel";
-            this.checkinPanel.Size = new System.Drawing.Size(1473, 846);
+            this.checkinPanel.Size = new System.Drawing.Size(1105, 687);
             this.checkinPanel.TabIndex = 5;
             // 
             // lbCheckIn
@@ -184,10 +176,9 @@
             this.lbCheckIn.AutoSize = true;
             this.lbCheckIn.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCheckIn.ForeColor = System.Drawing.Color.DimGray;
-            this.lbCheckIn.Location = new System.Drawing.Point(331, 169);
-            this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCheckIn.Location = new System.Drawing.Point(248, 137);
             this.lbCheckIn.Name = "lbCheckIn";
-            this.lbCheckIn.Size = new System.Drawing.Size(163, 28);
+            this.lbCheckIn.Size = new System.Drawing.Size(132, 23);
             this.lbCheckIn.TabIndex = 27;
             this.lbCheckIn.Text = "Tag Number";
             // 
@@ -197,10 +188,9 @@
             this.statusIn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.statusIn.ForeColor = System.Drawing.Color.DimGray;
             this.statusIn.Image = ((System.Drawing.Image)(resources.GetObject("statusIn.Image")));
-            this.statusIn.Location = new System.Drawing.Point(222, 338);
-            this.statusIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusIn.Location = new System.Drawing.Point(166, 275);
             this.statusIn.Name = "statusIn";
-            this.statusIn.Size = new System.Drawing.Size(44, 31);
+            this.statusIn.Size = new System.Drawing.Size(33, 25);
             this.statusIn.TabIndex = 26;
             this.statusIn.Text = "      ";
             // 
@@ -209,10 +199,9 @@
             this.labelStatusIn.AutoSize = true;
             this.labelStatusIn.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelStatusIn.ForeColor = System.Drawing.Color.DimGray;
-            this.labelStatusIn.Location = new System.Drawing.Point(88, 340);
-            this.labelStatusIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelStatusIn.Location = new System.Drawing.Point(66, 276);
             this.labelStatusIn.Name = "labelStatusIn";
-            this.labelStatusIn.Size = new System.Drawing.Size(117, 28);
+            this.labelStatusIn.Size = new System.Drawing.Size(95, 23);
             this.labelStatusIn.TabIndex = 25;
             this.labelStatusIn.Text = "STATUS";
             // 
@@ -220,10 +209,10 @@
             // 
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Location = new System.Drawing.Point(92, 169);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox2.Location = new System.Drawing.Point(69, 137);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(176, 153);
+            this.pictureBox2.Size = new System.Drawing.Size(132, 124);
             this.pictureBox2.TabIndex = 24;
             this.pictureBox2.TabStop = false;
             // 
@@ -239,10 +228,9 @@
             this.buttonPay.ForeColor = System.Drawing.Color.White;
             this.buttonPay.Image = ((System.Drawing.Image)(resources.GetObject("buttonPay.Image")));
             this.buttonPay.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonPay.Location = new System.Drawing.Point(93, 377);
-            this.buttonPay.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonPay.Location = new System.Drawing.Point(70, 306);
             this.buttonPay.Name = "buttonPay";
-            this.buttonPay.Size = new System.Drawing.Size(173, 42);
+            this.buttonPay.Size = new System.Drawing.Size(130, 34);
             this.buttonPay.TabIndex = 10;
             this.buttonPay.Text = "Pay";
             this.buttonPay.UseVisualStyleBackColor = false;
@@ -257,10 +245,9 @@
             this.searchPanel.Controls.Add(this.buttonSearch);
             this.searchPanel.Controls.Add(this.textBoxResrvID);
             this.searchPanel.Controls.Add(this.label9);
-            this.searchPanel.Location = new System.Drawing.Point(221, 15);
-            this.searchPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.searchPanel.Location = new System.Drawing.Point(203, 12);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(1942, 846);
+            this.searchPanel.Size = new System.Drawing.Size(1456, 687);
             this.searchPanel.TabIndex = 6;
             this.searchPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.searchPanel_Paint);
             // 
@@ -269,18 +256,17 @@
             this.labelMonitor.AutoSize = true;
             this.labelMonitor.Font = new System.Drawing.Font("Century", 13F, System.Drawing.FontStyle.Bold);
             this.labelMonitor.ForeColor = System.Drawing.Color.DimGray;
-            this.labelMonitor.Location = new System.Drawing.Point(44, 131);
-            this.labelMonitor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelMonitor.Location = new System.Drawing.Point(33, 106);
             this.labelMonitor.Name = "labelMonitor";
-            this.labelMonitor.Size = new System.Drawing.Size(0, 27);
+            this.labelMonitor.Size = new System.Drawing.Size(0, 22);
             this.labelMonitor.TabIndex = 28;
             // 
             // buttonSaveChanges
             // 
-            this.buttonSaveChanges.Location = new System.Drawing.Point(173, 419);
-            this.buttonSaveChanges.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonSaveChanges.Location = new System.Drawing.Point(130, 340);
+            this.buttonSaveChanges.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonSaveChanges.Name = "buttonSaveChanges";
-            this.buttonSaveChanges.Size = new System.Drawing.Size(81, 28);
+            this.buttonSaveChanges.Size = new System.Drawing.Size(61, 23);
             this.buttonSaveChanges.TabIndex = 18;
             this.buttonSaveChanges.Text = "Save";
             this.buttonSaveChanges.UseVisualStyleBackColor = true;
@@ -289,10 +275,11 @@
             // dataGridViewCamp
             // 
             this.dataGridViewCamp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewCamp.Location = new System.Drawing.Point(49, 472);
+            this.dataGridViewCamp.Location = new System.Drawing.Point(37, 384);
+            this.dataGridViewCamp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridViewCamp.Name = "dataGridViewCamp";
             this.dataGridViewCamp.RowTemplate.Height = 24;
-            this.dataGridViewCamp.Size = new System.Drawing.Size(1251, 328);
+            this.dataGridViewCamp.Size = new System.Drawing.Size(938, 266);
             this.dataGridViewCamp.TabIndex = 15;
             // 
             // label2
@@ -300,10 +287,9 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(46, 419);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(34, 340);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(109, 28);
+            this.label2.Size = new System.Drawing.Size(88, 23);
             this.label2.TabIndex = 14;
             this.label2.Text = "Monitor";
             // 
@@ -319,10 +305,9 @@
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
             this.buttonSearch.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearch.Image")));
             this.buttonSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSearch.Location = new System.Drawing.Point(313, 80);
-            this.buttonSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonSearch.Location = new System.Drawing.Point(235, 65);
             this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(36, 37);
+            this.buttonSearch.Size = new System.Drawing.Size(27, 30);
             this.buttonSearch.TabIndex = 13;
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
@@ -330,10 +315,9 @@
             // textBoxResrvID
             // 
             this.textBoxResrvID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxResrvID.Location = new System.Drawing.Point(49, 85);
-            this.textBoxResrvID.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxResrvID.Location = new System.Drawing.Point(37, 69);
             this.textBoxResrvID.Name = "textBoxResrvID";
-            this.textBoxResrvID.Size = new System.Drawing.Size(249, 26);
+            this.textBoxResrvID.Size = new System.Drawing.Size(188, 22);
             this.textBoxResrvID.TabIndex = 12;
             // 
             // label9
@@ -341,10 +325,9 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.DimGray;
-            this.label9.Location = new System.Drawing.Point(43, 46);
-            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Location = new System.Drawing.Point(32, 37);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(280, 28);
+            this.label9.Size = new System.Drawing.Size(227, 23);
             this.label9.TabIndex = 11;
             this.label9.Text = "Enter Reservation ID ";
             // 
@@ -354,10 +337,9 @@
             this.checkoutPanel.Controls.Add(this.label6);
             this.checkoutPanel.Controls.Add(this.labelStatusOut);
             this.checkoutPanel.Controls.Add(this.pictureBox1);
-            this.checkoutPanel.Location = new System.Drawing.Point(221, 15);
-            this.checkoutPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.checkoutPanel.Location = new System.Drawing.Point(166, 12);
             this.checkoutPanel.Name = "checkoutPanel";
-            this.checkoutPanel.Size = new System.Drawing.Size(1473, 846);
+            this.checkoutPanel.Size = new System.Drawing.Size(1105, 687);
             this.checkoutPanel.TabIndex = 7;
             // 
             // lbCheckOut
@@ -365,10 +347,9 @@
             this.lbCheckOut.AutoSize = true;
             this.lbCheckOut.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCheckOut.ForeColor = System.Drawing.Color.DimGray;
-            this.lbCheckOut.Location = new System.Drawing.Point(439, 303);
-            this.lbCheckOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbCheckOut.Location = new System.Drawing.Point(329, 246);
             this.lbCheckOut.Name = "lbCheckOut";
-            this.lbCheckOut.Size = new System.Drawing.Size(163, 28);
+            this.lbCheckOut.Size = new System.Drawing.Size(132, 23);
             this.lbCheckOut.TabIndex = 36;
             this.lbCheckOut.Text = "Tag Number";
             // 
@@ -378,10 +359,9 @@
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.DimGray;
             this.label6.Image = ((System.Drawing.Image)(resources.GetObject("label6.Image")));
-            this.label6.Location = new System.Drawing.Point(357, 472);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label6.Location = new System.Drawing.Point(268, 384);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 31);
+            this.label6.Size = new System.Drawing.Size(33, 25);
             this.label6.TabIndex = 35;
             this.label6.Text = "      ";
             // 
@@ -390,10 +370,9 @@
             this.labelStatusOut.AutoSize = true;
             this.labelStatusOut.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelStatusOut.ForeColor = System.Drawing.Color.DimGray;
-            this.labelStatusOut.Location = new System.Drawing.Point(223, 474);
-            this.labelStatusOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelStatusOut.Location = new System.Drawing.Point(167, 385);
             this.labelStatusOut.Name = "labelStatusOut";
-            this.labelStatusOut.Size = new System.Drawing.Size(117, 28);
+            this.labelStatusOut.Size = new System.Drawing.Size(95, 23);
             this.labelStatusOut.TabIndex = 34;
             this.labelStatusOut.Text = "STATUS";
             // 
@@ -401,10 +380,10 @@
             // 
             this.pictureBox1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox1.BackgroundImage")));
             this.pictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox1.Location = new System.Drawing.Point(227, 303);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(170, 246);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(176, 153);
+            this.pictureBox1.Size = new System.Drawing.Size(132, 124);
             this.pictureBox1.TabIndex = 33;
             this.pictureBox1.TabStop = false;
             // 
@@ -412,25 +391,23 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(221, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Location = new System.Drawing.Point(166, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1600, 12);
+            this.panel2.Size = new System.Drawing.Size(874, 10);
             this.panel2.TabIndex = 1;
             // 
             // CampingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1821, 945);
-            this.Controls.Add(this.checkinPanel);
-            this.Controls.Add(this.searchPanel);
+            this.ClientSize = new System.Drawing.Size(1040, 640);
             this.Controls.Add(this.checkoutPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
+            this.Controls.Add(this.checkinPanel);
+            this.Controls.Add(this.searchPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CampingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CampingForm";

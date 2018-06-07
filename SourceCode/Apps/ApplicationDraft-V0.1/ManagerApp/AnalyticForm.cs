@@ -12,7 +12,7 @@ using ThanhDLL;
 
 namespace ManagerApp
 {
-    public partial class AnalyticForm : Form
+    public partial class AnalyticForm : Form,ILogger
     {
         DataHelper dh;
 
@@ -23,7 +23,7 @@ namespace ManagerApp
 
         private void AnalyticForm_Load(object sender, EventArgs e)
         {
-            dh = new DataHelper();
+            dh = new DataHelper(this);
             fillChart();
             //FillComboBoxShop();
             //comboBoxShop.SelectedIndex = -1;
@@ -154,6 +154,11 @@ namespace ManagerApp
             HomeForm home = new HomeForm();
             this.Dispose();
             home.Show();
+        }
+
+        public void LogMessage(string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

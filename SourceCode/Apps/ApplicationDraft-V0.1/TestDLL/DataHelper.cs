@@ -12,17 +12,20 @@ namespace ThanhDLL
 {
     public class DataHelper
     {
-        ///////////////////////////////////////
-        // CONNECTING TO DATABASE
-        ///////////////////////////////////////
+       #region properties
         MySqlConnection connection;
         MySqlDataAdapter dataAdapter;
+        private ILogger logger;
+        #endregion
 
-        /**
-         * Constructors
-         */
-        public DataHelper()
+       #region Constructor
+        /// <summary>
+        /// Connecting to the Database
+        /// </summary>
+        /// <param name="logger"></param>
+        public DataHelper(ILogger logger)
         {
+            this.logger = logger;
             string connectionInfo = "server=studmysql01.fhict.local;" +
                                     "database=dbi387862;" +
                                     "user id=dbi387862;" +
@@ -31,11 +34,35 @@ namespace ThanhDLL
 
             connection = new MySqlConnection(connectionInfo);
             dataAdapter = new MySqlDataAdapter();
-        }
+            try
+            {
+                connection.Open();
+                LogMessage("DBConnection: Database is connected");
+            }
+            catch (MySqlException)
+            {
+                LogMessage("DBConnection: Database is not connected");
 
-        ///////////////////////////////////////
-        // DATA TABLES
-        ///////////////////////////////////////
+            }
+            finally
+            {
+                connection.Close();
+
+            }
+        }
+        #endregion
+
+       #region Private Method LogMessage
+        private void LogMessage(string message)
+        {
+            if (logger != null)
+            {
+                logger.LogMessage(message);
+            }
+        }
+       #endregion
+
+       #region Public Method Datatable
 
         public DataTable DataTableFromSQL(string sql)
         {
@@ -48,11 +75,13 @@ namespace ThanhDLL
                 dataAdapter.Fill(table);
                 return table;
             }
-            catch (MySqlException)
+            catch(InvalidOperationException)
             {
-                MessageBox.Show("Error trying to build data table");
-                return null;
+                LogMessage("DataTableFromSQL:Error trying to build data table");
+
             }
+           
+            return null;
         }
 
         /// <summary>
@@ -60,47 +89,74 @@ namespace ThanhDLL
         /// </summary>
         /// <param name="table"></param>
         /// <returns></returns>
-        public bool UpdateTable(DataTable changes)
+         public bool UpdateTable(DataTable changes)
         {
+            bool updateSuccess = false;
             try
             {
-                dataAdapter.Update(changes);
+                if (changes != null)
+                {
+                    dataAdapter.Update(changes);
+                    updateSuccess = true;
+                }
             }
-            catch (MySqlException)
+            catch (InvalidOperationException)
+            { 
+              LogMessage("UpdateTable : the source table is invalid");  
+            }
+            catch (DBConcurrencyException)
             {
-                MessageBox.Show("Error trying to update dat table");
-                return false;
+                LogMessage("UpdateTable : An attempt to execute an INSERT, UPDATE, or DELETE statement resulted in zero rows affected");
             }
-            return true;
+            catch (SystemException)
+            {
+                LogMessage("UpdateTable : No data exist to use as a source");
+
+            }
+            return updateSuccess;
         }
 
 
         public DataSet GetDataset(string sql)
         {
+            DataSet ds = new DataSet();
+           
             try
             {
-                DataSet ds = new DataSet();
+                
                 dataAdapter.SelectCommand = new MySqlCommand(sql, connection);
                 dataAdapter.Fill(ds);
                 return ds;
+               
             }
-            catch (MySqlException)
+            catch (InvalidOperationException)
             {
-                MessageBox.Show("Error trying to get the dataset");
+                LogMessage("GetDataset : the source dataset is invalid");
                 return null;
-                // return false;
+
             }
-            finally
+            catch (SystemException)
             {
-                connection.Close();
+                LogMessage("UpdateTable : No dataset exist to use as a source");
+                return null;
+
+
             }
+
+            //finally
+            //{
+            //    connection.Close();
+            //}
         }
+        #endregion
+
+       #region public Method  login with credentials
 
         public int CheckCredentials(string username, string pwd)
         {
             string sql = "SELECT COUNT(*) 'Nr' FROM LOGIN WHERE Username = '" + username + "' AND Password='" + pwd + "'";
             MySqlCommand command = new MySqlCommand(sql, connection);
-            int nr = 0;
+            int nr=0;
 
             try
             {
@@ -110,7 +166,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error checking credentials");
+                LogMessage("CheckCredentials: Error checking credentials");
                 return -1;
             }
             finally
@@ -118,10 +174,9 @@ namespace ThanhDLL
                 connection.Close();
             }
         }
+        #endregion
 
-        ///////////////////////////////////////
-        // VISITOR'S HANDLING
-        ///////////////////////////////////////
+       #region Public Method Visitor Handling
 
         /// <summary>
         ///  Updates credit, checked in status and rfid of the selected visitor in the database 
@@ -148,9 +203,9 @@ namespace ThanhDLL
                 int nrOfRecordsChanged = command.ExecuteNonQuery();
                 return nrOfRecordsChanged;
             }
-            catch (MySqlException exc)
+            catch (MySqlException )
             {
-                MessageBox.Show("Error trying to update visitor");
+                LogMessage("UpdateSelectedVisitor : Error trying to update visitor");
                 return -1;
             }
             finally
@@ -180,8 +235,8 @@ namespace ThanhDLL
                 string rfidNr = "";
                 double cred = 0;
                 bool checkedIn = false;
-                int spot = 0; // not reserved by default
                 bool isInCamp;
+                int reservenr=0;
 
                 nr = Convert.ToInt32(reader["VisitorNr"]);
                 first = Convert.ToString(reader["FirstName"]);
@@ -205,13 +260,11 @@ namespace ThanhDLL
                 {
                     checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
                 }
-                if (!(reader["ReservNr"] is DBNull))
-                {
-                    spot = Convert.ToInt32(reader["ReservNr"]);
-                }
-                isInCamp = Convert.ToBoolean(reader["IsInCamp"]);
 
-                v = (new Visitor(nr, first, last, phone, mail, rfidNr, checkedIn, cred, spot, isInCamp));
+                isInCamp = Convert.ToBoolean(reader["IsInCamp"]);
+                //fix the problem,there is no reserveNr in database.
+                
+                v = (new Visitor(nr, first, last, phone, mail, rfidNr, checkedIn, cred,reservenr, isInCamp));
             }
             return v;
         }
@@ -221,7 +274,7 @@ namespace ThanhDLL
         /// </summary>
         /// <param name="visitorNr"></param>
         /// <returns>Returns null if fails and the object visitor initiated if found</returns>
-        public Visitor FindVisitorByNr(string visitorNr)
+        public Visitor FindVisitorByNr(int visitorNr)
         {
             Visitor v = null;
             string sql = "SELECT * FROM VISITOR WHERE VisitorNr = " + visitorNr;
@@ -236,7 +289,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error trying to find visitor by nr.");
+                LogMessage("FindVisitorByNr : Error trying to find visitor by nr.");
             }
             finally
             {
@@ -284,15 +337,14 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error trying to find unreturned items");
+                LogMessage("FindUnreturnedItems : Error trying to find unreturned items");
             }
             finally
             {
                 connection.Close();
             }
         }
-
-        /// <summary>
+         /// <summary>
         /// Checks if a certain RFID tag exists in the database
         /// </summary>
         /// <param name="rfidNr"></param>
@@ -319,7 +371,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error trying to find RFID");
+                LogMessage("existsRFID: Error trying to find RFID");
             }
             finally
             {
@@ -369,8 +421,9 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error trying to get ticket");
+                LogMessage("GetTicket : Error trying to get ticket");
             }
+ 
             finally
             {
                 connection.Close();
@@ -397,9 +450,9 @@ namespace ThanhDLL
 
                 v = ReadDataVisitor(reader, v);
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
-                MessageBox.Show("Error trying to find visitor");
+                LogMessage("FindVisitorByTag: Error trying to find visitor");
             }
             finally
             {
@@ -432,9 +485,9 @@ namespace ThanhDLL
                 int rowsAffected = command.ExecuteNonQuery();
                 return rowsAffected;
             }
-            catch (MySqlException exc)
+            catch (MySqlException)
             {
-                MessageBox.Show("Error trying to check out visitor");
+                LogMessage("MoveToDeletedVisitor :Error trying to check out visitor");
                 return -1;
             }
             finally
@@ -442,11 +495,11 @@ namespace ThanhDLL
                 connection.Close();
             }
         }
-
-
-        ///////////////////////////////////////
-        // COUNT ROWS
-        ///////////////////////////////////////
+        /// <summary>
+        /// Count the row in a table 
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
         public int CountRowTable(string table)
         {
             string sql = "SELECT COUNT(*) FROM " + table;
@@ -460,7 +513,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error counting rows");
+                LogMessage("CountRowTable: Error counting rows");
                 return -1;
             }
             finally
@@ -468,6 +521,7 @@ namespace ThanhDLL
                 connection.Close();
             }
         }
+       #endregion
 
         ///////////////////////////////////////
         // STATISTICS
@@ -493,7 +547,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting the total balance");
+                LogMessage("GetTotalBalance : Error getting the total balance");
                 return -1;
             }
             finally
@@ -523,7 +577,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting total credit spent");
+                LogMessage("GetTotalSpent: Error getting total credit spent");
                 return -1;
             }
             finally
@@ -569,7 +623,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting food articles");
+                LogMessage("GetFoodArticles : Error getting food articles");
             }
             finally
             {
@@ -614,7 +668,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting drink articles");
+                LogMessage("GetDrinkArticles : Error getting drink articles");
             }
             finally
             {
@@ -639,7 +693,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error adding new order");
+                LogMessage("CreateNewLoanOrder : Error adding new order");
                 return -1;
             }
             finally
@@ -663,7 +717,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error adding new order");
+                LogMessage("CreateNewStoreOrder : Error adding new order");
                 return -1;
             }
             finally
@@ -700,7 +754,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting the right order number");
+                LogMessage("GetRightOrderNr: Error getting the right order number");
                 return -1;
             }
             finally
@@ -739,7 +793,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error adding information to order");
+                LogMessage("AddStoreOrderLine : Error adding information to order");
                 return -1;
             }
             finally
@@ -774,7 +828,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error adding information to order");
+                LogMessage("AddLoanOrderLine: Error adding information to order");
                 return -1;
             }
             finally
@@ -809,7 +863,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting the right order number");
+                LogMessage("GetOrderDateOfArticle:Error getting the right order number");
             }
             finally
             {
@@ -846,7 +900,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error processing loan return");
+                LogMessage("ProcessLoanReturn: Error processing loan return");
                 return -1;
             }
             finally
@@ -880,7 +934,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting shop by nr");
+                LogMessage("ProcessLoanReturn : Error getting shop by nr");
             }
             finally
             {
@@ -924,13 +978,13 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting article by tag");
+                LogMessage("FindLoanArticleByTag: Error getting article by tag");
             }
             finally
             {
                 connection.Close();
             }
-            return null;
+            return a;
         }
 
         public List<LoanArticle> GetAllLoanArticles()
@@ -969,7 +1023,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting all loan articles");
+                LogMessage("GetAllLoanArticles : Error getting all loan articles");
             }
             finally
             {
@@ -997,7 +1051,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error updating reservation");
+                LogMessage("UpdateSelectedReservation: Error updating reservation");
                 return -1;
             }
             finally
@@ -1024,7 +1078,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error updating ticket");
+                LogMessage("UpdateSelectedTicket : Error updating ticket");
                 return -1;
             }
             finally
@@ -1052,7 +1106,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error updating article");
+                LogMessage("UpdateSelectedArticle: Error updating article");
                 return -1;
             }
             finally
@@ -1103,7 +1157,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting resrevation");
+                LogMessage("FindReservationByVisitor : Error getting resrevation");
                 return null;
             }
             finally
@@ -1152,7 +1206,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting reservation");
+                LogMessage("FindReservationByNr: Error getting reservation");
                 return null;
             }
             finally
@@ -1178,7 +1232,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error adding new order");
+                LogMessage("CreateNewLog : Error adding new order");
                 return -1;
             }
             finally

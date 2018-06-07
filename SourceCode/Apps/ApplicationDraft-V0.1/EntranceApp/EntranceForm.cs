@@ -17,10 +17,11 @@ using ZXing;
 using ZXing.Common;
 using ZXing.QrCode;
 using System.Media;
+using MySql.Data.MySqlClient;
 
 namespace EntranceApp
 {
-    public partial class EntranceForm : Form
+    public partial class EntranceForm : Form,ILogger
     {
         ///////////////////////////////////////
         // DECLARATIONS
@@ -34,13 +35,13 @@ namespace EntranceApp
         RFID myRFIDReader;
 
         // Delegates for RFID
-        public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
+        public delegate void ProcessTag(object sender, RFIDTagEventArgs e);//where you will used this method
 
-        // thanh tests qr
+        //  qr
         QrCodeEncodingOptions options = new QrCodeEncodingOptions();
         WebCam wCam;
 
-        // thanh has some fun
+       //sound for success and error
         SoundPlayer successSound = new SoundPlayer("../../../connect.wav");
         SoundPlayer errorSound = new SoundPlayer("../../../error.wav");
 
@@ -48,34 +49,39 @@ namespace EntranceApp
         ///////////////////////////////////////
         // STARTUP STUFF
         ///////////////////////////////////////
-        public void ShowAttached(object sender, AttachEventArgs e)
+        public void ShowDeviceAttached(object sender, AttachEventArgs e)
         {
-            MessageBox.Show("RFID Reader Attached: Serial nr." + myRFIDReader.DeviceSerialNumber);
+            LogMessage("RFID Reader Attached: Serial nr." + myRFIDReader.DeviceSerialNumber);
         }
 
-        public void ShowDetached(object sender, DetachEventArgs e)
+        public void ShowDeviceDetached(object sender, DetachEventArgs e)
         {
-            MessageBox.Show("RFID Reader Detached: Serial nr." + myRFIDReader.DeviceSerialNumber);
+            LogMessage("RFID Reader Detached: Serial nr." + myRFIDReader.DeviceSerialNumber);
         }
 
         private void EntranceForm_Load(object sender, EventArgs e)
         {
+            //show the first one panel checkIn visible
+            ticketPanel.Visible = false;
+            checkoutPanel.Visible = false;
+            searchPanel.Visible = false;
+
             // Connecting to DB
-            dh = new DataHelper();
+            dh = new DataHelper(this);
 
             // Connecting RFID reader
             try
             {
                 myRFIDReader = new RFID();
-                myRFIDReader.Attach += new AttachEventHandler(ShowAttached);
-                myRFIDReader.Detach += new DetachEventHandler(ShowDetached);
+                myRFIDReader.Attach += new AttachEventHandler(ShowDeviceAttached);
+                myRFIDReader.Detach += new DetachEventHandler(ShowDeviceDetached);
                 myRFIDReader.Open();
-
             }
             catch (PhidgetException)
             {
                 MessageBox.Show("Failure to connect to RFID reader");
             }
+           
         }
 
         ///////////////////////////////////////
@@ -87,12 +93,33 @@ namespace EntranceApp
             sideHighlight.Height = ticketsBtn.Height;
             sideHighlight.Top = ticketsBtn.Top;
         }
+        /// <summary>
+        /// Information can not be empty in textbox
+        /// </summary>
+        /// <returns></returns>
+        private bool InputValidation()
+        {
+            return !String.IsNullOrEmpty(tbFirstName.Text) &&
+                    !String.IsNullOrEmpty(tbLastName.Text) &&
+                    ! String.IsNullOrEmpty(tbEmailAddress.Text) &&
+                     !String.IsNullOrEmpty(tbPhoneNumber.Text) &&
+                     !String.IsNullOrEmpty(cbxSelectedAmount.Text);
+        }
+     
 
         private void ticketsBtn_Click(object sender, EventArgs e)
         {
             sideHighlight.Height = ticketsBtn.Height;
             sideHighlight.Top = ticketsBtn.Top;
             ticketPanel.BringToFront();
+            //when the ticket button will be clicked,it will show the only related buy ticket
+            //error in listbox of ticket panel and it same as another panel.
+            ticketPanel.Visible = true;
+            searchPanel.Visible = false;
+            checkoutPanel.Visible = false;
+            checkinPanel.Visible = false;
+            dh = new DataHelper(this);
+
         }
 
         private void checkinBtn_Click(object sender, EventArgs e)
@@ -100,7 +127,12 @@ namespace EntranceApp
             sideHighlight.Height = checkinBtn.Height;
             sideHighlight.Top = checkinBtn.Top;
             checkinPanel.BringToFront();
-
+            checkinPanel.Visible = true;
+            ticketPanel.Visible = false;
+            searchPanel.Visible = false;
+            checkoutPanel.Visible = false;
+            // Connecting to DB
+            dh = new DataHelper(this);
             // Switching delegate's method
             myRFIDReader.Tag -= CheckOut;
             myRFIDReader.Tag += CheckIn;
@@ -111,7 +143,12 @@ namespace EntranceApp
             sideHighlight.Height = checkoutBtn.Height;
             sideHighlight.Top = checkoutBtn.Top;
             checkoutPanel.BringToFront();
-
+            checkoutPanel.Visible = true;
+            ticketPanel.Visible = false;
+            searchPanel.Visible = false;
+            checkinPanel.Visible = false;
+            // Connecting to DB
+            dh = new DataHelper(this);
             // Switching delegate's method
             myRFIDReader.Tag -= CheckIn;
             myRFIDReader.Tag += CheckOut;
@@ -122,11 +159,26 @@ namespace EntranceApp
             sideHighlight.Height = monitorBtn.Height;
             sideHighlight.Top = monitorBtn.Top;
             searchPanel.BringToFront();
+            searchPanel.Visible = true;
+            checkoutPanel.Visible = false;
+            checkinPanel.Visible = false;
+            ticketPanel.Visible = false;
+            // Connecting to DB
+            dh = new DataHelper(this);
 
             // Display data onto gridview
             visitorTable = new BindingSource();
-            visitorTable.DataSource = dh.DataTableFromSQL("SELECT * FROM VISITOR");
-            dataGridVisitor.DataSource = visitorTable;
+            try
+            {
+                visitorTable.DataSource = dh.DataTableFromSQL("SELECT * FROM VISITOR");  
+                dataGridVisitor.DataSource = visitorTable;
+            }
+            catch(Exception)
+            {
+                LogMessage("DataTableFromSQL: Error while querying");
+            }
+    
+       
         }
 
         ///////////////////////////////////////
@@ -136,22 +188,23 @@ namespace EntranceApp
         {
             if (dh.UpdateTable((DataTable)visitorTable.DataSource))
             {
-                MessageBox.Show("Data updated");
-                dataGridVisitor.Refresh();
+                 LogMessage("Data updated");
+                 dataGridVisitor.Refresh();
             }
             else
             {
-                MessageBox.Show("Error while updating data");
+                 LogMessage("Error while updating data");
             }
         }
 
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+
             labelMonitor.Text = "";
             int i;
             if (int.TryParse(textBoxSearch.Text, out i))
             {
-                visitor = dh.FindVisitorByNr(i.ToString());
+                visitor = dh.FindVisitorByNr(i);
                 if (visitor != null)
                 {
                     labelMonitor.Text = visitor.ToString();
@@ -275,36 +328,44 @@ namespace EntranceApp
                 if (result != null)
                 {
                     // Find their ticket
-                    t = dh.GetTicket(Convert.ToInt32(result.Text));
+                    try {
+                        t = dh.GetTicket(Convert.ToInt32(result.Text));
 
-                    if (t != null) // if ticket exists
-                    {
-                        visitor = dh.FindVisitorByNr(t.BuyerNr.ToString());
-                        display.SetText(t.ToString(), lbCheckIn);
-                        display.SetText(visitor.ToString(), labelVisitorInfo);
-
-                        if (t.Paid)
+                        if (t != null) // if ticket exists
                         {
-                            display.SetText("OK", labelStatusIn);
-                            t = null;
+                            visitor = dh.FindVisitorByNr(t.BuyerNr);
+                            display.SetText(t.ToString(), lbCheckIn);
+                            display.SetText(visitor.ToString(), labelVisitorInfo);
+
+                            if (t.Paid)
+                            {
+                                display.SetText("OK", labelStatusIn);
+                                t = null;
+                            }
+                            else
+                            {
+                                errorSound.Play();
+                                display.SetText("UNPAID", labelStatusIn);
+                            }
+
+                            StopWebcam();
                         }
                         else
                         {
-                            errorSound.Play();
-                            display.SetText("UNPAID", labelStatusIn);
+                            MessageBox.Show("Ticket not found");
                         }
-
-                        StopWebcam();
                     }
-                    else
+                    catch (System.FormatException)
                     {
-                        MessageBox.Show("Ticket not found");
+                        LogMessage("invalid ticket");
                     }
-                }
+               }
+            
                 else
                 {
                     labelStatusIn.Text = "No QR";
                 }
+             
             }
         }
 
@@ -336,7 +397,7 @@ namespace EntranceApp
                 else
                 {
                     t.ChangeStatus(); // revert
-                    MessageBox.Show("Error while updating status");
+                    LogMessage("Error while updating status");
                 }
             }
             else
@@ -344,5 +405,47 @@ namespace EntranceApp
                 MessageBox.Show("Ticket not found or already paid");
             }
         }
+
+        public void LogMessage(string message)
+        {
+            if (ticketPanel.Visible)
+            {
+                lbxLogMessage.Items.Add(message);
+
+            }
+            if (checkinPanel.Visible)
+            {
+                lbxCheckInLogMessage.Items.Add(message);
+            }
+            if (searchPanel.Visible)
+            {
+                lbMonitorMessage.Items.Add(message);
+
+            }
+        }
+
+        private void btnClearTicketLog_Click(object sender, EventArgs e)
+        {
+            lbxLogMessage.Items.Clear();
+        }
+
+        private void btnCheckOutClear_Click(object sender, EventArgs e)
+        {
+            lbxCheckOutMessage.Items.Clear();
+
+        }
+
+        private void btnCheckInClear_Click(object sender, EventArgs e)
+        {
+            lbxCheckInLogMessage.Items.Clear();
+
+        }
+
+        private void btnClearLogMonitor_Click(object sender, EventArgs e)
+        {
+            lbMonitorMessage.Items.Clear();
+        }
+
+       
     }
 }

@@ -33,7 +33,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\..\..\Documents\mySQL\MySql.Data.dll</HintPath>
+      <HintPath>..\..\..\..\..\prop-project\CampApp\bin\Debug\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="Phidget22.NET, Version=1.0.0.6, Culture=neutral, PublicKeyToken=aefa9ee0bcd237af, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

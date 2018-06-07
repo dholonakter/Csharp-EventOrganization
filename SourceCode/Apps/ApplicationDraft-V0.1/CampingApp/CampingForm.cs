@@ -14,7 +14,7 @@ using System.Threading;
 
 namespace CampingApp
 {
-    public partial class CampingForm : Form
+    public partial class CampingForm : Form,ILogger
     {
         ///////////////////////////////////////
         // DECLARATIONS
@@ -86,7 +86,8 @@ namespace CampingApp
         private void CampingForm_Load(object sender, EventArgs e)
         {
             // Connecting to DB
-            dh = new DataHelper();
+   
+            dh = new DataHelper(this);
 
 
             // Connecting RFID reader
@@ -255,6 +256,11 @@ namespace CampingApp
         private void searchPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        public void LogMessage(string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }
