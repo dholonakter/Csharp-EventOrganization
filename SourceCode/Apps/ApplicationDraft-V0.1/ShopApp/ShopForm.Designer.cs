@@ -35,6 +35,7 @@
             this.productBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.productPanel = new System.Windows.Forms.Panel();
+            this.buttonRestart = new System.Windows.Forms.Button();
             this.labelAdminShop = new System.Windows.Forms.Label();
             this.comboBoxShop = new System.Windows.Forms.ComboBox();
             this.lblCardLinkedStatus = new System.Windows.Forms.Label();
@@ -47,10 +48,13 @@
             this.quantitySelec = new System.Windows.Forms.NumericUpDown();
             this.startPanel = new System.Windows.Forms.Panel();
             this.labelShopName = new System.Windows.Forms.Label();
-            this.buttonRestart = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.listBox1 = new System.Windows.Forms.ListBox();
             this.panel1.SuspendLayout();
             this.productPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantitySelec)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -61,9 +65,8 @@
             this.panel1.Controls.Add(this.productBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(221, 788);
+            this.panel1.Size = new System.Drawing.Size(166, 640);
             this.panel1.TabIndex = 0;
             // 
             // overviewBtn
@@ -76,10 +79,9 @@
             this.overviewBtn.ForeColor = System.Drawing.Color.White;
             this.overviewBtn.Image = ((System.Drawing.Image)(resources.GetObject("overviewBtn.Image")));
             this.overviewBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.overviewBtn.Location = new System.Drawing.Point(15, 110);
-            this.overviewBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.overviewBtn.Location = new System.Drawing.Point(11, 89);
             this.overviewBtn.Name = "overviewBtn";
-            this.overviewBtn.Size = new System.Drawing.Size(207, 66);
+            this.overviewBtn.Size = new System.Drawing.Size(155, 54);
             this.overviewBtn.TabIndex = 15;
             this.overviewBtn.Text = "Overview";
             this.overviewBtn.UseVisualStyleBackColor = true;
@@ -88,10 +90,9 @@
             // sideHighlight
             // 
             this.sideHighlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.sideHighlight.Location = new System.Drawing.Point(0, 110);
-            this.sideHighlight.Margin = new System.Windows.Forms.Padding(4);
+            this.sideHighlight.Location = new System.Drawing.Point(0, 89);
             this.sideHighlight.Name = "sideHighlight";
-            this.sideHighlight.Size = new System.Drawing.Size(15, 66);
+            this.sideHighlight.Size = new System.Drawing.Size(11, 54);
             this.sideHighlight.TabIndex = 14;
             // 
             // productBtn
@@ -104,10 +105,9 @@
             this.productBtn.ForeColor = System.Drawing.Color.White;
             this.productBtn.Image = ((System.Drawing.Image)(resources.GetObject("productBtn.Image")));
             this.productBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.productBtn.Location = new System.Drawing.Point(15, 223);
-            this.productBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.productBtn.Location = new System.Drawing.Point(11, 181);
             this.productBtn.Name = "productBtn";
-            this.productBtn.Size = new System.Drawing.Size(207, 66);
+            this.productBtn.Size = new System.Drawing.Size(155, 54);
             this.productBtn.TabIndex = 17;
             this.productBtn.Text = "Products";
             this.productBtn.UseVisualStyleBackColor = true;
@@ -117,14 +117,15 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(221, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Location = new System.Drawing.Point(166, 0);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1166, 12);
+            this.panel2.Size = new System.Drawing.Size(874, 10);
             this.panel2.TabIndex = 1;
             // 
             // productPanel
             // 
+            this.productPanel.Controls.Add(this.progressBar1);
+            this.productPanel.Controls.Add(this.groupBox1);
             this.productPanel.Controls.Add(this.buttonRestart);
             this.productPanel.Controls.Add(this.labelAdminShop);
             this.productPanel.Controls.Add(this.comboBoxShop);
@@ -136,37 +137,48 @@
             this.productPanel.Controls.Add(this.drinkRbtn);
             this.productPanel.Controls.Add(this.foodRbtn);
             this.productPanel.Controls.Add(this.quantitySelec);
-            this.productPanel.Location = new System.Drawing.Point(307, 86);
-            this.productPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.productPanel.Location = new System.Drawing.Point(230, 70);
             this.productPanel.Name = "productPanel";
-            this.productPanel.Size = new System.Drawing.Size(1329, 780);
+            this.productPanel.Size = new System.Drawing.Size(997, 634);
             this.productPanel.TabIndex = 4;
+            // 
+            // buttonRestart
+            // 
+            this.buttonRestart.Location = new System.Drawing.Point(44, 408);
+            this.buttonRestart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRestart.Name = "buttonRestart";
+            this.buttonRestart.Size = new System.Drawing.Size(124, 45);
+            this.buttonRestart.TabIndex = 34;
+            this.buttonRestart.Text = "restart order";
+            this.buttonRestart.UseVisualStyleBackColor = true;
+            this.buttonRestart.Click += new System.EventHandler(this.buttonRestart_Click);
             // 
             // labelAdminShop
             // 
             this.labelAdminShop.AutoSize = true;
-            this.labelAdminShop.Location = new System.Drawing.Point(83, 73);
+            this.labelAdminShop.Location = new System.Drawing.Point(62, 59);
+            this.labelAdminShop.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelAdminShop.Name = "labelAdminShop";
-            this.labelAdminShop.Size = new System.Drawing.Size(91, 17);
+            this.labelAdminShop.Size = new System.Drawing.Size(69, 13);
             this.labelAdminShop.TabIndex = 33;
             this.labelAdminShop.Text = "Choose shop";
             // 
             // comboBoxShop
             // 
             this.comboBoxShop.FormattingEnabled = true;
-            this.comboBoxShop.Location = new System.Drawing.Point(323, 66);
+            this.comboBoxShop.Location = new System.Drawing.Point(242, 54);
+            this.comboBoxShop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.comboBoxShop.Name = "comboBoxShop";
-            this.comboBoxShop.Size = new System.Drawing.Size(195, 24);
+            this.comboBoxShop.Size = new System.Drawing.Size(147, 21);
             this.comboBoxShop.TabIndex = 32;
             this.comboBoxShop.SelectedIndexChanged += new System.EventHandler(this.comboBoxShop_SelectedIndexChanged);
             // 
             // lblCardLinkedStatus
             // 
             this.lblCardLinkedStatus.AutoSize = true;
-            this.lblCardLinkedStatus.Location = new System.Drawing.Point(79, 481);
-            this.lblCardLinkedStatus.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCardLinkedStatus.Location = new System.Drawing.Point(56, 379);
             this.lblCardLinkedStatus.Name = "lblCardLinkedStatus";
-            this.lblCardLinkedStatus.Size = new System.Drawing.Size(116, 17);
+            this.lblCardLinkedStatus.Size = new System.Drawing.Size(88, 13);
             this.lblCardLinkedStatus.TabIndex = 31;
             this.lblCardLinkedStatus.Text = "...........................";
             // 
@@ -175,21 +187,18 @@
             this.labelOrderInfo.AutoSize = true;
             this.labelOrderInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelOrderInfo.ForeColor = System.Drawing.Color.DimGray;
-            this.labelOrderInfo.Location = new System.Drawing.Point(677, 119);
-            this.labelOrderInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelOrderInfo.Location = new System.Drawing.Point(508, 97);
             this.labelOrderInfo.Name = "labelOrderInfo";
-            this.labelOrderInfo.Size = new System.Drawing.Size(21, 28);
+            this.labelOrderInfo.Size = new System.Drawing.Size(17, 23);
             this.labelOrderInfo.TabIndex = 28;
             this.labelOrderInfo.Text = "-";
             // 
             // itemLbx
             // 
             this.itemLbx.FormattingEnabled = true;
-            this.itemLbx.ItemHeight = 16;
-            this.itemLbx.Location = new System.Drawing.Point(79, 167);
-            this.itemLbx.Margin = new System.Windows.Forms.Padding(4);
+            this.itemLbx.Location = new System.Drawing.Point(59, 136);
             this.itemLbx.Name = "itemLbx";
-            this.itemLbx.Size = new System.Drawing.Size(439, 196);
+            this.itemLbx.Size = new System.Drawing.Size(330, 160);
             this.itemLbx.TabIndex = 26;
             this.itemLbx.SelectedIndexChanged += new System.EventHandler(this.itemLbx_SelectedIndexChanged);
             this.itemLbx.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.itemLbx_MouseDoubleClick);
@@ -199,10 +208,9 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.DimGray;
-            this.label3.Location = new System.Drawing.Point(77, 384);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(58, 312);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(137, 28);
+            this.label3.Size = new System.Drawing.Size(110, 23);
             this.label3.TabIndex = 25;
             this.label3.Text = "Quantity :";
             // 
@@ -211,10 +219,9 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(75, 114);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(56, 93);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(180, 28);
+            this.label1.Size = new System.Drawing.Size(147, 23);
             this.label1.TabIndex = 25;
             this.label1.Text = "Choose Type :";
             // 
@@ -222,10 +229,10 @@
             // 
             this.drinkRbtn.AutoSize = true;
             this.drinkRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.drinkRbtn.Location = new System.Drawing.Point(448, 119);
-            this.drinkRbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.drinkRbtn.Location = new System.Drawing.Point(336, 97);
+            this.drinkRbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.drinkRbtn.Name = "drinkRbtn";
-            this.drinkRbtn.Size = new System.Drawing.Size(70, 24);
+            this.drinkRbtn.Size = new System.Drawing.Size(57, 20);
             this.drinkRbtn.TabIndex = 24;
             this.drinkRbtn.Text = "Drink";
             this.drinkRbtn.UseVisualStyleBackColor = true;
@@ -235,10 +242,10 @@
             this.foodRbtn.AutoSize = true;
             this.foodRbtn.Checked = true;
             this.foodRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.foodRbtn.Location = new System.Drawing.Point(323, 118);
-            this.foodRbtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.foodRbtn.Location = new System.Drawing.Point(242, 96);
+            this.foodRbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.foodRbtn.Name = "foodRbtn";
-            this.foodRbtn.Size = new System.Drawing.Size(67, 24);
+            this.foodRbtn.Size = new System.Drawing.Size(58, 20);
             this.foodRbtn.TabIndex = 23;
             this.foodRbtn.TabStop = true;
             this.foodRbtn.Text = "Food";
@@ -249,19 +256,18 @@
             // 
             this.quantitySelec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.quantitySelec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.quantitySelec.Location = new System.Drawing.Point(229, 386);
-            this.quantitySelec.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.quantitySelec.Location = new System.Drawing.Point(172, 314);
+            this.quantitySelec.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.quantitySelec.Name = "quantitySelec";
-            this.quantitySelec.Size = new System.Drawing.Size(123, 26);
+            this.quantitySelec.Size = new System.Drawing.Size(92, 22);
             this.quantitySelec.TabIndex = 19;
             this.quantitySelec.ValueChanged += new System.EventHandler(this.quantitySelec_ValueChanged);
             // 
             // startPanel
             // 
-            this.startPanel.Location = new System.Drawing.Point(292, 90);
-            this.startPanel.Margin = new System.Windows.Forms.Padding(4);
+            this.startPanel.Location = new System.Drawing.Point(233, 73);
             this.startPanel.Name = "startPanel";
-            this.startPanel.Size = new System.Drawing.Size(1473, 846);
+            this.startPanel.Size = new System.Drawing.Size(1091, 687);
             this.startPanel.TabIndex = 9;
             // 
             // labelShopName
@@ -269,36 +275,49 @@
             this.labelShopName.AutoSize = true;
             this.labelShopName.Font = new System.Drawing.Font("Century", 16F, System.Drawing.FontStyle.Bold);
             this.labelShopName.ForeColor = System.Drawing.Color.DarkRed;
-            this.labelShopName.Location = new System.Drawing.Point(314, 39);
-            this.labelShopName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelShopName.Location = new System.Drawing.Point(236, 32);
             this.labelShopName.Name = "labelShopName";
-            this.labelShopName.Size = new System.Drawing.Size(197, 33);
+            this.labelShopName.Size = new System.Drawing.Size(162, 27);
             this.labelShopName.TabIndex = 32;
             this.labelShopName.Text = "SHOP NAME";
             // 
-            // buttonRestart
+            // groupBox1
             // 
-            this.buttonRestart.Location = new System.Drawing.Point(79, 546);
-            this.buttonRestart.Name = "buttonRestart";
-            this.buttonRestart.Size = new System.Drawing.Size(166, 55);
-            this.buttonRestart.TabIndex = 34;
-            this.buttonRestart.Text = "restart order";
-            this.buttonRestart.UseVisualStyleBackColor = true;
-            this.buttonRestart.Click += new System.EventHandler(this.buttonRestart_Click);
+            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Location = new System.Drawing.Point(31, 477);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(551, 93);
+            this.groupBox1.TabIndex = 35;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "groupBox1";
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(107, 444);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(8, 9);
+            this.progressBar1.TabIndex = 36;
+            // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(17, 19);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(510, 56);
+            this.listBox1.TabIndex = 0;
             // 
             // ShopForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1387, 788);
+            this.ClientSize = new System.Drawing.Size(1040, 640);
             this.Controls.Add(this.labelShopName);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.productPanel);
             this.Controls.Add(this.startPanel);
+            this.Controls.Add(this.productPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ShopForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShopForm";
@@ -309,6 +328,7 @@
             this.productPanel.ResumeLayout(false);
             this.productPanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.quantitySelec)).EndInit();
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -335,6 +355,9 @@
         private System.Windows.Forms.ComboBox comboBoxShop;
         private System.Windows.Forms.Label labelShopName;
         private System.Windows.Forms.Button buttonRestart;
+        private System.Windows.Forms.ProgressBar progressBar1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListBox listBox1;
     }
 }
 

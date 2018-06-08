@@ -15,7 +15,7 @@ using System.Globalization;
 
 namespace RentalApp
 {
-    public partial class RentalForm : Form
+    public partial class RentalForm : Form,ILogger
     {
         Order o;
         DataHelper data;
@@ -38,6 +38,9 @@ namespace RentalApp
             sideHighlight.Height = borrowBtn.Height;
             sideHighlight.Top = borrowBtn.Top;
             borrowPanel.BringToFront();
+            borrowPanel.Visible = true;
+            returnPanel.Visible = false;
+            data = new DataHelper(this);
 
             // switchy switch
             borrow = true;
@@ -47,6 +50,11 @@ namespace RentalApp
             sideHighlight.Height = returnBtn.Height;
             sideHighlight.Top = returnBtn.Top;
             returnPanel.BringToFront();
+            borrowPanel.Visible = false;
+            returnPanel.Visible = true;
+            data = new DataHelper(this);
+
+
 
             // switchy switch
             borrow = false;
@@ -56,7 +64,7 @@ namespace RentalApp
         {
             // init values
             borrow = true;
-            data = new DataHelper();
+            data = new DataHelper(this);
             myRFIDReader = new RFID();
             myRFIDReader.Tag += ScanVisitor;
             o = new Order(selectedShop);
@@ -64,10 +72,17 @@ namespace RentalApp
             myRFIDReader.Open();
 
             // GUI
-            labelShopName.Text = "Loan Stand " + selectedShop.ShopName;
-            sideHighlight.Height = borrowBtn.Height;
-            sideHighlight.Top = borrowBtn.Top;
-            borrowPanel.BringToFront();
+            if (selectedShop != null)
+            {
+                labelShopName.Text = "Loan Stand " + selectedShop.ShopName;
+                sideHighlight.Height = borrowBtn.Height;
+                sideHighlight.Top = borrowBtn.Top;
+                borrowPanel.BringToFront();
+            }
+            else
+            {
+                MessageBox.Show("no shop is selected");
+            }
         }
 
         // RFID PROCESSING
@@ -164,45 +179,53 @@ namespace RentalApp
 
             if (MessageBox.Show("Confirm payment?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
             {
-                if (borrow)
+                if (v != null)
                 {
-                    if (v.Credit < o.GetLoanDeposit())
+                    if (borrow)
                     {
-                        MessageBox.Show("Visitor does not have enough credit.");
+                        if (v.Credit < o.GetLoanDeposit())
+                        {
+                            MessageBox.Show("Visitor does not have enough credit.");
+                        }
+                        else
+                        {
+                            v.Credit -= o.GetLoanDeposit();
+                            o.OrderDate = DateTime.Now;
+                            o.VisitorNr = v.IdNr;
+
+                            if (data.CreateNewLoanOrder(o) == 1 && data.AddLoanOrderLine(o) != -1 && data.UpdateSelectedVisitor(v) != -1)
+                            {
+                                labelBorrowInfo.Text = o.GetDepositReceipt();
+                                labelVisitorB.Text = v.ToString();
+                            }
+                        }
                     }
                     else
                     {
-                        v.Credit -= o.GetLoanDeposit();
-                        o.OrderDate = DateTime.Now;
-                        o.VisitorNr = v.IdNr;
-
-                        if (data.CreateNewLoanOrder(o) == 1 && data.AddLoanOrderLine(o) != -1 && data.UpdateSelectedVisitor(v) != -1)
+                        if (v.Credit + o.GetLoanDeposit() < o.GetLoanFee())
                         {
-                            labelBorrowInfo.Text = o.GetDepositReceipt();
-                            labelVisitorB.Text = v.ToString();
+                            MessageBox.Show("Visitor does not have enough credit.");
+                        }
+                        else
+                        {
+                            // return deposit take fees
+                            v.Credit = v.Credit + o.GetLoanDeposit() - o.GetLoanFee();
+                            o.OrderDate = DateTime.Now; // the date of the "return order" 
+
+                            if (data.ProcessLoanReturn(o, v.IdNr.ToString()) != -1 && data.UpdateSelectedVisitor(v) != -1)
+                            {
+                                labelReturnInfo.Text = o.GetReturnReceipt();
+                                labelVisitorR.Text = v.ToString();
+                            }
                         }
                     }
                 }
                 else
                 {
-                    if (v.Credit + o.GetLoanDeposit() < o.GetLoanFee())
-                    {
-                        MessageBox.Show("Visitor does not have enough credit.");
-                    }
-                    else
-                    {
-                        // return deposit take fees
-                        v.Credit = v.Credit + o.GetLoanDeposit() - o.GetLoanFee();
-                        o.OrderDate = DateTime.Now; // the date of the "return order" 
-
-                        if (data.ProcessLoanReturn(o, v.IdNr.ToString()) != -1 && data.UpdateSelectedVisitor(v) != -1)
-                        {
-                            labelReturnInfo.Text = o.GetReturnReceipt();
-                            labelVisitorR.Text = v.ToString();
-                        }
-                    }
+                    MessageBox.Show("visitor is not found");
                 }
             }
+
             o = new Order(selectedShop);
         }
 
@@ -215,6 +238,33 @@ namespace RentalApp
         {
             o = new Order(selectedShop);
             labelBorrowInfo.Text = o.ToString();
+        }
+
+        private void returnPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        public void LogMessage(string message)
+        {
+            if (lbxBorrowMessage.Visible)
+            {
+                lbxBorrowMessage.Items.Add(message);
+            }
+            else
+            {
+                lbxReturnmMessage.Items.Add(message);
+            }
+        }
+
+        private void btnClearOfReturn_Click(object sender, EventArgs e)
+        {
+            lbxReturnmMessage.Items.Clear();
+        }
+
+        private void btnBorrowClear_Click(object sender, EventArgs e)
+        {
+            lbxBorrowMessage.Items.Clear();
         }
     }
 }

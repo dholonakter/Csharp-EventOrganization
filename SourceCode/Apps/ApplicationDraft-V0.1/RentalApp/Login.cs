@@ -12,14 +12,14 @@ using ThanhDLL;
 
 namespace RentalApp
 {
-    public partial class Login : Form
+    public partial class Login : Form,ILogger
     {
         DataHelper dh;
 
         public Login()
         {
             InitializeComponent();
-            dh = new DataHelper();
+            dh = new DataHelper(this);
         }
 
         private void ValidateLogin()
@@ -64,6 +64,17 @@ namespace RentalApp
             {
                 ValidateLogin();
             }
+        }
+
+        public void LogMessage(string message)
+        {
+            lbxLoginMessage.Items.Add(message);
+        }
+
+       
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            lbxLoginMessage.Items.Clear();
         }
     }
 }

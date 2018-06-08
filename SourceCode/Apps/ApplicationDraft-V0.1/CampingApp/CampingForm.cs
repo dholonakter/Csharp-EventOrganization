@@ -43,6 +43,11 @@ namespace CampingApp
             sideHighlight.Height = checkinBtn.Height;
             sideHighlight.Top = checkinBtn.Top;
             checkinPanel.BringToFront();
+            searchPanel.Visible = false;
+            checkoutPanel.Visible = false;
+            checkinPanel.Visible = true;
+            dh = new DataHelper(this);
+
 
             // clear gui
             lbCheckIn.Text = "";
@@ -59,6 +64,11 @@ namespace CampingApp
             sideHighlight.Height = checkoutBtn.Height;
             sideHighlight.Top = checkoutBtn.Top;
             checkoutPanel.BringToFront();
+            searchPanel.Visible = false;
+            checkoutPanel.Visible = true;
+            checkinPanel.Visible = false;
+            dh = new DataHelper(this);
+
 
             // clear gui
             lbCheckOut.Text = "";
@@ -76,17 +86,34 @@ namespace CampingApp
             sideHighlight.Top = monitorBtn.Top;
             searchPanel.BringToFront();
 
+            searchPanel.Visible = true;
+            checkoutPanel.Visible = false;
+            checkinPanel.Visible = false;
+            dh = new DataHelper(this);
+
+
             // Display data onto gridview
             campTable = new BindingSource();
-            campTable.DataSource = dh.DataTableFromSQL("SELECT * FROM reservation_info");
-            dataGridViewCamp.DataSource = campTable;
+            try
+            {
+                campTable.DataSource = dh.DataTableFromSQL("SELECT * FROM reservation_info");
+                dataGridViewCamp.DataSource = campTable;
+            }
+            catch(Exception)
+            {
+                LogMessage("DataTableFromSQL: Error while querying the reservation");
+            }
+            
             r = null;
         }
 
         private void CampingForm_Load(object sender, EventArgs e)
         {
             // Connecting to DB
-   
+            //show the checkin panel visible
+            checkoutPanel.Visible = false;
+            searchPanel.Visible = false;
+
             dh = new DataHelper(this);
 
 
@@ -103,7 +130,7 @@ namespace CampingApp
             }
             catch (PhidgetException)
             {
-                MessageBox.Show("Failure to connect to RFID reader");
+                 LogMessage("Failure to connect to RFID reader");
             }
         }
 
@@ -253,14 +280,22 @@ namespace CampingApp
             }
         }
 
-        private void searchPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         public void LogMessage(string message)
         {
-            throw new NotImplementedException();
+            if (checkinPanel.Visible)
+            {
+                lbxCheckInMessage.Items.Add(message);
+            }
+            if (searchPanel.Visible)
+            {
+                lbMonitorMessage.Items.Add(message);
+
+            }
+            if (checkoutPanel.Visible)
+            {
+                lbxCheckoutMessage.Items.Add(message);
+            }
         }
     }
 }

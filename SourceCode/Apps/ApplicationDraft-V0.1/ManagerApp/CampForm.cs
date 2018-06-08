@@ -11,7 +11,7 @@ using ThanhDLL;
 
 namespace ManagerApp
 {
-    public partial class CampForm : Form
+    public partial class CampForm : Form,ILogger
     {
         DataHelper dh;
         BindingSource campTable;
@@ -21,7 +21,7 @@ namespace ManagerApp
         {
             InitializeComponent();
 
-            dh = new DataHelper();
+            dh = new DataHelper(this);
             ShowAll();
         }
 
@@ -95,6 +95,11 @@ namespace ManagerApp
             HomeForm home = new HomeForm();
             home.Show();
             this.Hide();
+        }
+
+        public void LogMessage(string message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

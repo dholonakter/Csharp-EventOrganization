@@ -79,7 +79,7 @@ namespace EntranceApp
             }
             catch (PhidgetException)
             {
-                MessageBox.Show("Failure to connect to RFID reader");
+                LogMessage("Failure to connect to RFID reader");
             }
            
         }
@@ -421,6 +421,10 @@ namespace EntranceApp
             {
                 lbMonitorMessage.Items.Add(message);
 
+            }
+            if (checkoutPanel.Visible)
+            {
+                lbxCheckOutMessage.Items.Add(message);
             }
         }
 

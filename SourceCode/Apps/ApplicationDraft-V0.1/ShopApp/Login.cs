@@ -12,14 +12,14 @@ using ThanhDLL;
 
 namespace ShopApp
 {
-    public partial class Login : Form
+    public partial class Login : Form,ILogger
     {
         DataHelper dh;
 
         public Login()
         {
             InitializeComponent();
-            dh = new DataHelper();
+            dh = new DataHelper(this);
         }
         private void ValidateLogin()
         {
@@ -62,6 +62,16 @@ namespace ShopApp
             {
                 ValidateLogin();
             }
+        }
+
+        public void LogMessage(string message)
+        {
+            lbxLoginMessage.Items.Add(message);
+        }
+
+        private void btnLoginClear_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

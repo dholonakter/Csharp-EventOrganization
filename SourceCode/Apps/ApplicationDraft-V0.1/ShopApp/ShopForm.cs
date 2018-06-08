@@ -14,7 +14,7 @@ using Phidget22.Events;
 
 namespace ShopApp
 {
-    public partial class ShopForm : Form
+    public partial class ShopForm : Form,ILogger
     {
         Order o;
         DataHelper data;
@@ -115,7 +115,7 @@ namespace ShopApp
         {
             // init values
             o = new Order(selectedShop);
-            data = new DataHelper();
+            data = new DataHelper(this);
             myRFIDReader = new RFID();
 
             myRFIDReader.Tag += new RFIDTagEventHandler(Pay);
@@ -237,6 +237,11 @@ namespace ShopApp
         {
             o = new Order(selectedShop);
             labelOrderInfo.Text = o.ToString();
+        }
+
+        public void LogMessage(string message)
+        {
+            S
         }
     }
 }
