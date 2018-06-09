@@ -78,6 +78,8 @@ namespace RentalApp
                 sideHighlight.Height = borrowBtn.Height;
                 sideHighlight.Top = borrowBtn.Top;
                 borrowPanel.BringToFront();
+                returnPanel.Visible = false;
+                borrowPanel.Visible = true;
             }
             else
             {

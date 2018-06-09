@@ -11,7 +11,7 @@ using ThanhDLL;
 
 namespace ManagerApp
 {
-    public partial class ShopForm : Form
+    public partial class ShopForm : Form,ILogger
     {
         DataHelper dh;
         BindingSource dataTable;
@@ -20,7 +20,7 @@ namespace ManagerApp
         public ShopForm()
         {
             InitializeComponent();
-            dh = new DataHelper();
+            dh = new DataHelper(this);
         }
 
         private void Display(string sql)
@@ -99,6 +99,11 @@ namespace ManagerApp
             HomeForm home = new HomeForm();
             home.Show();
             this.Hide();
+        }
+
+        public void LogMessage(string message)
+        {
+
         }
     }
 }

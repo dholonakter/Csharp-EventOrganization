@@ -99,7 +99,7 @@ namespace ManagerApp
 
         public void LogMessage(string message)
         {
-            throw new NotImplementedException();
+            lbxCampMessage.Items.Add(message);
         }
     }
 }

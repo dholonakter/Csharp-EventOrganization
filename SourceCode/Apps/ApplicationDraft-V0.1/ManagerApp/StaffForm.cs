@@ -11,7 +11,7 @@ using ThanhDLL;
 
 namespace ManagerApp
 {
-    public partial class StaffForm : Form
+    public partial class StaffForm : Form,ILogger
     {
         DataHelper dh;
         BindingSource staffTable;
@@ -20,7 +20,7 @@ namespace ManagerApp
         public StaffForm()
         {
             InitializeComponent();
-            dh = new DataHelper();
+            dh = new DataHelper(this);
             FillComboBox();
             ShowAll();
         }
@@ -86,6 +86,10 @@ namespace ManagerApp
             HomeForm home = new HomeForm();
             home.Show();
             this.Hide();
+        }
+
+        public void LogMessage(string message)
+        {
         }
     }
 }

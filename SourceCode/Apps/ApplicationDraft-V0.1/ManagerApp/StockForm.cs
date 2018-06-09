@@ -11,7 +11,7 @@ using ThanhDLL;
 
 namespace ManagerApp
 {
-    public partial class StockForm : Form
+    public partial class StockForm : Form,ILogger
     {
         DataHelper dh;
         BindingSource dataTable;
@@ -21,7 +21,7 @@ namespace ManagerApp
         public StockForm()
         {
             InitializeComponent();
-            dh = new DataHelper();
+            dh = new DataHelper(this);
             timerUpdate.Start();
             sql = "select ArticleNr, ShopName, ShopNr, ArticleName, Price, Available, IsLoanable, DepositValue from all_article";
             Display(sql);
@@ -77,6 +77,11 @@ namespace ManagerApp
             HomeForm home = new HomeForm();
             home.Show();
             this.Hide();
+        }
+
+        public void LogMessage(string message)
+        {
+            lbxInventoryMessage.Items.Add(message);
         }
     }
 }

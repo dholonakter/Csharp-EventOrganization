@@ -11,7 +11,7 @@ using ThanhDLL;
 
 namespace ManagerApp
 {
-    public partial class VisitorForm : Form
+    public partial class VisitorForm : Form,ILogger
     {
         DataHelper dh;
         BindingSource visitorTable;
@@ -20,10 +20,10 @@ namespace ManagerApp
         public VisitorForm()
         {
             InitializeComponent();
-            dh = new DataHelper();
+            dh = new DataHelper(this);
 
             //timerUpdate.Start();
-            sql = "SELECT VisitorNr, FirstName, LastName, Phone, Email, UserPassword, RFIDNr, Credit, CheckedIn, ReservNr, IsInCamp" + " FROM VISITOR";
+            sql = "SELECT VisitorNr, FirstName, LastName, Phone, Email, UserPassword, RFIDNr, Credit, CheckedIn,IsInCamp" + " FROM VISITOR";
             Display(sql);
 
             UpdateLabels();
@@ -32,9 +32,16 @@ namespace ManagerApp
         {
             // Display data onto gridview
             visitorTable = new BindingSource();
-            visitorTable.DataSource = dh.DataTableFromSQL(sql);
-            dataGridViewVisitor.DataSource = visitorTable;
-            dataGridViewVisitor.Refresh();
+            try
+            {
+                visitorTable.DataSource = dh.DataTableFromSQL(sql);
+                dataGridViewVisitor.DataSource = visitorTable;
+                dataGridViewVisitor.Refresh();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can not dispaly the data");
+            }
         }
 
         private void UpdateLabels()
@@ -75,6 +82,10 @@ namespace ManagerApp
             HomeForm home = new HomeForm();
             home.Show();
             this.Hide();
+        }
+
+        public void LogMessage(string message)
+        {
         }
     }
 }

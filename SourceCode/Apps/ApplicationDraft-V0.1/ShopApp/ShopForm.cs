@@ -64,6 +64,9 @@ namespace ShopApp
             sideHighlight.Height = overviewBtn.Height;
             sideHighlight.Top = overviewBtn.Top;
             startPanel.BringToFront();
+            startPanel.Visible = true;
+            productPanel.Visible = false;
+            data = new DataHelper(this);
         }
 
         private void productBtn_Click(object sender, EventArgs e)
@@ -71,6 +74,9 @@ namespace ShopApp
             sideHighlight.Height = productBtn.Height;
             sideHighlight.Top = productBtn.Top;
             productPanel.BringToFront();
+            startPanel.Visible = false;
+            productPanel.Visible = true;
+            data = new DataHelper(this);
 
             if (selectedShop == null) // if admin is logged on 
             {
@@ -138,6 +144,8 @@ namespace ShopApp
             sideHighlight.Height = overviewBtn.Height;
             sideHighlight.Top = overviewBtn.Top;
             startPanel.BringToFront();
+            startPanel.Visible = true;
+            productPanel.Visible = false;
         }
 
         private void foodRbtn_CheckedChanged(object sender, EventArgs e)
@@ -241,7 +249,24 @@ namespace ShopApp
 
         public void LogMessage(string message)
         {
-            S
+            if (startPanel.Visible)
+            {
+                lbxOverviewMessage.Items.Add(message);
+            }
+            if (productPanel.Visible)
+            {
+                lbProductMessage.Items.Add(message);
+            }
+        }
+
+        private void btnOverviewClear_Click(object sender, EventArgs e)
+        {
+            lbxOverviewMessage.Items.Clear();
+        }
+
+        private void btnProductClear_Click(object sender, EventArgs e)
+        {
+            lbProductMessage.Items.Clear();
         }
     }
 }

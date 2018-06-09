@@ -158,7 +158,7 @@ namespace ManagerApp
 
         public void LogMessage(string message)
         {
-            throw new NotImplementedException();
+
         }
     }
 }

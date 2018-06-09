@@ -71,7 +71,7 @@ namespace ShopApp
 
         private void btnLoginClear_Click(object sender, EventArgs e)
         {
-
+            lbxLoginMessage.Items.Clear();
         }
     }
 }

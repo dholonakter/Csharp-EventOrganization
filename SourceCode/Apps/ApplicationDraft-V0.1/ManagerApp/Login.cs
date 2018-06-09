@@ -12,7 +12,7 @@ using ThanhDLL;
 
 namespace ManagerApp
 {
-    public partial class Login : Form
+    public partial class Login : Form,ILogger
     {
         DataHelper dh;
         SoundPlayer sound = new SoundPlayer("../../../error.wav");
@@ -20,7 +20,7 @@ namespace ManagerApp
         public Login()
         {
             InitializeComponent();
-            dh = new DataHelper();
+            dh = new DataHelper(this);
         }
 
         private void Login_Load(object sender, EventArgs e)
@@ -58,6 +58,11 @@ namespace ManagerApp
             {
                 ValidateLogin();
             }
+        }
+
+        public void LogMessage(string message)
+        {
+            lbxLoginMessage.Items.Add(message);
         }
     }
 }

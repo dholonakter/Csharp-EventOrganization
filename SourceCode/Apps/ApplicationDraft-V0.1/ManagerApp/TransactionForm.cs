@@ -12,7 +12,7 @@ using ThanhDLL;
 
 namespace ManagerApp
 {
-    public partial class TransactionForm : Form
+    public partial class TransactionForm : Form,ILogger
     {
         DataHelper dh;
         BindingSource logTable;
@@ -21,7 +21,7 @@ namespace ManagerApp
         public TransactionForm()
         {
             InitializeComponent();
-            dh = new DataHelper();
+            dh = new DataHelper(this);
         }
 
         private void buttonLoad_Click(object sender, EventArgs e)
@@ -92,9 +92,16 @@ namespace ManagerApp
         {
             // Display data onto gridview
             logTable = new BindingSource();
-            logTable.DataSource = dh.DataTableFromSQL("SELECT * FROM ATM_LOG");
-            dataGridView1.DataSource = logTable;
-            dataGridView1.Refresh();
+            try
+            {
+                logTable.DataSource = dh.DataTableFromSQL("SELECT * FROM ATM_LOG");
+                dataGridView1.DataSource = logTable;
+                dataGridView1.Refresh();
+            }
+            catch(Exception)
+            {
+                LogMessage("Something went wrong while displaying");
+            }
         }
         private void TransactionForm_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -106,6 +113,11 @@ namespace ManagerApp
         private void buttonRefresh_Click(object sender, EventArgs e)
         {
             DisplayLog();
+        }
+
+        public void LogMessage(string message)
+        {
+            lbxTransctionMessage.Items.Add(message);
         }
     }
 }

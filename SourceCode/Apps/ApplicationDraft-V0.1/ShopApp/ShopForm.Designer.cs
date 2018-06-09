@@ -35,6 +35,9 @@
             this.productBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.productPanel = new System.Windows.Forms.Panel();
+            this.progressBar1 = new System.Windows.Forms.ProgressBar();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lbProductMessage = new System.Windows.Forms.ListBox();
             this.buttonRestart = new System.Windows.Forms.Button();
             this.labelAdminShop = new System.Windows.Forms.Label();
             this.comboBoxShop = new System.Windows.Forms.ComboBox();
@@ -48,13 +51,16 @@
             this.quantitySelec = new System.Windows.Forms.NumericUpDown();
             this.startPanel = new System.Windows.Forms.Panel();
             this.labelShopName = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.progressBar1 = new System.Windows.Forms.ProgressBar();
-            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lbxOverviewMessage = new System.Windows.Forms.ListBox();
+            this.btnOverviewClear = new System.Windows.Forms.Button();
+            this.btnProductClear = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.productPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.quantitySelec)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.quantitySelec)).BeginInit();
+            this.startPanel.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -124,6 +130,7 @@
             // 
             // productPanel
             // 
+            this.productPanel.Controls.Add(this.btnProductClear);
             this.productPanel.Controls.Add(this.progressBar1);
             this.productPanel.Controls.Add(this.groupBox1);
             this.productPanel.Controls.Add(this.buttonRestart);
@@ -137,15 +144,40 @@
             this.productPanel.Controls.Add(this.drinkRbtn);
             this.productPanel.Controls.Add(this.foodRbtn);
             this.productPanel.Controls.Add(this.quantitySelec);
-            this.productPanel.Location = new System.Drawing.Point(230, 70);
+            this.productPanel.Location = new System.Drawing.Point(233, 70);
             this.productPanel.Name = "productPanel";
-            this.productPanel.Size = new System.Drawing.Size(997, 634);
+            this.productPanel.Size = new System.Drawing.Size(994, 634);
             this.productPanel.TabIndex = 4;
+            // 
+            // progressBar1
+            // 
+            this.progressBar1.Location = new System.Drawing.Point(107, 444);
+            this.progressBar1.Name = "progressBar1";
+            this.progressBar1.Size = new System.Drawing.Size(8, 9);
+            this.progressBar1.TabIndex = 36;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.lbProductMessage);
+            this.groupBox1.Location = new System.Drawing.Point(24, 448);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(551, 96);
+            this.groupBox1.TabIndex = 35;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "LogMessage";
+            // 
+            // lbProductMessage
+            // 
+            this.lbProductMessage.FormattingEnabled = true;
+            this.lbProductMessage.Location = new System.Drawing.Point(13, 19);
+            this.lbProductMessage.Name = "lbProductMessage";
+            this.lbProductMessage.Size = new System.Drawing.Size(514, 69);
+            this.lbProductMessage.TabIndex = 0;
             // 
             // buttonRestart
             // 
-            this.buttonRestart.Location = new System.Drawing.Point(44, 408);
-            this.buttonRestart.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonRestart.Location = new System.Drawing.Point(44, 398);
+            this.buttonRestart.Margin = new System.Windows.Forms.Padding(2);
             this.buttonRestart.Name = "buttonRestart";
             this.buttonRestart.Size = new System.Drawing.Size(124, 45);
             this.buttonRestart.TabIndex = 34;
@@ -167,7 +199,7 @@
             // 
             this.comboBoxShop.FormattingEnabled = true;
             this.comboBoxShop.Location = new System.Drawing.Point(242, 54);
-            this.comboBoxShop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBoxShop.Margin = new System.Windows.Forms.Padding(2);
             this.comboBoxShop.Name = "comboBoxShop";
             this.comboBoxShop.Size = new System.Drawing.Size(147, 21);
             this.comboBoxShop.TabIndex = 32;
@@ -176,7 +208,7 @@
             // lblCardLinkedStatus
             // 
             this.lblCardLinkedStatus.AutoSize = true;
-            this.lblCardLinkedStatus.Location = new System.Drawing.Point(56, 379);
+            this.lblCardLinkedStatus.Location = new System.Drawing.Point(56, 370);
             this.lblCardLinkedStatus.Name = "lblCardLinkedStatus";
             this.lblCardLinkedStatus.Size = new System.Drawing.Size(88, 13);
             this.lblCardLinkedStatus.TabIndex = 31;
@@ -230,7 +262,7 @@
             this.drinkRbtn.AutoSize = true;
             this.drinkRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.drinkRbtn.Location = new System.Drawing.Point(336, 97);
-            this.drinkRbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.drinkRbtn.Margin = new System.Windows.Forms.Padding(2);
             this.drinkRbtn.Name = "drinkRbtn";
             this.drinkRbtn.Size = new System.Drawing.Size(57, 20);
             this.drinkRbtn.TabIndex = 24;
@@ -243,7 +275,7 @@
             this.foodRbtn.Checked = true;
             this.foodRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.foodRbtn.Location = new System.Drawing.Point(242, 96);
-            this.foodRbtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.foodRbtn.Margin = new System.Windows.Forms.Padding(2);
             this.foodRbtn.Name = "foodRbtn";
             this.foodRbtn.Size = new System.Drawing.Size(58, 20);
             this.foodRbtn.TabIndex = 23;
@@ -257,7 +289,7 @@
             this.quantitySelec.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.quantitySelec.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.quantitySelec.Location = new System.Drawing.Point(172, 314);
-            this.quantitySelec.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.quantitySelec.Margin = new System.Windows.Forms.Padding(2);
             this.quantitySelec.Name = "quantitySelec";
             this.quantitySelec.Size = new System.Drawing.Size(92, 22);
             this.quantitySelec.TabIndex = 19;
@@ -265,6 +297,8 @@
             // 
             // startPanel
             // 
+            this.startPanel.Controls.Add(this.btnOverviewClear);
+            this.startPanel.Controls.Add(this.groupBox2);
             this.startPanel.Location = new System.Drawing.Point(233, 73);
             this.startPanel.Name = "startPanel";
             this.startPanel.Size = new System.Drawing.Size(1091, 687);
@@ -281,30 +315,43 @@
             this.labelShopName.TabIndex = 32;
             this.labelShopName.Text = "SHOP NAME";
             // 
-            // groupBox1
+            // groupBox2
             // 
-            this.groupBox1.Controls.Add(this.listBox1);
-            this.groupBox1.Location = new System.Drawing.Point(31, 477);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(551, 93);
-            this.groupBox1.TabIndex = 35;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox2.Controls.Add(this.lbxOverviewMessage);
+            this.groupBox2.Location = new System.Drawing.Point(18, 407);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(628, 125);
+            this.groupBox2.TabIndex = 0;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "LogMessage";
             // 
-            // progressBar1
+            // lbxOverviewMessage
             // 
-            this.progressBar1.Location = new System.Drawing.Point(107, 444);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(8, 9);
-            this.progressBar1.TabIndex = 36;
+            this.lbxOverviewMessage.FormattingEnabled = true;
+            this.lbxOverviewMessage.Location = new System.Drawing.Point(6, 17);
+            this.lbxOverviewMessage.Name = "lbxOverviewMessage";
+            this.lbxOverviewMessage.Size = new System.Drawing.Size(581, 95);
+            this.lbxOverviewMessage.TabIndex = 0;
             // 
-            // listBox1
+            // btnOverviewClear
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(17, 19);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(510, 56);
-            this.listBox1.TabIndex = 0;
+            this.btnOverviewClear.Location = new System.Drawing.Point(225, 544);
+            this.btnOverviewClear.Name = "btnOverviewClear";
+            this.btnOverviewClear.Size = new System.Drawing.Size(75, 23);
+            this.btnOverviewClear.TabIndex = 1;
+            this.btnOverviewClear.Text = "ClearAll";
+            this.btnOverviewClear.UseVisualStyleBackColor = true;
+            this.btnOverviewClear.Click += new System.EventHandler(this.btnOverviewClear_Click);
+            // 
+            // btnProductClear
+            // 
+            this.btnProductClear.Location = new System.Drawing.Point(225, 550);
+            this.btnProductClear.Name = "btnProductClear";
+            this.btnProductClear.Size = new System.Drawing.Size(75, 23);
+            this.btnProductClear.TabIndex = 37;
+            this.btnProductClear.Text = "ClearAll";
+            this.btnProductClear.UseVisualStyleBackColor = true;
+            this.btnProductClear.Click += new System.EventHandler(this.btnProductClear_Click);
             // 
             // ShopForm
             // 
@@ -315,8 +362,8 @@
             this.Controls.Add(this.labelShopName);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.startPanel);
             this.Controls.Add(this.productPanel);
+            this.Controls.Add(this.startPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ShopForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -327,8 +374,10 @@
             this.panel1.ResumeLayout(false);
             this.productPanel.ResumeLayout(false);
             this.productPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.quantitySelec)).EndInit();
             this.groupBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.quantitySelec)).EndInit();
+            this.startPanel.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -357,7 +406,11 @@
         private System.Windows.Forms.Button buttonRestart;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lbProductMessage;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ListBox lbxOverviewMessage;
+        private System.Windows.Forms.Button btnOverviewClear;
+        private System.Windows.Forms.Button btnProductClear;
     }
 }
 
