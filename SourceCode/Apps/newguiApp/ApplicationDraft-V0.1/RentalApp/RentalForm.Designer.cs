@@ -30,41 +30,19 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RentalForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.monitorBtn = new System.Windows.Forms.Button();
             this.sideHighlight = new System.Windows.Forms.Panel();
             this.borrowBtn = new System.Windows.Forms.Button();
             this.returnBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.startPanel = new System.Windows.Forms.Panel();
-            this.borrowPanel = new System.Windows.Forms.Panel();
-            this.loanClearBtn = new System.Windows.Forms.Button();
-            this.loaningLbl = new System.Windows.Forms.Label();
-            this.labelVisitorB = new System.Windows.Forms.Label();
-            this.returnPanel = new System.Windows.Forms.Panel();
-            this.labelVisitorR = new System.Windows.Forms.Label();
-            this.labelReturnInfo = new System.Windows.Forms.Label();
-            this.labelShopName = new System.Windows.Forms.Label();
-            this.monitorBtn = new System.Windows.Forms.Button();
-            this.totalLbl = new System.Windows.Forms.Label();
-            this.labelBorrowInfo = new System.Windows.Forms.Label();
-            this.loanInfoLbx = new System.Windows.Forms.ListBox();
-            this.confirmLoanBtn = new System.Windows.Forms.Button();
-            this.removeBtn = new System.Windows.Forms.Button();
-            this.returnLbx = new System.Windows.Forms.ListBox();
-            this.confirmReturnBtn = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.depositLbl = new System.Windows.Forms.Label();
-            this.returnLbl = new System.Windows.Forms.Label();
-            this.customerReturnInfoLbl = new System.Windows.Forms.Label();
-            this.returnDepositLbl = new System.Windows.Forms.Label();
-            this.orderReturnInfoLbl = new System.Windows.Forms.Label();
-            this.loanCustomerInfoLbl = new System.Windows.Forms.Label();
-            this.orderLoanInfoLbl = new System.Windows.Forms.Label();
-            this.totalLoanLbl = new System.Windows.Forms.Label();
             this.logsClearBtn = new System.Windows.Forms.Button();
-            this.checkoutLogsBtn = new System.Windows.Forms.Button();
-            this.checkinLogsBtn = new System.Windows.Forms.Button();
+            this.currentBtn = new System.Windows.Forms.Button();
+            this.viewAllBtn = new System.Windows.Forms.Button();
             this.viewLogsBtn = new System.Windows.Forms.Button();
             this.logsInfoLbx = new System.Windows.Forms.ListBox();
+            this.personNrRbtn = new System.Windows.Forms.RadioButton();
+            this.personNameRbtn = new System.Windows.Forms.RadioButton();
             this.itemNrRbtn = new System.Windows.Forms.RadioButton();
             this.itemNameRbtn = new System.Windows.Forms.RadioButton();
             this.searchLbl = new System.Windows.Forms.Label();
@@ -73,8 +51,30 @@
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.labelMonitor = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.personNameRbtn = new System.Windows.Forms.RadioButton();
-            this.personNrRbtn = new System.Windows.Forms.RadioButton();
+            this.borrowPanel = new System.Windows.Forms.Panel();
+            this.totalLoanLbl = new System.Windows.Forms.Label();
+            this.orderLoanInfoLbl = new System.Windows.Forms.Label();
+            this.loanCustomerInfoLbl = new System.Windows.Forms.Label();
+            this.loanInfoLbx = new System.Windows.Forms.ListBox();
+            this.removeBtn = new System.Windows.Forms.Button();
+            this.confirmLoanBtn = new System.Windows.Forms.Button();
+            this.loanClearBtn = new System.Windows.Forms.Button();
+            this.totalLbl = new System.Windows.Forms.Label();
+            this.loaningLbl = new System.Windows.Forms.Label();
+            this.labelBorrowInfo = new System.Windows.Forms.Label();
+            this.labelVisitorB = new System.Windows.Forms.Label();
+            this.returnPanel = new System.Windows.Forms.Panel();
+            this.orderReturnInfoLbl = new System.Windows.Forms.Label();
+            this.returnDepositLbl = new System.Windows.Forms.Label();
+            this.customerReturnInfoLbl = new System.Windows.Forms.Label();
+            this.returnLbx = new System.Windows.Forms.ListBox();
+            this.confirmReturnBtn = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.depositLbl = new System.Windows.Forms.Label();
+            this.returnLbl = new System.Windows.Forms.Label();
+            this.labelVisitorR = new System.Windows.Forms.Label();
+            this.labelReturnInfo = new System.Windows.Forms.Label();
+            this.labelShopName = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.startPanel.SuspendLayout();
             this.borrowPanel.SuspendLayout();
@@ -93,6 +93,23 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(166, 640);
             this.panel1.TabIndex = 0;
+            // 
+            // monitorBtn
+            // 
+            this.monitorBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.monitorBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.monitorBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.monitorBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.monitorBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monitorBtn.ForeColor = System.Drawing.Color.White;
+            this.monitorBtn.Image = ((System.Drawing.Image)(resources.GetObject("monitorBtn.Image")));
+            this.monitorBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.monitorBtn.Location = new System.Drawing.Point(11, 231);
+            this.monitorBtn.Name = "monitorBtn";
+            this.monitorBtn.Size = new System.Drawing.Size(155, 54);
+            this.monitorBtn.TabIndex = 22;
+            this.monitorBtn.Text = "Logs";
+            this.monitorBtn.UseVisualStyleBackColor = true;
             // 
             // sideHighlight
             // 
@@ -150,8 +167,8 @@
             // startPanel
             // 
             this.startPanel.Controls.Add(this.logsClearBtn);
-            this.startPanel.Controls.Add(this.checkoutLogsBtn);
-            this.startPanel.Controls.Add(this.checkinLogsBtn);
+            this.startPanel.Controls.Add(this.currentBtn);
+            this.startPanel.Controls.Add(this.viewAllBtn);
             this.startPanel.Controls.Add(this.viewLogsBtn);
             this.startPanel.Controls.Add(this.logsInfoLbx);
             this.startPanel.Controls.Add(this.personNrRbtn);
@@ -169,280 +186,6 @@
             this.startPanel.Size = new System.Drawing.Size(1105, 687);
             this.startPanel.TabIndex = 10;
             // 
-            // borrowPanel
-            // 
-            this.borrowPanel.Controls.Add(this.totalLoanLbl);
-            this.borrowPanel.Controls.Add(this.orderLoanInfoLbl);
-            this.borrowPanel.Controls.Add(this.loanCustomerInfoLbl);
-            this.borrowPanel.Controls.Add(this.loanInfoLbx);
-            this.borrowPanel.Controls.Add(this.removeBtn);
-            this.borrowPanel.Controls.Add(this.confirmLoanBtn);
-            this.borrowPanel.Controls.Add(this.loanClearBtn);
-            this.borrowPanel.Controls.Add(this.totalLbl);
-            this.borrowPanel.Controls.Add(this.loaningLbl);
-            this.borrowPanel.Controls.Add(this.labelBorrowInfo);
-            this.borrowPanel.Controls.Add(this.labelVisitorB);
-            this.borrowPanel.Location = new System.Drawing.Point(223, 73);
-            this.borrowPanel.Name = "borrowPanel";
-            this.borrowPanel.Size = new System.Drawing.Size(997, 634);
-            this.borrowPanel.TabIndex = 11;
-            // 
-            // loanClearBtn
-            // 
-            this.loanClearBtn.Location = new System.Drawing.Point(203, 406);
-            this.loanClearBtn.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.loanClearBtn.Name = "loanClearBtn";
-            this.loanClearBtn.Size = new System.Drawing.Size(124, 60);
-            this.loanClearBtn.TabIndex = 31;
-            this.loanClearBtn.Text = "Clear All";
-            this.loanClearBtn.UseVisualStyleBackColor = true;
-            this.loanClearBtn.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // loaningLbl
-            // 
-            this.loaningLbl.AutoSize = true;
-            this.loaningLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.loaningLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.loaningLbl.Location = new System.Drawing.Point(54, 30);
-            this.loaningLbl.Name = "loaningLbl";
-            this.loaningLbl.Size = new System.Drawing.Size(153, 23);
-            this.loaningLbl.TabIndex = 30;
-            this.loaningLbl.Text = "Loaning Items";
-            // 
-            // labelVisitorB
-            // 
-            this.labelVisitorB.AutoSize = true;
-            this.labelVisitorB.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVisitorB.ForeColor = System.Drawing.Color.DimGray;
-            this.labelVisitorB.Location = new System.Drawing.Point(378, 30);
-            this.labelVisitorB.Name = "labelVisitorB";
-            this.labelVisitorB.Size = new System.Drawing.Size(105, 23);
-            this.labelVisitorB.TabIndex = 26;
-            this.labelVisitorB.Text = "Customer";
-            // 
-            // returnPanel
-            // 
-            this.returnPanel.Controls.Add(this.orderReturnInfoLbl);
-            this.returnPanel.Controls.Add(this.returnDepositLbl);
-            this.returnPanel.Controls.Add(this.customerReturnInfoLbl);
-            this.returnPanel.Controls.Add(this.returnLbx);
-            this.returnPanel.Controls.Add(this.confirmReturnBtn);
-            this.returnPanel.Controls.Add(this.button3);
-            this.returnPanel.Controls.Add(this.depositLbl);
-            this.returnPanel.Controls.Add(this.returnLbl);
-            this.returnPanel.Controls.Add(this.labelVisitorR);
-            this.returnPanel.Controls.Add(this.labelReturnInfo);
-            this.returnPanel.Location = new System.Drawing.Point(223, 70);
-            this.returnPanel.Name = "returnPanel";
-            this.returnPanel.Size = new System.Drawing.Size(997, 634);
-            this.returnPanel.TabIndex = 30;
-            // 
-            // labelVisitorR
-            // 
-            this.labelVisitorR.AutoSize = true;
-            this.labelVisitorR.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVisitorR.ForeColor = System.Drawing.Color.DimGray;
-            this.labelVisitorR.Location = new System.Drawing.Point(369, 33);
-            this.labelVisitorR.Name = "labelVisitorR";
-            this.labelVisitorR.Size = new System.Drawing.Size(111, 23);
-            this.labelVisitorR.TabIndex = 27;
-            this.labelVisitorR.Text = "Customer:";
-            // 
-            // labelReturnInfo
-            // 
-            this.labelReturnInfo.AutoSize = true;
-            this.labelReturnInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelReturnInfo.ForeColor = System.Drawing.Color.DimGray;
-            this.labelReturnInfo.Location = new System.Drawing.Point(369, 114);
-            this.labelReturnInfo.Name = "labelReturnInfo";
-            this.labelReturnInfo.Size = new System.Drawing.Size(73, 23);
-            this.labelReturnInfo.TabIndex = 26;
-            this.labelReturnInfo.Text = "Order:";
-            // 
-            // labelShopName
-            // 
-            this.labelShopName.AutoSize = true;
-            this.labelShopName.Font = new System.Drawing.Font("Century", 16F, System.Drawing.FontStyle.Bold);
-            this.labelShopName.ForeColor = System.Drawing.Color.DarkRed;
-            this.labelShopName.Location = new System.Drawing.Point(248, 31);
-            this.labelShopName.Name = "labelShopName";
-            this.labelShopName.Size = new System.Drawing.Size(162, 27);
-            this.labelShopName.TabIndex = 31;
-            this.labelShopName.Text = "SHOP NAME";
-            // 
-            // monitorBtn
-            // 
-            this.monitorBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.monitorBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.monitorBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.monitorBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.monitorBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monitorBtn.ForeColor = System.Drawing.Color.White;
-            this.monitorBtn.Image = ((System.Drawing.Image)(resources.GetObject("monitorBtn.Image")));
-            this.monitorBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.monitorBtn.Location = new System.Drawing.Point(11, 231);
-            this.monitorBtn.Name = "monitorBtn";
-            this.monitorBtn.Size = new System.Drawing.Size(155, 54);
-            this.monitorBtn.TabIndex = 22;
-            this.monitorBtn.Text = "Logs";
-            this.monitorBtn.UseVisualStyleBackColor = true;
-            // 
-            // totalLbl
-            // 
-            this.totalLbl.AutoSize = true;
-            this.totalLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.totalLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.totalLbl.Location = new System.Drawing.Point(378, 406);
-            this.totalLbl.Name = "totalLbl";
-            this.totalLbl.Size = new System.Drawing.Size(68, 23);
-            this.totalLbl.TabIndex = 30;
-            this.totalLbl.Text = "Total:";
-            // 
-            // labelBorrowInfo
-            // 
-            this.labelBorrowInfo.AutoSize = true;
-            this.labelBorrowInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelBorrowInfo.ForeColor = System.Drawing.Color.DimGray;
-            this.labelBorrowInfo.Location = new System.Drawing.Point(378, 111);
-            this.labelBorrowInfo.Name = "labelBorrowInfo";
-            this.labelBorrowInfo.Size = new System.Drawing.Size(73, 23);
-            this.labelBorrowInfo.TabIndex = 27;
-            this.labelBorrowInfo.Text = "Order:";
-            // 
-            // loanInfoLbx
-            // 
-            this.loanInfoLbx.FormattingEnabled = true;
-            this.loanInfoLbx.Location = new System.Drawing.Point(58, 111);
-            this.loanInfoLbx.Name = "loanInfoLbx";
-            this.loanInfoLbx.Size = new System.Drawing.Size(269, 290);
-            this.loanInfoLbx.TabIndex = 32;
-            // 
-            // confirmLoanBtn
-            // 
-            this.confirmLoanBtn.Location = new System.Drawing.Point(602, 398);
-            this.confirmLoanBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.confirmLoanBtn.Name = "confirmLoanBtn";
-            this.confirmLoanBtn.Size = new System.Drawing.Size(124, 68);
-            this.confirmLoanBtn.TabIndex = 31;
-            this.confirmLoanBtn.Text = "Confirm";
-            this.confirmLoanBtn.UseVisualStyleBackColor = true;
-            this.confirmLoanBtn.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // removeBtn
-            // 
-            this.removeBtn.Location = new System.Drawing.Point(58, 406);
-            this.removeBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.removeBtn.Name = "removeBtn";
-            this.removeBtn.Size = new System.Drawing.Size(124, 60);
-            this.removeBtn.TabIndex = 31;
-            this.removeBtn.Text = "Remove";
-            this.removeBtn.UseVisualStyleBackColor = true;
-            this.removeBtn.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // returnLbx
-            // 
-            this.returnLbx.FormattingEnabled = true;
-            this.returnLbx.Location = new System.Drawing.Point(58, 114);
-            this.returnLbx.Name = "returnLbx";
-            this.returnLbx.Size = new System.Drawing.Size(269, 290);
-            this.returnLbx.TabIndex = 40;
-            // 
-            // confirmReturnBtn
-            // 
-            this.confirmReturnBtn.Location = new System.Drawing.Point(602, 401);
-            this.confirmReturnBtn.Margin = new System.Windows.Forms.Padding(2);
-            this.confirmReturnBtn.Name = "confirmReturnBtn";
-            this.confirmReturnBtn.Size = new System.Drawing.Size(124, 60);
-            this.confirmReturnBtn.TabIndex = 38;
-            this.confirmReturnBtn.Text = "Confirm";
-            this.confirmReturnBtn.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(203, 409);
-            this.button3.Margin = new System.Windows.Forms.Padding(2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(124, 60);
-            this.button3.TabIndex = 39;
-            this.button3.Text = "Clear All";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
-            // depositLbl
-            // 
-            this.depositLbl.AutoSize = true;
-            this.depositLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.depositLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.depositLbl.Location = new System.Drawing.Point(357, 409);
-            this.depositLbl.Name = "depositLbl";
-            this.depositLbl.Size = new System.Drawing.Size(85, 23);
-            this.depositLbl.TabIndex = 35;
-            this.depositLbl.Text = "Return:";
-            // 
-            // returnLbl
-            // 
-            this.returnLbl.AutoSize = true;
-            this.returnLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.returnLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.returnLbl.Location = new System.Drawing.Point(54, 33);
-            this.returnLbl.Name = "returnLbl";
-            this.returnLbl.Size = new System.Drawing.Size(172, 23);
-            this.returnLbl.TabIndex = 36;
-            this.returnLbl.Text = "Returning Items";
-            // 
-            // customerReturnInfoLbl
-            // 
-            this.customerReturnInfoLbl.AutoSize = true;
-            this.customerReturnInfoLbl.Location = new System.Drawing.Point(373, 60);
-            this.customerReturnInfoLbl.Name = "customerReturnInfoLbl";
-            this.customerReturnInfoLbl.Size = new System.Drawing.Size(24, 13);
-            this.customerReturnInfoLbl.TabIndex = 41;
-            this.customerReturnInfoLbl.Text = "info";
-            // 
-            // returnDepositLbl
-            // 
-            this.returnDepositLbl.AutoSize = true;
-            this.returnDepositLbl.Location = new System.Drawing.Point(358, 433);
-            this.returnDepositLbl.Name = "returnDepositLbl";
-            this.returnDepositLbl.Size = new System.Drawing.Size(24, 13);
-            this.returnDepositLbl.TabIndex = 41;
-            this.returnDepositLbl.Text = "info";
-            // 
-            // orderReturnInfoLbl
-            // 
-            this.orderReturnInfoLbl.AutoSize = true;
-            this.orderReturnInfoLbl.Location = new System.Drawing.Point(373, 137);
-            this.orderReturnInfoLbl.Name = "orderReturnInfoLbl";
-            this.orderReturnInfoLbl.Size = new System.Drawing.Size(24, 13);
-            this.orderReturnInfoLbl.TabIndex = 41;
-            this.orderReturnInfoLbl.Text = "info";
-            // 
-            // loanCustomerInfoLbl
-            // 
-            this.loanCustomerInfoLbl.AutoSize = true;
-            this.loanCustomerInfoLbl.Location = new System.Drawing.Point(379, 57);
-            this.loanCustomerInfoLbl.Name = "loanCustomerInfoLbl";
-            this.loanCustomerInfoLbl.Size = new System.Drawing.Size(24, 13);
-            this.loanCustomerInfoLbl.TabIndex = 42;
-            this.loanCustomerInfoLbl.Text = "info";
-            // 
-            // orderLoanInfoLbl
-            // 
-            this.orderLoanInfoLbl.AutoSize = true;
-            this.orderLoanInfoLbl.Location = new System.Drawing.Point(379, 134);
-            this.orderLoanInfoLbl.Name = "orderLoanInfoLbl";
-            this.orderLoanInfoLbl.Size = new System.Drawing.Size(24, 13);
-            this.orderLoanInfoLbl.TabIndex = 42;
-            this.orderLoanInfoLbl.Text = "info";
-            // 
-            // totalLoanLbl
-            // 
-            this.totalLoanLbl.AutoSize = true;
-            this.totalLoanLbl.Location = new System.Drawing.Point(379, 430);
-            this.totalLoanLbl.Name = "totalLoanLbl";
-            this.totalLoanLbl.Size = new System.Drawing.Size(24, 13);
-            this.totalLoanLbl.TabIndex = 42;
-            this.totalLoanLbl.Text = "info";
-            // 
             // logsClearBtn
             // 
             this.logsClearBtn.Location = new System.Drawing.Point(669, 471);
@@ -452,23 +195,23 @@
             this.logsClearBtn.Text = "Clear All";
             this.logsClearBtn.UseVisualStyleBackColor = true;
             // 
-            // checkoutLogsBtn
+            // currentBtn
             // 
-            this.checkoutLogsBtn.Location = new System.Drawing.Point(425, 471);
-            this.checkoutLogsBtn.Name = "checkoutLogsBtn";
-            this.checkoutLogsBtn.Size = new System.Drawing.Size(124, 69);
-            this.checkoutLogsBtn.TabIndex = 55;
-            this.checkoutLogsBtn.Text = "Currently Loaning";
-            this.checkoutLogsBtn.UseVisualStyleBackColor = true;
+            this.currentBtn.Location = new System.Drawing.Point(425, 471);
+            this.currentBtn.Name = "currentBtn";
+            this.currentBtn.Size = new System.Drawing.Size(124, 69);
+            this.currentBtn.TabIndex = 55;
+            this.currentBtn.Text = "Currently Loaning";
+            this.currentBtn.UseVisualStyleBackColor = true;
             // 
-            // checkinLogsBtn
+            // viewAllBtn
             // 
-            this.checkinLogsBtn.Location = new System.Drawing.Point(275, 471);
-            this.checkinLogsBtn.Name = "checkinLogsBtn";
-            this.checkinLogsBtn.Size = new System.Drawing.Size(124, 69);
-            this.checkinLogsBtn.TabIndex = 56;
-            this.checkinLogsBtn.Text = "View All Items";
-            this.checkinLogsBtn.UseVisualStyleBackColor = true;
+            this.viewAllBtn.Location = new System.Drawing.Point(275, 471);
+            this.viewAllBtn.Name = "viewAllBtn";
+            this.viewAllBtn.Size = new System.Drawing.Size(124, 69);
+            this.viewAllBtn.TabIndex = 56;
+            this.viewAllBtn.Text = "View All Items";
+            this.viewAllBtn.UseVisualStyleBackColor = true;
             // 
             // viewLogsBtn
             // 
@@ -486,6 +229,28 @@
             this.logsInfoLbx.Name = "logsInfoLbx";
             this.logsInfoLbx.Size = new System.Drawing.Size(658, 238);
             this.logsInfoLbx.TabIndex = 53;
+            // 
+            // personNrRbtn
+            // 
+            this.personNrRbtn.AutoSize = true;
+            this.personNrRbtn.Location = new System.Drawing.Point(324, 65);
+            this.personNrRbtn.Name = "personNrRbtn";
+            this.personNrRbtn.Size = new System.Drawing.Size(75, 17);
+            this.personNrRbtn.TabIndex = 51;
+            this.personNrRbtn.TabStop = true;
+            this.personNrRbtn.Text = "Person_Nr";
+            this.personNrRbtn.UseVisualStyleBackColor = true;
+            // 
+            // personNameRbtn
+            // 
+            this.personNameRbtn.AutoSize = true;
+            this.personNameRbtn.Location = new System.Drawing.Point(226, 65);
+            this.personNameRbtn.Name = "personNameRbtn";
+            this.personNameRbtn.Size = new System.Drawing.Size(92, 17);
+            this.personNameRbtn.TabIndex = 52;
+            this.personNameRbtn.TabStop = true;
+            this.personNameRbtn.Text = "Person_Name";
+            this.personNameRbtn.UseVisualStyleBackColor = true;
             // 
             // itemNrRbtn
             // 
@@ -577,27 +342,262 @@
             this.buttonSearch.TabIndex = 45;
             this.buttonSearch.UseVisualStyleBackColor = false;
             // 
-            // personNameRbtn
+            // borrowPanel
             // 
-            this.personNameRbtn.AutoSize = true;
-            this.personNameRbtn.Location = new System.Drawing.Point(226, 65);
-            this.personNameRbtn.Name = "personNameRbtn";
-            this.personNameRbtn.Size = new System.Drawing.Size(92, 17);
-            this.personNameRbtn.TabIndex = 52;
-            this.personNameRbtn.TabStop = true;
-            this.personNameRbtn.Text = "Person_Name";
-            this.personNameRbtn.UseVisualStyleBackColor = true;
+            this.borrowPanel.Controls.Add(this.totalLoanLbl);
+            this.borrowPanel.Controls.Add(this.orderLoanInfoLbl);
+            this.borrowPanel.Controls.Add(this.loanCustomerInfoLbl);
+            this.borrowPanel.Controls.Add(this.loanInfoLbx);
+            this.borrowPanel.Controls.Add(this.removeBtn);
+            this.borrowPanel.Controls.Add(this.confirmLoanBtn);
+            this.borrowPanel.Controls.Add(this.loanClearBtn);
+            this.borrowPanel.Controls.Add(this.totalLbl);
+            this.borrowPanel.Controls.Add(this.loaningLbl);
+            this.borrowPanel.Controls.Add(this.labelBorrowInfo);
+            this.borrowPanel.Controls.Add(this.labelVisitorB);
+            this.borrowPanel.Location = new System.Drawing.Point(223, 73);
+            this.borrowPanel.Name = "borrowPanel";
+            this.borrowPanel.Size = new System.Drawing.Size(997, 634);
+            this.borrowPanel.TabIndex = 11;
             // 
-            // personNrRbtn
+            // totalLoanLbl
             // 
-            this.personNrRbtn.AutoSize = true;
-            this.personNrRbtn.Location = new System.Drawing.Point(324, 65);
-            this.personNrRbtn.Name = "personNrRbtn";
-            this.personNrRbtn.Size = new System.Drawing.Size(75, 17);
-            this.personNrRbtn.TabIndex = 51;
-            this.personNrRbtn.TabStop = true;
-            this.personNrRbtn.Text = "Person_Nr";
-            this.personNrRbtn.UseVisualStyleBackColor = true;
+            this.totalLoanLbl.AutoSize = true;
+            this.totalLoanLbl.Location = new System.Drawing.Point(379, 430);
+            this.totalLoanLbl.Name = "totalLoanLbl";
+            this.totalLoanLbl.Size = new System.Drawing.Size(24, 13);
+            this.totalLoanLbl.TabIndex = 42;
+            this.totalLoanLbl.Text = "info";
+            // 
+            // orderLoanInfoLbl
+            // 
+            this.orderLoanInfoLbl.AutoSize = true;
+            this.orderLoanInfoLbl.Location = new System.Drawing.Point(379, 134);
+            this.orderLoanInfoLbl.Name = "orderLoanInfoLbl";
+            this.orderLoanInfoLbl.Size = new System.Drawing.Size(24, 13);
+            this.orderLoanInfoLbl.TabIndex = 42;
+            this.orderLoanInfoLbl.Text = "info";
+            // 
+            // loanCustomerInfoLbl
+            // 
+            this.loanCustomerInfoLbl.AutoSize = true;
+            this.loanCustomerInfoLbl.Location = new System.Drawing.Point(379, 57);
+            this.loanCustomerInfoLbl.Name = "loanCustomerInfoLbl";
+            this.loanCustomerInfoLbl.Size = new System.Drawing.Size(24, 13);
+            this.loanCustomerInfoLbl.TabIndex = 42;
+            this.loanCustomerInfoLbl.Text = "info";
+            // 
+            // loanInfoLbx
+            // 
+            this.loanInfoLbx.FormattingEnabled = true;
+            this.loanInfoLbx.Location = new System.Drawing.Point(58, 111);
+            this.loanInfoLbx.Name = "loanInfoLbx";
+            this.loanInfoLbx.Size = new System.Drawing.Size(269, 290);
+            this.loanInfoLbx.TabIndex = 32;
+            // 
+            // removeBtn
+            // 
+            this.removeBtn.Location = new System.Drawing.Point(58, 406);
+            this.removeBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.removeBtn.Name = "removeBtn";
+            this.removeBtn.Size = new System.Drawing.Size(124, 60);
+            this.removeBtn.TabIndex = 31;
+            this.removeBtn.Text = "Remove";
+            this.removeBtn.UseVisualStyleBackColor = true;
+            this.removeBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // confirmLoanBtn
+            // 
+            this.confirmLoanBtn.Location = new System.Drawing.Point(602, 398);
+            this.confirmLoanBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.confirmLoanBtn.Name = "confirmLoanBtn";
+            this.confirmLoanBtn.Size = new System.Drawing.Size(124, 68);
+            this.confirmLoanBtn.TabIndex = 31;
+            this.confirmLoanBtn.Text = "Confirm";
+            this.confirmLoanBtn.UseVisualStyleBackColor = true;
+            this.confirmLoanBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // loanClearBtn
+            // 
+            this.loanClearBtn.Location = new System.Drawing.Point(203, 406);
+            this.loanClearBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.loanClearBtn.Name = "loanClearBtn";
+            this.loanClearBtn.Size = new System.Drawing.Size(124, 60);
+            this.loanClearBtn.TabIndex = 31;
+            this.loanClearBtn.Text = "Clear All";
+            this.loanClearBtn.UseVisualStyleBackColor = true;
+            this.loanClearBtn.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // totalLbl
+            // 
+            this.totalLbl.AutoSize = true;
+            this.totalLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalLbl.ForeColor = System.Drawing.Color.DimGray;
+            this.totalLbl.Location = new System.Drawing.Point(378, 406);
+            this.totalLbl.Name = "totalLbl";
+            this.totalLbl.Size = new System.Drawing.Size(68, 23);
+            this.totalLbl.TabIndex = 30;
+            this.totalLbl.Text = "Total:";
+            // 
+            // loaningLbl
+            // 
+            this.loaningLbl.AutoSize = true;
+            this.loaningLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.loaningLbl.ForeColor = System.Drawing.Color.DimGray;
+            this.loaningLbl.Location = new System.Drawing.Point(54, 30);
+            this.loaningLbl.Name = "loaningLbl";
+            this.loaningLbl.Size = new System.Drawing.Size(153, 23);
+            this.loaningLbl.TabIndex = 30;
+            this.loaningLbl.Text = "Loaning Items";
+            // 
+            // labelBorrowInfo
+            // 
+            this.labelBorrowInfo.AutoSize = true;
+            this.labelBorrowInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelBorrowInfo.ForeColor = System.Drawing.Color.DimGray;
+            this.labelBorrowInfo.Location = new System.Drawing.Point(378, 111);
+            this.labelBorrowInfo.Name = "labelBorrowInfo";
+            this.labelBorrowInfo.Size = new System.Drawing.Size(73, 23);
+            this.labelBorrowInfo.TabIndex = 27;
+            this.labelBorrowInfo.Text = "Order:";
+            // 
+            // labelVisitorB
+            // 
+            this.labelVisitorB.AutoSize = true;
+            this.labelVisitorB.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVisitorB.ForeColor = System.Drawing.Color.DimGray;
+            this.labelVisitorB.Location = new System.Drawing.Point(378, 30);
+            this.labelVisitorB.Name = "labelVisitorB";
+            this.labelVisitorB.Size = new System.Drawing.Size(105, 23);
+            this.labelVisitorB.TabIndex = 26;
+            this.labelVisitorB.Text = "Customer";
+            // 
+            // returnPanel
+            // 
+            this.returnPanel.Controls.Add(this.orderReturnInfoLbl);
+            this.returnPanel.Controls.Add(this.returnDepositLbl);
+            this.returnPanel.Controls.Add(this.customerReturnInfoLbl);
+            this.returnPanel.Controls.Add(this.returnLbx);
+            this.returnPanel.Controls.Add(this.confirmReturnBtn);
+            this.returnPanel.Controls.Add(this.button3);
+            this.returnPanel.Controls.Add(this.depositLbl);
+            this.returnPanel.Controls.Add(this.returnLbl);
+            this.returnPanel.Controls.Add(this.labelVisitorR);
+            this.returnPanel.Controls.Add(this.labelReturnInfo);
+            this.returnPanel.Location = new System.Drawing.Point(223, 70);
+            this.returnPanel.Name = "returnPanel";
+            this.returnPanel.Size = new System.Drawing.Size(997, 634);
+            this.returnPanel.TabIndex = 30;
+            // 
+            // orderReturnInfoLbl
+            // 
+            this.orderReturnInfoLbl.AutoSize = true;
+            this.orderReturnInfoLbl.Location = new System.Drawing.Point(373, 137);
+            this.orderReturnInfoLbl.Name = "orderReturnInfoLbl";
+            this.orderReturnInfoLbl.Size = new System.Drawing.Size(24, 13);
+            this.orderReturnInfoLbl.TabIndex = 41;
+            this.orderReturnInfoLbl.Text = "info";
+            // 
+            // returnDepositLbl
+            // 
+            this.returnDepositLbl.AutoSize = true;
+            this.returnDepositLbl.Location = new System.Drawing.Point(358, 433);
+            this.returnDepositLbl.Name = "returnDepositLbl";
+            this.returnDepositLbl.Size = new System.Drawing.Size(24, 13);
+            this.returnDepositLbl.TabIndex = 41;
+            this.returnDepositLbl.Text = "info";
+            // 
+            // customerReturnInfoLbl
+            // 
+            this.customerReturnInfoLbl.AutoSize = true;
+            this.customerReturnInfoLbl.Location = new System.Drawing.Point(373, 60);
+            this.customerReturnInfoLbl.Name = "customerReturnInfoLbl";
+            this.customerReturnInfoLbl.Size = new System.Drawing.Size(24, 13);
+            this.customerReturnInfoLbl.TabIndex = 41;
+            this.customerReturnInfoLbl.Text = "info";
+            // 
+            // returnLbx
+            // 
+            this.returnLbx.FormattingEnabled = true;
+            this.returnLbx.Location = new System.Drawing.Point(58, 114);
+            this.returnLbx.Name = "returnLbx";
+            this.returnLbx.Size = new System.Drawing.Size(269, 290);
+            this.returnLbx.TabIndex = 40;
+            // 
+            // confirmReturnBtn
+            // 
+            this.confirmReturnBtn.Location = new System.Drawing.Point(602, 401);
+            this.confirmReturnBtn.Margin = new System.Windows.Forms.Padding(2);
+            this.confirmReturnBtn.Name = "confirmReturnBtn";
+            this.confirmReturnBtn.Size = new System.Drawing.Size(124, 60);
+            this.confirmReturnBtn.TabIndex = 38;
+            this.confirmReturnBtn.Text = "Confirm";
+            this.confirmReturnBtn.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(203, 409);
+            this.button3.Margin = new System.Windows.Forms.Padding(2);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(124, 60);
+            this.button3.TabIndex = 39;
+            this.button3.Text = "Clear All";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
+            // depositLbl
+            // 
+            this.depositLbl.AutoSize = true;
+            this.depositLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.depositLbl.ForeColor = System.Drawing.Color.DimGray;
+            this.depositLbl.Location = new System.Drawing.Point(357, 409);
+            this.depositLbl.Name = "depositLbl";
+            this.depositLbl.Size = new System.Drawing.Size(85, 23);
+            this.depositLbl.TabIndex = 35;
+            this.depositLbl.Text = "Return:";
+            // 
+            // returnLbl
+            // 
+            this.returnLbl.AutoSize = true;
+            this.returnLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.returnLbl.ForeColor = System.Drawing.Color.DimGray;
+            this.returnLbl.Location = new System.Drawing.Point(54, 33);
+            this.returnLbl.Name = "returnLbl";
+            this.returnLbl.Size = new System.Drawing.Size(172, 23);
+            this.returnLbl.TabIndex = 36;
+            this.returnLbl.Text = "Returning Items";
+            // 
+            // labelVisitorR
+            // 
+            this.labelVisitorR.AutoSize = true;
+            this.labelVisitorR.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelVisitorR.ForeColor = System.Drawing.Color.DimGray;
+            this.labelVisitorR.Location = new System.Drawing.Point(369, 33);
+            this.labelVisitorR.Name = "labelVisitorR";
+            this.labelVisitorR.Size = new System.Drawing.Size(111, 23);
+            this.labelVisitorR.TabIndex = 27;
+            this.labelVisitorR.Text = "Customer:";
+            // 
+            // labelReturnInfo
+            // 
+            this.labelReturnInfo.AutoSize = true;
+            this.labelReturnInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelReturnInfo.ForeColor = System.Drawing.Color.DimGray;
+            this.labelReturnInfo.Location = new System.Drawing.Point(369, 114);
+            this.labelReturnInfo.Name = "labelReturnInfo";
+            this.labelReturnInfo.Size = new System.Drawing.Size(73, 23);
+            this.labelReturnInfo.TabIndex = 26;
+            this.labelReturnInfo.Text = "Order:";
+            // 
+            // labelShopName
+            // 
+            this.labelShopName.AutoSize = true;
+            this.labelShopName.Font = new System.Drawing.Font("Century", 16F, System.Drawing.FontStyle.Bold);
+            this.labelShopName.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelShopName.Location = new System.Drawing.Point(248, 31);
+            this.labelShopName.Name = "labelShopName";
+            this.labelShopName.Size = new System.Drawing.Size(162, 27);
+            this.labelShopName.TabIndex = 31;
+            this.labelShopName.Text = "SHOP NAME";
             // 
             // RentalForm
             // 
@@ -664,8 +664,8 @@
         private System.Windows.Forms.Label returnDepositLbl;
         private System.Windows.Forms.Label customerReturnInfoLbl;
         private System.Windows.Forms.Button logsClearBtn;
-        private System.Windows.Forms.Button checkoutLogsBtn;
-        private System.Windows.Forms.Button checkinLogsBtn;
+        private System.Windows.Forms.Button currentBtn;
+        private System.Windows.Forms.Button viewAllBtn;
         private System.Windows.Forms.Button viewLogsBtn;
         private System.Windows.Forms.ListBox logsInfoLbx;
         private System.Windows.Forms.RadioButton personNrRbtn;

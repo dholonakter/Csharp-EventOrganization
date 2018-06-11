@@ -39,9 +39,9 @@ namespace ManagerApp
         private void FillComboBox()
         {
             DataTable dt = dh.DataTableFromSQL("SELECT JobDescription FROM Job");
-            comboBoxTitle.ValueMember = "JobDescription";
-            comboBoxTitle.DisplayMember = "JobDescription";
-            comboBoxTitle.DataSource = dt;
+            locationComboBx.ValueMember = "JobDescription";
+            locationComboBx.DisplayMember = "JobDescription";
+            locationComboBx.DataSource = dt;
         }
 
         private double GetSumSalary()
@@ -63,7 +63,7 @@ namespace ManagerApp
 
         private void buttonDisplay_Click(object sender, EventArgs e)
         {
-            sql = "select * from staff where JobDescription = '" + comboBoxTitle.SelectedValue + "'";
+            sql = "select * from staff where JobDescription = '" + locationComboBx.SelectedValue + "'";
             Display(sql);
             labelCount.Text = "You have " + (dataGridViewStaff.RowCount - 1) + " people in this position"; // minus empty row from hell
         }

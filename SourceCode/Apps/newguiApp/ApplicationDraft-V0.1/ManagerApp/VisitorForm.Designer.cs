@@ -28,85 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisitorForm));
-            this.button1 = new System.Windows.Forms.Button();
-            this.labelTotalSpent = new System.Windows.Forms.Label();
-            this.labelTotalBalance = new System.Windows.Forms.Label();
-            this.dataGridViewVisitor = new System.Windows.Forms.DataGridView();
-            this.labelTotalPresent = new System.Windows.Forms.Label();
-            this.labelTotalVisitors = new System.Windows.Forms.Label();
             this.buttonSave = new System.Windows.Forms.Button();
-            this.timerUpdate = new System.Windows.Forms.Timer(this.components);
+            this.timerUpdate = new System.Windows.Forms.Timer();
             this.button7 = new System.Windows.Forms.Button();
             this.homeBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVisitor)).BeginInit();
+            this.searchLbl = new System.Windows.Forms.Label();
+            this.errorLbl = new System.Windows.Forms.Label();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
+            this.buttonSearch = new System.Windows.Forms.Button();
+            this.visitorLbx = new System.Windows.Forms.ListBox();
+            this.visitorClearBtn = new System.Windows.Forms.Button();
+            this.viewAllBtn = new System.Windows.Forms.Button();
+            this.LogsBtn = new System.Windows.Forms.Button();
+            this.totalLbl = new System.Windows.Forms.Label();
+            this.infoLbl = new System.Windows.Forms.Label();
+            this.refreshBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(777, 196);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(67, 34);
-            this.button1.TabIndex = 48;
-            this.button1.Text = "save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // labelTotalSpent
-            // 
-            this.labelTotalSpent.AutoSize = true;
-            this.labelTotalSpent.ForeColor = System.Drawing.Color.Black;
-            this.labelTotalSpent.Location = new System.Drawing.Point(356, 213);
-            this.labelTotalSpent.Name = "labelTotalSpent";
-            this.labelTotalSpent.Size = new System.Drawing.Size(83, 17);
-            this.labelTotalSpent.TabIndex = 47;
-            this.labelTotalSpent.Text = "Total spent:";
-            // 
-            // labelTotalBalance
-            // 
-            this.labelTotalBalance.AutoSize = true;
-            this.labelTotalBalance.ForeColor = System.Drawing.Color.Black;
-            this.labelTotalBalance.Location = new System.Drawing.Point(356, 190);
-            this.labelTotalBalance.Name = "labelTotalBalance";
-            this.labelTotalBalance.Size = new System.Drawing.Size(98, 17);
-            this.labelTotalBalance.TabIndex = 46;
-            this.labelTotalBalance.Text = "Total balance:";
-            // 
-            // dataGridViewVisitor
-            // 
-            this.dataGridViewVisitor.BackgroundColor = System.Drawing.Color.Gainsboro;
-            this.dataGridViewVisitor.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.dataGridViewVisitor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridViewVisitor.Location = new System.Drawing.Point(69, 236);
-            this.dataGridViewVisitor.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridViewVisitor.Name = "dataGridViewVisitor";
-            this.dataGridViewVisitor.RowTemplate.Height = 24;
-            this.dataGridViewVisitor.Size = new System.Drawing.Size(1187, 390);
-            this.dataGridViewVisitor.TabIndex = 45;
-            this.dataGridViewVisitor.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dataGridViewVisitor_CellBeginEdit);
-            this.dataGridViewVisitor.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridViewVisitor_CellEndEdit);
-            // 
-            // labelTotalPresent
-            // 
-            this.labelTotalPresent.AutoSize = true;
-            this.labelTotalPresent.ForeColor = System.Drawing.Color.Black;
-            this.labelTotalPresent.Location = new System.Drawing.Point(67, 213);
-            this.labelTotalPresent.Name = "labelTotalPresent";
-            this.labelTotalPresent.Size = new System.Drawing.Size(144, 17);
-            this.labelTotalPresent.TabIndex = 44;
-            this.labelTotalPresent.Text = "Total visitors present:";
-            // 
-            // labelTotalVisitors
-            // 
-            this.labelTotalVisitors.AutoSize = true;
-            this.labelTotalVisitors.ForeColor = System.Drawing.Color.Black;
-            this.labelTotalVisitors.Location = new System.Drawing.Point(67, 190);
-            this.labelTotalVisitors.Name = "labelTotalVisitors";
-            this.labelTotalVisitors.Size = new System.Drawing.Size(92, 17);
-            this.labelTotalVisitors.TabIndex = 43;
-            this.labelTotalVisitors.Text = "Total visitors:";
             // 
             // buttonSave
             // 
@@ -118,11 +56,11 @@
             this.buttonSave.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
             this.buttonSave.ForeColor = System.Drawing.Color.MidnightBlue;
             this.buttonSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonSave.Image")));
-            this.buttonSave.Location = new System.Drawing.Point(69, 116);
-            this.buttonSave.Margin = new System.Windows.Forms.Padding(11, 2, 11, 2);
+            this.buttonSave.Location = new System.Drawing.Point(52, 94);
+            this.buttonSave.Margin = new System.Windows.Forms.Padding(8, 2, 8, 2);
             this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Padding = new System.Windows.Forms.Padding(29, 0, 0, 0);
-            this.buttonSave.Size = new System.Drawing.Size(1187, 65);
+            this.buttonSave.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
+            this.buttonSave.Size = new System.Drawing.Size(890, 53);
             this.buttonSave.TabIndex = 42;
             this.buttonSave.Text = "    Visitors status";
             this.buttonSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -144,10 +82,9 @@
             this.button7.ForeColor = System.Drawing.Color.LightGray;
             this.button7.Image = ((System.Drawing.Image)(resources.GetObject("button7.Image")));
             this.button7.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button7.Location = new System.Drawing.Point(1197, 15);
-            this.button7.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button7.Location = new System.Drawing.Point(898, 12);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(59, 52);
+            this.button7.Size = new System.Drawing.Size(44, 42);
             this.button7.TabIndex = 61;
             this.button7.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button7.UseVisualStyleBackColor = true;
@@ -162,51 +99,171 @@
             this.homeBtn.ForeColor = System.Drawing.Color.DimGray;
             this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
             this.homeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.homeBtn.Location = new System.Drawing.Point(1264, 15);
-            this.homeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.homeBtn.Location = new System.Drawing.Point(948, 12);
             this.homeBtn.Name = "homeBtn";
-            this.homeBtn.Size = new System.Drawing.Size(59, 52);
+            this.homeBtn.Size = new System.Drawing.Size(44, 42);
             this.homeBtn.TabIndex = 62;
             this.homeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.homeBtn.UseVisualStyleBackColor = true;
             this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
             // 
+            // searchLbl
+            // 
+            this.searchLbl.AutoSize = true;
+            this.searchLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLbl.ForeColor = System.Drawing.Color.DimGray;
+            this.searchLbl.Location = new System.Drawing.Point(59, 160);
+            this.searchLbl.Name = "searchLbl";
+            this.searchLbl.Size = new System.Drawing.Size(156, 23);
+            this.searchLbl.TabIndex = 66;
+            this.searchLbl.Text = "Search Visitor:";
+            // 
+            // errorLbl
+            // 
+            this.errorLbl.AutoSize = true;
+            this.errorLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLbl.ForeColor = System.Drawing.Color.DimGray;
+            this.errorLbl.Location = new System.Drawing.Point(152, 189);
+            this.errorLbl.Name = "errorLbl";
+            this.errorLbl.Size = new System.Drawing.Size(162, 23);
+            this.errorLbl.TabIndex = 65;
+            this.errorLbl.Text = "(error message)";
+            // 
+            // textBoxSearch
+            // 
+            this.textBoxSearch.Location = new System.Drawing.Point(220, 163);
+            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(195, 20);
+            this.textBoxSearch.TabIndex = 64;
+            // 
+            // buttonSearch
+            // 
+            this.buttonSearch.BackColor = System.Drawing.Color.DimGray;
+            this.buttonSearch.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonSearch.FlatAppearance.BorderSize = 0;
+            this.buttonSearch.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.buttonSearch.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.buttonSearch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonSearch.ForeColor = System.Drawing.Color.White;
+            this.buttonSearch.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearch.Image")));
+            this.buttonSearch.Location = new System.Drawing.Point(428, 163);
+            this.buttonSearch.Name = "buttonSearch";
+            this.buttonSearch.Size = new System.Drawing.Size(31, 22);
+            this.buttonSearch.TabIndex = 63;
+            this.buttonSearch.UseVisualStyleBackColor = false;
+            // 
+            // visitorLbx
+            // 
+            this.visitorLbx.FormattingEnabled = true;
+            this.visitorLbx.Location = new System.Drawing.Point(63, 245);
+            this.visitorLbx.Name = "visitorLbx";
+            this.visitorLbx.Size = new System.Drawing.Size(658, 212);
+            this.visitorLbx.TabIndex = 67;
+            // 
+            // visitorClearBtn
+            // 
+            this.visitorClearBtn.Location = new System.Drawing.Point(597, 463);
+            this.visitorClearBtn.Name = "visitorClearBtn";
+            this.visitorClearBtn.Size = new System.Drawing.Size(124, 69);
+            this.visitorClearBtn.TabIndex = 68;
+            this.visitorClearBtn.Text = "Clear All";
+            this.visitorClearBtn.UseVisualStyleBackColor = true;
+            // 
+            // viewAllBtn
+            // 
+            this.viewAllBtn.Location = new System.Drawing.Point(203, 463);
+            this.viewAllBtn.Name = "viewAllBtn";
+            this.viewAllBtn.Size = new System.Drawing.Size(124, 69);
+            this.viewAllBtn.TabIndex = 70;
+            this.viewAllBtn.Text = "View All Visitors";
+            this.viewAllBtn.UseVisualStyleBackColor = true;
+            // 
+            // LogsBtn
+            // 
+            this.LogsBtn.Location = new System.Drawing.Point(63, 463);
+            this.LogsBtn.Name = "LogsBtn";
+            this.LogsBtn.Size = new System.Drawing.Size(124, 69);
+            this.LogsBtn.TabIndex = 71;
+            this.LogsBtn.Text = "View all logs of specified visitor";
+            this.LogsBtn.UseVisualStyleBackColor = true;
+            // 
+            // totalLbl
+            // 
+            this.totalLbl.AutoSize = true;
+            this.totalLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.totalLbl.ForeColor = System.Drawing.Color.DimGray;
+            this.totalLbl.Location = new System.Drawing.Point(746, 163);
+            this.totalLbl.Name = "totalLbl";
+            this.totalLbl.Size = new System.Drawing.Size(151, 23);
+            this.totalLbl.TabIndex = 65;
+            this.totalLbl.Text = "Total Visitors:";
+            // 
+            // infoLbl
+            // 
+            this.infoLbl.AutoSize = true;
+            this.infoLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.infoLbl.ForeColor = System.Drawing.Color.DimGray;
+            this.infoLbl.Location = new System.Drawing.Point(746, 200);
+            this.infoLbl.Name = "infoLbl";
+            this.infoLbl.Size = new System.Drawing.Size(48, 23);
+            this.infoLbl.TabIndex = 65;
+            this.infoLbl.Text = "info";
+            // 
+            // refreshBtn
+            // 
+            this.refreshBtn.Location = new System.Drawing.Point(849, 313);
+            this.refreshBtn.Name = "refreshBtn";
+            this.refreshBtn.Size = new System.Drawing.Size(124, 69);
+            this.refreshBtn.TabIndex = 68;
+            this.refreshBtn.Text = "Refresh";
+            this.refreshBtn.UseVisualStyleBackColor = true;
+            // 
             // VisitorForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1339, 703);
+            this.ClientSize = new System.Drawing.Size(1004, 571);
+            this.Controls.Add(this.refreshBtn);
+            this.Controls.Add(this.visitorClearBtn);
+            this.Controls.Add(this.viewAllBtn);
+            this.Controls.Add(this.LogsBtn);
+            this.Controls.Add(this.visitorLbx);
+            this.Controls.Add(this.searchLbl);
+            this.Controls.Add(this.totalLbl);
+            this.Controls.Add(this.infoLbl);
+            this.Controls.Add(this.errorLbl);
+            this.Controls.Add(this.textBoxSearch);
+            this.Controls.Add(this.buttonSearch);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.homeBtn);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.labelTotalSpent);
-            this.Controls.Add(this.labelTotalBalance);
-            this.Controls.Add(this.dataGridViewVisitor);
-            this.Controls.Add(this.labelTotalPresent);
-            this.Controls.Add(this.labelTotalVisitors);
             this.Controls.Add(this.buttonSave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "VisitorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visitors";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVisitor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Label labelTotalSpent;
-        private System.Windows.Forms.Label labelTotalBalance;
-        private System.Windows.Forms.DataGridView dataGridViewVisitor;
-        private System.Windows.Forms.Label labelTotalPresent;
-        private System.Windows.Forms.Label labelTotalVisitors;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Timer timerUpdate;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button homeBtn;
+        private System.Windows.Forms.Label searchLbl;
+        private System.Windows.Forms.Label errorLbl;
+        private System.Windows.Forms.TextBox textBoxSearch;
+        private System.Windows.Forms.Button buttonSearch;
+        private System.Windows.Forms.ListBox visitorLbx;
+        private System.Windows.Forms.Button visitorClearBtn;
+        private System.Windows.Forms.Button viewAllBtn;
+        private System.Windows.Forms.Button LogsBtn;
+        private System.Windows.Forms.Label totalLbl;
+        private System.Windows.Forms.Label infoLbl;
+        private System.Windows.Forms.Button refreshBtn;
     }
 }
