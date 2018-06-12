@@ -38,9 +38,10 @@
             this.clearBtn = new System.Windows.Forms.Button();
             this.viewAllBtn = new System.Windows.Forms.Button();
             this.logsBtn = new System.Windows.Forms.Button();
-            this.stallLbx = new System.Windows.Forms.ListBox();
             this.stallComboBx = new System.Windows.Forms.ComboBox();
             this.StallLbl = new System.Windows.Forms.Label();
+            this.dataGridViewShop = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShop)).BeginInit();
             this.SuspendLayout();
             // 
             // button12
@@ -140,14 +141,6 @@
             this.logsBtn.Text = "View all logs of specified visitor";
             this.logsBtn.UseVisualStyleBackColor = true;
             // 
-            // stallLbx
-            // 
-            this.stallLbx.FormattingEnabled = true;
-            this.stallLbx.Location = new System.Drawing.Point(139, 243);
-            this.stallLbx.Name = "stallLbx";
-            this.stallLbx.Size = new System.Drawing.Size(733, 212);
-            this.stallLbx.TabIndex = 72;
-            // 
             // stallComboBx
             // 
             this.stallComboBx.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
@@ -169,26 +162,39 @@
             this.StallLbl.TabIndex = 77;
             this.StallLbl.Text = "Choose Stall:";
             // 
+            // dataGridViewShop
+            // 
+            this.dataGridViewShop.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dataGridViewShop.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewShop.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewShop.Location = new System.Drawing.Point(139, 230);
+            this.dataGridViewShop.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewShop.Name = "dataGridViewShop";
+            this.dataGridViewShop.RowTemplate.Height = 24;
+            this.dataGridViewShop.Size = new System.Drawing.Size(733, 217);
+            this.dataGridViewShop.TabIndex = 79;
+            // 
             // ShopForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 571);
+            this.Controls.Add(this.dataGridViewShop);
             this.Controls.Add(this.stallComboBx);
             this.Controls.Add(this.StallLbl);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.viewAllBtn);
             this.Controls.Add(this.logsBtn);
-            this.Controls.Add(this.stallLbx);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.button12);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ShopForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewShop)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -203,8 +209,8 @@
         private System.Windows.Forms.Button clearBtn;
         private System.Windows.Forms.Button viewAllBtn;
         private System.Windows.Forms.Button logsBtn;
-        private System.Windows.Forms.ListBox stallLbx;
         private System.Windows.Forms.ComboBox stallComboBx;
         private System.Windows.Forms.Label StallLbl;
+        private System.Windows.Forms.DataGridView dataGridViewShop;
     }
 }
