@@ -34,9 +34,10 @@
             this.logsClearBtn = new System.Windows.Forms.Button();
             this.viewAllBtn = new System.Windows.Forms.Button();
             this.logsBtn = new System.Windows.Forms.Button();
-            this.staffLbx = new System.Windows.Forms.ListBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.refreshBtn = new System.Windows.Forms.Button();
+            this.dataGridViewStaff = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStaff)).BeginInit();
             this.SuspendLayout();
             // 
             // locationLbl
@@ -87,14 +88,6 @@
             this.logsBtn.Text = "View Logs of specified staff member";
             this.logsBtn.UseVisualStyleBackColor = true;
             // 
-            // staffLbx
-            // 
-            this.staffLbx.FormattingEnabled = true;
-            this.staffLbx.Location = new System.Drawing.Point(160, 203);
-            this.staffLbx.Name = "staffLbx";
-            this.staffLbx.Size = new System.Drawing.Size(658, 238);
-            this.staffLbx.TabIndex = 58;
-            // 
             // buttonSave
             // 
             this.buttonSave.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(212)))), ((int)(((byte)(224)))));
@@ -125,23 +118,34 @@
             this.refreshBtn.Text = "Refresh";
             this.refreshBtn.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewStaff
+            // 
+            this.dataGridViewStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStaff.Location = new System.Drawing.Point(160, 200);
+            this.dataGridViewStaff.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewStaff.Name = "dataGridViewStaff";
+            this.dataGridViewStaff.RowTemplate.Height = 24;
+            this.dataGridViewStaff.Size = new System.Drawing.Size(658, 239);
+            this.dataGridViewStaff.TabIndex = 70;
+            // 
             // StaffForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(990, 571);
+            this.Controls.Add(this.dataGridViewStaff);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.logsClearBtn);
             this.Controls.Add(this.viewAllBtn);
             this.Controls.Add(this.logsBtn);
-            this.Controls.Add(this.staffLbx);
             this.Controls.Add(this.locationComboBx);
             this.Controls.Add(this.locationLbl);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "StaffForm";
             this.Text = "StaffForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.StaffForm_FormClosed);
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStaff)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -153,8 +157,8 @@
         private System.Windows.Forms.Button logsClearBtn;
         private System.Windows.Forms.Button viewAllBtn;
         private System.Windows.Forms.Button logsBtn;
-        private System.Windows.Forms.ListBox staffLbx;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button refreshBtn;
+        private System.Windows.Forms.DataGridView dataGridViewStaff;
     }
 }

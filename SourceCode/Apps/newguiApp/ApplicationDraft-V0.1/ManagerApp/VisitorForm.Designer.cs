@@ -28,22 +28,24 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisitorForm));
             this.buttonSave = new System.Windows.Forms.Button();
-            this.timerUpdate = new System.Windows.Forms.Timer();
+            this.timerUpdate = new System.Windows.Forms.Timer(this.components);
             this.button7 = new System.Windows.Forms.Button();
             this.homeBtn = new System.Windows.Forms.Button();
             this.searchLbl = new System.Windows.Forms.Label();
             this.errorLbl = new System.Windows.Forms.Label();
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.visitorLbx = new System.Windows.Forms.ListBox();
             this.visitorClearBtn = new System.Windows.Forms.Button();
             this.viewAllBtn = new System.Windows.Forms.Button();
             this.LogsBtn = new System.Windows.Forms.Button();
             this.totalLbl = new System.Windows.Forms.Label();
             this.infoLbl = new System.Windows.Forms.Label();
             this.refreshBtn = new System.Windows.Forms.Button();
+            this.dataGridViewVisitor = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVisitor)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonSave
@@ -154,17 +156,9 @@
             this.buttonSearch.TabIndex = 63;
             this.buttonSearch.UseVisualStyleBackColor = false;
             // 
-            // visitorLbx
-            // 
-            this.visitorLbx.FormattingEnabled = true;
-            this.visitorLbx.Location = new System.Drawing.Point(63, 245);
-            this.visitorLbx.Name = "visitorLbx";
-            this.visitorLbx.Size = new System.Drawing.Size(658, 212);
-            this.visitorLbx.TabIndex = 67;
-            // 
             // visitorClearBtn
             // 
-            this.visitorClearBtn.Location = new System.Drawing.Point(597, 463);
+            this.visitorClearBtn.Location = new System.Drawing.Point(597, 501);
             this.visitorClearBtn.Name = "visitorClearBtn";
             this.visitorClearBtn.Size = new System.Drawing.Size(124, 69);
             this.visitorClearBtn.TabIndex = 68;
@@ -173,7 +167,7 @@
             // 
             // viewAllBtn
             // 
-            this.viewAllBtn.Location = new System.Drawing.Point(203, 463);
+            this.viewAllBtn.Location = new System.Drawing.Point(206, 501);
             this.viewAllBtn.Name = "viewAllBtn";
             this.viewAllBtn.Size = new System.Drawing.Size(124, 69);
             this.viewAllBtn.TabIndex = 70;
@@ -182,7 +176,7 @@
             // 
             // LogsBtn
             // 
-            this.LogsBtn.Location = new System.Drawing.Point(63, 463);
+            this.LogsBtn.Location = new System.Drawing.Point(52, 501);
             this.LogsBtn.Name = "LogsBtn";
             this.LogsBtn.Size = new System.Drawing.Size(124, 69);
             this.LogsBtn.TabIndex = 71;
@@ -220,16 +214,28 @@
             this.refreshBtn.Text = "Refresh";
             this.refreshBtn.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewVisitor
+            // 
+            this.dataGridViewVisitor.BackgroundColor = System.Drawing.Color.Gainsboro;
+            this.dataGridViewVisitor.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewVisitor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewVisitor.Location = new System.Drawing.Point(52, 214);
+            this.dataGridViewVisitor.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewVisitor.Name = "dataGridViewVisitor";
+            this.dataGridViewVisitor.RowTemplate.Height = 24;
+            this.dataGridViewVisitor.Size = new System.Drawing.Size(669, 264);
+            this.dataGridViewVisitor.TabIndex = 72;
+            // 
             // VisitorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 571);
+            this.Controls.Add(this.dataGridViewVisitor);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.visitorClearBtn);
             this.Controls.Add(this.viewAllBtn);
             this.Controls.Add(this.LogsBtn);
-            this.Controls.Add(this.visitorLbx);
             this.Controls.Add(this.searchLbl);
             this.Controls.Add(this.totalLbl);
             this.Controls.Add(this.infoLbl);
@@ -240,10 +246,11 @@
             this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.buttonSave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "VisitorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Visitors";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVisitor)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -258,12 +265,12 @@
         private System.Windows.Forms.Label errorLbl;
         private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Button buttonSearch;
-        private System.Windows.Forms.ListBox visitorLbx;
         private System.Windows.Forms.Button visitorClearBtn;
         private System.Windows.Forms.Button viewAllBtn;
         private System.Windows.Forms.Button LogsBtn;
         private System.Windows.Forms.Label totalLbl;
         private System.Windows.Forms.Label infoLbl;
         private System.Windows.Forms.Button refreshBtn;
+        private System.Windows.Forms.DataGridView dataGridViewVisitor;
     }
 }

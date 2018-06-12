@@ -47,11 +47,16 @@ namespace ThanhDLL
             this.IsInCamp = isInCamp;
             ArticlesBorrowed = new List<LoanArticle>();
         }
-
-        public Visitor (int visitorNr, string firstName, string lastName, string phone, string mail) 
+        public Visitor(int visitorNr, string firstName, string lastName, string phone, string mail)
             : base(visitorNr, firstName, lastName, phone, mail)
         {
             // base
+        }
+        public Visitor (int visitorNr, string firstName, string lastName, string phone, string mail, string rfidNr) 
+            : base(visitorNr, firstName, lastName, phone, mail)
+        {
+            // base
+            this.RFIDNr = rfidNr;
         }
 
         ///////////////////////////////////////
@@ -64,9 +69,10 @@ namespace ThanhDLL
         /// <returns></returns>
         public override string ToString()
         {
-            return "Visitor #" + base.ToString()
-                + "\nCredit: " + this.Credit +
-                (this.ReservNr != 0 ? "\nReserved camp: " + this.ReservNr : "\nNot reserved camp");
+            return "Visitor #" + this.IdNr + " - " + this.FirstName + " , " + this.LastName.ToUpper()
+                + " - Tag: " + this.RFIDNr
+                + " - Phone: " + this.Phone
+                + " - Checked in: " + this.CheckedIn;
         }
 
        

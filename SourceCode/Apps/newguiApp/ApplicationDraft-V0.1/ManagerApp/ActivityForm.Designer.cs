@@ -29,21 +29,15 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ActivityForm));
-            this.scheduleLbx = new System.Windows.Forms.ListBox();
             this.searchLbl = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.activityLbx = new System.Windows.Forms.ListBox();
             this.button12 = new System.Windows.Forms.Button();
             this.refreshBtn = new System.Windows.Forms.Button();
+            this.dataGridViewStaff = new System.Windows.Forms.DataGridView();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStaff)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
-            // 
-            // scheduleLbx
-            // 
-            this.scheduleLbx.FormattingEnabled = true;
-            this.scheduleLbx.Location = new System.Drawing.Point(52, 194);
-            this.scheduleLbx.Name = "scheduleLbx";
-            this.scheduleLbx.Size = new System.Drawing.Size(441, 277);
-            this.scheduleLbx.TabIndex = 69;
             // 
             // searchLbl
             // 
@@ -66,14 +60,6 @@
             this.label1.Size = new System.Drawing.Size(183, 23);
             this.label1.TabIndex = 68;
             this.label1.Text = "Activity Statuses:";
-            // 
-            // activityLbx
-            // 
-            this.activityLbx.FormattingEnabled = true;
-            this.activityLbx.Location = new System.Drawing.Point(553, 194);
-            this.activityLbx.Name = "activityLbx";
-            this.activityLbx.Size = new System.Drawing.Size(441, 277);
-            this.activityLbx.TabIndex = 69;
             // 
             // button12
             // 
@@ -105,32 +91,53 @@
             this.refreshBtn.Text = "Refresh";
             this.refreshBtn.UseVisualStyleBackColor = true;
             // 
+            // dataGridViewStaff
+            // 
+            this.dataGridViewStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewStaff.Location = new System.Drawing.Point(52, 194);
+            this.dataGridViewStaff.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewStaff.Name = "dataGridViewStaff";
+            this.dataGridViewStaff.RowTemplate.Height = 24;
+            this.dataGridViewStaff.Size = new System.Drawing.Size(450, 323);
+            this.dataGridViewStaff.TabIndex = 75;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Location = new System.Drawing.Point(553, 194);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowTemplate.Height = 24;
+            this.dataGridView1.Size = new System.Drawing.Size(450, 323);
+            this.dataGridView1.TabIndex = 75;
+            // 
             // ActivityForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1026, 605);
+            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dataGridViewStaff);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.button12);
-            this.Controls.Add(this.activityLbx);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.scheduleLbx);
             this.Controls.Add(this.searchLbl);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ActivityForm";
             this.Text = "ActivityForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStaff)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox scheduleLbx;
         private System.Windows.Forms.Label searchLbl;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ListBox activityLbx;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button refreshBtn;
+        private System.Windows.Forms.DataGridView dataGridViewStaff;
+        private System.Windows.Forms.DataGridView dataGridView1;
     }
 }

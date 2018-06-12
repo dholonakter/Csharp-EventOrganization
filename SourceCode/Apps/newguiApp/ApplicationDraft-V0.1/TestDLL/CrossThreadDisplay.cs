@@ -1,6 +1,7 @@
 ﻿using Microsoft.Win32.SafeHandles;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -23,10 +24,27 @@ namespace ThanhDLL
         }
 
         // Delegates for cross-thread processing
+        delegate void TextboxDelegate(string text, TextBox tb);
         delegate void LabelDelegate(string text, Label lb);
         delegate void ListboxDelegate(Object o, ListBox lb);
         delegate void VoidListboxDelegate(ListBox lb);
 
+        // Set text to textbox
+        public void SetTextBox(string text, TextBox tb)
+        {
+            // InvokeRequired required compares the thread ID of the  
+            // calling thread to the thread ID of the creating thread.  
+            // If these threads are different, it returns true.  
+            if (tb.InvokeRequired)
+            {
+                TextboxDelegate d = new TextboxDelegate(SetTextBox);
+                myForm.Invoke(d, new object[] { text, tb });
+            }
+            else
+            {
+                tb.Text = text;
+            }
+        }
         // Clearing the given listbox
         public void ClearListbox(ListBox lb)
         {
@@ -94,6 +112,20 @@ namespace ThanhDLL
                 {
                     lb.Items.Add(a);
                 }
+            }
+        }
+
+        // Change color of label
+        public void ChangeLabelColor(Label lb, Color c)
+        {
+            if (lb.InvokeRequired)
+            {
+                ListboxDelegate d = new ListboxDelegate(DisplayArticle);
+                myForm.Invoke(d, new object[] { lb, c });
+            }
+            else
+            {
+                lb.ForeColor = c;
             }
         }
 

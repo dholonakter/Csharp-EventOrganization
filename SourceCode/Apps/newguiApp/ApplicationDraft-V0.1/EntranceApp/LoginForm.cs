@@ -4,28 +4,25 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ThanhDLL;
 
-namespace ManagerApp
+namespace EntranceApp
 {
-    public partial class Login : Form
+    public partial class LoginForm : Form
     {
         DataHelper dh;
-        SoundPlayer sound = new SoundPlayer("../../../error.wav");
 
-        public Login()
+        public delegate void OnLoggedIn (object sender, EventArgs e);
+        public event OnLoggedIn LoggedInHandler;
+
+        public LoginForm()
         {
             InitializeComponent();
+            this.DialogResult = DialogResult.OK;
             dh = new DataHelper();
-        }
-
-        private void Login_Load(object sender, EventArgs e)
-        {
-
         }
 
         private void ValidateLogin()
@@ -34,30 +31,21 @@ namespace ManagerApp
             {
                 if (tbUsername.Text.StartsWith("admin") && dh.CheckCredentials(tbUsername.Text, tbPassword.Text) == 1)
                 {
-                    this.Hide();
-                    Form mf = new HomeForm();
-                    mf.ShowDialog();
-
+                    if (LoggedInHandler != null)
+                    {
+                        this.LoggedInHandler(this, null); // fire them events
+                    }
                 }
                 else
                 {
-                    MessageBox.Show("Login failed");
-                    sound.Play();
+                    labelStatus.Text = "FAILED";
                 }
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void buttonLogin_Click(object sender, EventArgs e)
         {
             ValidateLogin();
-        }
-
-        private void textBox2_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)13) // enter pressed
-            {
-                ValidateLogin();
-            }
         }
     }
 }

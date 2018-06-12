@@ -39,7 +39,8 @@
             this.button7 = new System.Windows.Forms.Button();
             this.homeBtn = new System.Windows.Forms.Button();
             this.refreshBtn = new System.Windows.Forms.Button();
-            this.campLbx = new System.Windows.Forms.ListBox();
+            this.dataGridViewCamp = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCamp)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonClean
@@ -53,7 +54,7 @@
             this.buttonClean.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(204)))), ((int)(((byte)(122)))), ((int)(((byte)(17)))));
             this.buttonClean.Image = ((System.Drawing.Image)(resources.GetObject("buttonClean.Image")));
             this.buttonClean.Location = new System.Drawing.Point(711, 185);
-            this.buttonClean.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonClean.Margin = new System.Windows.Forms.Padding(2);
             this.buttonClean.Name = "buttonClean";
             this.buttonClean.Size = new System.Drawing.Size(143, 36);
             this.buttonClean.TabIndex = 40;
@@ -74,7 +75,7 @@
             this.buttonAvailable.ForeColor = System.Drawing.Color.DarkGreen;
             this.buttonAvailable.Image = ((System.Drawing.Image)(resources.GetObject("buttonAvailable.Image")));
             this.buttonAvailable.Location = new System.Drawing.Point(711, 239);
-            this.buttonAvailable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAvailable.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAvailable.Name = "buttonAvailable";
             this.buttonAvailable.Size = new System.Drawing.Size(143, 36);
             this.buttonAvailable.TabIndex = 39;
@@ -95,7 +96,7 @@
             this.buttonBooked.ForeColor = System.Drawing.Color.Black;
             this.buttonBooked.Image = ((System.Drawing.Image)(resources.GetObject("buttonBooked.Image")));
             this.buttonBooked.Location = new System.Drawing.Point(711, 291);
-            this.buttonBooked.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonBooked.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBooked.Name = "buttonBooked";
             this.buttonBooked.Size = new System.Drawing.Size(143, 36);
             this.buttonBooked.TabIndex = 36;
@@ -137,7 +138,7 @@
             this.buttonAll.ForeColor = System.Drawing.Color.MidnightBlue;
             this.buttonAll.Image = ((System.Drawing.Image)(resources.GetObject("buttonAll.Image")));
             this.buttonAll.Location = new System.Drawing.Point(711, 345);
-            this.buttonAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAll.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAll.Name = "buttonAll";
             this.buttonAll.Size = new System.Drawing.Size(143, 36);
             this.buttonAll.TabIndex = 50;
@@ -196,21 +197,24 @@
             this.refreshBtn.Text = "Refresh";
             this.refreshBtn.UseVisualStyleBackColor = true;
             // 
-            // campLbx
+            // dataGridViewCamp
             // 
-            this.campLbx.FormattingEnabled = true;
-            this.campLbx.Location = new System.Drawing.Point(130, 185);
-            this.campLbx.Name = "campLbx";
-            this.campLbx.Size = new System.Drawing.Size(545, 303);
-            this.campLbx.TabIndex = 69;
+            this.dataGridViewCamp.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dataGridViewCamp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridViewCamp.Location = new System.Drawing.Point(140, 185);
+            this.dataGridViewCamp.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridViewCamp.Name = "dataGridViewCamp";
+            this.dataGridViewCamp.RowTemplate.Height = 24;
+            this.dataGridViewCamp.Size = new System.Drawing.Size(547, 303);
+            this.dataGridViewCamp.TabIndex = 71;
             // 
             // CampForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1004, 571);
+            this.Controls.Add(this.dataGridViewCamp);
             this.Controls.Add(this.refreshBtn);
-            this.Controls.Add(this.campLbx);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.buttonAll);
@@ -219,10 +223,11 @@
             this.Controls.Add(this.buttonBooked);
             this.Controls.Add(this.button9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CampForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CampForm";
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCamp)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -237,6 +242,6 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button homeBtn;
         private System.Windows.Forms.Button refreshBtn;
-        private System.Windows.Forms.ListBox campLbx;
+        private System.Windows.Forms.DataGridView dataGridViewCamp;
     }
 }
