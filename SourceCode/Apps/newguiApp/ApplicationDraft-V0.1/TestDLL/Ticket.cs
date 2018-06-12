@@ -17,6 +17,7 @@ namespace ThanhDLL
         ///////////////////////////////////////
         public int TicketNr { get; set; }
         public DateTime TicketDate { get; set; }
+        public DateTime EntryTime { get; set; }
         public int BuyerNr { get; set; }
         public string TicketType { get; set; }
         public bool Paid { get; set; }
@@ -25,7 +26,7 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////
-        public Ticket(int ticketNr, DateTime date, int buyer, string type, bool paid, double price)
+        public Ticket(int ticketNr, DateTime date, int buyer, string type, bool paid, double price, DateTime entryTime)
         {
             this.TicketNr = ticketNr;
             this.TicketDate = date;
@@ -33,6 +34,7 @@ namespace ThanhDLL
             this.TicketType = type;
             this.Paid = paid;
             this.Price = price;
+            this.EntryTime = entryTime;
         }
 
         ///////////////////////////////////////

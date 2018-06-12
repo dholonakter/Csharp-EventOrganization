@@ -134,9 +134,9 @@ namespace ThanhDLL
                         "SET Credit = " + v.Credit + "," +
                         "CheckedIn = " + v.CheckedIn + "," +
                         "IsInCamp = " + v.IsInCamp + ", " +
-                        "RFIDNr = " + (v.RFIDNr == "" ? "NULL" : "'" + v.RFIDNr + "'");
+                        "RFIDNr = " + (v.RFIDNr == "" ? "NONE" : "'" + v.RFIDNr + "'");
 
-            sql += " WHERE VisitorNr = " + v.IdNr;
+            sql += " WHERE IdNr = " + v.IdNr;
 
             //MessageBox.Show(sql);
 
@@ -180,10 +180,10 @@ namespace ThanhDLL
                 string rfidNr = "";
                 double cred = 0;
                 bool checkedIn = false;
-                int spot = 0; // not reserved by default
+                int reserv = 0; // not reserved by default
                 bool isInCamp;
 
-                nr = Convert.ToInt32(reader["VisitorNr"]);
+                nr = Convert.ToInt32(reader["IdNr"]);
                 first = Convert.ToString(reader["FirstName"]);
                 last = Convert.ToString(reader["LastName"]);
                 phone = Convert.ToString(reader["Phone"]);
@@ -205,13 +205,10 @@ namespace ThanhDLL
                 {
                     checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
                 }
-                if (!(reader["ReservNr"] is DBNull))
-                {
-                    spot = Convert.ToInt32(reader["ReservNr"]);
-                }
+
                 isInCamp = Convert.ToBoolean(reader["IsInCamp"]);
 
-                v = (new Visitor(nr, first, last, phone, mail, rfidNr, checkedIn, cred, spot, isInCamp));
+                v = (new Visitor(nr, first, last, phone, mail, rfidNr, checkedIn, cred, reserv, isInCamp));
             }
             return v;
         }
@@ -221,10 +218,10 @@ namespace ThanhDLL
         /// </summary>
         /// <param name="visitorNr"></param>
         /// <returns>Returns null if fails and the object visitor initiated if found</returns>
-        public Visitor FindVisitorByNr(string visitorNr)
+        public Visitor FindVisitorByNr(int visitorNr)
         {
             Visitor v = null;
-            string sql = "SELECT * FROM VISITOR WHERE VisitorNr = " + visitorNr;
+            string sql = "SELECT * FROM VISITOR WHERE IdNr = " + visitorNr;
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
@@ -252,8 +249,8 @@ namespace ThanhDLL
         public void FindUnreturnedItems(Visitor v)
         {
             string sql = "SELECT ShopName, ArticleNr, ArticleName" +
-                " FROM all_order" +
-                " WHERE IsLoanable = 1 and VisitorNr = " + v.IdNr + " AND ReturnDate IS NULL";
+                " FROM loan_orders" +
+                " WHERE VisitorNr = " + v.IdNr + " AND IsLoaned = 1";
 
             MySqlCommand command = new MySqlCommand(sql, connection);
             try
@@ -299,7 +296,7 @@ namespace ThanhDLL
         /// <returns></returns>
         public string existsRFID(string rfidNr)
         {
-            string sql = "SELECT RFIDNr FROM VISITOR WHERE RFIDNr IS NOT NULL";
+            string sql = "SELECT RFIDNr FROM VISITOR WHERE RFIDNr <> 'NONE'";
             List<string> usedRIFD = new List<string>();
 
             MySqlCommand command = new MySqlCommand(sql, connection);
@@ -319,7 +316,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error trying to find RFID");
+                //MessageBox.Show("Error trying to find RFID");
             }
             finally
             {
@@ -351,6 +348,7 @@ namespace ThanhDLL
                 // temporary variables
                 int buyerNr;
                 DateTime date;
+                DateTime entry = DateTime.MinValue;
                 string type;
                 bool paid;
                 double price;
@@ -361,9 +359,16 @@ namespace ThanhDLL
                     buyerNr = Convert.ToInt32(reader["BuyerNr"]);
                     date = Convert.ToDateTime(reader["TicketDate"]);
                     type = Convert.ToString(reader["TicketType"]);
+
+                    if (!(reader["EntryTime"] is DBNull))
+                    {
+                        entry = Convert.ToDateTime(reader["EntryTime"]);
+                    }
+
+
                     paid = Convert.ToBoolean(reader["Paid"]);
                     price = Convert.ToDouble(reader["TicketPrice"]);
-                    t = new Ticket(nr, date, buyerNr, type, paid, price);
+                    t = new Ticket(nr, date, buyerNr, type, paid, price, entry);
                 }
 
             }
@@ -378,6 +383,114 @@ namespace ThanhDLL
             return t;
         }
 
+        public List<Ticket> GetUsedTickets()
+        {
+            string sql = "SELECT * " +
+                "FROM ticket_info " +
+                "WHERE EntryTime IS NOT NULL "
+                + "ORDER BY EntryTime DESC";
+
+            List<Ticket> temp = new List<Ticket>();
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // temporary variables
+                int ticketNr;
+                int buyerNr;
+                DateTime date;
+                DateTime entry = DateTime.MinValue;
+                string type;
+                bool paid;
+                double price;
+
+                while (reader.Read())
+                {
+                    // reading
+                    ticketNr = Convert.ToInt32(reader["TicketNr"]);
+                    buyerNr = Convert.ToInt32(reader["BuyerNr"]);
+                    date = Convert.ToDateTime(reader["TicketDate"]);
+                    type = Convert.ToString(reader["TicketType"]);
+
+                    if (!(reader["EntryTime"] is DBNull))
+                    {
+                        entry = Convert.ToDateTime(reader["EntryTime"]);
+                    }
+
+
+                    paid = Convert.ToBoolean(reader["Paid"]);
+                    price = Convert.ToDouble(reader["TicketPrice"]);
+                    temp.Add(new Ticket(ticketNr, date, buyerNr, type, paid, price, entry));
+                }
+
+            }
+            catch (MySqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
+
+        public List<Ticket> GetUnusedTickets()
+        {
+            string sql = "SELECT * " +
+                "FROM ticket_info " +
+                "WHERE EntryTime IS NULL ";
+
+            List<Ticket> temp = new List<Ticket>();
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // temporary variables
+                int ticketNr;
+                int buyerNr;
+                DateTime date;
+                DateTime entry = DateTime.MinValue;
+                string type;
+                bool paid;
+                double price;
+
+                while (reader.Read())
+                {
+                    // reading
+                    ticketNr = Convert.ToInt32(reader["TicketNr"]);
+                    buyerNr = Convert.ToInt32(reader["BuyerNr"]);
+                    date = Convert.ToDateTime(reader["TicketDate"]);
+                    type = Convert.ToString(reader["TicketType"]);
+
+                    if (!(reader["EntryTime"] is DBNull))
+                    {
+                        entry = Convert.ToDateTime(reader["EntryTime"]);
+                    }
+
+
+                    paid = Convert.ToBoolean(reader["Paid"]);
+                    price = Convert.ToDouble(reader["TicketPrice"]);
+                    temp.Add(new Ticket(ticketNr, date, buyerNr, type, paid, price, entry));
+                }
+
+            }
+            catch (MySqlException exc)
+            {
+                MessageBox.Show(exc.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
         /// <summary>
         /// Finds visitor by RFID tag
         /// </summary>
@@ -399,7 +512,7 @@ namespace ThanhDLL
             }
             catch (MySqlException exc)
             {
-                MessageBox.Show("Error trying to find visitor");
+                //MessageBox.Show("Error trying to find visitor");
             }
             finally
             {
@@ -410,9 +523,9 @@ namespace ThanhDLL
 
         public int MoveToDeletedVisitor(Visitor v)
         {
-            string sql = "INSERT INTO DELETED_VISITOR(IdNr, FirstName, LastName, Phone, Email, RFIDNr, ReservNr)" +
-                "VALUES(@IdNr, @FirstName, @LastName, @Phone, @Email, @RFIDNr, @ReservNr); ";
-            sql += "SET FOREIGN_KEY_CHECKS=0; DELETE FROM PARTICIPANT WHERE IdNr = " + v.IdNr + "; SET FOREIGN_KEY_CHECKS= 1;";
+            string sql = "INSERT INTO DELETED_VISITOR(IdNr, FirstName, LastName, Phone, Email, RFIDNr)" +
+                "VALUES(@IdNr, @FirstName, @LastName, @Phone, @Email, @RFIDNr); ";
+            sql += "SET FOREIGN_KEY_CHECKS=0; DELETE FROM visitor WHERE IdNr = " + v.IdNr + "; SET FOREIGN_KEY_CHECKS= 1;";
             // temporarily turning off foreign key checks
 
             MySqlCommand command = new MySqlCommand(sql, connection);
@@ -424,7 +537,6 @@ namespace ThanhDLL
             command.Parameters.AddWithValue("@Phone", v.Phone);
             command.Parameters.AddWithValue("@Email", v.Email);
             command.Parameters.AddWithValue("@RFIDNr", v.RFIDNr);
-            command.Parameters.AddWithValue("@ReservNr", v.ReservNr);
 
             try
             {
@@ -434,7 +546,7 @@ namespace ThanhDLL
             }
             catch (MySqlException exc)
             {
-                MessageBox.Show("Error trying to check out visitor");
+                //MessageBox.Show("Error trying to check out visitor");
                 return -1;
             }
             finally
@@ -447,6 +559,26 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // COUNT ROWS
         ///////////////////////////////////////
+        public int CountRowSQL(string sql)
+        {
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                return Convert.ToInt32(command.ExecuteScalar());
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Error counting rows");
+                return -1;
+            }
+            finally
+            {
+                connection.Close();
+            }
+
+        }
         public int CountRowTable(string table)
         {
             string sql = "SELECT COUNT(*) FROM " + table;
@@ -680,7 +812,7 @@ namespace ThanhDLL
         public int GetRightOrderNr(Order o)
         {
             string sql = "SELECT OrderNr FROM SHOP_ORDER WHERE OrderDate = '" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "'";
-            
+
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
@@ -895,7 +1027,7 @@ namespace ThanhDLL
         {
             LoanArticle a = null;
             string sql = "SELECT * FROM all_article WHERE IsLoanable = 1 and RFIDNr = '" + rfidNr + "'";
-            
+
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
@@ -1009,8 +1141,9 @@ namespace ThanhDLL
         public int UpdateSelectedTicket(Ticket t)
         {
             string sql = "UPDATE ticket " +
-                        "SET Paid = " + t.Paid +
-                        " WHERE TicketNr =" + t.TicketNr;
+                        "SET Paid = " + t.Paid
+                        + ", EntryTime = CONVERT('" + t.EntryTime.ToString("yyyy-MM-dd HH:mm:ss") + "', DATETIME)"
+                        + " WHERE TicketNr =" + t.TicketNr;
 
             //MessageBox.Show(sql);
 
@@ -1185,6 +1318,135 @@ namespace ThanhDLL
             {
                 connection.Close();
             }
+        }
+
+        private List<Visitor> FindVisitorByCondition(string whereCond)
+        {
+            string sql = "SELECT * FROM VISITOR WHERE" + whereCond;
+            List<Visitor> temp = new List<Visitor>();
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // reading
+                while (reader.Read())
+                {
+                    // temporary variables
+                    int nr;
+                    string first;
+                    string last;
+                    string phone;
+                    string mail;
+                    string rfidNr = "";
+                    double cred = 0;
+                    bool checkedIn = false;
+                    int reserv = 0; // not reserved by default
+                    bool isInCamp;
+
+                    nr = Convert.ToInt32(reader["IdNr"]);
+                    first = Convert.ToString(reader["FirstName"]);
+                    last = Convert.ToString(reader["LastName"]);
+                    phone = Convert.ToString(reader["Phone"]);
+                    mail = Convert.ToString(reader["Email"]);
+                    if (!(reader["RFIDNr"] is DBNull))
+                    {
+                        rfidNr = Convert.ToString(reader["RFIDNr"]);
+                    }
+                    else
+                    {
+                        rfidNr = "";
+                    }
+
+                    if (!(reader["Credit"] is DBNull))
+                    {
+                        cred = Convert.ToDouble(reader["Credit"]);
+                    }
+                    if (!(reader["CheckedIn"] is DBNull))
+                    {
+                        checkedIn = Convert.ToBoolean(reader["CheckedIn"]);
+                    }
+
+                    isInCamp = Convert.ToBoolean(reader["IsInCamp"]);
+
+                    temp.Add(new Visitor(nr, first, last, phone, mail, rfidNr, checkedIn, cred, reserv, isInCamp));
+                }
+            }
+
+            catch (MySqlException exc)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
+
+        public List<Visitor> FindVisitorByName(string name)
+        {
+            // encapsulation
+            return FindVisitorByCondition(" FirstName LIKE '%" + name + "%' OR LastName LIKE '%" + name + "%'");
+        }
+
+        public List<Visitor> FindCheckedInVisitors()
+        {
+            return FindVisitorByCondition(" CheckedIn = 1");
+        }
+
+        public List<Visitor> FindCheckedOutVisitors()
+        {
+            string sql = "SELECT * FROM deleted_VISITOR";
+            List<Visitor> temp = new List<Visitor>();
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                // reading
+                while (reader.Read())
+                {
+                    // temporary variables
+                    int nr;
+                    string first;
+                    string last;
+                    string phone;
+                    string mail;
+                    string rfidNr = "";
+                    
+
+                    nr = Convert.ToInt32(reader["IdNr"]);
+                    first = Convert.ToString(reader["FirstName"]);
+                    last = Convert.ToString(reader["LastName"]);
+                    phone = Convert.ToString(reader["Phone"]);
+                    mail = Convert.ToString(reader["Email"]);
+                    if (!(reader["RFIDNr"] is DBNull))
+                    {
+                        rfidNr = Convert.ToString(reader["RFIDNr"]);
+                    }
+                    else
+                    {
+                        rfidNr = "";
+                    }
+
+                    temp.Add(new Visitor(nr, first, last, phone, mail, rfidNr));
+                }
+            }
+
+            catch (MySqlException exc)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
         }
     }
 }
