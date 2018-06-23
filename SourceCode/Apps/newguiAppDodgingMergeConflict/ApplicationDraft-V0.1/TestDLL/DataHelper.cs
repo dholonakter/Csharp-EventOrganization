@@ -850,34 +850,9 @@ namespace ThanhDLL
             }
         }
 
-        public double GetTotalSpent()
+        public void GetTotalSpent()
         {
-            string sql = "SELECT SUM(Subtotal) 'Total' FROM ALL_ORDER";
-
-            MySqlCommand command = new MySqlCommand(sql, connection);
-
-            try
-            {
-                connection.Open();
-                MySqlDataReader reader = command.ExecuteReader();
-
-                double sum = 0;
-
-                while (reader.Read())
-                {
-                    sum = Convert.ToDouble(reader["Total"]);
-                }
-                return sum;
-            }
-            catch (MySqlException)
-            {
-                MessageBox.Show("Error getting total credit spent");
-                return -1;
-            }
-            finally
-            {
-                connection.Close();
-            }
+            /* not working */
         }
 
         ///////////////////////////////////////
@@ -1013,11 +988,11 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // STORE ORDERS HANDLING
         ///////////////////////////////////////
-        public int CreateNewStoreOrder(Order o)
+        public int CreateNewOrder(Order o)
         {
             string sql = "INSERT INTO SHOP_ORDER(OrderDate, ShopNr, VisitorNr) " +
-                       "VALUES(CONVERT('" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "', DATETIME)" + ", " + o.Shop.ShopNr + ", " + o.VisitorNr + ")";
-            
+                       "VALUES(CONVERT('" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "', DATETIME), " + o.Shop.ShopNr + ", " + o.VisitorNr + ")";
+
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
@@ -1036,6 +1011,7 @@ namespace ThanhDLL
                 connection.Close();
             }
         }
+
         public int GetRightOrderNr(Order o)
         {
             string sql = "SELECT OrderNr FROM SHOP_ORDER WHERE OrderDate = '" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "'";
@@ -1067,6 +1043,7 @@ namespace ThanhDLL
                 connection.Close();
             }
         }
+
         public int AddStoreOrderLine(Order o)
         {
             string sql = "";
@@ -1077,7 +1054,7 @@ namespace ThanhDLL
                        "VALUES(" + GetRightOrderNr(o) + ", " + (i + 1) + ", " + o.Articles[i].ArticleNr + ", "
                        + o.Quantity[i] + ");";
 
-                sql += " UPDATE ARTICLE SET Available = Available - " + o.Quantity[i] + " WHERE ArticleNr = " +
+                sql += " UPDATE STORE_ARTICLE SET Available = Available - " + o.Quantity[i] + " WHERE ArticleNr = " +
                     o.Articles[i].ArticleNr + " AND ShopNr = " + o.Shop.ShopNr + ";";
             }
 
@@ -1323,29 +1300,7 @@ namespace ThanhDLL
         /**
         * Handle borrow/return
         */
-        public int CreateNewLoanOrder(LoanOrder o)
-        {
-            string sql = "INSERT INTO SHOP_ORDER(OrderDate, ShopNr, VisitorNr) " +
-                       "VALUES(CONVERT('" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "', DATETIME), " + o.Shop.ShopNr + ", " + o.VisitorNr + ")";
-            //MessageBox.Show(sql);
-            MySqlCommand command = new MySqlCommand(sql, connection);
-
-            try
-            {
-                connection.Open();
-                int rowsAffected = command.ExecuteNonQuery();
-                return rowsAffected;
-            }
-            catch (MySqlException)
-            {
-                MessageBox.Show("Error adding new order");
-                return -1;
-            }
-            finally
-            {
-                connection.Close();
-            }
-        }
+        
         public int AddLoanOrderLine(LoanOrder o)
         {
             string sql = "";

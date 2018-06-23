@@ -33,7 +33,7 @@ namespace ManagerApp
             dataGridViewStaff.DataSource = staffTable;
             dataGridViewStaff.Columns[0].Visible = false;
             dataGridViewStaff.Refresh();
-            labelSum.Text = "The sum of their monthly salary is: €" + GetSumSalary().ToString("0.00");
+            //labelSum.Text = "The sum of their monthly salary is: €" + GetSumSalary().ToString("0.00");
         }
 
         private void FillComboBox()
@@ -58,14 +58,14 @@ namespace ManagerApp
         {
             sql = "Select * from staff"; // dont you love it when you havev iews
             Display(sql);
-            labelCount.Text = "You have in total " + (dataGridViewStaff.RowCount - 1) + " people"; // minus empty row from hell
+            //labelCount.Text = "You have in total " + (dataGridViewStaff.RowCount - 1) + " people"; // minus empty row from hell
         }
 
         private void buttonDisplay_Click(object sender, EventArgs e)
         {
             sql = "select * from staff where JobDescription = '" + locationComboBx.SelectedValue + "'";
             Display(sql);
-            labelCount.Text = "You have " + (dataGridViewStaff.RowCount - 1) + " people in this position"; // minus empty row from hell
+            //labelCount.Text = "You have " + (dataGridViewStaff.RowCount - 1) + " people in this position"; // minus empty row from hell
         }
 
         private void buttonSave_Click(object sender, EventArgs e)

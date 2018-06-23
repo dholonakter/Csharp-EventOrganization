@@ -35,6 +35,9 @@
             this.stockBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.productPanel = new System.Windows.Forms.Panel();
+            this.buttonIncrease = new System.Windows.Forms.Button();
+            this.buttonConfirm = new System.Windows.Forms.Button();
+            this.buttonDecrease = new System.Windows.Forms.Button();
             this.productLabel9 = new System.Windows.Forms.Label();
             this.productLabel10 = new System.Windows.Forms.Label();
             this.productLabel11 = new System.Windows.Forms.Label();
@@ -63,31 +66,20 @@
             this.itemLbx = new System.Windows.Forms.ListBox();
             this.labelOrder = new System.Windows.Forms.Label();
             this.startPanel = new System.Windows.Forms.Panel();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.logsClearBtn = new System.Windows.Forms.Button();
-            this.restockBtn = new System.Windows.Forms.Button();
             this.viewStockBtn = new System.Windows.Forms.Button();
             this.viewHistoryBtn = new System.Windows.Forms.Button();
             this.logsInfoLbx = new System.Windows.Forms.ListBox();
             this.labelMonitor = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.searchStockLbl = new System.Windows.Forms.Label();
             this.searchLbl = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.textBoxResrvID = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.restockLbl = new System.Windows.Forms.Label();
             this.stockLogsLbl = new System.Windows.Forms.Label();
             this.labelShopName = new System.Windows.Forms.Label();
-            this.buttonConfirm = new System.Windows.Forms.Button();
-            this.buttonDecrease = new System.Windows.Forms.Button();
-            this.buttonIncrease = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.productPanel.SuspendLayout();
             this.startPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -198,6 +190,63 @@
             this.productPanel.Size = new System.Drawing.Size(1329, 780);
             this.productPanel.TabIndex = 4;
             // 
+            // buttonIncrease
+            // 
+            this.buttonIncrease.BackColor = System.Drawing.Color.DimGray;
+            this.buttonIncrease.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonIncrease.FlatAppearance.BorderSize = 0;
+            this.buttonIncrease.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.buttonIncrease.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.buttonIncrease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonIncrease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonIncrease.ForeColor = System.Drawing.Color.White;
+            this.buttonIncrease.Location = new System.Drawing.Point(948, 633);
+            this.buttonIncrease.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonIncrease.Name = "buttonIncrease";
+            this.buttonIncrease.Size = new System.Drawing.Size(94, 62);
+            this.buttonIncrease.TabIndex = 61;
+            this.buttonIncrease.Text = "+";
+            this.buttonIncrease.UseVisualStyleBackColor = false;
+            this.buttonIncrease.Click += new System.EventHandler(this.buttonIncrease_Click);
+            // 
+            // buttonConfirm
+            // 
+            this.buttonConfirm.BackColor = System.Drawing.Color.DimGray;
+            this.buttonConfirm.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonConfirm.FlatAppearance.BorderSize = 0;
+            this.buttonConfirm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.buttonConfirm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.buttonConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonConfirm.ForeColor = System.Drawing.Color.White;
+            this.buttonConfirm.Location = new System.Drawing.Point(1088, 633);
+            this.buttonConfirm.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonConfirm.Name = "buttonConfirm";
+            this.buttonConfirm.Size = new System.Drawing.Size(206, 62);
+            this.buttonConfirm.TabIndex = 60;
+            this.buttonConfirm.Text = "Confirm";
+            this.buttonConfirm.UseVisualStyleBackColor = false;
+            this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
+            // 
+            // buttonDecrease
+            // 
+            this.buttonDecrease.BackColor = System.Drawing.Color.DimGray;
+            this.buttonDecrease.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonDecrease.FlatAppearance.BorderSize = 0;
+            this.buttonDecrease.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.buttonDecrease.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.buttonDecrease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonDecrease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonDecrease.ForeColor = System.Drawing.Color.White;
+            this.buttonDecrease.Location = new System.Drawing.Point(855, 633);
+            this.buttonDecrease.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonDecrease.Name = "buttonDecrease";
+            this.buttonDecrease.Size = new System.Drawing.Size(94, 62);
+            this.buttonDecrease.TabIndex = 59;
+            this.buttonDecrease.Text = "-";
+            this.buttonDecrease.UseVisualStyleBackColor = false;
+            this.buttonDecrease.Click += new System.EventHandler(this.buttonRemove_Click);
+            // 
             // productLabel9
             // 
             this.productLabel9.AutoSize = true;
@@ -227,7 +276,7 @@
             this.productLabel11.AutoSize = true;
             this.productLabel11.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel11.ForeColor = System.Drawing.Color.Black;
-            this.productLabel11.Location = new System.Drawing.Point(632, 622);
+            this.productLabel11.Location = new System.Drawing.Point(440, 622);
             this.productLabel11.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.productLabel11.Name = "productLabel11";
             this.productLabel11.Size = new System.Drawing.Size(85, 23);
@@ -239,7 +288,7 @@
             this.productLabel12.AutoSize = true;
             this.productLabel12.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel12.ForeColor = System.Drawing.Color.Black;
-            this.productLabel12.Location = new System.Drawing.Point(438, 622);
+            this.productLabel12.Location = new System.Drawing.Point(634, 622);
             this.productLabel12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.productLabel12.Name = "productLabel12";
             this.productLabel12.Size = new System.Drawing.Size(85, 23);
@@ -554,22 +603,15 @@
             // 
             // startPanel
             // 
-            this.startPanel.Controls.Add(this.numericUpDown1);
-            this.startPanel.Controls.Add(this.comboBox1);
-            this.startPanel.Controls.Add(this.logsClearBtn);
-            this.startPanel.Controls.Add(this.restockBtn);
             this.startPanel.Controls.Add(this.viewStockBtn);
             this.startPanel.Controls.Add(this.viewHistoryBtn);
             this.startPanel.Controls.Add(this.logsInfoLbx);
             this.startPanel.Controls.Add(this.labelMonitor);
-            this.startPanel.Controls.Add(this.label4);
             this.startPanel.Controls.Add(this.searchStockLbl);
             this.startPanel.Controls.Add(this.searchLbl);
             this.startPanel.Controls.Add(this.buttonSearch);
             this.startPanel.Controls.Add(this.textBoxResrvID);
             this.startPanel.Controls.Add(this.label2);
-            this.startPanel.Controls.Add(this.label3);
-            this.startPanel.Controls.Add(this.restockLbl);
             this.startPanel.Controls.Add(this.stockLogsLbl);
             this.startPanel.Location = new System.Drawing.Point(292, 90);
             this.startPanel.Margin = new System.Windows.Forms.Padding(4);
@@ -577,68 +619,33 @@
             this.startPanel.Size = new System.Drawing.Size(1473, 846);
             this.startPanel.TabIndex = 9;
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(1132, 201);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(160, 22);
-            this.numericUpDown1.TabIndex = 46;
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(973, 156);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(317, 24);
-            this.comboBox1.TabIndex = 45;
-            // 
-            // logsClearBtn
-            // 
-            this.logsClearBtn.Location = new System.Drawing.Point(673, 567);
-            this.logsClearBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.logsClearBtn.Name = "logsClearBtn";
-            this.logsClearBtn.Size = new System.Drawing.Size(165, 85);
-            this.logsClearBtn.TabIndex = 41;
-            this.logsClearBtn.Text = "Clear All";
-            this.logsClearBtn.UseVisualStyleBackColor = true;
-            // 
-            // restockBtn
-            // 
-            this.restockBtn.Location = new System.Drawing.Point(1127, 314);
-            this.restockBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.restockBtn.Name = "restockBtn";
-            this.restockBtn.Size = new System.Drawing.Size(165, 85);
-            this.restockBtn.TabIndex = 42;
-            this.restockBtn.Text = "Restock";
-            this.restockBtn.UseVisualStyleBackColor = true;
-            // 
             // viewStockBtn
             // 
-            this.viewStockBtn.Location = new System.Drawing.Point(349, 567);
+            this.viewStockBtn.Location = new System.Drawing.Point(274, 523);
             this.viewStockBtn.Margin = new System.Windows.Forms.Padding(4);
             this.viewStockBtn.Name = "viewStockBtn";
             this.viewStockBtn.Size = new System.Drawing.Size(165, 85);
             this.viewStockBtn.TabIndex = 43;
             this.viewStockBtn.Text = "View Stock";
             this.viewStockBtn.UseVisualStyleBackColor = true;
+            this.viewStockBtn.Click += new System.EventHandler(this.viewStockBtn_Click);
             // 
             // viewHistoryBtn
             // 
-            this.viewHistoryBtn.Location = new System.Drawing.Point(149, 567);
+            this.viewHistoryBtn.Location = new System.Drawing.Point(74, 523);
             this.viewHistoryBtn.Margin = new System.Windows.Forms.Padding(4);
             this.viewHistoryBtn.Name = "viewHistoryBtn";
             this.viewHistoryBtn.Size = new System.Drawing.Size(165, 85);
             this.viewHistoryBtn.TabIndex = 44;
             this.viewHistoryBtn.Text = "View Purchase History";
             this.viewHistoryBtn.UseVisualStyleBackColor = true;
+            this.viewHistoryBtn.Click += new System.EventHandler(this.viewHistoryBtn_Click);
             // 
             // logsInfoLbx
             // 
             this.logsInfoLbx.FormattingEnabled = true;
             this.logsInfoLbx.ItemHeight = 16;
-            this.logsInfoLbx.Location = new System.Drawing.Point(149, 235);
+            this.logsInfoLbx.Location = new System.Drawing.Point(74, 191);
             this.logsInfoLbx.Margin = new System.Windows.Forms.Padding(4);
             this.logsInfoLbx.Name = "logsInfoLbx";
             this.logsInfoLbx.Size = new System.Drawing.Size(688, 292);
@@ -655,24 +662,12 @@
             this.labelMonitor.Size = new System.Drawing.Size(0, 27);
             this.labelMonitor.TabIndex = 37;
             // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.DimGray;
-            this.label4.Location = new System.Drawing.Point(968, 113);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(299, 28);
-            this.label4.TabIndex = 36;
-            this.label4.Text = "Select item and amount";
-            // 
             // searchStockLbl
             // 
             this.searchStockLbl.AutoSize = true;
             this.searchStockLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchStockLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.searchStockLbl.Location = new System.Drawing.Point(35, 107);
+            this.searchStockLbl.Location = new System.Drawing.Point(65, 83);
             this.searchStockLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.searchStockLbl.Name = "searchStockLbl";
             this.searchStockLbl.Size = new System.Drawing.Size(167, 28);
@@ -684,7 +679,7 @@
             this.searchLbl.AutoSize = true;
             this.searchLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.searchLbl.Location = new System.Drawing.Point(35, 107);
+            this.searchLbl.Location = new System.Drawing.Point(65, 83);
             this.searchLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.searchLbl.Name = "searchLbl";
             this.searchLbl.Size = new System.Drawing.Size(167, 28);
@@ -703,7 +698,7 @@
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
             this.buttonSearch.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearch.Image")));
             this.buttonSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSearch.Location = new System.Drawing.Point(517, 105);
+            this.buttonSearch.Location = new System.Drawing.Point(547, 81);
             this.buttonSearch.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(36, 37);
@@ -713,7 +708,7 @@
             // textBoxResrvID
             // 
             this.textBoxResrvID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxResrvID.Location = new System.Drawing.Point(244, 111);
+            this.textBoxResrvID.Location = new System.Drawing.Point(274, 87);
             this.textBoxResrvID.Margin = new System.Windows.Forms.Padding(4);
             this.textBoxResrvID.Name = "textBoxResrvID";
             this.textBoxResrvID.Size = new System.Drawing.Size(249, 26);
@@ -732,36 +727,12 @@
             this.label2.TabIndex = 32;
             this.label2.Text = "(error message)";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.DimGray;
-            this.label3.Location = new System.Drawing.Point(968, 58);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(105, 28);
-            this.label3.TabIndex = 33;
-            this.label3.Text = "Restock";
-            // 
-            // restockLbl
-            // 
-            this.restockLbl.AutoSize = true;
-            this.restockLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.restockLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.restockLbl.Location = new System.Drawing.Point(968, 58);
-            this.restockLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.restockLbl.Name = "restockLbl";
-            this.restockLbl.Size = new System.Drawing.Size(105, 28);
-            this.restockLbl.TabIndex = 33;
-            this.restockLbl.Text = "Restock";
-            // 
             // stockLogsLbl
             // 
             this.stockLogsLbl.AutoSize = true;
             this.stockLogsLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stockLogsLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.stockLogsLbl.Location = new System.Drawing.Point(68, 37);
+            this.stockLogsLbl.Location = new System.Drawing.Point(65, 37);
             this.stockLogsLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.stockLogsLbl.Name = "stockLogsLbl";
             this.stockLogsLbl.Size = new System.Drawing.Size(142, 28);
@@ -780,71 +751,14 @@
             this.labelShopName.TabIndex = 32;
             this.labelShopName.Text = "SHOP NAME";
             // 
-            // buttonConfirm
-            // 
-            this.buttonConfirm.BackColor = System.Drawing.Color.DimGray;
-            this.buttonConfirm.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonConfirm.FlatAppearance.BorderSize = 0;
-            this.buttonConfirm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.buttonConfirm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.buttonConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonConfirm.ForeColor = System.Drawing.Color.White;
-            this.buttonConfirm.Location = new System.Drawing.Point(1088, 633);
-            this.buttonConfirm.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonConfirm.Name = "buttonConfirm";
-            this.buttonConfirm.Size = new System.Drawing.Size(206, 62);
-            this.buttonConfirm.TabIndex = 60;
-            this.buttonConfirm.Text = "Confirm";
-            this.buttonConfirm.UseVisualStyleBackColor = false;
-            this.buttonConfirm.Click += new System.EventHandler(this.buttonConfirm_Click);
-            // 
-            // buttonDecrease
-            // 
-            this.buttonDecrease.BackColor = System.Drawing.Color.DimGray;
-            this.buttonDecrease.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonDecrease.FlatAppearance.BorderSize = 0;
-            this.buttonDecrease.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.buttonDecrease.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.buttonDecrease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonDecrease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonDecrease.ForeColor = System.Drawing.Color.White;
-            this.buttonDecrease.Location = new System.Drawing.Point(855, 633);
-            this.buttonDecrease.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonDecrease.Name = "buttonDecrease";
-            this.buttonDecrease.Size = new System.Drawing.Size(94, 62);
-            this.buttonDecrease.TabIndex = 59;
-            this.buttonDecrease.Text = "-";
-            this.buttonDecrease.UseVisualStyleBackColor = false;
-            this.buttonDecrease.Click += new System.EventHandler(this.buttonRemove_Click);
-            // 
-            // buttonIncrease
-            // 
-            this.buttonIncrease.BackColor = System.Drawing.Color.DimGray;
-            this.buttonIncrease.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonIncrease.FlatAppearance.BorderSize = 0;
-            this.buttonIncrease.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.buttonIncrease.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.buttonIncrease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonIncrease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonIncrease.ForeColor = System.Drawing.Color.White;
-            this.buttonIncrease.Location = new System.Drawing.Point(948, 633);
-            this.buttonIncrease.Margin = new System.Windows.Forms.Padding(4);
-            this.buttonIncrease.Name = "buttonIncrease";
-            this.buttonIncrease.Size = new System.Drawing.Size(94, 62);
-            this.buttonIncrease.TabIndex = 61;
-            this.buttonIncrease.Text = "+";
-            this.buttonIncrease.UseVisualStyleBackColor = false;
-            this.buttonIncrease.Click += new System.EventHandler(this.buttonIncrease_Click);
-            // 
             // ShopForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
-            this.Controls.Add(this.productPanel);
             this.Controls.Add(this.startPanel);
+            this.Controls.Add(this.productPanel);
             this.Controls.Add(this.labelShopName);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -861,7 +775,6 @@
             this.productPanel.PerformLayout();
             this.startPanel.ResumeLayout(false);
             this.startPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -880,8 +793,6 @@
         private System.Windows.Forms.Panel startPanel;
         private System.Windows.Forms.Label labelOrderInfo;
         private System.Windows.Forms.Label labelShopName;
-        private System.Windows.Forms.Button logsClearBtn;
-        private System.Windows.Forms.Button restockBtn;
         private System.Windows.Forms.Button viewStockBtn;
         private System.Windows.Forms.Button viewHistoryBtn;
         private System.Windows.Forms.ListBox logsInfoLbx;
@@ -891,12 +802,7 @@
         private System.Windows.Forms.Button buttonSearch;
         private System.Windows.Forms.TextBox textBoxResrvID;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label restockLbl;
         private System.Windows.Forms.Label stockLogsLbl;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button productButton9;
         private System.Windows.Forms.Button productButton10;
         private System.Windows.Forms.Button productButton11;

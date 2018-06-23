@@ -60,13 +60,7 @@ namespace ManagerApp
 
         private void inventoryBtn_Click(object sender, EventArgs e)
         {
-            if (selectedForm != null)
-            {
-                selectedForm.Dispose();
-            }
-            selectedForm = new StockForm();
-            selectedForm.Show();
-            this.Dispose();
+            
         }
 
         private void staffBtn_Click(object sender, EventArgs e)
@@ -82,13 +76,7 @@ namespace ManagerApp
 
         private void analyticBtn_Click(object sender, EventArgs e)
         {
-            if (selectedForm != null)
-            {
-                selectedForm.Dispose();
-            }
-            selectedForm = new AnalyticForm();
-            selectedForm.Show();
-            this.Dispose();
+            
         }
 
         private void buttonTransactions_Click(object sender, EventArgs e)

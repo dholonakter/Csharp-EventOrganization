@@ -75,6 +75,7 @@ namespace RentalApp
             labelInfoR.Text = "";
             loanInfoLbx.Items.Clear();
             returnLbx.Items.Clear();
+            o = new LoanOrder(selectedShop);
         }
         private void monitorBtn_Click(object sender, EventArgs e)
         {
@@ -241,7 +242,7 @@ namespace RentalApp
                         o.OrderDate = DateTime.Now;
                         o.VisitorNr = v.IdNr;
 
-                        if (data.CreateNewLoanOrder(o) == 1 && data.AddLoanOrderLine(o) != -1 && data.UpdateSelectedVisitor(v) != -1)
+                        if (data.CreateNewOrder(o) == 1 && data.AddLoanOrderLine(o) != -1 && data.UpdateSelectedVisitor(v) != -1)
                         {
                             //labelBorrowInfo.Text = o.GetDepositReceipt();
                             labelMessageB.Text = "Loan successful!";

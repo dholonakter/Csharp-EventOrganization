@@ -63,6 +63,7 @@ namespace ShopApp
             int idOfY = Convert.ToInt32(y.Name.Substring(12));
             return idOfX.CompareTo(idOfY);
         }
+        
         private void ShopForm_Load(object sender, EventArgs e)
         {
             // init values
@@ -75,6 +76,8 @@ namespace ShopApp
             buttons = new List<Button>();
             labels = new List<Label>();
             allProducts = data.GetAllStoreArticles(selectedShop);
+            allProducts.Sort();
+
 
             labelShopName.Text = "Store " + selectedShop.ShopName;
 
@@ -201,22 +204,6 @@ namespace ShopApp
             }
         }
         
-        
-        private void ProcessOrder()
-        {
-            if(MessageBox.Show("Confirm payment", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
-            {
-                o.OrderDate = DateTime.Now;
-
-                if (data.CreateNewStoreOrder(o) == 1 && data.AddStoreOrderLine(o) != -1)
-                {
-                    o.OrderNr = data.GetRightOrderNr(o);
-                    labelOrder.Text = "Order nr. " + o.OrderNr + " processed";
-                }
-            }
-            o = new Order(selectedShop);
-        }
-
         private void ShopForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.original.Show();
@@ -269,7 +256,27 @@ namespace ShopApp
 
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
-            ProcessOrder();
+            if (MessageBox.Show("Confirm payment", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+            {
+                o.OrderDate = DateTime.Now;
+
+                if (data.CreateNewStoreOrder(o) == 1 && data.AddStoreOrderLine(o) != -1)
+                {
+                    o.OrderNr = data.GetRightOrderNr(o);
+                    labelOrder.Text = "Order nr. " + o.OrderNr + " processed";
+                }
+            }
+            o = new Order(selectedShop);
+        }
+
+        private void viewHistoryBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void viewStockBtn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

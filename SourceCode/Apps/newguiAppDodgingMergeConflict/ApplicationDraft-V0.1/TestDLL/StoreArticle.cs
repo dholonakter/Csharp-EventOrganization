@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ThanhDLL
 {
-    public class StoreArticle:Article
+    public class StoreArticle:Article, IComparable<StoreArticle>
     {
         public string Category { get; set; }
         public string ImgFile { get; set; }
@@ -20,6 +20,11 @@ namespace ThanhDLL
             // using base 
             this.ImgFile = img;
             this.Category = category;
+        }
+
+        public int CompareTo(StoreArticle other)
+        {
+            return this.Category.CompareTo(other.Category);
         }
     }
 }
