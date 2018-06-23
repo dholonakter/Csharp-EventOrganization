@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShopForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.orderBtn = new System.Windows.Forms.Button();
@@ -35,6 +36,7 @@
             this.stockBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.productPanel = new System.Windows.Forms.Panel();
+            this.buttonUndo = new System.Windows.Forms.Button();
             this.buttonIncrease = new System.Windows.Forms.Button();
             this.buttonConfirm = new System.Windows.Forms.Button();
             this.buttonDecrease = new System.Windows.Forms.Button();
@@ -73,10 +75,13 @@
             this.searchStockLbl = new System.Windows.Forms.Label();
             this.searchLbl = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.textBoxResrvID = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.stockLogsLbl = new System.Windows.Forms.Label();
             this.labelShopName = new System.Windows.Forms.Label();
+            this.timerScanCard = new System.Windows.Forms.Timer(this.components);
+            this.personNameRbtn = new System.Windows.Forms.RadioButton();
+            this.itemNrRbtn = new System.Windows.Forms.RadioButton();
+            this.itemNameRbtn = new System.Windows.Forms.RadioButton();
             this.panel1.SuspendLayout();
             this.productPanel.SuspendLayout();
             this.startPanel.SuspendLayout();
@@ -154,6 +159,7 @@
             // 
             // productPanel
             // 
+            this.productPanel.Controls.Add(this.buttonUndo);
             this.productPanel.Controls.Add(this.buttonIncrease);
             this.productPanel.Controls.Add(this.buttonConfirm);
             this.productPanel.Controls.Add(this.buttonDecrease);
@@ -190,6 +196,25 @@
             this.productPanel.Size = new System.Drawing.Size(1329, 780);
             this.productPanel.TabIndex = 4;
             // 
+            // buttonUndo
+            // 
+            this.buttonUndo.BackColor = System.Drawing.Color.DimGray;
+            this.buttonUndo.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.buttonUndo.FlatAppearance.BorderSize = 0;
+            this.buttonUndo.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
+            this.buttonUndo.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
+            this.buttonUndo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonUndo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonUndo.ForeColor = System.Drawing.Color.White;
+            this.buttonUndo.Location = new System.Drawing.Point(1096, 527);
+            this.buttonUndo.Margin = new System.Windows.Forms.Padding(4);
+            this.buttonUndo.Name = "buttonUndo";
+            this.buttonUndo.Size = new System.Drawing.Size(96, 62);
+            this.buttonUndo.TabIndex = 62;
+            this.buttonUndo.Text = "New  order";
+            this.buttonUndo.UseVisualStyleBackColor = false;
+            this.buttonUndo.Click += new System.EventHandler(this.buttonUndo_Click);
+            // 
             // buttonIncrease
             // 
             this.buttonIncrease.BackColor = System.Drawing.Color.DimGray;
@@ -200,7 +225,7 @@
             this.buttonIncrease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonIncrease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonIncrease.ForeColor = System.Drawing.Color.White;
-            this.buttonIncrease.Location = new System.Drawing.Point(948, 633);
+            this.buttonIncrease.Location = new System.Drawing.Point(950, 527);
             this.buttonIncrease.Margin = new System.Windows.Forms.Padding(4);
             this.buttonIncrease.Name = "buttonIncrease";
             this.buttonIncrease.Size = new System.Drawing.Size(94, 62);
@@ -219,10 +244,10 @@
             this.buttonConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonConfirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonConfirm.ForeColor = System.Drawing.Color.White;
-            this.buttonConfirm.Location = new System.Drawing.Point(1088, 633);
+            this.buttonConfirm.Location = new System.Drawing.Point(1200, 527);
             this.buttonConfirm.Margin = new System.Windows.Forms.Padding(4);
             this.buttonConfirm.Name = "buttonConfirm";
-            this.buttonConfirm.Size = new System.Drawing.Size(206, 62);
+            this.buttonConfirm.Size = new System.Drawing.Size(96, 62);
             this.buttonConfirm.TabIndex = 60;
             this.buttonConfirm.Text = "Confirm";
             this.buttonConfirm.UseVisualStyleBackColor = false;
@@ -238,7 +263,7 @@
             this.buttonDecrease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDecrease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDecrease.ForeColor = System.Drawing.Color.White;
-            this.buttonDecrease.Location = new System.Drawing.Point(855, 633);
+            this.buttonDecrease.Location = new System.Drawing.Point(857, 527);
             this.buttonDecrease.Margin = new System.Windows.Forms.Padding(4);
             this.buttonDecrease.Name = "buttonDecrease";
             this.buttonDecrease.Size = new System.Drawing.Size(94, 62);
@@ -572,7 +597,7 @@
             this.labelOrderInfo.AutoSize = true;
             this.labelOrderInfo.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelOrderInfo.ForeColor = System.Drawing.Color.DimGray;
-            this.labelOrderInfo.Location = new System.Drawing.Point(850, 723);
+            this.labelOrderInfo.Location = new System.Drawing.Point(852, 617);
             this.labelOrderInfo.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelOrderInfo.Name = "labelOrderInfo";
             this.labelOrderInfo.Size = new System.Drawing.Size(83, 28);
@@ -586,7 +611,7 @@
             this.itemLbx.Location = new System.Drawing.Point(855, 137);
             this.itemLbx.Margin = new System.Windows.Forms.Padding(4);
             this.itemLbx.Name = "itemLbx";
-            this.itemLbx.Size = new System.Drawing.Size(439, 468);
+            this.itemLbx.Size = new System.Drawing.Size(439, 356);
             this.itemLbx.TabIndex = 26;
             // 
             // labelOrder
@@ -603,6 +628,9 @@
             // 
             // startPanel
             // 
+            this.startPanel.Controls.Add(this.personNameRbtn);
+            this.startPanel.Controls.Add(this.itemNrRbtn);
+            this.startPanel.Controls.Add(this.itemNameRbtn);
             this.startPanel.Controls.Add(this.viewStockBtn);
             this.startPanel.Controls.Add(this.viewHistoryBtn);
             this.startPanel.Controls.Add(this.logsInfoLbx);
@@ -610,8 +638,7 @@
             this.startPanel.Controls.Add(this.searchStockLbl);
             this.startPanel.Controls.Add(this.searchLbl);
             this.startPanel.Controls.Add(this.buttonSearch);
-            this.startPanel.Controls.Add(this.textBoxResrvID);
-            this.startPanel.Controls.Add(this.label2);
+            this.startPanel.Controls.Add(this.textBoxSearch);
             this.startPanel.Controls.Add(this.stockLogsLbl);
             this.startPanel.Location = new System.Drawing.Point(292, 90);
             this.startPanel.Margin = new System.Windows.Forms.Padding(4);
@@ -621,7 +648,7 @@
             // 
             // viewStockBtn
             // 
-            this.viewStockBtn.Location = new System.Drawing.Point(274, 523);
+            this.viewStockBtn.Location = new System.Drawing.Point(263, 471);
             this.viewStockBtn.Margin = new System.Windows.Forms.Padding(4);
             this.viewStockBtn.Name = "viewStockBtn";
             this.viewStockBtn.Size = new System.Drawing.Size(165, 85);
@@ -632,7 +659,7 @@
             // 
             // viewHistoryBtn
             // 
-            this.viewHistoryBtn.Location = new System.Drawing.Point(74, 523);
+            this.viewHistoryBtn.Location = new System.Drawing.Point(70, 471);
             this.viewHistoryBtn.Margin = new System.Windows.Forms.Padding(4);
             this.viewHistoryBtn.Name = "viewHistoryBtn";
             this.viewHistoryBtn.Size = new System.Drawing.Size(165, 85);
@@ -645,10 +672,10 @@
             // 
             this.logsInfoLbx.FormattingEnabled = true;
             this.logsInfoLbx.ItemHeight = 16;
-            this.logsInfoLbx.Location = new System.Drawing.Point(74, 191);
+            this.logsInfoLbx.Location = new System.Drawing.Point(70, 159);
             this.logsInfoLbx.Margin = new System.Windows.Forms.Padding(4);
             this.logsInfoLbx.Name = "logsInfoLbx";
-            this.logsInfoLbx.Size = new System.Drawing.Size(688, 292);
+            this.logsInfoLbx.Size = new System.Drawing.Size(852, 292);
             this.logsInfoLbx.TabIndex = 40;
             // 
             // labelMonitor
@@ -698,34 +725,22 @@
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
             this.buttonSearch.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearch.Image")));
             this.buttonSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonSearch.Location = new System.Drawing.Point(547, 81);
+            this.buttonSearch.Location = new System.Drawing.Point(787, 116);
             this.buttonSearch.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(36, 37);
             this.buttonSearch.TabIndex = 35;
             this.buttonSearch.UseVisualStyleBackColor = false;
+            this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
             // 
-            // textBoxResrvID
+            // textBoxSearch
             // 
-            this.textBoxResrvID.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxResrvID.Location = new System.Drawing.Point(274, 87);
-            this.textBoxResrvID.Margin = new System.Windows.Forms.Padding(4);
-            this.textBoxResrvID.Name = "textBoxResrvID";
-            this.textBoxResrvID.Size = new System.Drawing.Size(249, 26);
-            this.textBoxResrvID.TabIndex = 34;
-            this.textBoxResrvID.Text = " ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.DimGray;
-            this.label2.Location = new System.Drawing.Point(144, 145);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(200, 28);
-            this.label2.TabIndex = 32;
-            this.label2.Text = "(error message)";
+            this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxSearch.Location = new System.Drawing.Point(514, 122);
+            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.textBoxSearch.Name = "textBoxSearch";
+            this.textBoxSearch.Size = new System.Drawing.Size(249, 26);
+            this.textBoxSearch.TabIndex = 34;
             // 
             // stockLogsLbl
             // 
@@ -750,6 +765,50 @@
             this.labelShopName.Size = new System.Drawing.Size(197, 33);
             this.labelShopName.TabIndex = 32;
             this.labelShopName.Text = "SHOP NAME";
+            // 
+            // timerScanCard
+            // 
+            this.timerScanCard.Interval = 10000;
+            this.timerScanCard.Tick += new System.EventHandler(this.timerScanCard_Tick);
+            // 
+            // personNameRbtn
+            // 
+            this.personNameRbtn.AutoSize = true;
+            this.personNameRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.personNameRbtn.Location = new System.Drawing.Point(370, 122);
+            this.personNameRbtn.Margin = new System.Windows.Forms.Padding(4);
+            this.personNameRbtn.Name = "personNameRbtn";
+            this.personNameRbtn.Size = new System.Drawing.Size(136, 24);
+            this.personNameRbtn.TabIndex = 55;
+            this.personNameRbtn.TabStop = true;
+            this.personNameRbtn.Text = "Person_Name";
+            this.personNameRbtn.UseVisualStyleBackColor = true;
+            // 
+            // itemNrRbtn
+            // 
+            this.itemNrRbtn.AutoSize = true;
+            this.itemNrRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.itemNrRbtn.Location = new System.Drawing.Point(264, 122);
+            this.itemNrRbtn.Margin = new System.Windows.Forms.Padding(4);
+            this.itemNrRbtn.Name = "itemNrRbtn";
+            this.itemNrRbtn.Size = new System.Drawing.Size(98, 24);
+            this.itemNrRbtn.TabIndex = 54;
+            this.itemNrRbtn.TabStop = true;
+            this.itemNrRbtn.Text = "Item\'s Nr";
+            this.itemNrRbtn.UseVisualStyleBackColor = true;
+            // 
+            // itemNameRbtn
+            // 
+            this.itemNameRbtn.AutoSize = true;
+            this.itemNameRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.itemNameRbtn.Location = new System.Drawing.Point(134, 122);
+            this.itemNameRbtn.Margin = new System.Windows.Forms.Padding(4);
+            this.itemNameRbtn.Name = "itemNameRbtn";
+            this.itemNameRbtn.Size = new System.Drawing.Size(124, 24);
+            this.itemNameRbtn.TabIndex = 56;
+            this.itemNameRbtn.TabStop = true;
+            this.itemNameRbtn.Text = "Item\'s Name";
+            this.itemNameRbtn.UseVisualStyleBackColor = true;
             // 
             // ShopForm
             // 
@@ -800,8 +859,7 @@
         private System.Windows.Forms.Label searchStockLbl;
         private System.Windows.Forms.Label searchLbl;
         private System.Windows.Forms.Button buttonSearch;
-        private System.Windows.Forms.TextBox textBoxResrvID;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox textBoxSearch;
         private System.Windows.Forms.Label stockLogsLbl;
         private System.Windows.Forms.Button productButton9;
         private System.Windows.Forms.Button productButton10;
@@ -830,6 +888,11 @@
         private System.Windows.Forms.Button buttonConfirm;
         private System.Windows.Forms.Button buttonDecrease;
         private System.Windows.Forms.Button buttonIncrease;
+        private System.Windows.Forms.Button buttonUndo;
+        private System.Windows.Forms.Timer timerScanCard;
+        private System.Windows.Forms.RadioButton personNameRbtn;
+        private System.Windows.Forms.RadioButton itemNrRbtn;
+        private System.Windows.Forms.RadioButton itemNameRbtn;
     }
 }
 

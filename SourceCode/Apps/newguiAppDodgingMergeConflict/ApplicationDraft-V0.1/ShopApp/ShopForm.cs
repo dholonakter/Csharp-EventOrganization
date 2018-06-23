@@ -118,20 +118,37 @@ namespace ShopApp
 
         private void Pay(object sender, RFIDTagEventArgs e)
         {
+            timerScanCard.Stop();
+            buttonConfirm.Text = "Confirm";
+
+            // Find a visitor
             v = data.FindVisitorByTag(e.Tag);
+            
             if (v != null)
             {
+                // Create order
+                o.OrderDate = DateTime.Now;
                 o.VisitorNr = v.IdNr;
+
+                if (data.CreateNewOrder(o) == 1 && data.AddStoreOrderLine(o) != -1)
+                {
+                    o.OrderNr = data.GetRightOrderNr(o);
+                    labelOrderInfo.Text += "\nOrder nr. " + o.OrderNr + " processed";
+                }
+
+                // Pay up babey
+                
                 if (v.Credit < o.GetSum())
                 {
-                    MessageBox.Show("Visitor does not have enough credit.");
+                    labelOrderInfo.Text = ("Visitor does not have enough credit.");
                 }
                 else
                 {
                     v.Credit -= o.GetSum();
-                    //ProcessOrder();
                     data.UpdateSelectedVisitor(v);
                 }
+
+
             }
         }
 
@@ -202,18 +219,14 @@ namespace ShopApp
             {
                 itemLbx.Items.Add(o.Articles[i] + "; Quantity: " + o.Quantity[i]);
             }
+            labelOrderInfo.Text = "Total: €" + o.GetSum().ToString("0.00");
         }
         
         private void ShopForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Program.original.Show();
         }
-
-        private void buttonRestart_Click(object sender, EventArgs e)
-        {
-            o = new Order(selectedShop);
-            labelOrderInfo.Text = o.ToString();
-        }
+        
 
         private void AddArticle(Button button)
         {
@@ -253,30 +266,118 @@ namespace ShopApp
                 DisplayOrderItems();
             }
         }
+        private void buttonUndo_Click(object sender, EventArgs e)
+        {
+            o = new Order(selectedShop);
+            itemLbx.Items.Clear();
+            labelOrderInfo.Text = "";
+        }
+
+        private void timerScanCard_Tick(object sender, EventArgs e)
+        {
+            o = new Order(selectedShop);
+            itemLbx.Items.Clear();
+            labelOrderInfo.Text = "";
+            timerScanCard.Stop();
+            buttonConfirm.Text = "Confirm";
+        }
 
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Confirm payment", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
-            {
-                o.OrderDate = DateTime.Now;
+            buttonConfirm.Text = "Await scan";
+            timerScanCard.Start();
+        }
 
-                if (data.CreateNewStoreOrder(o) == 1 && data.AddStoreOrderLine(o) != -1)
+        private void DisplayListOfArticles(List<StoreArticle> foundArticles)
+        {
+            logsInfoLbx.Items.Clear();
+            if (foundArticles.Count != 0)
+            {
+                foreach (StoreArticle a in foundArticles)
                 {
-                    o.OrderNr = data.GetRightOrderNr(o);
-                    labelOrder.Text = "Order nr. " + o.OrderNr + " processed";
+                    logsInfoLbx.Items.Add(a);
                 }
             }
-            o = new Order(selectedShop);
+            else
+            {
+                logsInfoLbx.Items.Add("No articles found");
+            }
         }
 
         private void viewHistoryBtn_Click(object sender, EventArgs e)
         {
-
+            StoreArticle selectedItem = (StoreArticle)logsInfoLbx.SelectedItem;
+            if (selectedItem != null)
+            {
+                List<Order> foundOrders = data.GetStoreArticleOrderHistory(selectedShop, selectedItem);
+                logsInfoLbx.Items.Clear();
+                if (foundOrders.Count != 0)
+                {
+                    foreach (Order o in foundOrders)
+                    {
+                        Visitor buyer = data.FindVisitorByNr(o.VisitorNr);
+                        logsInfoLbx.Items.Add("Order nr." + o.OrderNr + " on " + o.OrderDate
+                            + "; Sold to: " + buyer.FirstName + ", " + buyer.LastName.ToUpper()
+                            + "; Phone nr. " + buyer.Phone);
+                    }
+                }
+                else
+                {
+                    logsInfoLbx.Items.Add("No order found");
+                }
+            }
         }
 
         private void viewStockBtn_Click(object sender, EventArgs e)
         {
+            List<StoreArticle> foundArticles = data.GetAllStoreArticles(selectedShop);
+            DisplayListOfArticles(foundArticles);
+        }
 
+        private void buttonSearch_Click(object sender, EventArgs e)
+        {
+            logsInfoLbx.Items.Clear();
+            if (itemNameRbtn.Checked)
+            {
+                List<StoreArticle> foundArticles = data.GetStoreArticlesContaining(selectedShop, textBoxSearch.Text);
+                DisplayListOfArticles(foundArticles);
+            }
+            else if (itemNrRbtn.Checked)
+            {
+                StoreArticle foundArticle = data.FindStoreArticleByNr(Convert.ToInt32(textBoxSearch.Text), selectedShop);
+                if (foundArticle != null)
+                {
+                    logsInfoLbx.Items.Add(foundArticle);
+                }
+                else
+                {
+                    logsInfoLbx.Items.Add("No articles found");
+                }
+            }
+            else if (personNameRbtn.Checked)
+            {
+                List<Visitor> visitorsWithName = data.FindVisitorByName(textBoxSearch.Text);
+                List<Order> foundOrders = data.GetStoreArticleWithVisitorNrs(selectedShop, visitorsWithName);
+                logsInfoLbx.Items.Clear();
+                if (foundOrders.Count != 0)
+                {
+                    foreach (Order o in foundOrders)
+                    {
+                        Visitor buyer = data.FindVisitorByNr(o.VisitorNr);
+                        foreach(Article a in o.Articles)
+                        {
+                            logsInfoLbx.Items.Add("Order nr." + o.OrderNr + " on " + o.OrderDate
+                            + "; Article nr. " + a.ArticleNr + ": "  + a.ArticleName
+                            + "; Sold to: " + buyer.FirstName + ", " + buyer.LastName.ToUpper()
+                            + "; Phone nr. " + buyer.Phone);
+                        }
+                    }
+                }
+                else
+                {
+                    logsInfoLbx.Items.Add("No order found");
+                }
+            }
         }
     }
 }

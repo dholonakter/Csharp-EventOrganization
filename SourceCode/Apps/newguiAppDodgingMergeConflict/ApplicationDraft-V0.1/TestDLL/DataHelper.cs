@@ -895,9 +895,9 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // STORES
         ///////////////////////////////////////
-        public List<StoreArticle> GetAllStoreArticles(Shop s)
+        private List<StoreArticle> GetStoreArticlesByCondition(Shop s, string condition)
         {
-            String sql = "SELECT * FROM store_article WHERE ShopNr = " + s.ShopNr;
+            String sql = "SELECT * FROM store_article WHERE ShopNr = " + s.ShopNr + " AND " + condition;
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             List<StoreArticle> temp;
@@ -930,7 +930,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                
+
             }
             finally
             {
@@ -938,52 +938,56 @@ namespace ThanhDLL
             }
             return temp;
         }
-
-        public List<Article> GetDrinkArticles(int shopnr)
+        public List<StoreArticle> GetAllStoreArticles(Shop s)
         {
-            String sql = "SELECT * FROM all_article WHERE Category = 'Drink' AND ShopNr=" + Convert.ToString(shopnr);
-            MySqlCommand command = new MySqlCommand(sql, connection);
+            return GetStoreArticlesByCondition(s, "TRUE");
+        }
+        public List<StoreArticle> GetStoreArticlesContaining(Shop s, string phrase)
+        {
+            return GetStoreArticlesByCondition(s, "ArticleName LIKE '%" + phrase + "%'");
+        }
+        public StoreArticle FindStoreArticleByNr(int nr, Shop s)
+        {
+            StoreArticle a = null;
+            string sql = "SELECT * FROM store_article WHERE ShopNr = " + s.ShopNr + " AND ArticleNr = " + nr;
 
-            List<Article> temp;
-            temp = new List<Article>();
+            MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
             {
                 connection.Open();
                 MySqlDataReader reader = command.ExecuteReader();
 
-                String name;
-                int nr;
-                double price;
+                int articleNr = 0;
+                string articleName = "";
+                double price = 0;
+                int available = 0;
                 string img = "";
-                int stock;
+                string category = "";
+
                 //string shopname;
                 while (reader.Read())
                 {
-                    name = Convert.ToString(reader["ArticleName"]);
+                    articleName = Convert.ToString(reader["ArticleName"]);
                     //shopname = Convert.ToString(reader["ShopName"]);
-                    nr = Convert.ToInt32(reader["ArticleNr"]);
-                    shopnr = Convert.ToInt32(reader["ShopNr"]);
-                    price = Convert.ToInt32(reader["price"]);
-                    if (!(reader["Img"] is DBNull))
-                    {
-                        img = Convert.ToString(reader["Img"]);
-                    }
-                    stock = Convert.ToInt32(reader["Available"]);
-                    temp.Add(new Article(shopnr, nr, name, price, stock));
+                    articleNr = Convert.ToInt32(reader["ArticleNr"]);
+                    price = Convert.ToInt32(reader["Price"]);
+                    available = Convert.ToInt32(reader["Available"]);
+                    img = Convert.ToString(reader["ImgFile"]);
+                    category = Convert.ToString(reader["Category"]);
                 }
+                return (new StoreArticle(s.ShopNr, s.ShopName, articleNr, articleName, price, available, img, category));
+
             }
             catch (MySqlException)
             {
-                MessageBox.Show("Error getting drink articles");
             }
             finally
             {
                 connection.Close();
             }
-            return temp;
+            return null;
         }
-
 
         ///////////////////////////////////////
         // STORE ORDERS HANDLING
@@ -1078,7 +1082,89 @@ namespace ThanhDLL
             }
 
         }
+        public List<Order> GetStoreArticleOrderHistory(Shop s, StoreArticle a)
+        {
+            List<Order> o = new List<Order>();
+            string sql = "SELECT * FROM store_orders WHERE ShopNr = " + s.ShopNr + " AND ArticleNr = " + a.ArticleNr;
 
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Order temp = new LoanOrder(s);
+                    temp.OrderNr = Convert.ToInt32(reader["OrderNr"]);
+                    temp.OrderDate = Convert.ToDateTime(reader["OrderDate"]);
+                    temp.Articles.Add(new Article(s.ShopName, a.ArticleNr, Convert.ToString(reader["ArticleName"])));
+                    temp.Quantity.Add(Convert.ToInt32(reader["Quantity"]));
+                    temp.VisitorNr = Convert.ToInt32(reader["VisitorNr"]);
+                    o.Add(temp);
+                }
+
+            }
+            catch (MySqlException)
+            {
+                
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return o;
+        }
+
+        public List<Order> GetStoreArticleWithVisitorNrs(Shop s, List<Visitor> visitors)
+        {
+            List<Order> o = new List<Order>();
+            string sql = "SELECT * FROM store_orders WHERE ShopNr = " + s.ShopNr + " AND VisitorNr IN(";
+
+            if (visitors.Count == 1)
+            {
+                sql += visitors[0].IdNr;
+            }
+            else
+            {
+                foreach (Visitor v in visitors)
+                {
+                    sql += v.IdNr + ", ";
+                }
+            }
+
+            sql += ");";
+
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    Order temp = new LoanOrder(s);
+                    temp.OrderNr = Convert.ToInt32(reader["OrderNr"]);
+                    temp.OrderDate = Convert.ToDateTime(reader["OrderDate"]);
+                    temp.Articles.Add(new Article(s.ShopName, Convert.ToInt32(reader["ArticleNr"]), Convert.ToString(reader["ArticleName"])));
+                    temp.Quantity.Add(Convert.ToInt32(reader["Quantity"]));
+                    temp.VisitorNr = Convert.ToInt32(reader["VisitorNr"]);
+                    o.Add(temp);
+                }
+
+            }
+            catch (MySqlException)
+            {
+
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return o;
+        }
 
         ///////////////////////////////////////
         // LOAN
@@ -1130,7 +1216,6 @@ namespace ThanhDLL
             }
             return temp;
         }
-
         public LoanArticle FindLoanArticleByNr(int nr, int shopNr)
         {
             LoanArticle a = null;
@@ -1169,7 +1254,6 @@ namespace ThanhDLL
             }
             return null;
         }
-
         public LoanArticle FindLoanArticleByTag(string rfidNr)
         {
             LoanArticle a = null;
@@ -1211,7 +1295,6 @@ namespace ThanhDLL
             }
             return null;
         }
-
         public List<LoanArticle> GetAllLoanArticles(int shopNr)
         {
             return GetLoanArticlesByCondition(shopNr, "TRUE"); // get all
@@ -1290,7 +1373,6 @@ namespace ThanhDLL
                 connection.Close();
             }
         }
-
 
 
         ///////////////////////////////////////
