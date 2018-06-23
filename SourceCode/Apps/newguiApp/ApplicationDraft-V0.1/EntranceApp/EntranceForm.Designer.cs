@@ -57,16 +57,13 @@
             this.checkoutHistoryBtn = new System.Windows.Forms.Button();
             this.checkoutInfoLbx = new System.Windows.Forms.ListBox();
             this.campingCheckoutLbl = new System.Windows.Forms.Label();
-            this.rentalsLbl = new System.Windows.Forms.Label();
             this.checkoutMessageLbl = new System.Windows.Forms.Label();
-            this.rentalStatusLbl = new System.Windows.Forms.Label();
             this.checkoutStatusLbl = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.labelVisitor = new System.Windows.Forms.Label();
             this.labelStatusOut = new System.Windows.Forms.Label();
             this.searchPanel = new System.Windows.Forms.Panel();
             this.tagRbtn = new System.Windows.Forms.RadioButton();
-            this.logsClearBtn = new System.Windows.Forms.Button();
             this.checkoutLogsBtn = new System.Windows.Forms.Button();
             this.checkinLogsBtn = new System.Windows.Forms.Button();
             this.viewLogsBtn = new System.Windows.Forms.Button();
@@ -353,9 +350,7 @@
             this.checkoutPanel.Controls.Add(this.checkoutHistoryBtn);
             this.checkoutPanel.Controls.Add(this.checkoutInfoLbx);
             this.checkoutPanel.Controls.Add(this.campingCheckoutLbl);
-            this.checkoutPanel.Controls.Add(this.rentalsLbl);
             this.checkoutPanel.Controls.Add(this.checkoutMessageLbl);
-            this.checkoutPanel.Controls.Add(this.rentalStatusLbl);
             this.checkoutPanel.Controls.Add(this.checkoutStatusLbl);
             this.checkoutPanel.Controls.Add(this.pictureBox3);
             this.checkoutPanel.Controls.Add(this.labelVisitor);
@@ -431,48 +426,24 @@
             this.campingCheckoutLbl.TabIndex = 42;
             this.campingCheckoutLbl.Text = "Entrance Check Out";
             // 
-            // rentalsLbl
-            // 
-            this.rentalsLbl.AutoSize = true;
-            this.rentalsLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rentalsLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.rentalsLbl.Location = new System.Drawing.Point(691, 284);
-            this.rentalsLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.rentalsLbl.Name = "rentalsLbl";
-            this.rentalsLbl.Size = new System.Drawing.Size(104, 28);
-            this.rentalsLbl.TabIndex = 43;
-            this.rentalsLbl.Text = "Rentals";
-            // 
             // checkoutMessageLbl
             // 
             this.checkoutMessageLbl.AutoSize = true;
             this.checkoutMessageLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkoutMessageLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.checkoutMessageLbl.Location = new System.Drawing.Point(691, 226);
+            this.checkoutMessageLbl.Location = new System.Drawing.Point(801, 226);
             this.checkoutMessageLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkoutMessageLbl.Name = "checkoutMessageLbl";
             this.checkoutMessageLbl.Size = new System.Drawing.Size(130, 28);
             this.checkoutMessageLbl.TabIndex = 43;
             this.checkoutMessageLbl.Text = "(message)";
             // 
-            // rentalStatusLbl
-            // 
-            this.rentalStatusLbl.AutoSize = true;
-            this.rentalStatusLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.rentalStatusLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.rentalStatusLbl.Location = new System.Drawing.Point(844, 287);
-            this.rentalStatusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.rentalStatusLbl.Name = "rentalStatusLbl";
-            this.rentalStatusLbl.Size = new System.Drawing.Size(139, 28);
-            this.rentalStatusLbl.TabIndex = 44;
-            this.rentalStatusLbl.Text = "(OK/NOK)";
-            // 
             // checkoutStatusLbl
             // 
             this.checkoutStatusLbl.AutoSize = true;
             this.checkoutStatusLbl.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkoutStatusLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.checkoutStatusLbl.Location = new System.Drawing.Point(844, 182);
+            this.checkoutStatusLbl.Location = new System.Drawing.Point(970, 185);
             this.checkoutStatusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkoutStatusLbl.Name = "checkoutStatusLbl";
             this.checkoutStatusLbl.Size = new System.Drawing.Size(139, 28);
@@ -495,7 +466,7 @@
             this.labelVisitor.AutoSize = true;
             this.labelVisitor.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelVisitor.ForeColor = System.Drawing.Color.DimGray;
-            this.labelVisitor.Location = new System.Drawing.Point(317, 185);
+            this.labelVisitor.Location = new System.Drawing.Point(327, 182);
             this.labelVisitor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelVisitor.Name = "labelVisitor";
             this.labelVisitor.Size = new System.Drawing.Size(150, 28);
@@ -507,7 +478,7 @@
             this.labelStatusOut.AutoSize = true;
             this.labelStatusOut.Font = new System.Drawing.Font("Century", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelStatusOut.ForeColor = System.Drawing.Color.DimGray;
-            this.labelStatusOut.Location = new System.Drawing.Point(691, 182);
+            this.labelStatusOut.Location = new System.Drawing.Point(801, 182);
             this.labelStatusOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStatusOut.Name = "labelStatusOut";
             this.labelStatusOut.Size = new System.Drawing.Size(117, 28);
@@ -517,7 +488,6 @@
             // searchPanel
             // 
             this.searchPanel.Controls.Add(this.tagRbtn);
-            this.searchPanel.Controls.Add(this.logsClearBtn);
             this.searchPanel.Controls.Add(this.checkoutLogsBtn);
             this.searchPanel.Controls.Add(this.checkinLogsBtn);
             this.searchPanel.Controls.Add(this.viewLogsBtn);
@@ -546,17 +516,6 @@
             this.tagRbtn.TabStop = true;
             this.tagRbtn.Text = "Tag Nr";
             this.tagRbtn.UseVisualStyleBackColor = true;
-            // 
-            // logsClearBtn
-            // 
-            this.logsClearBtn.Location = new System.Drawing.Point(619, 493);
-            this.logsClearBtn.Margin = new System.Windows.Forms.Padding(4);
-            this.logsClearBtn.Name = "logsClearBtn";
-            this.logsClearBtn.Size = new System.Drawing.Size(139, 44);
-            this.logsClearBtn.TabIndex = 41;
-            this.logsClearBtn.Text = "Clear All";
-            this.logsClearBtn.UseVisualStyleBackColor = true;
-            this.logsClearBtn.Click += new System.EventHandler(this.logsClearBtn_Click);
             // 
             // checkoutLogsBtn
             // 
@@ -697,8 +656,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1821, 945);
-            this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.checkoutPanel);
+            this.Controls.Add(this.searchPanel);
             this.Controls.Add(this.checkinPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -758,12 +717,9 @@
         private System.Windows.Forms.Button checkoutHistoryBtn;
         private System.Windows.Forms.ListBox checkoutInfoLbx;
         private System.Windows.Forms.Label campingCheckoutLbl;
-        private System.Windows.Forms.Label rentalsLbl;
         private System.Windows.Forms.Label checkoutMessageLbl;
-        private System.Windows.Forms.Label rentalStatusLbl;
         private System.Windows.Forms.Label checkoutStatusLbl;
         private System.Windows.Forms.PictureBox pictureBox3;
-        private System.Windows.Forms.Button logsClearBtn;
         private System.Windows.Forms.Button checkoutLogsBtn;
         private System.Windows.Forms.Button checkinLogsBtn;
         private System.Windows.Forms.Button viewLogsBtn;

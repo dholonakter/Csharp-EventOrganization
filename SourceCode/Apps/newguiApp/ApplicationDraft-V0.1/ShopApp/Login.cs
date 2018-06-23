@@ -40,7 +40,7 @@ namespace ShopApp
                         }
                         else
                         {
-                            mf = new ShopForm(dh.GetShopByNr(nr));
+                            mf = new ShopForm(dh.GetShopByNr(Convert.ToInt32(nr)));
                         }
                         mf.ShowDialog();
                     }

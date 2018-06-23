@@ -36,10 +36,6 @@ namespace ThanhDLL
         // METHODS
         ///////////////////////////////////////
 
-        /// <summary>
-        /// Export order's information as a string
-        /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
             if (Articles.Count != 0)
@@ -72,11 +68,6 @@ namespace ThanhDLL
             return "NO ARTICLES IN ORDER";
         }
 
-        /// <summary>
-        /// Add an article by n quantity
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="nr"></param>
         public void AddArticle(Article a, int nr)
         {
             if (Articles.Count != 0)
@@ -94,11 +85,6 @@ namespace ThanhDLL
             Quantity.Add(nr);
         }
 
-        /// <summary>
-        /// Remove an article by n quantity
-        /// </summary>
-        /// <param name="a"></param>
-        /// <param name="nr"></param>
         public void SetQuantity(Article a, int nr)
         {
             for (int i = 0; i < Articles.Count; i++)

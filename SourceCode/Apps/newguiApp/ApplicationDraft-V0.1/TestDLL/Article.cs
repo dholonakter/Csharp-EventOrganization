@@ -21,7 +21,6 @@ namespace ThanhDLL
         public string ArticleName { get; set; }
         public double Price { get; set; }
         public int Available { get; set; }
-        public string Img { get; set; }
 
         ///////////////////////////////////////
         // CONSTRUCTORS
@@ -30,7 +29,7 @@ namespace ThanhDLL
         /**
          * Constructor with full variables
          */
-        public Article(int shopNr, string shopName, int articleNr, string articleName, double price, int available, string img)
+        public Article(int shopNr, string shopName, int articleNr, string articleName, double price, int available)
         {
             this.ShopNr = shopNr;
             this.ShopName = shopName;
@@ -38,20 +37,8 @@ namespace ThanhDLL
             this.ArticleName = articleName;
             this.Price = price;
             this.Available = available;
-            this.Img = img;
         }
-        /**
-         * Constructors without ShopName
-         */
-        public Article(int shopNr, int articleNr, string articleName, double price, int available, string img)
-        {
-            this.ShopNr = shopNr;
-            this.ArticleNr = articleNr;
-            this.ArticleName = articleName;
-            this.Price = price;
-            this.Available = available;
-            this.Img = img;
-        }
+        
         /**
          * Constructors without ShopName and Img
          */
@@ -63,6 +50,7 @@ namespace ThanhDLL
             this.Price = price;
             this.Available = available;
         }
+
         /**
          * Simplest constructors to display items
          */
@@ -83,7 +71,7 @@ namespace ThanhDLL
         /// <returns></returns>
         public override string ToString()
         {
-            return "Article #" + this.ArticleNr + " - " + this.ArticleName + " - $" + this.Price + " - In stock: " + this.Available;
+            return "Article nr. " + ArticleNr + ": " + ArticleName;
         }
     }
 }

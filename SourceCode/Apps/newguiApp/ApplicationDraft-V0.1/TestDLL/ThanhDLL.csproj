@@ -52,6 +52,7 @@
     <Compile Include="CampingSpot.cs" />
     <Compile Include="CrossThreadDisplay.cs" />
     <Compile Include="DataHelper.cs" />
+    <Compile Include="LoanOrder.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="Order.cs" />
     <Compile Include="Participant.cs" />
@@ -60,6 +61,7 @@
     <Compile Include="Reservation.cs" />
     <Compile Include="Shop.cs" />
     <Compile Include="Staff.cs" />
+    <Compile Include="StoreArticle.cs" />
     <Compile Include="Ticket.cs" />
     <Compile Include="Visitor.cs" />
   </ItemGroup>

@@ -272,6 +272,8 @@ namespace EntranceApp
         {
             CrossThreadDisplay display = new CrossThreadDisplay(this);
             Visitor v = dh.FindVisitorByTag(e.Tag);
+            labelVisitor.Text = v.ToString();
+
             dh.FindUnreturnedItems(v);
 
             if (!admin)
@@ -296,9 +298,7 @@ namespace EntranceApp
                 {
                     display.DisplayLoanArticle(v.ArticlesBorrowed, checkoutInfoLbx);
                     display.SetText("NOK", checkoutStatusLbl);
-                    display.SetText("NOK", rentalStatusLbl);
                     display.SetText("Unreturned items found", checkoutMessageLbl);
-                    display.ChangeLabelColor(rentalStatusLbl, Color.DarkRed);
                     display.ChangeLabelColor(checkoutStatusLbl, Color.DarkRed);
                 }
             }
@@ -465,7 +465,7 @@ namespace EntranceApp
             if (visitor != null)
             {
                 lb.Items.Clear();
-                lb.Items.Add("VISITOR #" + visitor.IdNr);
+                lb.Items.Add("VISITOR NR. " + visitor.IdNr);
                 lb.Items.Add("Name: " + visitor.FirstName + ", " + visitor.LastName);
                 lb.Items.Add("Phone: " + visitor.Phone);
                 lb.Items.Add("Checked In: " + (visitor.CheckedIn ? "Yes" : "No"));
@@ -545,11 +545,6 @@ namespace EntranceApp
         private void checkoutClearBtn_Click(object sender, EventArgs e)
         {
             checkoutInfoLbx.Items.Clear();
-        }
-
-        private void logsClearBtn_Click(object sender, EventArgs e)
-        {
-            logsInfoLbx.Items.Clear();
         }
 
         private void viewLogsBtn_Click(object sender, EventArgs e)

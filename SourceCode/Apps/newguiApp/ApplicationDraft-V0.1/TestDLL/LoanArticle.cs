@@ -26,22 +26,14 @@ namespace ThanhDLL
         /**
          * Constructor with full variables
          */
-        public LoanArticle(int shopNr, string shopName, int articleNr, string articleName, double price, int available, string img, string rfid, double deposit)
-            : base(shopNr, shopName, articleNr, articleName, price, available, img)
+        public LoanArticle(int shopNr, string shopName, int articleNr, string articleName, double price, int available, string rfid, double deposit)
+            : base(shopNr, shopName, articleNr, articleName, price, available)
         {
             // using base 
             this.RFIDNr = rfid;
             this.DepositValue = deposit;
         }
-        /**
-         * Constructors without ShopName
-         */
-        public LoanArticle(int shopNr, int articleNr, string articleName, double price, int available, string img, string rfid)
-            :base(shopNr, articleNr, articleName, price, available, img)
-        {
-            // using base
-            this.RFIDNr = rfid;
-        }
+        
         /**
          * Constructors without ShopName and Img
          */
@@ -63,15 +55,6 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // METHODS
         ///////////////////////////////////////
-
-        /// <summary>
-        /// Returns info of a loanable article as as string
-        /// </summary>
-        /// <returns></returns>
-        public override string ToString()
-        {
-            return "Article #" + this.ArticleNr + " - " + this.ArticleName + " - $" + this.Price + " - In stock: " + this.Available;
-        }
 
         /// <summary>
         /// Sets availability to 1 - which means has been returned

@@ -69,10 +69,9 @@ namespace ThanhDLL
         /// <returns></returns>
         public override string ToString()
         {
-            return "Visitor #" + this.IdNr + " - " + this.FirstName + " , " + this.LastName.ToUpper()
-                + " - Tag: " + this.RFIDNr
-                + " - Phone: " + this.Phone
-                + " - Checked in: " + this.CheckedIn;
+            return "Visitor Nr." + this.IdNr 
+                + "\n" + this.FirstName + " , " + this.LastName.ToUpper()
+                + "\nPhone: " + this.Phone;
         }
 
        

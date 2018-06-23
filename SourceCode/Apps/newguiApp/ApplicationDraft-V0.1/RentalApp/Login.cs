@@ -41,7 +41,7 @@ namespace RentalApp
                         }
                         else
                         {
-                            mf = new RentalForm(dh.GetShopByNr(nr));
+                            mf = new RentalForm(dh.GetShopByNr(Convert.ToInt32(nr)));
                         }
                         mf.ShowDialog();
                     }
