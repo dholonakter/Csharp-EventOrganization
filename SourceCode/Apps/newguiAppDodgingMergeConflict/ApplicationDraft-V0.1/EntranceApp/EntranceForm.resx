@@ -136,9 +136,11 @@
   </data>
   <data name="monitorBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAFdJREFUWEft
-        0TEKwDAMBEH9/9NOs0ZFMDHEOVLslDLSHbgkTSOM2MY8htjG/P5wGDEWsIAFLGABC/y4QAqxjXkMse9w
-        6/NvWyI/U4Csbaydw91trEkPqi66oA0eGLGQzQAAAABJRU5ErkJggg==
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+        YQUAAAC+SURBVFhH7ZZBCoMwEEWz8lSFXq27trfsRii9xHRiHoookkwHrSEPBpJP/vfjakLjbxGRTueu
+        89L5GWLzUc8jWX0gNh/19MkqVyQTZJgKDHA1Q4xPAaSiMCyVFLBATCvgUwCpKAxLJQUsENMK+BRAKgrD
+        UkkBC8ScuIBy2EbkCrH54IscthG9k1UuSIu/grwJT00Fnsk6mbmOIC/0NXiaj3riWh434w/SvgXWICuW
+        GlZ25P3Qb944zs6NExPCFzqUOGl8YyZTAAAAAElFTkSuQmCC
 </value>
   </data>
   <data name="checkoutBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

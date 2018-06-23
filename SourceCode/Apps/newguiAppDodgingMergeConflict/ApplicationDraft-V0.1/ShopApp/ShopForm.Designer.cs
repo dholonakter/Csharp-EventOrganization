@@ -81,6 +81,7 @@
             this.stockLogsLbl = new System.Windows.Forms.Label();
             this.labelShopName = new System.Windows.Forms.Label();
             this.timerScanCard = new System.Windows.Forms.Timer(this.components);
+            this.errorLbl = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.productPanel.SuspendLayout();
             this.startPanel.SuspendLayout();
@@ -104,7 +105,7 @@
             this.orderBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
             this.orderBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.orderBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.orderBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.orderBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.orderBtn.ForeColor = System.Drawing.Color.White;
             this.orderBtn.Image = ((System.Drawing.Image)(resources.GetObject("orderBtn.Image")));
             this.orderBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -130,7 +131,7 @@
             this.stockBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
             this.stockBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
             this.stockBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.stockBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.stockBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.stockBtn.ForeColor = System.Drawing.Color.White;
             this.stockBtn.Image = ((System.Drawing.Image)(resources.GetObject("stockBtn.Image")));
             this.stockBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -264,132 +265,132 @@
             // productLabel9
             // 
             this.productLabel9.AutoSize = true;
-            this.productLabel9.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel9.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel9.ForeColor = System.Drawing.Color.Black;
             this.productLabel9.Location = new System.Drawing.Point(40, 505);
             this.productLabel9.Name = "productLabel9";
-            this.productLabel9.Size = new System.Drawing.Size(70, 18);
+            this.productLabel9.Size = new System.Drawing.Size(65, 18);
             this.productLabel9.TabIndex = 58;
             this.productLabel9.Text = "Order #";
             // 
             // productLabel10
             // 
             this.productLabel10.AutoSize = true;
-            this.productLabel10.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel10.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel10.ForeColor = System.Drawing.Color.Black;
             this.productLabel10.Location = new System.Drawing.Point(184, 505);
             this.productLabel10.Name = "productLabel10";
-            this.productLabel10.Size = new System.Drawing.Size(70, 18);
+            this.productLabel10.Size = new System.Drawing.Size(65, 18);
             this.productLabel10.TabIndex = 57;
             this.productLabel10.Text = "Order #";
             // 
             // productLabel11
             // 
             this.productLabel11.AutoSize = true;
-            this.productLabel11.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel11.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel11.ForeColor = System.Drawing.Color.Black;
             this.productLabel11.Location = new System.Drawing.Point(330, 505);
             this.productLabel11.Name = "productLabel11";
-            this.productLabel11.Size = new System.Drawing.Size(70, 18);
+            this.productLabel11.Size = new System.Drawing.Size(65, 18);
             this.productLabel11.TabIndex = 55;
             this.productLabel11.Text = "Order #";
             // 
             // productLabel12
             // 
             this.productLabel12.AutoSize = true;
-            this.productLabel12.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel12.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel12.ForeColor = System.Drawing.Color.Black;
             this.productLabel12.Location = new System.Drawing.Point(476, 505);
             this.productLabel12.Name = "productLabel12";
-            this.productLabel12.Size = new System.Drawing.Size(70, 18);
+            this.productLabel12.Size = new System.Drawing.Size(65, 18);
             this.productLabel12.TabIndex = 56;
             this.productLabel12.Text = "Order #";
             // 
             // productLabel5
             // 
             this.productLabel5.AutoSize = true;
-            this.productLabel5.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel5.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel5.ForeColor = System.Drawing.Color.Black;
             this.productLabel5.Location = new System.Drawing.Point(41, 350);
             this.productLabel5.Name = "productLabel5";
-            this.productLabel5.Size = new System.Drawing.Size(70, 18);
+            this.productLabel5.Size = new System.Drawing.Size(65, 18);
             this.productLabel5.TabIndex = 54;
             this.productLabel5.Text = "Order #";
             // 
             // productLabel6
             // 
             this.productLabel6.AutoSize = true;
-            this.productLabel6.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel6.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel6.ForeColor = System.Drawing.Color.Black;
             this.productLabel6.Location = new System.Drawing.Point(186, 350);
             this.productLabel6.Name = "productLabel6";
-            this.productLabel6.Size = new System.Drawing.Size(70, 18);
+            this.productLabel6.Size = new System.Drawing.Size(65, 18);
             this.productLabel6.TabIndex = 53;
             this.productLabel6.Text = "Order #";
             // 
             // productLabel8
             // 
             this.productLabel8.AutoSize = true;
-            this.productLabel8.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel8.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel8.ForeColor = System.Drawing.Color.Black;
             this.productLabel8.Location = new System.Drawing.Point(476, 350);
             this.productLabel8.Name = "productLabel8";
-            this.productLabel8.Size = new System.Drawing.Size(70, 18);
+            this.productLabel8.Size = new System.Drawing.Size(65, 18);
             this.productLabel8.TabIndex = 51;
             this.productLabel8.Text = "Order #";
             // 
             // productLabel7
             // 
             this.productLabel7.AutoSize = true;
-            this.productLabel7.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel7.ForeColor = System.Drawing.Color.Black;
             this.productLabel7.Location = new System.Drawing.Point(328, 350);
             this.productLabel7.Name = "productLabel7";
-            this.productLabel7.Size = new System.Drawing.Size(70, 18);
+            this.productLabel7.Size = new System.Drawing.Size(65, 18);
             this.productLabel7.TabIndex = 52;
             this.productLabel7.Text = "Order #";
             // 
             // productLabel4
             // 
             this.productLabel4.AutoSize = true;
-            this.productLabel4.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel4.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel4.ForeColor = System.Drawing.Color.Black;
             this.productLabel4.Location = new System.Drawing.Point(474, 207);
             this.productLabel4.Name = "productLabel4";
-            this.productLabel4.Size = new System.Drawing.Size(70, 18);
+            this.productLabel4.Size = new System.Drawing.Size(65, 18);
             this.productLabel4.TabIndex = 50;
             this.productLabel4.Text = "Order #";
             // 
             // productLabel3
             // 
             this.productLabel3.AutoSize = true;
-            this.productLabel3.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel3.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel3.ForeColor = System.Drawing.Color.Black;
             this.productLabel3.Location = new System.Drawing.Point(330, 207);
             this.productLabel3.Name = "productLabel3";
-            this.productLabel3.Size = new System.Drawing.Size(70, 18);
+            this.productLabel3.Size = new System.Drawing.Size(65, 18);
             this.productLabel3.TabIndex = 49;
             this.productLabel3.Text = "Order #";
             // 
             // productLabel1
             // 
             this.productLabel1.AutoSize = true;
-            this.productLabel1.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel1.ForeColor = System.Drawing.Color.Black;
             this.productLabel1.Location = new System.Drawing.Point(41, 207);
             this.productLabel1.Name = "productLabel1";
-            this.productLabel1.Size = new System.Drawing.Size(70, 18);
+            this.productLabel1.Size = new System.Drawing.Size(65, 18);
             this.productLabel1.TabIndex = 47;
             this.productLabel1.Text = "Order #";
             // 
             // productLabel2
             // 
             this.productLabel2.AutoSize = true;
-            this.productLabel2.Font = new System.Drawing.Font("Century", 10.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.productLabel2.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.productLabel2.ForeColor = System.Drawing.Color.Black;
             this.productLabel2.Location = new System.Drawing.Point(184, 207);
             this.productLabel2.Name = "productLabel2";
-            this.productLabel2.Size = new System.Drawing.Size(70, 18);
+            this.productLabel2.Size = new System.Drawing.Size(65, 18);
             this.productLabel2.TabIndex = 48;
             this.productLabel2.Text = "Order #";
             // 
@@ -603,6 +604,7 @@
             // 
             // startPanel
             // 
+            this.startPanel.Controls.Add(this.errorLbl);
             this.startPanel.Controls.Add(this.personNameRbtn);
             this.startPanel.Controls.Add(this.itemNrRbtn);
             this.startPanel.Controls.Add(this.itemNameRbtn);
@@ -623,7 +625,7 @@
             // 
             this.personNameRbtn.AutoSize = true;
             this.personNameRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.personNameRbtn.Location = new System.Drawing.Point(401, 89);
+            this.personNameRbtn.Location = new System.Drawing.Point(401, 67);
             this.personNameRbtn.Name = "personNameRbtn";
             this.personNameRbtn.Size = new System.Drawing.Size(128, 24);
             this.personNameRbtn.TabIndex = 55;
@@ -635,7 +637,7 @@
             // 
             this.itemNrRbtn.AutoSize = true;
             this.itemNrRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemNrRbtn.Location = new System.Drawing.Point(305, 88);
+            this.itemNrRbtn.Location = new System.Drawing.Point(305, 66);
             this.itemNrRbtn.Name = "itemNrRbtn";
             this.itemNrRbtn.Size = new System.Drawing.Size(90, 24);
             this.itemNrRbtn.TabIndex = 54;
@@ -647,7 +649,7 @@
             // 
             this.itemNameRbtn.AutoSize = true;
             this.itemNameRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.itemNameRbtn.Location = new System.Drawing.Point(183, 88);
+            this.itemNameRbtn.Location = new System.Drawing.Point(183, 66);
             this.itemNameRbtn.Name = "itemNameRbtn";
             this.itemNameRbtn.Size = new System.Drawing.Size(116, 24);
             this.itemNameRbtn.TabIndex = 56;
@@ -700,7 +702,7 @@
             this.labelMonitor.AutoSize = true;
             this.labelMonitor.Font = new System.Drawing.Font("Century", 13F, System.Drawing.FontStyle.Bold);
             this.labelMonitor.ForeColor = System.Drawing.Color.DimGray;
-            this.labelMonitor.Location = new System.Drawing.Point(52, 99);
+            this.labelMonitor.Location = new System.Drawing.Point(52, 77);
             this.labelMonitor.Name = "labelMonitor";
             this.labelMonitor.Size = new System.Drawing.Size(0, 22);
             this.labelMonitor.TabIndex = 37;
@@ -710,7 +712,7 @@
             this.searchStockLbl.AutoSize = true;
             this.searchStockLbl.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchStockLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.searchStockLbl.Location = new System.Drawing.Point(50, 88);
+            this.searchStockLbl.Location = new System.Drawing.Point(50, 66);
             this.searchStockLbl.Name = "searchStockLbl";
             this.searchStockLbl.Size = new System.Drawing.Size(125, 22);
             this.searchStockLbl.TabIndex = 36;
@@ -726,7 +728,7 @@
             this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
             this.buttonSearch.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearch.Image")));
-            this.buttonSearch.Location = new System.Drawing.Point(790, 73);
+            this.buttonSearch.Location = new System.Drawing.Point(790, 51);
             this.buttonSearch.Name = "buttonSearch";
             this.buttonSearch.Size = new System.Drawing.Size(53, 51);
             this.buttonSearch.TabIndex = 35;
@@ -736,7 +738,7 @@
             // textBoxSearch
             // 
             this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxSearch.Location = new System.Drawing.Point(533, 88);
+            this.textBoxSearch.Location = new System.Drawing.Point(533, 66);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(251, 26);
             this.textBoxSearch.TabIndex = 34;
@@ -768,6 +770,17 @@
             this.timerScanCard.Interval = 10000;
             this.timerScanCard.Tick += new System.EventHandler(this.timerScanCard_Tick);
             // 
+            // errorLbl
+            // 
+            this.errorLbl.AutoSize = true;
+            this.errorLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLbl.ForeColor = System.Drawing.Color.Red;
+            this.errorLbl.Location = new System.Drawing.Point(529, 95);
+            this.errorLbl.Name = "errorLbl";
+            this.errorLbl.Size = new System.Drawing.Size(121, 20);
+            this.errorLbl.TabIndex = 57;
+            this.errorLbl.Text = "(error message)";
+            // 
             // ShopForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -777,8 +790,8 @@
             this.Controls.Add(this.labelShopName);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.productPanel);
             this.Controls.Add(this.startPanel);
+            this.Controls.Add(this.productPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "ShopForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -849,6 +862,7 @@
         private System.Windows.Forms.RadioButton personNameRbtn;
         private System.Windows.Forms.RadioButton itemNrRbtn;
         private System.Windows.Forms.RadioButton itemNameRbtn;
+        private System.Windows.Forms.Label errorLbl;
     }
 }
 
