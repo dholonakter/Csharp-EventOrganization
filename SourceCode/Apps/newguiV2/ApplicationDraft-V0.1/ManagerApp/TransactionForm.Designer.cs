@@ -63,7 +63,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label1.Location = new System.Drawing.Point(53, 138);
+            this.label1.Location = new System.Drawing.Point(53, 134);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(144, 30);
@@ -73,12 +73,12 @@
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStatus.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
             this.labelStatus.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.labelStatus.Location = new System.Drawing.Point(53, 212);
+            this.labelStatus.Location = new System.Drawing.Point(52, 247);
             this.labelStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(199, 30);
+            this.labelStatus.Size = new System.Drawing.Size(210, 30);
             this.labelStatus.TabIndex = 37;
             this.labelStatus.Text = "Last added logs on: ";
             // 
@@ -86,7 +86,7 @@
             // 
             this.labelLocation.AutoSize = true;
             this.labelLocation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLocation.Location = new System.Drawing.Point(54, 168);
+            this.labelLocation.Location = new System.Drawing.Point(78, 197);
             this.labelLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelLocation.Name = "labelLocation";
             this.labelLocation.Size = new System.Drawing.Size(107, 21);
@@ -96,13 +96,14 @@
             // buttonChange
             // 
             this.buttonChange.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonChange.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonChange.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.buttonChange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonChange.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonChange.Image = ((System.Drawing.Image)(resources.GetObject("buttonChange.Image")));
-            this.buttonChange.Location = new System.Drawing.Point(201, 137);
+            this.buttonChange.Location = new System.Drawing.Point(189, 135);
             this.buttonChange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonChange.Name = "buttonChange";
-            this.buttonChange.Size = new System.Drawing.Size(83, 35);
+            this.buttonChange.Size = new System.Drawing.Size(46, 31);
             this.buttonChange.TabIndex = 39;
             this.buttonChange.UseVisualStyleBackColor = false;
             this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
@@ -138,6 +139,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button12);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "TransactionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

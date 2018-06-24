@@ -63,10 +63,6 @@ namespace EntranceApp
             // Connecting to DB
             dh = new DataHelper();
 
-            // DEMO
-            t = dh.GetTicket(3);
-            visitor = dh.FindVisitorByNr(13);
-
 
             // Connecting RFID reader
             try
@@ -82,6 +78,14 @@ namespace EntranceApp
             {
                 MessageBox.Show("Failure to connect to RFID reader");
             }
+
+
+            // Switching delegate's method 
+            myRFIDReader.Tag -= CheckOut;
+            myRFIDReader.Tag -= ScanRFID;
+            myRFIDReader.Tag += CheckIn;
+            checkinOverrideBtn.Text = "Override";
+            admin = false;
         }
 
         ///////////////////////////////////////
@@ -89,8 +93,13 @@ namespace EntranceApp
         ///////////////////////////////////////
         public EntranceForm()
         {
-            InitializeComponent();
+            InitializeComponent(); 
             admin = false;
+
+            sideHighlight.Height = checkinBtn.Height;
+            sideHighlight.Top = checkinBtn.Top;
+            checkinPanel.BringToFront();
+
         }
 
         private void ticketsBtn_Click(object sender, EventArgs e)
@@ -104,14 +113,27 @@ namespace EntranceApp
             sideHighlight.Top = checkinBtn.Top;
             checkinPanel.BringToFront();
 
-            // Switching delegate's method
+            // Switching delegate's method 
+            myRFIDReader.Tag -= CheckOut;
             myRFIDReader.Tag -= ScanRFID;
             myRFIDReader.Tag += CheckIn;
             checkinOverrideBtn.Text = "Override";
             admin = false;
         }
 
-       
+        private void checkoutBtn_Click(object sender, EventArgs e)
+        {
+            sideHighlight.Height = checkoutBtn.Height;
+            sideHighlight.Top = checkoutBtn.Top;
+            checkoutPanel.BringToFront();
+
+            // Switching delegate's method
+            myRFIDReader.Tag -= CheckIn;
+            myRFIDReader.Tag -= ScanRFID;
+            myRFIDReader.Tag += CheckOut;
+            checkoutOverrideBtn.Text = "Override";
+            admin = false;
+        }
 
         private void monitorBtn_Click(object sender, EventArgs e)
         {
@@ -121,7 +143,7 @@ namespace EntranceApp
 
             // Switching delegate's method
             myRFIDReader.Tag -= CheckIn;
-
+            myRFIDReader.Tag -= CheckOut;
             myRFIDReader.Tag += ScanRFID;
         }
 
@@ -262,7 +284,58 @@ namespace EntranceApp
         ///////////////////////////////////////
         // CHECK OUT PANEL
         /////////////////////////////////////// 
-       
+        private void CheckOut(object sender, RFIDTagEventArgs e)
+        {
+            CrossThreadDisplay display = new CrossThreadDisplay(this);
+            Visitor v = dh.FindVisitorByTag(e.Tag);
+
+            dh.FindUnreturnedItems(v);
+
+            if (!admin)
+            {
+                if (v.CanLeave())
+                {
+                    if (dh.MoveToDeletedVisitor(v) != -1)
+                    {
+                        display.SetText("OK", checkoutStatusLbl);
+                        display.SetText("Visitor can exit", checkoutMessageLbl);
+                        display.ChangeLabelColor(checkoutStatusLbl, Color.DarkGreen);
+                    }
+                    else
+                    {
+                        v.CheckInWith(visitor.RFIDNr); // undo the task
+                        display.SetText("NOK", checkoutStatusLbl);
+                        display.SetText("Error while checking out", checkoutMessageLbl);
+                        display.ChangeLabelColor(checkoutStatusLbl, Color.DarkRed);
+                    }
+                }
+                else
+                {
+                    display.DisplayLoanArticle(v.ArticlesBorrowed, checkoutInfoLbx);
+                    display.SetText("NOK", checkoutStatusLbl);
+                    display.SetText("Unreturned items found", checkoutMessageLbl);
+                    display.ChangeLabelColor(checkoutStatusLbl, Color.DarkRed);
+                }
+            }
+            else
+            {
+                if (dh.MoveToDeletedVisitor(v) != -1)
+                {
+                    display.SetText("OK", checkoutStatusLbl);
+                    display.SetText("Visitor can exit", checkoutMessageLbl);
+                    display.ChangeLabelColor(checkoutStatusLbl, Color.DarkGreen);
+                }
+                else
+                {
+                    v.CheckInWith(visitor.RFIDNr); // undo the task
+                    display.SetText("NOK", checkoutStatusLbl);
+                    display.SetText("Error while checking out", checkoutMessageLbl);
+                    display.ChangeLabelColor(checkoutStatusLbl, Color.DarkRed);
+                }
+            }
+            display.Dispose();
+        }
+
         ///////////////////////////////////////
         // THANH TEST
         /////////////////////////////////////// 
@@ -305,20 +378,21 @@ namespace EntranceApp
                     if (t != null) // if ticket exists
                     {
                         visitor = dh.FindVisitorByNr(t.BuyerNr);
-                        lbCheckIn.Text = t.ToString();
-
                         if (t.Paid)
                         {
-                            checkinStatusLbl.Text = "OK";
+                            checkinStatusLbl.Text = "Pending";
+                            checkinMessageLbl.Text = "Waiting for RFID";
                             checkinStatusLbl.ForeColor = Color.DarkGreen;
                             checkinHistoryBtn.Enabled = false;
-                            t = null;
                         }
                         else if (!t.Paid)
                         {
                             checkinStatusLbl.Text = "NOK";
                             checkinStatusLbl.ForeColor = Color.DarkRed;
                             checkinMessageLbl.Text = "Ticket has not been paid";
+                            t.Price += 10;
+                            t.AtEntrance = true;
+                            dh.UpdateSelectedTicket(t);
                             checkinHistoryBtn.Enabled = true;
                         }
                         else if (t.EntryTime != null)
@@ -327,7 +401,7 @@ namespace EntranceApp
                             checkinStatusLbl.ForeColor = Color.DarkRed;
                             checkinMessageLbl.Text = "Ticket already used";
                         }
-
+                        lbCheckIn.Text = t.ToString();
                         StopWebcam();
                     }
                     else
@@ -433,7 +507,13 @@ namespace EntranceApp
             ((Form)sender).Close();
         }
 
-       
+        private void CheckOutOverride(object sender, EventArgs e)
+        {
+            MessageBox.Show("Logged in as admin");
+            admin = true;
+            checkoutOverrideBtn.Text = "Revoke admin rights";
+            ((Form)sender).Close();
+        }
 
 
         private void checkinOverrideBtn_Click(object sender, EventArgs e)
@@ -455,7 +535,33 @@ namespace EntranceApp
         }
 
 
-       
+        private void checkoutOverrideBtn_Click(object sender, EventArgs e)
+        {
+            if (!admin)
+            {
+                LoginForm testDialog = new LoginForm();
+                testDialog.LoggedInHandler += CheckOutOverride;
+                testDialog.ShowDialog();
+            }
+            else
+            {
+                if (MessageBox.Show("Revoke admin rights on this user?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    admin = false;
+                    checkoutOverrideBtn.Text = "Override";
+                }
+            }
+        }
+
+        private void checkoutDetailsBtn_Click(object sender, EventArgs e)
+        {
+            ShowUserDetails(checkoutInfoLbx);
+        }
+
+        private void checkoutClearBtn_Click(object sender, EventArgs e)
+        {
+            checkoutInfoLbx.Items.Clear();
+        }
 
         private void viewLogsBtn_Click(object sender, EventArgs e)
         {
@@ -508,9 +614,20 @@ namespace EntranceApp
             }
         }
 
-        private void homeBtn_Click(object sender, EventArgs e)
+        private void buttonConfirmPayment_Click(object sender, EventArgs e)
         {
-            this.Dispose();
+            if (t!= null)
+            {
+                t.ChangeStatus();
+                lbCheckIn.Text = t.ToString();
+                if (dh.UpdateSelectedTicket(t) != -1)
+                {
+                    checkinStatusLbl.Text = "Pending";
+                    checkinMessageLbl.Text = "Waiting for RFID";
+                    checkinStatusLbl.ForeColor = Color.DarkGreen;
+                    checkinHistoryBtn.Enabled = false;
+                }
+            }
         }
     }
 }

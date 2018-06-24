@@ -605,6 +605,7 @@
             this.Controls.Add(this.returnPanel);
             this.Controls.Add(this.borrowPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RentalForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "RentalForm";

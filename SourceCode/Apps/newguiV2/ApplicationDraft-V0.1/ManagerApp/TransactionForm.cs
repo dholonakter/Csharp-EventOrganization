@@ -21,7 +21,6 @@ namespace ManagerApp
         {
             InitializeComponent();
             dh = new DataHelper();
-            buttonChange.Text = "Intialize";
         }
 
         private void TransactionForm_FormClosed(object sender, FormClosedEventArgs e)
@@ -85,7 +84,6 @@ namespace ManagerApp
             watcher.Created += new FileSystemEventHandler(OnChanged);
 
             labelLocation.Text = path;
-            buttonChange.Text = "Change";
         }
 
         private void homeBtn_Click(object sender, EventArgs e)

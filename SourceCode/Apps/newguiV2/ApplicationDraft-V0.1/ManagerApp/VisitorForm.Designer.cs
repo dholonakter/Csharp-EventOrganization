@@ -308,6 +308,7 @@
             this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.buttonSave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "VisitorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
