@@ -1,16 +1,10 @@
-﻿using System;
+﻿using Phidget22;
+using Phidget22.Events;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using ThanhDLL;
-using Phidget22;
-using Phidget22.Events;
-using System.Threading;
 
 namespace CampingApp
 {
@@ -26,6 +20,7 @@ namespace CampingApp
         DataHelper dh;
         BindingSource campTable;
         RFID myRFIDReader;
+        bool admin;
 
         // Delegates for RFID
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
@@ -38,20 +33,31 @@ namespace CampingApp
             checkinPanel.BringToFront();
         }
 
+        private void ResetGUI()
+        {
+            labelStatusIn.Text = "";
+            checkoutStatusLbl.Text = "";
+            labelMessageIn.Text = "";
+            checkoutMessageLbl.Text = "";
+            logsInfoLbx.Items.Clear();
+            checkoutInfoLbx.Items.Clear();
+            checkoutInfoLbx.Items.Clear();
+            buttonOverride.Text = "Override";
+            admin = false;
+            visitor = null;
+            r = null;
+        }
+
         private void checkinBtn_Click(object sender, EventArgs e)
         {
             sideHighlight.Height = checkinBtn.Height;
             sideHighlight.Top = checkinBtn.Top;
             checkinPanel.BringToFront();
 
-            // clear gui
-            lbCheckIn.Text = "";
-            labelStatusIn.Text = "STATUS";
-
             // Switching delegate's method
+            ResetGUI();
             myRFIDReader.Tag -= CheckOut;
             myRFIDReader.Tag += CheckIn;
-            r = null;
         }
 
         private void checkoutBtn_Click(object sender, EventArgs e)
@@ -60,14 +66,10 @@ namespace CampingApp
             sideHighlight.Top = checkoutBtn.Top;
             checkoutPanel.BringToFront();
 
-            // clear gui
-            lbCheckOut.Text = "";
-            labelStatusOut.Text = "STATUS";
-
             // Switching delegate's method
+            ResetGUI();
             myRFIDReader.Tag -= CheckIn;
             myRFIDReader.Tag += CheckOut;
-            r = null;
         }
 
         private void monitorBtn_Click(object sender, EventArgs e)
@@ -76,18 +78,14 @@ namespace CampingApp
             sideHighlight.Top = monitorBtn.Top;
             searchPanel.BringToFront();
 
-            // Display data onto gridview
-            campTable = new BindingSource();
-            campTable.DataSource = dh.DataTableFromSQL("SELECT * FROM reservation_info");
-            dataGridViewCamp.DataSource = campTable;
-            r = null;
+            ResetGUI();
         }
 
         private void CampingForm_Load(object sender, EventArgs e)
         {
             // Connecting to DB
             dh = new DataHelper();
-
+            admin = false;
 
             // Connecting RFID reader
             try
@@ -118,44 +116,66 @@ namespace CampingApp
 
             if (r != null)
             {
-                display.SetText(r.ToString(), lbCheckIn);
+                display.DisplayReservation(r, listBoxCheckIn);
 
-                if (r.Paid) // if endDate is earlier than now
+                if (!admin)
                 {
-                    if (DateTime.Compare(r.EndDate, DateTime.Now) > 0)
+                    if (r.Paid)
                     {
-                        display.SetText("OK", labelStatusIn);
-
-                        if (!visitor.IsInCamp)
+                        if (DateTime.Compare(r.EndDate, DateTime.Now) > 0) // if endDate is earlier than now
                         {
-                            r.NrCheckedIn += 1;
-                            visitor.IsInCamp = true;
+                            display.SetText("OK", labelStatusIn);
+
+                            if (!visitor.IsInCamp)
+                            {
+                                r.NrCheckedIn += 1;
+                                visitor.IsInCamp = true;
+                                if (dh.UpdateSelectedReservation(r) != -1 && dh.UpdateSelectedVisitor(visitor) != -1)
+                                {
+                                    display.SetText("Checked in successful!", labelMessageIn);
+                                }
+                            }
+                            else
+                            {
+                                display.SetText("NOK", labelStatusIn);
+                                display.SetText("Already checked in", labelMessageIn);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Visitor is already checked in");
+                            display.SetText("NOK", labelStatusIn);
+                            display.SetText("The reservation's end date is past", labelMessageIn);
                         }
 
+                    }
+                    else
+                    {
+                        display.SetText("NOK", labelStatusIn);
+                        display.SetText("The reservation is not paid", labelMessageIn);
+                    }
+                }
+                else
+                {
+                    if (!visitor.IsInCamp)
+                    {
+                        r.NrCheckedIn += 1;
+                        visitor.IsInCamp = true;
                         if (dh.UpdateSelectedReservation(r) != -1 && dh.UpdateSelectedVisitor(visitor) != -1)
                         {
-                            display.SetText(r.ToString(), lbCheckIn); //update reservation info on lb
-                            r = null;
+                            display.SetText("OK", labelStatusIn);
+                            display.SetText("Checked in successful!", labelMessageIn);
                         }
                     }
                     else
                     {
-                        display.SetText("EXPIRED", labelStatusIn);
+                        display.SetText("NOK", labelStatusIn);
+                        display.SetText("Already checked in", labelMessageIn);
                     }
-                    
-                }
-                else
-                {
-                    display.SetText("NOT PAID", labelStatusIn);
                 }
             }
             else
             {
-                MessageBox.Show("No reservation found");
+                display.SetText("No reservation found", labelMessageIn);
             }
         }
 
@@ -173,88 +193,182 @@ namespace CampingApp
                     visitor.IsInCamp = false;
                     if (dh.UpdateSelectedReservation(r) != -1 && dh.UpdateSelectedVisitor(visitor) != -1)
                     {
-                        display.SetText("OK", labelStatusOut);
-                        display.SetText(r.ToString(), lbCheckOut); //update reservation info on lb
+                        display.DisplayReservation(r, checkoutInfoLbx);
+                        display.SetText("OK", checkoutStatusLbl);
+                        display.SetText("Checked out successful", checkoutMessageLbl);
                         r = null;
                     }
                     else
                     {
                         r.NrCheckedIn += 1; //revert
-                        MessageBox.Show("Error while checking out");
+                        display.SetText("NOK", checkoutStatusLbl);
+                        display.SetText("Please try scanning card again", checkoutMessageLbl);
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Visitor is already checked out");
+                    display.SetText("NOK", checkoutStatusLbl);
+                    display.SetText("Already checked out", checkoutMessageLbl);
                 }
             }
             else
             {
-                MessageBox.Show("No reservation found");
+                display.SetText("No reservation found", checkoutMessageLbl);
             }
         }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void DisplayReservation(Reservation r, ListBox lb)
         {
-            if (r != null && labelStatusIn.Text == "NOT OK") // only in cases where it's unpaid and not expired
-            {
-                r.ChangeStatus();
-                if (dh.UpdateSelectedReservation(r) != -1)
-                {
-                    using (CrossThreadDisplay display = new CrossThreadDisplay(this))
-                    {
-                        display.SetText("OK", labelStatusIn);
-                        display.SetText(r.ToString(), lbCheckIn);
-                        r = null;
-                    }
-                }
-                else
-                {
-                    r.ChangeStatus(); // revert
-                    MessageBox.Show("Error while updating status");
-                }
-            }
+            lb.Items.Clear();
+            lb.Items.Add("RESERVATION NR. " + r.ReservNr);
+            lb.Items.Add("Reserved on: " + r.ReservDate);
+            lb.Items.Add("Reserved spot: " + r.Spot.SpotName);
+            lb.Items.Add("Period: " + r.StartDate + " to " + r.EndDate);
+            lb.Items.Add("Status: " + r.NrCheckedIn + "/" + r.NrOfRegistered + " checked in");
         }
-
-        private void buttonSaveChanges_Click(object sender, EventArgs e)
-        {
-            if (dh.UpdateTable((DataTable)campTable.DataSource))
-            {
-                MessageBox.Show("Data updated");
-                dataGridViewCamp.Refresh();
-            }
-            else
-            {
-                MessageBox.Show("Error while updating data");
-            }
-        }
-
         private void buttonSearch_Click(object sender, EventArgs e)
         {
-            labelMonitor.Text = "";
-            int i;
-
-            if (int.TryParse(textBoxResrvID.Text, out i))
+            logsInfoLbx.Items.Clear();
+            if (nameRbtn.Checked)
             {
-                r = dh.FindReservationByNr(i.ToString());
-                if (r != null)
+                List<Visitor> visitors = dh.FindVisitorByName(textBoxSearch.Text);
+                if (visitors.Count != 0)
                 {
-                    labelMonitor.Text = r.ToString();
+                    foreach (Visitor v in visitors)
+                    {
+                        r = dh.FindReservationByVisitor(v);
+                        if (r != null)
+                        {
+                            logsInfoLbx.Items.Add("RESERVATION NR. " + r.ReservNr +
+                            "; Reserved spot: " + r.Spot.SpotName +
+                            "; Reserved by: " + r.Reserver.FirstName + ", " + r.Reserver.LastName.ToUpper());
+                        }
+                        else
+                        {
+                            logsInfoLbx.Items.Add("Cannot find reservation");
+                        }
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("Reservation not found");
-                }
+                viewLogsBtn.Enabled = false;
+                viewLogsBtn.BackColor = Color.LightGray;
             }
-            else
+            else if (reservationRbtn.Checked)
             {
-                MessageBox.Show("Please enter a number");
+                r = dh.FindReservationByNr(textBoxSearch.Text);
+                logsInfoLbx.Items.Add(r);
+                viewLogsBtn.Enabled = true;
+                viewLogsBtn.BackColor = Color.DimGray;
             }
         }
 
         private void searchPanel_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void ShowUserDetails(ListBox lb)
+        {
+            if (visitor != null)
+            {
+                lb.Items.Clear();
+                lb.Items.Add("VISITOR NR. " + visitor.IdNr);
+                lb.Items.Add("Name: " + visitor.FirstName + ", " + visitor.LastName);
+                lb.Items.Add("Phone: " + visitor.Phone);
+                lb.Items.Add("Is In Camp: " + (visitor.IsInCamp ? "Yes" : "No"));
+            }
+        }
+
+        private void buttonUserDetails_Click(object sender, EventArgs e)
+        {
+            ShowUserDetails(listBoxCheckIn);
+        }
+
+        private void checkoutDetailsBtn_Click(object sender, EventArgs e)
+        {
+            ShowUserDetails(checkoutInfoLbx);
+        }
+
+        private void viewLogsBtn_Click(object sender, EventArgs e)
+        {
+            logsInfoLbx.Items.Clear();
+            
+            if (r != null)
+            {
+                List<int> campersNr = dh.FindCampersNr(r);
+                List<Visitor> visitors = new List<Visitor>();
+                foreach (int number in campersNr)
+                {
+                    visitors.Add(dh.FindVisitorByNr(number));
+                }
+                for (int i = 0; i < visitors.Count; i++)
+                {
+                    logsInfoLbx.Items.Add("Nr. " + (i + 1) + ": " + visitors[i].FirstName + ", " + visitors[i].LastName.ToUpper()
+                        + "; Phone: " + visitors[i].Phone);
+                }
+            }
+            else
+            {
+                logsInfoLbx.Items.Add("Please search for a reservation first");
+            }
+        }
+
+        private void checkinLogsBtn_Click(object sender, EventArgs e)
+        {
+            logsInfoLbx.Items.Clear();
+            List<Reservation> foundReservations = dh.FindFullyPresentReservations();
+            if (foundReservations != null)
+            {
+                foreach (Reservation r in foundReservations)
+                {
+                    logsInfoLbx.Items.Add(r);
+                }
+            }
+            else
+            {
+                logsInfoLbx.Items.Add("No reservation found");
+            }
+
+        }
+
+        private void checkoutLogsBtn_Click(object sender, EventArgs e)
+        {
+            logsInfoLbx.Items.Clear();
+            List<Reservation> foundReservations = dh.FindNotFullyPresentReservations();
+            if (foundReservations != null)
+            {
+                foreach (Reservation r in foundReservations)
+                {
+                    logsInfoLbx.Items.Add(r);
+                }
+            }
+            else
+            {
+                logsInfoLbx.Items.Add("No reservation found");
+            }
+        }
+        private void CheckInOverride(object sender, EventArgs e)
+        {
+            MessageBox.Show("Logged in as admin");
+            admin = true;
+            buttonOverride.Text = "Revoke admin rights";
+            ((Form)sender).Close();
+        }
+
+        private void buttonOverride_Click(object sender, EventArgs e)
+        {
+            if (!admin)
+            {
+                LoginForm testDialog = new LoginForm();
+                testDialog.LoggedInHandler += CheckInOverride;
+                testDialog.ShowDialog();
+            }
+            else
+            {
+                if (MessageBox.Show("Revoke admin rights on this user?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    admin = false;
+                    buttonOverride.Text = "Override";
+                }
+            }
         }
     }
 }

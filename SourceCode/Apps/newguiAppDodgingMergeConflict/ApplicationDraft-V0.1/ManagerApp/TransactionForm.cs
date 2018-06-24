@@ -15,97 +15,77 @@ namespace ManagerApp
     public partial class TransactionForm : Form
     {
         DataHelper dh;
-        BindingSource logTable;
-
+        FileSystemWatcher watcher;
 
         public TransactionForm()
         {
             InitializeComponent();
             dh = new DataHelper();
+            buttonChange.Text = "Intialize";
         }
 
-        private void buttonLoad_Click(object sender, EventArgs e)
-        {
-            string path = "";
-            listBoxDetails.Items.Clear();
-
-            using (FileDialog fd = new OpenFileDialog())
-            {
-                fd.ShowDialog();
-                path = fd.FileName;
-            }
-
-            if (path != "")
-            {
-                using (FileStream fs = new FileStream(path, FileMode.Open))
-                {
-                    StreamReader sr = new StreamReader(fs);
-
-                    while (!sr.EndOfStream)
-                    {
-                        listBoxDetails.Items.Add(sr.ReadLine());
-                    }
-
-                    if (sr != null)
-                    {
-                        sr.Close();
-                    }
-                }
-
-                using (FileStream fs = new FileStream(path, FileMode.Open))
-                {
-                    StreamReader sr = new StreamReader(fs);
-
-                    string startPeriod;
-                    string endPeriod;
-                    string receiverNr;
-
-                    receiverNr = Convert.ToString(sr.ReadLine());
-                    startPeriod = Convert.ToString(sr.ReadLine());
-                    endPeriod = Convert.ToString(sr.ReadLine());
-
-                    int max = Convert.ToInt32(sr.ReadLine());
-
-                    for (int i = 0; i < max; i++)
-                    {
-                        string temp = sr.ReadLine();
-
-                        string[] parsed = temp.Split(' ');
-
-                        dh.CreateNewLog(new Log(startPeriod, endPeriod, parsed[0].Trim(), receiverNr, Convert.ToDouble(parsed[1].Trim())));
-                    }
-
-                    if (sr != null)
-                    {
-                        sr.Close();
-                    }
-
-                    if (MessageBox.Show("Log added to database") == DialogResult.OK)
-                    {
-                        DisplayLog();
-                    }
-                }
-                
-            }
-        }
-        private void DisplayLog()
-        {
-            // Display data onto gridview
-            logTable = new BindingSource();
-            logTable.DataSource = dh.DataTableFromSQL("SELECT * FROM ATM_LOG");
-            dataGridView1.DataSource = logTable;
-            dataGridView1.Refresh();
-        }
         private void TransactionForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             HomeForm home = new HomeForm();
             this.Dispose();
             home.Show();
         }
-
-        private void buttonRefresh_Click(object sender, EventArgs e)
+        
+        private void OnChanged(object sender, FileSystemEventArgs e)
         {
-            DisplayLog();
+            string path = e.FullPath; // change path to process logs
+            using (FileStream fs = new FileStream(path, FileMode.Open))
+            {
+                StreamReader sr = new StreamReader(fs);
+
+                string startPeriod;
+                string endPeriod;
+                string receiverNr;
+
+                receiverNr = Convert.ToString(sr.ReadLine());
+                startPeriod = Convert.ToString(sr.ReadLine());
+                endPeriod = Convert.ToString(sr.ReadLine());
+
+                int max = Convert.ToInt32(sr.ReadLine());
+
+                for (int i = 0; i < max; i++)
+                {
+                    string temp = sr.ReadLine();
+
+                    string[] parsed = temp.Split(' ');
+
+                    dh.CreateNewLog(new Log(startPeriod, endPeriod, parsed[0].Trim(), receiverNr, Convert.ToDouble(parsed[1].Trim())));
+                }
+
+                if (sr != null)
+                {
+                    sr.Close();
+                }
+            }
+            using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+            {
+                display.SetText("Last added logs on " + DateTime.Now, labelStatus);
+            }
+        }
+
+        private void buttonChange_Click(object sender, EventArgs e)
+        {
+            string path;
+            using (FolderBrowserDialog fd = new FolderBrowserDialog())
+            {
+                fd.ShowDialog();
+                path = fd.SelectedPath;
+            }
+            watcher = new FileSystemWatcher()
+            {
+                Path = path,
+                Filter = "*.txt"
+            };
+            watcher.EnableRaisingEvents = true;
+            watcher.Created += new FileSystemEventHandler(OnChanged);
+
+            labelLocation.Text = path;
+            buttonChange.Text = "Change";
         }
     }
 }

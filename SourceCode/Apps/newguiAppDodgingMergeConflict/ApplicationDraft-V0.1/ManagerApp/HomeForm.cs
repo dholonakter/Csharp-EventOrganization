@@ -38,13 +38,7 @@ namespace ManagerApp
 
         private void shopBtn_Click(object sender, EventArgs e)
         {
-            if (selectedForm != null)
-            {
-                selectedForm.Dispose();
-            }
-            selectedForm = new ShopForm();
-            selectedForm.Show();
-            this.Dispose();
+            
         }
 
         private void campBtn_Click(object sender, EventArgs e)
@@ -88,6 +82,16 @@ namespace ManagerApp
             selectedForm = new TransactionForm();
             selectedForm.Show();
             this.Dispose();
+        }
+
+        private void HomeForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void buttonActivitiy_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

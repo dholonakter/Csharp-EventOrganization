@@ -37,11 +37,9 @@
             this.checkoutBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkinPanel = new System.Windows.Forms.Panel();
+            this.labelEntrance = new System.Windows.Forms.Label();
             this.checkinOverrideBtn = new System.Windows.Forms.Button();
-            this.userDetailsBtn = new System.Windows.Forms.Button();
-            this.checkinHistoryBtn = new System.Windows.Forms.Button();
             this.checkinInfoLbx = new System.Windows.Forms.ListBox();
-            this.checkinLbl = new System.Windows.Forms.Label();
             this.checkinMessageLbl = new System.Windows.Forms.Label();
             this.checkinStatusLbl = new System.Windows.Forms.Label();
             this.lbCheckIn = new System.Windows.Forms.Label();
@@ -50,15 +48,13 @@
             this.buttonStartWC = new System.Windows.Forms.Button();
             this.pictureBoxSource = new System.Windows.Forms.PictureBox();
             this.checkoutPanel = new System.Windows.Forms.Panel();
+            this.labelExit = new System.Windows.Forms.Label();
             this.checkoutOverrideBtn = new System.Windows.Forms.Button();
             this.checkoutDetailsBtn = new System.Windows.Forms.Button();
-            this.checkoutHistoryBtn = new System.Windows.Forms.Button();
             this.checkoutInfoLbx = new System.Windows.Forms.ListBox();
-            this.campingCheckoutLbl = new System.Windows.Forms.Label();
             this.checkoutMessageLbl = new System.Windows.Forms.Label();
             this.checkoutStatusLbl = new System.Windows.Forms.Label();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.labelVisitor = new System.Windows.Forms.Label();
             this.labelStatusOut = new System.Windows.Forms.Label();
             this.searchPanel = new System.Windows.Forms.Panel();
             this.tagRbtn = new System.Windows.Forms.RadioButton();
@@ -74,9 +70,8 @@
             this.labelMonitor = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
             this.webCamTimer = new System.Windows.Forms.Timer(this.components);
-            this.labelEntrance = new System.Windows.Forms.Label();
-            this.labelExit = new System.Windows.Forms.Label();
-            this.msgErrorlbl = new System.Windows.Forms.Label();
+            this.userDetailsBtn = new System.Windows.Forms.Button();
+            this.checkinHistoryBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.checkinPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -95,8 +90,9 @@
             this.panel1.Controls.Add(this.checkoutBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(166, 640);
+            this.panel1.Size = new System.Drawing.Size(221, 788);
             this.panel1.TabIndex = 0;
             // 
             // checkinBtn
@@ -109,9 +105,10 @@
             this.checkinBtn.ForeColor = System.Drawing.Color.White;
             this.checkinBtn.Image = ((System.Drawing.Image)(resources.GetObject("checkinBtn.Image")));
             this.checkinBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkinBtn.Location = new System.Drawing.Point(11, 89);
+            this.checkinBtn.Location = new System.Drawing.Point(15, 110);
+            this.checkinBtn.Margin = new System.Windows.Forms.Padding(4);
             this.checkinBtn.Name = "checkinBtn";
-            this.checkinBtn.Size = new System.Drawing.Size(155, 74);
+            this.checkinBtn.Size = new System.Drawing.Size(207, 91);
             this.checkinBtn.TabIndex = 9;
             this.checkinBtn.Text = " Check In";
             this.checkinBtn.UseVisualStyleBackColor = true;
@@ -120,9 +117,10 @@
             // sideHighlight
             // 
             this.sideHighlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.sideHighlight.Location = new System.Drawing.Point(0, 89);
+            this.sideHighlight.Location = new System.Drawing.Point(0, 110);
+            this.sideHighlight.Margin = new System.Windows.Forms.Padding(4);
             this.sideHighlight.Name = "sideHighlight";
-            this.sideHighlight.Size = new System.Drawing.Size(10, 74);
+            this.sideHighlight.Size = new System.Drawing.Size(13, 91);
             this.sideHighlight.TabIndex = 14;
             // 
             // monitorBtn
@@ -135,9 +133,10 @@
             this.monitorBtn.ForeColor = System.Drawing.Color.White;
             this.monitorBtn.Image = ((System.Drawing.Image)(resources.GetObject("monitorBtn.Image")));
             this.monitorBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.monitorBtn.Location = new System.Drawing.Point(11, 296);
+            this.monitorBtn.Location = new System.Drawing.Point(15, 364);
+            this.monitorBtn.Margin = new System.Windows.Forms.Padding(4);
             this.monitorBtn.Name = "monitorBtn";
-            this.monitorBtn.Size = new System.Drawing.Size(155, 74);
+            this.monitorBtn.Size = new System.Drawing.Size(207, 91);
             this.monitorBtn.TabIndex = 10;
             this.monitorBtn.Text = "Logs";
             this.monitorBtn.UseVisualStyleBackColor = true;
@@ -153,9 +152,10 @@
             this.checkoutBtn.ForeColor = System.Drawing.Color.White;
             this.checkoutBtn.Image = ((System.Drawing.Image)(resources.GetObject("checkoutBtn.Image")));
             this.checkoutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkoutBtn.Location = new System.Drawing.Point(11, 191);
+            this.checkoutBtn.Location = new System.Drawing.Point(15, 235);
+            this.checkoutBtn.Margin = new System.Windows.Forms.Padding(4);
             this.checkoutBtn.Name = "checkoutBtn";
-            this.checkoutBtn.Size = new System.Drawing.Size(155, 74);
+            this.checkoutBtn.Size = new System.Drawing.Size(207, 91);
             this.checkoutBtn.TabIndex = 11;
             this.checkoutBtn.Text = "    Check Out";
             this.checkoutBtn.UseVisualStyleBackColor = true;
@@ -165,19 +165,19 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(166, 0);
+            this.panel2.Location = new System.Drawing.Point(221, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(874, 10);
+            this.panel2.Size = new System.Drawing.Size(1166, 12);
             this.panel2.TabIndex = 1;
             // 
             // checkinPanel
             // 
+            this.checkinPanel.Controls.Add(this.checkinHistoryBtn);
+            this.checkinPanel.Controls.Add(this.userDetailsBtn);
             this.checkinPanel.Controls.Add(this.labelEntrance);
             this.checkinPanel.Controls.Add(this.checkinOverrideBtn);
-            this.checkinPanel.Controls.Add(this.userDetailsBtn);
-            this.checkinPanel.Controls.Add(this.checkinHistoryBtn);
             this.checkinPanel.Controls.Add(this.checkinInfoLbx);
-            this.checkinPanel.Controls.Add(this.checkinLbl);
             this.checkinPanel.Controls.Add(this.checkinMessageLbl);
             this.checkinPanel.Controls.Add(this.checkinStatusLbl);
             this.checkinPanel.Controls.Add(this.lbCheckIn);
@@ -185,119 +185,96 @@
             this.checkinPanel.Controls.Add(this.pictureBox2);
             this.checkinPanel.Controls.Add(this.buttonStartWC);
             this.checkinPanel.Controls.Add(this.pictureBoxSource);
-            this.checkinPanel.Location = new System.Drawing.Point(176, 16);
+            this.checkinPanel.Location = new System.Drawing.Point(235, 20);
+            this.checkinPanel.Margin = new System.Windows.Forms.Padding(4);
             this.checkinPanel.Name = "checkinPanel";
-            this.checkinPanel.Size = new System.Drawing.Size(1105, 687);
+            this.checkinPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkinPanel.TabIndex = 3;
+            // 
+            // labelEntrance
+            // 
+            this.labelEntrance.AutoSize = true;
+            this.labelEntrance.Font = new System.Drawing.Font("Times New Roman", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEntrance.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelEntrance.Location = new System.Drawing.Point(46, 44);
+            this.labelEntrance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelEntrance.Name = "labelEntrance";
+            this.labelEntrance.Size = new System.Drawing.Size(237, 46);
+            this.labelEntrance.TabIndex = 62;
+            this.labelEntrance.Text = "ENTRANCE";
             // 
             // checkinOverrideBtn
             // 
             this.checkinOverrideBtn.BackColor = System.Drawing.Color.DimGray;
             this.checkinOverrideBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.checkinOverrideBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkinOverrideBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkinOverrideBtn.Font = new System.Drawing.Font("Roboto", 12F);
             this.checkinOverrideBtn.ForeColor = System.Drawing.Color.White;
-            this.checkinOverrideBtn.Location = new System.Drawing.Point(785, 572);
+            this.checkinOverrideBtn.Location = new System.Drawing.Point(793, 661);
+            this.checkinOverrideBtn.Margin = new System.Windows.Forms.Padding(4);
             this.checkinOverrideBtn.Name = "checkinOverrideBtn";
-            this.checkinOverrideBtn.Size = new System.Drawing.Size(142, 52);
+            this.checkinOverrideBtn.Size = new System.Drawing.Size(231, 64);
             this.checkinOverrideBtn.TabIndex = 58;
             this.checkinOverrideBtn.Text = "Override";
             this.checkinOverrideBtn.UseVisualStyleBackColor = false;
             this.checkinOverrideBtn.Click += new System.EventHandler(this.checkinOverrideBtn_Click);
             // 
-            // userDetailsBtn
-            // 
-            this.userDetailsBtn.BackColor = System.Drawing.Color.DimGray;
-            this.userDetailsBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.userDetailsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.userDetailsBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.userDetailsBtn.ForeColor = System.Drawing.Color.White;
-            this.userDetailsBtn.Location = new System.Drawing.Point(360, 572);
-            this.userDetailsBtn.Name = "userDetailsBtn";
-            this.userDetailsBtn.Size = new System.Drawing.Size(173, 52);
-            this.userDetailsBtn.TabIndex = 60;
-            this.userDetailsBtn.Text = "User Details";
-            this.userDetailsBtn.UseVisualStyleBackColor = false;
-            this.userDetailsBtn.Click += new System.EventHandler(this.userDetailsBtn_Click);
-            // 
-            // checkinHistoryBtn
-            // 
-            this.checkinHistoryBtn.BackColor = System.Drawing.Color.DimGray;
-            this.checkinHistoryBtn.Enabled = false;
-            this.checkinHistoryBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.checkinHistoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkinHistoryBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkinHistoryBtn.ForeColor = System.Drawing.Color.White;
-            this.checkinHistoryBtn.Location = new System.Drawing.Point(40, 572);
-            this.checkinHistoryBtn.Name = "checkinHistoryBtn";
-            this.checkinHistoryBtn.Size = new System.Drawing.Size(173, 52);
-            this.checkinHistoryBtn.TabIndex = 61;
-            this.checkinHistoryBtn.Text = "Check History";
-            this.checkinHistoryBtn.UseVisualStyleBackColor = false;
-            this.checkinHistoryBtn.Click += new System.EventHandler(this.checkinHistoryBtn_Click);
-            // 
             // checkinInfoLbx
             // 
             this.checkinInfoLbx.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkinInfoLbx.FormattingEnabled = true;
-            this.checkinInfoLbx.ItemHeight = 20;
-            this.checkinInfoLbx.Location = new System.Drawing.Point(40, 254);
+            this.checkinInfoLbx.ItemHeight = 25;
+            this.checkinInfoLbx.Location = new System.Drawing.Point(53, 504);
+            this.checkinInfoLbx.Margin = new System.Windows.Forms.Padding(4);
             this.checkinInfoLbx.Name = "checkinInfoLbx";
-            this.checkinInfoLbx.Size = new System.Drawing.Size(493, 304);
+            this.checkinInfoLbx.Size = new System.Drawing.Size(718, 229);
             this.checkinInfoLbx.TabIndex = 57;
-            // 
-            // checkinLbl
-            // 
-            this.checkinLbl.AutoSize = true;
-            this.checkinLbl.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkinLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.checkinLbl.Location = new System.Drawing.Point(35, 77);
-            this.checkinLbl.Name = "checkinLbl";
-            this.checkinLbl.Size = new System.Drawing.Size(117, 28);
-            this.checkinLbl.TabIndex = 54;
-            this.checkinLbl.Text = "Check In";
             // 
             // checkinMessageLbl
             // 
             this.checkinMessageLbl.AutoSize = true;
-            this.checkinMessageLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkinMessageLbl.ForeColor = System.Drawing.Color.Red;
-            this.checkinMessageLbl.Location = new System.Drawing.Point(555, 148);
+            this.checkinMessageLbl.Font = new System.Drawing.Font("Roboto", 12F);
+            this.checkinMessageLbl.ForeColor = System.Drawing.Color.Gray;
+            this.checkinMessageLbl.Location = new System.Drawing.Point(411, 328);
+            this.checkinMessageLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkinMessageLbl.Name = "checkinMessageLbl";
-            this.checkinMessageLbl.Size = new System.Drawing.Size(84, 20);
+            this.checkinMessageLbl.Size = new System.Drawing.Size(106, 24);
             this.checkinMessageLbl.TabIndex = 55;
             this.checkinMessageLbl.Text = "(message)";
             // 
             // checkinStatusLbl
             // 
             this.checkinStatusLbl.AutoSize = true;
-            this.checkinStatusLbl.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkinStatusLbl.Font = new System.Drawing.Font("Roboto Black", 16F);
             this.checkinStatusLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.checkinStatusLbl.Location = new System.Drawing.Point(658, 109);
+            this.checkinStatusLbl.Location = new System.Drawing.Point(544, 276);
+            this.checkinStatusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkinStatusLbl.Name = "checkinStatusLbl";
-            this.checkinStatusLbl.Size = new System.Drawing.Size(103, 23);
+            this.checkinStatusLbl.Size = new System.Drawing.Size(135, 33);
             this.checkinStatusLbl.TabIndex = 56;
             this.checkinStatusLbl.Text = "(OK/NOK)";
             // 
             // lbCheckIn
             // 
             this.lbCheckIn.AutoSize = true;
-            this.lbCheckIn.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbCheckIn.Font = new System.Drawing.Font("Roboto", 12F);
             this.lbCheckIn.ForeColor = System.Drawing.Color.DimGray;
-            this.lbCheckIn.Location = new System.Drawing.Point(177, 109);
+            this.lbCheckIn.Location = new System.Drawing.Point(622, 116);
+            this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCheckIn.Name = "lbCheckIn";
-            this.lbCheckIn.Size = new System.Drawing.Size(102, 23);
+            this.lbCheckIn.Size = new System.Drawing.Size(104, 24);
             this.lbCheckIn.TabIndex = 37;
             this.lbCheckIn.Text = "Ticket info";
             // 
             // labelStatusIn
             // 
             this.labelStatusIn.AutoSize = true;
-            this.labelStatusIn.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStatusIn.Font = new System.Drawing.Font("Roboto", 16F);
             this.labelStatusIn.ForeColor = System.Drawing.Color.DimGray;
-            this.labelStatusIn.Location = new System.Drawing.Point(551, 109);
+            this.labelStatusIn.Location = new System.Drawing.Point(409, 280);
+            this.labelStatusIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStatusIn.Name = "labelStatusIn";
-            this.labelStatusIn.Size = new System.Drawing.Size(73, 23);
+            this.labelStatusIn.Size = new System.Drawing.Size(112, 33);
             this.labelStatusIn.TabIndex = 20;
             this.labelStatusIn.Text = "STATUS";
             // 
@@ -305,10 +282,10 @@
             // 
             this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox2.Location = new System.Drawing.Point(40, 109);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox2.Location = new System.Drawing.Point(407, 108);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(132, 124);
+            this.pictureBox2.Size = new System.Drawing.Size(176, 153);
             this.pictureBox2.TabIndex = 19;
             this.pictureBox2.TabStop = false;
             // 
@@ -317,23 +294,23 @@
             this.buttonStartWC.BackColor = System.Drawing.Color.DimGray;
             this.buttonStartWC.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonStartWC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonStartWC.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonStartWC.Font = new System.Drawing.Font("Roboto", 12F);
             this.buttonStartWC.ForeColor = System.Drawing.Color.White;
-            this.buttonStartWC.Location = new System.Drawing.Point(555, 456);
-            this.buttonStartWC.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonStartWC.Location = new System.Drawing.Point(53, 374);
+            this.buttonStartWC.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonStartWC.Name = "buttonStartWC";
-            this.buttonStartWC.Size = new System.Drawing.Size(213, 52);
+            this.buttonStartWC.Size = new System.Drawing.Size(284, 64);
             this.buttonStartWC.TabIndex = 3;
-            this.buttonStartWC.Text = "Start webcam";
+            this.buttonStartWC.Text = "Start QR Scanner";
             this.buttonStartWC.UseVisualStyleBackColor = false;
             this.buttonStartWC.Click += new System.EventHandler(this.buttonStartWC_Click);
             // 
             // pictureBoxSource
             // 
-            this.pictureBoxSource.Location = new System.Drawing.Point(555, 254);
-            this.pictureBoxSource.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBoxSource.Location = new System.Drawing.Point(53, 108);
+            this.pictureBoxSource.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBoxSource.Name = "pictureBoxSource";
-            this.pictureBoxSource.Size = new System.Drawing.Size(213, 198);
+            this.pictureBoxSource.Size = new System.Drawing.Size(284, 244);
             this.pictureBoxSource.TabIndex = 2;
             this.pictureBoxSource.TabStop = false;
             // 
@@ -342,29 +319,40 @@
             this.checkoutPanel.Controls.Add(this.labelExit);
             this.checkoutPanel.Controls.Add(this.checkoutOverrideBtn);
             this.checkoutPanel.Controls.Add(this.checkoutDetailsBtn);
-            this.checkoutPanel.Controls.Add(this.checkoutHistoryBtn);
             this.checkoutPanel.Controls.Add(this.checkoutInfoLbx);
-            this.checkoutPanel.Controls.Add(this.campingCheckoutLbl);
             this.checkoutPanel.Controls.Add(this.checkoutMessageLbl);
             this.checkoutPanel.Controls.Add(this.checkoutStatusLbl);
             this.checkoutPanel.Controls.Add(this.pictureBox3);
-            this.checkoutPanel.Controls.Add(this.labelVisitor);
             this.checkoutPanel.Controls.Add(this.labelStatusOut);
-            this.checkoutPanel.Location = new System.Drawing.Point(176, 16);
+            this.checkoutPanel.Location = new System.Drawing.Point(235, 20);
+            this.checkoutPanel.Margin = new System.Windows.Forms.Padding(4);
             this.checkoutPanel.Name = "checkoutPanel";
-            this.checkoutPanel.Size = new System.Drawing.Size(1105, 687);
+            this.checkoutPanel.Size = new System.Drawing.Size(1473, 846);
             this.checkoutPanel.TabIndex = 4;
+            // 
+            // labelExit
+            // 
+            this.labelExit.AutoSize = true;
+            this.labelExit.Font = new System.Drawing.Font("Times New Roman", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelExit.ForeColor = System.Drawing.Color.DarkRed;
+            this.labelExit.Location = new System.Drawing.Point(56, 67);
+            this.labelExit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelExit.Name = "labelExit";
+            this.labelExit.Size = new System.Drawing.Size(114, 46);
+            this.labelExit.TabIndex = 63;
+            this.labelExit.Text = "EXIT";
             // 
             // checkoutOverrideBtn
             // 
             this.checkoutOverrideBtn.BackColor = System.Drawing.Color.DimGray;
             this.checkoutOverrideBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.checkoutOverrideBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkoutOverrideBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkoutOverrideBtn.Font = new System.Drawing.Font("Roboto", 12F);
             this.checkoutOverrideBtn.ForeColor = System.Drawing.Color.White;
-            this.checkoutOverrideBtn.Location = new System.Drawing.Point(722, 506);
+            this.checkoutOverrideBtn.Location = new System.Drawing.Point(655, 232);
+            this.checkoutOverrideBtn.Margin = new System.Windows.Forms.Padding(4);
             this.checkoutOverrideBtn.Name = "checkoutOverrideBtn";
-            this.checkoutOverrideBtn.Size = new System.Drawing.Size(142, 52);
+            this.checkoutOverrideBtn.Size = new System.Drawing.Size(220, 58);
             this.checkoutOverrideBtn.TabIndex = 47;
             this.checkoutOverrideBtn.Text = "Override";
             this.checkoutOverrideBtn.UseVisualStyleBackColor = false;
@@ -375,70 +363,49 @@
             this.checkoutDetailsBtn.BackColor = System.Drawing.Color.DimGray;
             this.checkoutDetailsBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.checkoutDetailsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkoutDetailsBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkoutDetailsBtn.Font = new System.Drawing.Font("Roboto", 12F);
             this.checkoutDetailsBtn.ForeColor = System.Drawing.Color.White;
-            this.checkoutDetailsBtn.Location = new System.Drawing.Point(47, 574);
+            this.checkoutDetailsBtn.Location = new System.Drawing.Point(403, 232);
+            this.checkoutDetailsBtn.Margin = new System.Windows.Forms.Padding(4);
             this.checkoutDetailsBtn.Name = "checkoutDetailsBtn";
-            this.checkoutDetailsBtn.Size = new System.Drawing.Size(174, 52);
+            this.checkoutDetailsBtn.Size = new System.Drawing.Size(232, 58);
             this.checkoutDetailsBtn.TabIndex = 49;
-            this.checkoutDetailsBtn.Text = "User Details";
+            this.checkoutDetailsBtn.Text = "Visitor details";
             this.checkoutDetailsBtn.UseVisualStyleBackColor = false;
             this.checkoutDetailsBtn.Click += new System.EventHandler(this.checkoutDetailsBtn_Click);
-            // 
-            // checkoutHistoryBtn
-            // 
-            this.checkoutHistoryBtn.BackColor = System.Drawing.Color.DimGray;
-            this.checkoutHistoryBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.checkoutHistoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkoutHistoryBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkoutHistoryBtn.ForeColor = System.Drawing.Color.White;
-            this.checkoutHistoryBtn.Location = new System.Drawing.Point(376, 572);
-            this.checkoutHistoryBtn.Name = "checkoutHistoryBtn";
-            this.checkoutHistoryBtn.Size = new System.Drawing.Size(174, 52);
-            this.checkoutHistoryBtn.TabIndex = 50;
-            this.checkoutHistoryBtn.Text = "Check History";
-            this.checkoutHistoryBtn.UseVisualStyleBackColor = false;
             // 
             // checkoutInfoLbx
             // 
             this.checkoutInfoLbx.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkoutInfoLbx.FormattingEnabled = true;
-            this.checkoutInfoLbx.ItemHeight = 20;
-            this.checkoutInfoLbx.Location = new System.Drawing.Point(47, 254);
+            this.checkoutInfoLbx.ItemHeight = 25;
+            this.checkoutInfoLbx.Location = new System.Drawing.Point(63, 313);
+            this.checkoutInfoLbx.Margin = new System.Windows.Forms.Padding(4);
             this.checkoutInfoLbx.Name = "checkoutInfoLbx";
-            this.checkoutInfoLbx.Size = new System.Drawing.Size(503, 304);
+            this.checkoutInfoLbx.Size = new System.Drawing.Size(932, 354);
             this.checkoutInfoLbx.TabIndex = 46;
-            // 
-            // campingCheckoutLbl
-            // 
-            this.campingCheckoutLbl.AutoSize = true;
-            this.campingCheckoutLbl.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.campingCheckoutLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.campingCheckoutLbl.Location = new System.Drawing.Point(42, 73);
-            this.campingCheckoutLbl.Name = "campingCheckoutLbl";
-            this.campingCheckoutLbl.Size = new System.Drawing.Size(137, 28);
-            this.campingCheckoutLbl.TabIndex = 42;
-            this.campingCheckoutLbl.Text = "Check Out";
             // 
             // checkoutMessageLbl
             // 
             this.checkoutMessageLbl.AutoSize = true;
-            this.checkoutMessageLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkoutMessageLbl.ForeColor = System.Drawing.Color.Red;
-            this.checkoutMessageLbl.Location = new System.Drawing.Point(555, 145);
+            this.checkoutMessageLbl.Font = new System.Drawing.Font("Roboto", 12F);
+            this.checkoutMessageLbl.ForeColor = System.Drawing.Color.Gray;
+            this.checkoutMessageLbl.Location = new System.Drawing.Point(410, 184);
+            this.checkoutMessageLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkoutMessageLbl.Name = "checkoutMessageLbl";
-            this.checkoutMessageLbl.Size = new System.Drawing.Size(84, 20);
+            this.checkoutMessageLbl.Size = new System.Drawing.Size(106, 24);
             this.checkoutMessageLbl.TabIndex = 43;
             this.checkoutMessageLbl.Text = "(message)";
             // 
             // checkoutStatusLbl
             // 
             this.checkoutStatusLbl.AutoSize = true;
-            this.checkoutStatusLbl.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkoutStatusLbl.Font = new System.Drawing.Font("Roboto Black", 16F);
             this.checkoutStatusLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.checkoutStatusLbl.Location = new System.Drawing.Point(634, 109);
+            this.checkoutStatusLbl.Location = new System.Drawing.Point(557, 146);
+            this.checkoutStatusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkoutStatusLbl.Name = "checkoutStatusLbl";
-            this.checkoutStatusLbl.Size = new System.Drawing.Size(103, 23);
+            this.checkoutStatusLbl.Size = new System.Drawing.Size(135, 33);
             this.checkoutStatusLbl.TabIndex = 44;
             this.checkoutStatusLbl.Text = "(OK/NOK)";
             // 
@@ -446,38 +413,27 @@
             // 
             this.pictureBox3.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox3.BackgroundImage")));
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.pictureBox3.Location = new System.Drawing.Point(47, 109);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox3.Location = new System.Drawing.Point(206, 137);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(132, 124);
+            this.pictureBox3.Size = new System.Drawing.Size(176, 153);
             this.pictureBox3.TabIndex = 40;
             this.pictureBox3.TabStop = false;
-            // 
-            // labelVisitor
-            // 
-            this.labelVisitor.AutoSize = true;
-            this.labelVisitor.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelVisitor.ForeColor = System.Drawing.Color.DimGray;
-            this.labelVisitor.Location = new System.Drawing.Point(184, 109);
-            this.labelVisitor.Name = "labelVisitor";
-            this.labelVisitor.Size = new System.Drawing.Size(103, 23);
-            this.labelVisitor.TabIndex = 39;
-            this.labelVisitor.Text = "Visitor info";
             // 
             // labelStatusOut
             // 
             this.labelStatusOut.AutoSize = true;
-            this.labelStatusOut.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStatusOut.Font = new System.Drawing.Font("Roboto", 16F);
             this.labelStatusOut.ForeColor = System.Drawing.Color.DimGray;
-            this.labelStatusOut.Location = new System.Drawing.Point(555, 109);
+            this.labelStatusOut.Location = new System.Drawing.Point(410, 144);
+            this.labelStatusOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStatusOut.Name = "labelStatusOut";
-            this.labelStatusOut.Size = new System.Drawing.Size(73, 23);
+            this.labelStatusOut.Size = new System.Drawing.Size(112, 33);
             this.labelStatusOut.TabIndex = 2;
             this.labelStatusOut.Text = "STATUS";
             // 
             // searchPanel
             // 
-            this.searchPanel.Controls.Add(this.msgErrorlbl);
             this.searchPanel.Controls.Add(this.tagRbtn);
             this.searchPanel.Controls.Add(this.checkoutLogsBtn);
             this.searchPanel.Controls.Add(this.checkinLogsBtn);
@@ -490,18 +446,20 @@
             this.searchPanel.Controls.Add(this.textBoxSearch);
             this.searchPanel.Controls.Add(this.labelMonitor);
             this.searchPanel.Controls.Add(this.buttonSearch);
-            this.searchPanel.Location = new System.Drawing.Point(176, 16);
+            this.searchPanel.Location = new System.Drawing.Point(235, 20);
+            this.searchPanel.Margin = new System.Windows.Forms.Padding(4);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(1105, 687);
+            this.searchPanel.Size = new System.Drawing.Size(1473, 846);
             this.searchPanel.TabIndex = 5;
             // 
             // tagRbtn
             // 
             this.tagRbtn.AutoSize = true;
-            this.tagRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tagRbtn.Location = new System.Drawing.Point(305, 92);
+            this.tagRbtn.Font = new System.Drawing.Font("Roboto", 12F);
+            this.tagRbtn.Location = new System.Drawing.Point(416, 136);
+            this.tagRbtn.Margin = new System.Windows.Forms.Padding(4);
             this.tagRbtn.Name = "tagRbtn";
-            this.tagRbtn.Size = new System.Drawing.Size(74, 24);
+            this.tagRbtn.Size = new System.Drawing.Size(90, 28);
             this.tagRbtn.TabIndex = 45;
             this.tagRbtn.TabStop = true;
             this.tagRbtn.Text = "Tag Nr";
@@ -512,11 +470,12 @@
             this.checkoutLogsBtn.BackColor = System.Drawing.Color.DimGray;
             this.checkoutLogsBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.checkoutLogsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkoutLogsBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkoutLogsBtn.Font = new System.Drawing.Font("Roboto", 12F);
             this.checkoutLogsBtn.ForeColor = System.Drawing.Color.White;
-            this.checkoutLogsBtn.Location = new System.Drawing.Point(458, 547);
+            this.checkoutLogsBtn.Location = new System.Drawing.Point(662, 646);
+            this.checkoutLogsBtn.Margin = new System.Windows.Forms.Padding(4);
             this.checkoutLogsBtn.Name = "checkoutLogsBtn";
-            this.checkoutLogsBtn.Size = new System.Drawing.Size(181, 55);
+            this.checkoutLogsBtn.Size = new System.Drawing.Size(241, 49);
             this.checkoutLogsBtn.TabIndex = 42;
             this.checkoutLogsBtn.Text = "Checked Out";
             this.checkoutLogsBtn.UseVisualStyleBackColor = false;
@@ -527,11 +486,12 @@
             this.checkinLogsBtn.BackColor = System.Drawing.Color.DimGray;
             this.checkinLogsBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.checkinLogsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.checkinLogsBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.checkinLogsBtn.Font = new System.Drawing.Font("Roboto", 12F);
             this.checkinLogsBtn.ForeColor = System.Drawing.Color.White;
-            this.checkinLogsBtn.Location = new System.Drawing.Point(256, 547);
+            this.checkinLogsBtn.Location = new System.Drawing.Point(371, 644);
+            this.checkinLogsBtn.Margin = new System.Windows.Forms.Padding(4);
             this.checkinLogsBtn.Name = "checkinLogsBtn";
-            this.checkinLogsBtn.Size = new System.Drawing.Size(181, 55);
+            this.checkinLogsBtn.Size = new System.Drawing.Size(241, 49);
             this.checkinLogsBtn.TabIndex = 43;
             this.checkinLogsBtn.Text = "Checked In";
             this.checkinLogsBtn.UseVisualStyleBackColor = false;
@@ -542,11 +502,12 @@
             this.viewLogsBtn.BackColor = System.Drawing.Color.DimGray;
             this.viewLogsBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.viewLogsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.viewLogsBtn.Font = new System.Drawing.Font("Century Gothic", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.viewLogsBtn.Font = new System.Drawing.Font("Roboto", 12F);
             this.viewLogsBtn.ForeColor = System.Drawing.Color.White;
-            this.viewLogsBtn.Location = new System.Drawing.Point(52, 547);
+            this.viewLogsBtn.Location = new System.Drawing.Point(73, 644);
+            this.viewLogsBtn.Margin = new System.Windows.Forms.Padding(4);
             this.viewLogsBtn.Name = "viewLogsBtn";
-            this.viewLogsBtn.Size = new System.Drawing.Size(181, 55);
+            this.viewLogsBtn.Size = new System.Drawing.Size(241, 49);
             this.viewLogsBtn.TabIndex = 44;
             this.viewLogsBtn.Text = "View Logs";
             this.viewLogsBtn.UseVisualStyleBackColor = false;
@@ -554,21 +515,23 @@
             // 
             // logsInfoLbx
             // 
-            this.logsInfoLbx.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.logsInfoLbx.Font = new System.Drawing.Font("Roboto", 10F);
             this.logsInfoLbx.FormattingEnabled = true;
             this.logsInfoLbx.ItemHeight = 20;
-            this.logsInfoLbx.Location = new System.Drawing.Point(52, 149);
+            this.logsInfoLbx.Location = new System.Drawing.Point(69, 183);
+            this.logsInfoLbx.Margin = new System.Windows.Forms.Padding(4);
             this.logsInfoLbx.Name = "logsInfoLbx";
-            this.logsInfoLbx.Size = new System.Drawing.Size(766, 384);
+            this.logsInfoLbx.Size = new System.Drawing.Size(834, 444);
             this.logsInfoLbx.TabIndex = 40;
             // 
             // ticketRbtn
             // 
             this.ticketRbtn.AutoSize = true;
-            this.ticketRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ticketRbtn.Location = new System.Drawing.Point(210, 92);
+            this.ticketRbtn.Font = new System.Drawing.Font("Roboto", 12F);
+            this.ticketRbtn.Location = new System.Drawing.Point(289, 136);
+            this.ticketRbtn.Margin = new System.Windows.Forms.Padding(4);
             this.ticketRbtn.Name = "ticketRbtn";
-            this.ticketRbtn.Size = new System.Drawing.Size(89, 24);
+            this.ticketRbtn.Size = new System.Drawing.Size(112, 28);
             this.ticketRbtn.TabIndex = 38;
             this.ticketRbtn.TabStop = true;
             this.ticketRbtn.Text = "Ticket Nr";
@@ -577,10 +540,11 @@
             // nameRbtn
             // 
             this.nameRbtn.AutoSize = true;
-            this.nameRbtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameRbtn.Location = new System.Drawing.Point(135, 92);
+            this.nameRbtn.Font = new System.Drawing.Font("Roboto", 12F);
+            this.nameRbtn.Location = new System.Drawing.Point(189, 136);
+            this.nameRbtn.Margin = new System.Windows.Forms.Padding(4);
             this.nameRbtn.Name = "nameRbtn";
-            this.nameRbtn.Size = new System.Drawing.Size(69, 24);
+            this.nameRbtn.Size = new System.Drawing.Size(85, 28);
             this.nameRbtn.TabIndex = 39;
             this.nameRbtn.TabStop = true;
             this.nameRbtn.Text = "Name";
@@ -589,32 +553,34 @@
             // searchLbl
             // 
             this.searchLbl.AutoSize = true;
-            this.searchLbl.Font = new System.Drawing.Font("Century Gothic", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.searchLbl.Font = new System.Drawing.Font("Roboto", 16F);
             this.searchLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.searchLbl.Location = new System.Drawing.Point(50, 92);
+            this.searchLbl.Location = new System.Drawing.Point(67, 133);
+            this.searchLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.searchLbl.Name = "searchLbl";
-            this.searchLbl.Size = new System.Drawing.Size(79, 22);
+            this.searchLbl.Size = new System.Drawing.Size(105, 33);
             this.searchLbl.TabIndex = 36;
             this.searchLbl.Text = "Search:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Century Gothic", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.DimGray;
-            this.label4.Location = new System.Drawing.Point(50, 49);
+            this.label4.Font = new System.Drawing.Font("Times New Roman", 24F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.label4.ForeColor = System.Drawing.Color.DarkRed;
+            this.label4.Location = new System.Drawing.Point(67, 60);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(173, 28);
+            this.label4.Size = new System.Drawing.Size(264, 46);
             this.label4.TabIndex = 33;
             this.label4.Text = "Entrance Logs";
             // 
             // textBoxSearch
             // 
             this.textBoxSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxSearch.Location = new System.Drawing.Point(384, 94);
-            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxSearch.Location = new System.Drawing.Point(563, 137);
+            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(195, 24);
+            this.textBoxSearch.Size = new System.Drawing.Size(259, 29);
             this.textBoxSearch.TabIndex = 30;
             // 
             // labelMonitor
@@ -622,9 +588,10 @@
             this.labelMonitor.AutoSize = true;
             this.labelMonitor.Font = new System.Drawing.Font("Century", 13F, System.Drawing.FontStyle.Bold);
             this.labelMonitor.ForeColor = System.Drawing.Color.DimGray;
-            this.labelMonitor.Location = new System.Drawing.Point(36, 73);
+            this.labelMonitor.Location = new System.Drawing.Point(48, 90);
+            this.labelMonitor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelMonitor.Name = "labelMonitor";
-            this.labelMonitor.Size = new System.Drawing.Size(0, 22);
+            this.labelMonitor.Size = new System.Drawing.Size(0, 27);
             this.labelMonitor.TabIndex = 29;
             // 
             // buttonSearch
@@ -638,9 +605,10 @@
             this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
             this.buttonSearch.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearch.Image")));
-            this.buttonSearch.Location = new System.Drawing.Point(595, 88);
+            this.buttonSearch.Location = new System.Drawing.Point(844, 135);
+            this.buttonSearch.Margin = new System.Windows.Forms.Padding(4);
             this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(44, 37);
+            this.buttonSearch.Size = new System.Drawing.Size(59, 32);
             this.buttonSearch.TabIndex = 14;
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
@@ -649,51 +617,50 @@
             // 
             this.webCamTimer.Tick += new System.EventHandler(this.webCamTimer_Tick);
             // 
-            // labelEntrance
+            // userDetailsBtn
             // 
-            this.labelEntrance.AutoSize = true;
-            this.labelEntrance.Font = new System.Drawing.Font("Century Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEntrance.ForeColor = System.Drawing.Color.DarkRed;
-            this.labelEntrance.Location = new System.Drawing.Point(8, 8);
-            this.labelEntrance.Name = "labelEntrance";
-            this.labelEntrance.Size = new System.Drawing.Size(180, 38);
-            this.labelEntrance.TabIndex = 62;
-            this.labelEntrance.Text = "ENTRANCE";
+            this.userDetailsBtn.BackColor = System.Drawing.Color.DimGray;
+            this.userDetailsBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.userDetailsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.userDetailsBtn.Font = new System.Drawing.Font("Roboto", 12F);
+            this.userDetailsBtn.ForeColor = System.Drawing.Color.White;
+            this.userDetailsBtn.Location = new System.Drawing.Point(793, 517);
+            this.userDetailsBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.userDetailsBtn.Name = "userDetailsBtn";
+            this.userDetailsBtn.Size = new System.Drawing.Size(231, 64);
+            this.userDetailsBtn.TabIndex = 64;
+            this.userDetailsBtn.Text = "Visitor Details";
+            this.userDetailsBtn.UseVisualStyleBackColor = false;
             // 
-            // labelExit
+            // checkinHistoryBtn
             // 
-            this.labelExit.AutoSize = true;
-            this.labelExit.Font = new System.Drawing.Font("Century Gothic", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelExit.ForeColor = System.Drawing.Color.DarkRed;
-            this.labelExit.Location = new System.Drawing.Point(8, 8);
-            this.labelExit.Name = "labelExit";
-            this.labelExit.Size = new System.Drawing.Size(78, 38);
-            this.labelExit.TabIndex = 63;
-            this.labelExit.Text = "EXIT";
-            // 
-            // msgErrorlbl
-            // 
-            this.msgErrorlbl.AutoSize = true;
-            this.msgErrorlbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.msgErrorlbl.ForeColor = System.Drawing.Color.Red;
-            this.msgErrorlbl.Location = new System.Drawing.Point(380, 120);
-            this.msgErrorlbl.Name = "msgErrorlbl";
-            this.msgErrorlbl.Size = new System.Drawing.Size(121, 20);
-            this.msgErrorlbl.TabIndex = 46;
-            this.msgErrorlbl.Text = "(error message)";
+            this.checkinHistoryBtn.BackColor = System.Drawing.Color.DimGray;
+            this.checkinHistoryBtn.Enabled = false;
+            this.checkinHistoryBtn.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.checkinHistoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.checkinHistoryBtn.Font = new System.Drawing.Font("Roboto", 12F);
+            this.checkinHistoryBtn.ForeColor = System.Drawing.Color.White;
+            this.checkinHistoryBtn.Location = new System.Drawing.Point(793, 589);
+            this.checkinHistoryBtn.Margin = new System.Windows.Forms.Padding(4);
+            this.checkinHistoryBtn.Name = "checkinHistoryBtn";
+            this.checkinHistoryBtn.Size = new System.Drawing.Size(231, 64);
+            this.checkinHistoryBtn.TabIndex = 65;
+            this.checkinHistoryBtn.Text = "Check History";
+            this.checkinHistoryBtn.UseVisualStyleBackColor = false;
             // 
             // EntranceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1040, 640);
+            this.ClientSize = new System.Drawing.Size(1387, 788);
+            this.Controls.Add(this.searchPanel);
+            this.Controls.Add(this.checkinPanel);
+            this.Controls.Add(this.checkoutPanel);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.checkoutPanel);
-            this.Controls.Add(this.checkinPanel);
-            this.Controls.Add(this.searchPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "EntranceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EntranceForm";
@@ -733,19 +700,12 @@
         private System.Windows.Forms.Timer webCamTimer;
         private System.Windows.Forms.Label labelMonitor;
         private System.Windows.Forms.Label lbCheckIn;
-        private System.Windows.Forms.Label labelVisitor;
         private System.Windows.Forms.Button checkinOverrideBtn;
-        private System.Windows.Forms.Button userDetailsBtn;
-        private System.Windows.Forms.Button checkinHistoryBtn;
-        private System.Windows.Forms.ListBox checkinInfoLbx;
-        private System.Windows.Forms.Label checkinLbl;
         private System.Windows.Forms.Label checkinMessageLbl;
         private System.Windows.Forms.Label checkinStatusLbl;
         private System.Windows.Forms.Button checkoutOverrideBtn;
         private System.Windows.Forms.Button checkoutDetailsBtn;
-        private System.Windows.Forms.Button checkoutHistoryBtn;
         private System.Windows.Forms.ListBox checkoutInfoLbx;
-        private System.Windows.Forms.Label campingCheckoutLbl;
         private System.Windows.Forms.Label checkoutMessageLbl;
         private System.Windows.Forms.Label checkoutStatusLbl;
         private System.Windows.Forms.PictureBox pictureBox3;
@@ -761,7 +721,9 @@
         private System.Windows.Forms.RadioButton tagRbtn;
         private System.Windows.Forms.Label labelEntrance;
         private System.Windows.Forms.Label labelExit;
-        private System.Windows.Forms.Label msgErrorlbl;
+        private System.Windows.Forms.ListBox checkinInfoLbx;
+        private System.Windows.Forms.Button checkinHistoryBtn;
+        private System.Windows.Forms.Button userDetailsBtn;
     }
 }
 

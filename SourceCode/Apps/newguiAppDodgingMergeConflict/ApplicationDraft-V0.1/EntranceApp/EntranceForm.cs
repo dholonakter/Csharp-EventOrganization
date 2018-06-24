@@ -176,13 +176,20 @@ namespace EntranceApp
             else if (ticketRbtn.Checked)
             {
                 t = dh.GetTicket(Convert.ToInt32(textBoxSearch.Text));
-                if (dh.FindVisitorByNr(t.BuyerNr) != null)
+                if (t != null)
                 {
-                    logsInfoLbx.Items.Add(visitor);
+                    if (dh.FindVisitorByNr(t.BuyerNr) != null)
+                    {
+                        logsInfoLbx.Items.Add(visitor);
+                    }
+                    else
+                    {
+                        logsInfoLbx.Items.Add("No visitor found");
+                    }
                 }
                 else
                 {
-                    logsInfoLbx.Items.Add("No visitor found");
+                    logsInfoLbx.Items.Add("No ticket found");
                 }
             }
         }
@@ -272,7 +279,6 @@ namespace EntranceApp
         {
             CrossThreadDisplay display = new CrossThreadDisplay(this);
             Visitor v = dh.FindVisitorByTag(e.Tag);
-            labelVisitor.Text = v.ToString();
 
             dh.FindUnreturnedItems(v);
 
@@ -333,7 +339,7 @@ namespace EntranceApp
             webCamTimer.Tick += webCamTimer_Tick;
             webCamTimer.Interval = 200;
             webCamTimer.Start();
-            buttonStartWC.Text = "Stop webcam";
+            buttonStartWC.Text = "Stop QR Scanner";
         }
 
         private void StopWebcam()
@@ -342,7 +348,7 @@ namespace EntranceApp
             webCamTimer = null;
             wCam.Dispose();
             wCam = null;
-            buttonStartWC.Text = "Start webcam";
+            buttonStartWC.Text = "Start QR Scanner";
         }
 
         private void webCamTimer_Tick(object sender, EventArgs e)
@@ -555,7 +561,7 @@ namespace EntranceApp
             {
                 foreach (Ticket t in tickets)
                 {
-                    logsInfoLbx.Items.Add("Ticket #" + t.TicketNr + " - Entry time: " + t.EntryTime + " - Type: " + t.TicketType + " - Price: " + t.Price);
+                    logsInfoLbx.Items.Add("Ticket nr. " + t.TicketNr + "; Entry time: " + t.EntryTime + "; Type: " + t.TicketType + "; Price: €" + t.Price.ToString("0.00"));
                 }
             }
             else

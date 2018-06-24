@@ -29,57 +29,12 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TransactionForm));
-            this.listBoxDetails = new System.Windows.Forms.ListBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.buttonLoad = new System.Windows.Forms.Button();
-            this.buttonRefresh = new System.Windows.Forms.Button();
             this.button12 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.labelLocation = new System.Windows.Forms.Label();
+            this.buttonChange = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // listBoxDetails
-            // 
-            this.listBoxDetails.FormattingEnabled = true;
-            this.listBoxDetails.Location = new System.Drawing.Point(148, 103);
-            this.listBoxDetails.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.listBoxDetails.Name = "listBoxDetails";
-            this.listBoxDetails.Size = new System.Drawing.Size(275, 407);
-            this.listBoxDetails.TabIndex = 0;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(432, 160);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(509, 348);
-            this.dataGridView1.TabIndex = 1;
-            // 
-            // buttonLoad
-            // 
-            this.buttonLoad.Location = new System.Drawing.Point(432, 103);
-            this.buttonLoad.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.buttonLoad.Name = "buttonLoad";
-            this.buttonLoad.Size = new System.Drawing.Size(235, 40);
-            this.buttonLoad.TabIndex = 2;
-            this.buttonLoad.Text = "Load";
-            this.buttonLoad.UseVisualStyleBackColor = true;
-            this.buttonLoad.Click += new System.EventHandler(this.buttonLoad_Click);
-            // 
-            // buttonRefresh
-            // 
-            this.buttonRefresh.Location = new System.Drawing.Point(687, 103);
-            this.buttonRefresh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.buttonRefresh.Name = "buttonRefresh";
-            this.buttonRefresh.Size = new System.Drawing.Size(255, 40);
-            this.buttonRefresh.TabIndex = 4;
-            this.buttonRefresh.Text = "Refresh";
-            this.buttonRefresh.UseVisualStyleBackColor = true;
-            this.buttonRefresh.Click += new System.EventHandler(this.buttonRefresh_Click);
             // 
             // button12
             // 
@@ -91,42 +46,85 @@
             this.button12.Font = new System.Drawing.Font("Segoe UI Semibold", 11F);
             this.button12.ForeColor = System.Drawing.Color.DarkGreen;
             this.button12.Image = ((System.Drawing.Image)(resources.GetObject("button12.Image")));
-            this.button12.Location = new System.Drawing.Point(166, 23);
-            this.button12.Margin = new System.Windows.Forms.Padding(8, 2, 8, 2);
+            this.button12.Location = new System.Drawing.Point(77, 66);
+            this.button12.Margin = new System.Windows.Forms.Padding(11, 2, 11, 2);
             this.button12.Name = "button12";
-            this.button12.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.button12.Size = new System.Drawing.Size(733, 53);
+            this.button12.Padding = new System.Windows.Forms.Padding(29, 0, 0, 0);
+            this.button12.Size = new System.Drawing.Size(977, 65);
             this.button12.TabIndex = 35;
             this.button12.Text = "Transactions Log";
             this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.button12.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.button12.UseVisualStyleBackColor = false;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Roboto Medium", 14F);
+            this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.label1.Location = new System.Drawing.Point(94, 158);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 29);
+            this.label1.TabIndex = 36;
+            this.label1.Text = "Files location: ";
+            // 
+            // labelStatus
+            // 
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Font = new System.Drawing.Font("Roboto Black", 14F);
+            this.labelStatus.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.labelStatus.Location = new System.Drawing.Point(94, 252);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(231, 29);
+            this.labelStatus.TabIndex = 37;
+            this.labelStatus.Text = "Last added logs on: ";
+            // 
+            // labelLocation
+            // 
+            this.labelLocation.AutoSize = true;
+            this.labelLocation.Font = new System.Drawing.Font("Roboto", 12F);
+            this.labelLocation.Location = new System.Drawing.Point(120, 202);
+            this.labelLocation.Name = "labelLocation";
+            this.labelLocation.Size = new System.Drawing.Size(138, 24);
+            this.labelLocation.TabIndex = 38;
+            this.labelLocation.Text = "Files location: ";
+            // 
+            // buttonChange
+            // 
+            this.buttonChange.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonChange.Location = new System.Drawing.Point(290, 162);
+            this.buttonChange.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonChange.Name = "buttonChange";
+            this.buttonChange.Size = new System.Drawing.Size(97, 27);
+            this.buttonChange.TabIndex = 39;
+            this.buttonChange.Text = "Change";
+            this.buttonChange.UseVisualStyleBackColor = true;
+            this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
+            // 
             // TransactionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1056, 588);
+            this.ClientSize = new System.Drawing.Size(1102, 521);
+            this.Controls.Add(this.buttonChange);
+            this.Controls.Add(this.labelLocation);
+            this.Controls.Add(this.labelStatus);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.button12);
-            this.Controls.Add(this.buttonRefresh);
-            this.Controls.Add(this.buttonLoad);
-            this.Controls.Add(this.dataGridView1);
-            this.Controls.Add(this.listBoxDetails);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "TransactionForm";
             this.Text = "TransactionForm";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.TransactionForm_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox listBoxDetails;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button buttonLoad;
-        private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Label labelLocation;
+        private System.Windows.Forms.Button buttonChange;
     }
 }

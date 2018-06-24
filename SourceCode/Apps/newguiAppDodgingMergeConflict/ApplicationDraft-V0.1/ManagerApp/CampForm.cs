@@ -31,7 +31,11 @@ namespace ManagerApp
             campTable = new BindingSource();
             campTable.DataSource = dh.DataTableFromSQL(sql);
             dataGridViewCamp.DataSource = campTable;
+
+            // hide foreign keys
             dataGridViewCamp.Columns[0].Visible = false;
+            dataGridViewCamp.Columns[2].Visible = false;
+
             dataGridViewCamp.Refresh();
         }
 
@@ -39,6 +43,17 @@ namespace ManagerApp
         {
             sql = "Select * FROM all_SPOT";
             Display(sql);
+            foreach (DataGridViewRow row in dataGridViewCamp.Rows)
+            {
+                if (Convert.ToInt32(row.Cells["IsFree"].Value) == 1)
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.LightCoral;
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -51,22 +66,19 @@ namespace ManagerApp
 
         private void buttonClean_Click(object sender, EventArgs e)
         {
-            timerUpdate.Start();
             sql = "SELECT * FROM all_SPOT WHERE ToBeServiced = 1";
             Display(sql);
         }
 
         private void buttonAvailable_Click(object sender, EventArgs e)
         {
-            timerUpdate.Start();
-            sql = "SELECT * FROM free_spots";
+            sql = "SELECT * FROM all_SPOT WHERE IsFree = 1";
             Display(sql);
         }
 
         private void buttonBooked_Click(object sender, EventArgs e)
         {
-            timerUpdate.Start();
-            sql = "SELECT * FROM all_spot s WHERE exists (select 1 from camping_reservation r where r.SpotNr = s.SpotNr)";
+            sql = "SELECT * FROM all_spot where IsFree = 0";
             Display(sql);
         }
 
@@ -75,19 +87,14 @@ namespace ManagerApp
             ShowAll();
         }
 
-        private void timerUpdate_Tick(object sender, EventArgs e)
-        {
-            Display(sql);
-        }
-
         private void dataGridViewCamp_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            timerUpdate.Start();
+            
         }
 
         private void dataGridViewCamp_CellBeginEdit(object sender, DataGridViewCellCancelEventArgs e)
         {
-            timerUpdate.Stop();
+            
         }
 
         private void homeBtn_Click(object sender, EventArgs e)
@@ -95,6 +102,14 @@ namespace ManagerApp
             HomeForm home = new HomeForm();
             home.Show();
             this.Hide();
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+            if (dh.UpdateTable((DataTable)campTable.DataSource))
+            {
+                dataGridViewCamp.Refresh();
+            }
         }
     }
 }

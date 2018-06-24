@@ -70,8 +70,8 @@ namespace ThanhDLL
         public override string ToString()
         {
             return "Visitor Nr." + this.IdNr 
-                + "\n" + this.FirstName + " , " + this.LastName.ToUpper()
-                + "\nPhone: " + this.Phone;
+                + ": " + this.FirstName + " , " + this.LastName.ToUpper()
+                + "; Phone: " + this.Phone;
         }
 
        

@@ -1545,7 +1545,7 @@ namespace ThanhDLL
         ///////////////////////////////////////
         public Reservation FindReservationByVisitor(Visitor visitor)
         {
-            string sql = "SELECT * FROM reservation_info WHERE Reserver = " + visitor.IdNr;
+            string sql = "SELECT * FROM reservation_info WHERE VisitorNr = " + visitor.IdNr;
             MySqlCommand command = new MySqlCommand(sql, connection);
 
             try
@@ -1622,7 +1622,7 @@ namespace ThanhDLL
                 {
                     reservDate = Convert.ToDateTime(reader["ReservDate"]);
                     spot = new CampingSpot(Convert.ToInt32(reader["SpotNr"]), Convert.ToString(reader["SpotName"]));
-                    reserver = new Visitor(Convert.ToInt32(reader["Reserver"]), Convert.ToString(reader["FirstName"]), Convert.ToString(reader["LastName"]), Convert.ToString(reader["Phone"]), Convert.ToString(reader["Email"]));
+                    reserver = new Visitor(Convert.ToInt32(reader["VisitorNr"]), Convert.ToString(reader["FirstName"]), Convert.ToString(reader["LastName"]), Convert.ToString(reader["Phone"]), Convert.ToString(reader["Email"]));
                     nrOfRegistered = Convert.ToInt32(reader["NrOfRegistered"]);
                     nrCheckedIn = Convert.ToInt32(reader["NrCheckedIn"]);
                     paid = Convert.ToBoolean(reader["Paid"]);
@@ -1643,6 +1643,97 @@ namespace ThanhDLL
             }
         }
 
+        public List<int> FindCampersNr(Reservation r)
+        {
+            string sql = "SELECT VisitorNr FROM reservation_info WHERE ReservNr = " + r.ReservNr;
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            List<int> numbers = new List<int>();
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while(reader.Read())
+                {
+                    numbers.Add(Convert.ToInt32(reader["VisitorNr"]));
+                }
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Error getting reservation");
+                return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return numbers;
+        }
+
+        private List<Reservation> FindReservationsByCondition(String condition)
+        {
+            string sql = "SELECT * FROM reservation_info WHERE " + condition;
+            MySqlCommand command = new MySqlCommand(sql, connection);
+
+            List<Reservation> temp = new List<Reservation>();
+
+            try
+            {
+                connection.Open();
+                MySqlDataReader reader = command.ExecuteReader();
+
+                if (!reader.HasRows)
+                {
+                    return null;
+                }
+                int reservNr = 0;
+                DateTime reservDate = DateTime.MinValue;
+                DateTime startDate = DateTime.MinValue;
+                DateTime endDate = DateTime.MinValue;
+                Visitor reserver = null;
+                CampingSpot spot = null;
+                int nrOfRegistered = 0;
+                int nrCheckedIn = 0;
+                bool paid = false;
+
+                while (reader.Read())
+                {
+                    reservNr = Convert.ToInt32(reader["ReservNr"]);
+                    reservDate = Convert.ToDateTime(reader["ReservDate"]);
+                    spot = new CampingSpot(Convert.ToInt32(reader["SpotNr"]), Convert.ToString(reader["SpotName"]));
+                    reserver = new Visitor(Convert.ToInt32(reader["VisitorNr"]), Convert.ToString(reader["FirstName"]), Convert.ToString(reader["LastName"]), Convert.ToString(reader["Phone"]), Convert.ToString(reader["Email"]));
+                    nrOfRegistered = Convert.ToInt32(reader["NrOfRegistered"]);
+                    nrCheckedIn = Convert.ToInt32(reader["NrCheckedIn"]);
+                    paid = Convert.ToBoolean(reader["Paid"]);
+                    startDate = Convert.ToDateTime(reader["StartDate"]);
+                    endDate = Convert.ToDateTime(reader["EndDate"]);
+                }
+
+                temp.Add(new Reservation(reservNr, reservDate, spot, reserver, nrOfRegistered, nrCheckedIn, paid, startDate, endDate));
+            }
+            catch (MySqlException)
+            {
+                MessageBox.Show("Error getting reservation");
+                return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return temp;
+        }
+
+        public List<Reservation> FindFullyPresentReservations()
+        {
+            return FindReservationsByCondition("NrOfRegistered = NrCheckedIn");
+        }
+
+        public List<Reservation> FindNotFullyPresentReservations()
+        {
+            return FindReservationsByCondition("NrOfRegistered <> NrCheckedIn");
+        }
 
         ///////////////////////////////////////
         // ATM LOGS HANDLING

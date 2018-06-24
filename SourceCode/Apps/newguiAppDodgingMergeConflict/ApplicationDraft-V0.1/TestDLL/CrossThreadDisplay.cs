@@ -72,6 +72,14 @@ namespace ThanhDLL
             else
             {
                 lb.Text = text;
+                if (text == "OK")
+                {
+                    lb.ForeColor = Color.DarkGreen;
+                }
+                else if (text == "NOK")
+                {
+                    lb.ForeColor = Color.DarkRed;
+                }
             }
         }
 
@@ -92,6 +100,28 @@ namespace ThanhDLL
                 {
                     lb.Items.Add((a) + " at loan stand " + a.ShopName);
                 }
+            }
+        }
+
+        // Display reservation
+        public void DisplayReservation(Object o, ListBox lb)
+        {
+            Reservation r = (Reservation)o;
+
+            if (lb.InvokeRequired)
+            {
+                ListboxDelegate d = new ListboxDelegate(DisplayArticle);
+                myForm.Invoke(d, new object[] { r, lb });
+            }
+            else
+            {
+                lb.Items.Clear();
+                lb.Items.Add("RESERVATION NR. " + r.ReservNr);
+                lb.Items.Add("Reserved on: " + r.ReservDate);
+                lb.Items.Add("Reserved spot: " + r.Spot.SpotName);
+                lb.Items.Add("Period: " + r.StartDate + " to " + r.EndDate);
+                lb.Items.Add("CAMPER: " + r.Reserver.FirstName + ", " + r.Reserver.LastName.ToUpper());
+                lb.Items.Add("Phone: " + r.Reserver.Phone);
             }
         }
 

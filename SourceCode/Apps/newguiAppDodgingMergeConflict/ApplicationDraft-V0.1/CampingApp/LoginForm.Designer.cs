@@ -1,4 +1,4 @@
-﻿namespace EntranceApp
+﻿namespace CampingApp
 {
     partial class LoginForm
     {
@@ -38,42 +38,42 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(69, 132);
+            this.label2.Location = new System.Drawing.Point(70, 146);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(68, 17);
-            this.label2.TabIndex = 9;
+            this.label2.TabIndex = 14;
             this.label2.Text = "password";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(69, 95);
+            this.label1.Location = new System.Drawing.Point(70, 109);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(71, 17);
-            this.label1.TabIndex = 8;
+            this.label1.TabIndex = 13;
             this.label1.Text = "username";
             // 
             // tbPassword
             // 
-            this.tbPassword.Location = new System.Drawing.Point(143, 129);
+            this.tbPassword.Location = new System.Drawing.Point(144, 143);
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(156, 22);
-            this.tbPassword.TabIndex = 7;
+            this.tbPassword.TabIndex = 12;
             // 
             // tbUsername
             // 
-            this.tbUsername.Location = new System.Drawing.Point(143, 90);
+            this.tbUsername.Location = new System.Drawing.Point(144, 104);
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(156, 22);
-            this.tbUsername.TabIndex = 6;
+            this.tbUsername.TabIndex = 11;
             // 
             // buttonLogin
             // 
-            this.buttonLogin.Location = new System.Drawing.Point(115, 194);
+            this.buttonLogin.Location = new System.Drawing.Point(116, 208);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(127, 34);
-            this.buttonLogin.TabIndex = 5;
+            this.buttonLogin.TabIndex = 10;
             this.buttonLogin.Text = "login";
             this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
@@ -82,7 +82,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 301);
+            this.ClientSize = new System.Drawing.Size(381, 312);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.tbPassword);

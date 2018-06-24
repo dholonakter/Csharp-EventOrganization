@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ThanhDLL;
 
-namespace EntranceApp
+namespace CampingApp
 {
     public partial class LoginForm : Form
     {
         DataHelper dh;
 
-        public delegate void OnLoggedIn (object sender, EventArgs e);
+        public delegate void OnLoggedIn(object sender, EventArgs e);
         public event OnLoggedIn LoggedInHandler;
 
         public LoginForm()

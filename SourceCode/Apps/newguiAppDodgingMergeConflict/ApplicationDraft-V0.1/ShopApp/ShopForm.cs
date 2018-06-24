@@ -379,5 +379,10 @@ namespace ShopApp
                 }
             }
         }
+
+        private void startPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

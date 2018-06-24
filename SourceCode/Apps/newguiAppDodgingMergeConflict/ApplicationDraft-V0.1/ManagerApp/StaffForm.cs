@@ -60,14 +60,7 @@ namespace ManagerApp
             Display(sql);
             //labelCount.Text = "You have in total " + (dataGridViewStaff.RowCount - 1) + " people"; // minus empty row from hell
         }
-
-        private void buttonDisplay_Click(object sender, EventArgs e)
-        {
-            sql = "select * from staff where JobDescription = '" + locationComboBx.SelectedValue + "'";
-            Display(sql);
-            //labelCount.Text = "You have " + (dataGridViewStaff.RowCount - 1) + " people in this position"; // minus empty row from hell
-        }
-
+        
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (dh.UpdateTable((DataTable)staffTable.DataSource))
@@ -86,6 +79,27 @@ namespace ManagerApp
             HomeForm home = new HomeForm();
             home.Show();
             this.Hide();
+        }
+
+        private void locationComboBx_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            sql = "select * from staff where JobDescription = '" + locationComboBx.SelectedValue + "'";
+            Display(sql);
+        }
+
+        private void buttonLogs_Click(object sender, EventArgs e)
+        {
+            int selectedIdNr = Convert.ToInt32(dataGridViewStaff.CurrentRow.Cells[0].Value);
+            if (selectedIdNr > 0)
+            {
+                sql = "SELECT * FROM staff_logs where IdNr = " + selectedIdNr;
+                Display(sql);
+            }
+        }
+
+        private void buttonRefresh_Click(object sender, EventArgs e)
+        {
+            Display(sql);
         }
     }
 }

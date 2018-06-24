@@ -136,11 +136,11 @@
   </data>
   <data name="monitorBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
-        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
-        YQUAAAC+SURBVFhH7ZZBCoMwEEWz8lSFXq27trfsRii9xHRiHoookkwHrSEPBpJP/vfjakLjbxGRTueu
-        89L5GWLzUc8jWX0gNh/19MkqVyQTZJgKDHA1Q4xPAaSiMCyVFLBATCvgUwCpKAxLJQUsENMK+BRAKgrD
-        UkkBC8ScuIBy2EbkCrH54IscthG9k1UuSIu/grwJT00Fnsk6mbmOIC/0NXiaj3riWh434w/SvgXWICuW
-        GlZ25P3Qb944zs6NExPCFzqUOGl8YyZTAAAAAElFTkSuQmCC
+        iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAAL5JREFUWEft
+        lkEKgzAQRbPyVIVerbu2t+xGKL3EdGIeiiiSTAetIQ8Gkk/+9+NqQuNvEZFO567z0vkZYvNRzyNZfSA2
+        H/X0ySpXJBNkmAoMcDVDjE8BpKIwLJUUsEBMK+BTAKkoDEslBSwQ0wr4FEAqCsNSSQELxJy4gHLYRuQK
+        sfngixy2Eb2TVS5Ii7+CvAlPTQWeyTqZuY4gL/Q1eJqPeuJaHjfjD9K+BdYgK5YaVnbk/dBv3jjOzo0T
+        E8IXOpQ4aXxjJlMAAAAASUVORK5CYII=
 </value>
   </data>
   <data name="checkoutBtn.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
