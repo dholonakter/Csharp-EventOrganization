@@ -48,16 +48,6 @@ namespace EntranceApp
         ///////////////////////////////////////
         // STARTUP STUFF
         ///////////////////////////////////////
-        public void ShowAttached(object sender, AttachEventArgs e)
-        {
-            MessageBox.Show("RFID Reader Attached: Serial nr." + myRFIDReader.DeviceSerialNumber);
-        }
-
-        public void ShowDetached(object sender, DetachEventArgs e)
-        {
-            MessageBox.Show("RFID Reader Detached: Serial nr." + myRFIDReader.DeviceSerialNumber);
-        }
-
         private void EntranceForm_Load(object sender, EventArgs e)
         {
             // Connecting to DB
@@ -72,8 +62,6 @@ namespace EntranceApp
             try
             {
                 myRFIDReader = new RFID();
-                myRFIDReader.Attach += new AttachEventHandler(ShowAttached);
-                myRFIDReader.Detach += new DetachEventHandler(ShowDetached);
                 myRFIDReader.Tag += CheckIn; // Check in by default
                 myRFIDReader.Open();
 
@@ -311,6 +299,7 @@ namespace EntranceApp
                         {
                             checkinStatusLbl.Text = "OK";
                             checkinStatusLbl.ForeColor = Color.DarkGreen;
+                            checkinMessageLbl.Text = "Ticket is good";
                             checkinHistoryBtn.Enabled = false;
                             t = null;
                         }
@@ -434,8 +423,6 @@ namespace EntranceApp
         }
 
        
-
-
         private void checkinOverrideBtn_Click(object sender, EventArgs e)
         {
             if (!admin)
@@ -511,6 +498,11 @@ namespace EntranceApp
         private void homeBtn_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void searchPanel_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

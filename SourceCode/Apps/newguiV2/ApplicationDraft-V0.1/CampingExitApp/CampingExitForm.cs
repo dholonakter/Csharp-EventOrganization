@@ -18,18 +18,10 @@ namespace CampingApp
         Visitor visitor;
         Reservation r;
         DataHelper dh;
-        BindingSource campTable;
         RFID myRFIDReader;
-        bool admin;
 
         // Delegates for RFID
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
-
-       
-
-      
-
-       
 
         private void checkoutBtn_Click(object sender, EventArgs e)
         {
@@ -55,7 +47,6 @@ namespace CampingApp
         {
             // Connecting to DB
             dh = new DataHelper();
-            admin = false;
 
             // Connecting RFID reader
             try

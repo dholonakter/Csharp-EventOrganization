@@ -47,11 +47,11 @@
             this.button12.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button12.ForeColor = System.Drawing.Color.DarkGreen;
             this.button12.Image = ((System.Drawing.Image)(resources.GetObject("button12.Image")));
-            this.button12.Location = new System.Drawing.Point(58, 54);
-            this.button12.Margin = new System.Windows.Forms.Padding(8, 2, 8, 2);
+            this.button12.Location = new System.Drawing.Point(77, 66);
+            this.button12.Margin = new System.Windows.Forms.Padding(11, 2, 11, 2);
             this.button12.Name = "button12";
-            this.button12.Padding = new System.Windows.Forms.Padding(22, 0, 0, 0);
-            this.button12.Size = new System.Drawing.Size(890, 53);
+            this.button12.Padding = new System.Windows.Forms.Padding(29, 0, 0, 0);
+            this.button12.Size = new System.Drawing.Size(1187, 65);
             this.button12.TabIndex = 35;
             this.button12.Text = "     TRANSACTIONS LOGS";
             this.button12.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -63,22 +63,20 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.label1.Location = new System.Drawing.Point(53, 138);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Location = new System.Drawing.Point(71, 165);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(144, 30);
+            this.label1.Size = new System.Drawing.Size(185, 37);
             this.label1.TabIndex = 36;
             this.label1.Text = "Files location: ";
             // 
             // labelStatus
             // 
             this.labelStatus.AutoSize = true;
-            this.labelStatus.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelStatus.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Bold);
             this.labelStatus.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.labelStatus.Location = new System.Drawing.Point(53, 212);
-            this.labelStatus.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelStatus.Location = new System.Drawing.Point(70, 304);
             this.labelStatus.Name = "labelStatus";
-            this.labelStatus.Size = new System.Drawing.Size(199, 30);
+            this.labelStatus.Size = new System.Drawing.Size(272, 37);
             this.labelStatus.TabIndex = 37;
             this.labelStatus.Text = "Last added logs on: ";
             // 
@@ -86,23 +84,23 @@
             // 
             this.labelLocation.AutoSize = true;
             this.labelLocation.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelLocation.Location = new System.Drawing.Point(54, 168);
-            this.labelLocation.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelLocation.Location = new System.Drawing.Point(104, 242);
             this.labelLocation.Name = "labelLocation";
-            this.labelLocation.Size = new System.Drawing.Size(107, 21);
+            this.labelLocation.Size = new System.Drawing.Size(135, 28);
             this.labelLocation.TabIndex = 38;
             this.labelLocation.Text = "Files location: ";
             // 
             // buttonChange
             // 
             this.buttonChange.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonChange.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonChange.FlatAppearance.BorderColor = System.Drawing.Color.Gray;
+            this.buttonChange.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonChange.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonChange.Image = ((System.Drawing.Image)(resources.GetObject("buttonChange.Image")));
-            this.buttonChange.Location = new System.Drawing.Point(201, 137);
-            this.buttonChange.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonChange.Location = new System.Drawing.Point(252, 166);
+            this.buttonChange.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonChange.Name = "buttonChange";
-            this.buttonChange.Size = new System.Drawing.Size(83, 35);
+            this.buttonChange.Size = new System.Drawing.Size(61, 38);
             this.buttonChange.TabIndex = 39;
             this.buttonChange.UseVisualStyleBackColor = false;
             this.buttonChange.Click += new System.EventHandler(this.buttonChange_Click);
@@ -117,9 +115,10 @@
             this.homeBtn.ForeColor = System.Drawing.Color.DimGray;
             this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
             this.homeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.homeBtn.Location = new System.Drawing.Point(948, 12);
+            this.homeBtn.Location = new System.Drawing.Point(1264, 15);
+            this.homeBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.homeBtn.Name = "homeBtn";
-            this.homeBtn.Size = new System.Drawing.Size(44, 42);
+            this.homeBtn.Size = new System.Drawing.Size(59, 52);
             this.homeBtn.TabIndex = 53;
             this.homeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.homeBtn.UseVisualStyleBackColor = true;
@@ -127,10 +126,10 @@
             // 
             // TransactionForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1004, 571);
+            this.ClientSize = new System.Drawing.Size(1339, 703);
             this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.buttonChange);
             this.Controls.Add(this.labelLocation);
@@ -138,7 +137,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button12);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "TransactionForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TransactionForm";

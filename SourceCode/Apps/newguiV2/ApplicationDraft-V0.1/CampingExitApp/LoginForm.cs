@@ -15,9 +15,6 @@ namespace CampingApp
     {
         DataHelper dh;
 
-        public delegate void OnLoggedIn(object sender, EventArgs e);
-        public event OnLoggedIn LoggedInHandler;
-
         public LoginForm()
         {
             InitializeComponent();
@@ -29,11 +26,13 @@ namespace CampingApp
         {
             if (tbUsername.Text != "" && tbPassword.Text != "")
             {
-                if (tbUsername.Text.StartsWith("admin") && dh.CheckCredentials(tbUsername.Text, tbPassword.Text) == 1)
+                if (tbUsername.Text.StartsWith("admin") || (tbUsername.Text.StartsWith("campexit") == true))
                 {
-                    if (LoggedInHandler != null)
+                    if (dh.CheckCredentials(tbUsername.Text, tbPassword.Text) == 1)
                     {
-                        this.LoggedInHandler(this, null); // fire them events
+                        Form mf = new CampingExitForm();
+                        mf.ShowDialog();
+                        mf.Focus();
                     }
                 }
                 else
