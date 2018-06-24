@@ -1,4 +1,4 @@
-﻿namespace EntranceApp
+﻿namespace CampingApp
 {
     partial class LoginForm
     {
@@ -46,7 +46,7 @@
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 25);
-            this.label2.TabIndex = 9;
+            this.label2.TabIndex = 14;
             this.label2.Text = "Password";
             // 
             // label1
@@ -58,7 +58,7 @@
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(101, 25);
-            this.label1.TabIndex = 8;
+            this.label1.TabIndex = 13;
             this.label1.Text = "Username";
             // 
             // tbPassword
@@ -69,7 +69,7 @@
             this.tbPassword.Name = "tbPassword";
             this.tbPassword.PasswordChar = '*';
             this.tbPassword.Size = new System.Drawing.Size(152, 29);
-            this.tbPassword.TabIndex = 7;
+            this.tbPassword.TabIndex = 12;
             // 
             // tbUsername
             // 
@@ -78,13 +78,11 @@
             this.tbUsername.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.tbUsername.Name = "tbUsername";
             this.tbUsername.Size = new System.Drawing.Size(152, 29);
-            this.tbUsername.TabIndex = 6;
+            this.tbUsername.TabIndex = 11;
             // 
             // buttonLogin
             // 
             this.buttonLogin.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonLogin.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonLogin.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.buttonLogin.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonLogin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonLogin.ForeColor = System.Drawing.Color.White;
@@ -92,9 +90,9 @@
             this.buttonLogin.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.buttonLogin.Name = "buttonLogin";
             this.buttonLogin.Size = new System.Drawing.Size(119, 52);
-            this.buttonLogin.TabIndex = 5;
+            this.buttonLogin.TabIndex = 10;
             this.buttonLogin.Text = "Login";
-            this.buttonLogin.UseVisualStyleBackColor = false;
+            this.buttonLogin.UseVisualStyleBackColor = true;
             this.buttonLogin.Click += new System.EventHandler(this.buttonLogin_Click);
             // 
             // panel2
@@ -104,7 +102,7 @@
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(340, 24);
-            this.panel2.TabIndex = 16;
+            this.panel2.TabIndex = 17;
             // 
             // LoginForm
             // 

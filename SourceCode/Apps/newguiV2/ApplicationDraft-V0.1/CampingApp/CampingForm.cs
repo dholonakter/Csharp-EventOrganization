@@ -8,7 +8,7 @@ using ThanhDLL;
 
 namespace CampingApp
 {
-    public partial class CampingExitForm : Form
+    public partial class CampingForm : Form
     {
         ///////////////////////////////////////
         // DECLARATIONS
@@ -18,10 +18,47 @@ namespace CampingApp
         Visitor visitor;
         Reservation r;
         DataHelper dh;
+        BindingSource campTable;
         RFID myRFIDReader;
+        bool admin;
 
         // Delegates for RFID
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
+
+        public CampingForm()
+        {
+            InitializeComponent();
+            sideHighlight.Height = checkinBtn.Height;
+            sideHighlight.Top = checkinBtn.Top;
+            checkinPanel.BringToFront();
+        }
+
+        private void ResetGUI()
+        {
+            labelStatusIn.Text = "";
+            checkoutStatusLbl.Text = "";
+            labelMessageIn.Text = "";
+            checkoutMessageLbl.Text = "";
+            logsInfoLbx.Items.Clear();
+            checkoutInfoLbx.Items.Clear();
+            checkoutInfoLbx.Items.Clear();
+            buttonOverride.Text = "Override";
+            admin = false;
+            visitor = null;
+            r = null;
+        }
+
+        private void checkinBtn_Click(object sender, EventArgs e)
+        {
+            sideHighlight.Height = checkinBtn.Height;
+            sideHighlight.Top = checkinBtn.Top;
+            checkinPanel.BringToFront();
+
+            // Switching delegate's method
+            ResetGUI();
+            myRFIDReader.Tag -= CheckOut;
+            myRFIDReader.Tag += CheckIn;
+        }
 
         private void checkoutBtn_Click(object sender, EventArgs e)
         {
@@ -30,8 +67,8 @@ namespace CampingApp
             checkoutPanel.BringToFront();
 
             // Switching delegate's method
-           
-
+            ResetGUI();
+            myRFIDReader.Tag -= CheckIn;
             myRFIDReader.Tag += CheckOut;
         }
 
@@ -41,12 +78,14 @@ namespace CampingApp
             sideHighlight.Top = monitorBtn.Top;
             searchPanel.BringToFront();
 
+            ResetGUI();
         }
 
         private void CampingForm_Load(object sender, EventArgs e)
         {
             // Connecting to DB
             dh = new DataHelper();
+            admin = false;
 
             // Connecting RFID reader
             try
@@ -55,6 +94,7 @@ namespace CampingApp
                 myRFIDReader.Open();
                 // Switching delegate's method
                 myRFIDReader.Tag -= CheckOut;
+                myRFIDReader.Tag += CheckIn;
                 r = null;
 
             }
@@ -62,12 +102,87 @@ namespace CampingApp
             {
                 MessageBox.Show("Failure to connect to RFID reader");
             }
+
+            // Switching delegate's method
+            ResetGUI();
+            myRFIDReader.Tag -= CheckOut;
+            myRFIDReader.Tag += CheckIn;
         }
 
         ///////////////////////////////////////
         // CHECK IN PANEL
         /////////////////////////////////////// 
 
+        private void CheckIn(object sender, RFIDTagEventArgs e)
+        {
+            CrossThreadDisplay display = new CrossThreadDisplay(this);
+            visitor = dh.FindVisitorByTag(e.Tag);
+            r = dh.FindReservationByVisitor(visitor);
+
+            if (r != null)
+            {
+                display.DisplayReservation(r, listBoxCheckIn);
+
+                if (!admin)
+                {
+                    if (r.Paid)
+                    {
+                        if (DateTime.Compare(r.EndDate, DateTime.Now) > 0) // if endDate is earlier than now
+                        {
+                            display.SetText("OK", labelStatusIn);
+
+                            if (!visitor.IsInCamp)
+                            {
+                                r.NrCheckedIn += 1;
+                                visitor.IsInCamp = true;
+                                if (dh.UpdateSelectedReservation(r) != -1 && dh.UpdateSelectedVisitor(visitor) != -1)
+                                {
+                                    display.SetText("Checked in successful!", labelMessageIn);
+                                }
+                            }
+                            else
+                            {
+                                display.SetText("NOK", labelStatusIn);
+                                display.SetText("Already checked in", labelMessageIn);
+                            }
+                        }
+                        else
+                        {
+                            display.SetText("NOK", labelStatusIn);
+                            display.SetText("The reservation's end date is past", labelMessageIn);
+                        }
+
+                    }
+                    else
+                    {
+                        display.SetText("NOK", labelStatusIn);
+                        display.SetText("The reservation is not paid", labelMessageIn);
+                    }
+                }
+                else
+                {
+                    if (!visitor.IsInCamp)
+                    {
+                        r.NrCheckedIn += 1;
+                        visitor.IsInCamp = true;
+                        if (dh.UpdateSelectedReservation(r) != -1 && dh.UpdateSelectedVisitor(visitor) != -1)
+                        {
+                            display.SetText("OK", labelStatusIn);
+                            display.SetText("Checked in successful!", labelMessageIn);
+                        }
+                    }
+                    else
+                    {
+                        display.SetText("NOK", labelStatusIn);
+                        display.SetText("Already checked in", labelMessageIn);
+                    }
+                }
+            }
+            else
+            {
+                display.SetText("No reservation found", labelMessageIn);
+            }
+        }
 
         private void CheckOut(object sender, RFIDTagEventArgs e)
         {
@@ -167,7 +282,10 @@ namespace CampingApp
             }
         }
 
-     
+        private void buttonUserDetails_Click(object sender, EventArgs e)
+        {
+            ShowUserDetails(listBoxCheckIn);
+        }
 
         private void checkoutDetailsBtn_Click(object sender, EventArgs e)
         {
@@ -232,12 +350,30 @@ namespace CampingApp
                 logsInfoLbx.Items.Add("No reservation found");
             }
         }
-
-
-       
-        private void homeBtn_Click(object sender, EventArgs e)
+        private void CheckInOverride(object sender, EventArgs e)
         {
-            this.Dispose();
+            MessageBox.Show("Logged in as admin");
+            admin = true;
+            buttonOverride.Text = "Revoke admin rights";
+            ((Form)sender).Close();
+        }
+
+        private void buttonOverride_Click(object sender, EventArgs e)
+        {
+            if (!admin)
+            {
+                LoginForm testDialog = new LoginForm();
+                testDialog.LoggedInHandler += CheckInOverride;
+                testDialog.ShowDialog();
+            }
+            else
+            {
+                if (MessageBox.Show("Revoke admin rights on this user?", "Confirm", MessageBoxButtons.OKCancel) == DialogResult.OK)
+                {
+                    admin = false;
+                    buttonOverride.Text = "Override";
+                }
+            }
         }
     }
 }

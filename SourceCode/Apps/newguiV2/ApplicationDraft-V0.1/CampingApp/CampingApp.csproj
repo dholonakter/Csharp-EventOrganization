@@ -55,11 +55,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CampingEntranceForm.cs">
+    <Compile Include="CampingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CampingEntranceForm.Designer.cs">
-      <DependentUpon>CampingEntranceForm.cs</DependentUpon>
+    <Compile Include="CampingForm.Designer.cs">
+      <DependentUpon>CampingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
@@ -69,8 +69,8 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="CampingEntranceForm.resx">
-      <DependentUpon>CampingEntranceForm.cs</DependentUpon>
+    <EmbeddedResource Include="CampingForm.resx">
+      <DependentUpon>CampingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

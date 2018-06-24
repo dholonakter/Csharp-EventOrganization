@@ -31,6 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ShopForm));
             this.panel1 = new System.Windows.Forms.Panel();
+            this.homeBtn = new System.Windows.Forms.Button();
             this.orderBtn = new System.Windows.Forms.Button();
             this.sideHighlight = new System.Windows.Forms.Panel();
             this.stockBtn = new System.Windows.Forms.Button();
@@ -81,7 +82,6 @@
             this.stockLogsLbl = new System.Windows.Forms.Label();
             this.labelShopName = new System.Windows.Forms.Label();
             this.timerScanCard = new System.Windows.Forms.Timer(this.components);
-            this.homeBtn = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.productPanel.SuspendLayout();
             this.startPanel.SuspendLayout();
@@ -99,6 +99,24 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(166, 765);
             this.panel1.TabIndex = 0;
+            // 
+            // homeBtn
+            // 
+            this.homeBtn.FlatAppearance.BorderSize = 0;
+            this.homeBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
+            this.homeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
+            this.homeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.homeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.homeBtn.ForeColor = System.Drawing.Color.DimGray;
+            this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
+            this.homeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.homeBtn.Location = new System.Drawing.Point(3, 3);
+            this.homeBtn.Name = "homeBtn";
+            this.homeBtn.Size = new System.Drawing.Size(44, 42);
+            this.homeBtn.TabIndex = 54;
+            this.homeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.homeBtn.UseVisualStyleBackColor = true;
+            this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
             // 
             // orderBtn
             // 
@@ -211,11 +229,11 @@
             // buttonIncrease
             // 
             this.buttonIncrease.BackColor = System.Drawing.Color.White;
-            this.buttonIncrease.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.buttonIncrease.FlatAppearance.BorderSize = 3;
+            this.buttonIncrease.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonIncrease.FlatAppearance.BorderSize = 2;
             this.buttonIncrease.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.buttonIncrease.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.buttonIncrease.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonIncrease.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonIncrease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonIncrease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonIncrease.ForeColor = System.Drawing.Color.White;
             this.buttonIncrease.Image = ((System.Drawing.Image)(resources.GetObject("buttonIncrease.Image")));
@@ -228,10 +246,10 @@
             // 
             // buttonConfirm
             // 
-            this.buttonConfirm.BackColor = System.Drawing.Color.DimGray;
-            this.buttonConfirm.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
-            this.buttonConfirm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.buttonConfirm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonConfirm.BackColor = System.Drawing.Color.Green;
+            this.buttonConfirm.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.buttonConfirm.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.buttonConfirm.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.buttonConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonConfirm.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonConfirm.ForeColor = System.Drawing.Color.White;
@@ -246,11 +264,11 @@
             // buttonDecrease
             // 
             this.buttonDecrease.BackColor = System.Drawing.Color.White;
-            this.buttonDecrease.FlatAppearance.BorderColor = System.Drawing.Color.Silver;
-            this.buttonDecrease.FlatAppearance.BorderSize = 3;
+            this.buttonDecrease.FlatAppearance.BorderColor = System.Drawing.Color.DimGray;
+            this.buttonDecrease.FlatAppearance.BorderSize = 2;
             this.buttonDecrease.FlatAppearance.MouseDownBackColor = System.Drawing.Color.DarkGray;
-            this.buttonDecrease.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DimGray;
-            this.buttonDecrease.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.buttonDecrease.FlatAppearance.MouseOverBackColor = System.Drawing.Color.DarkGray;
+            this.buttonDecrease.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonDecrease.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDecrease.ForeColor = System.Drawing.Color.White;
             this.buttonDecrease.Image = ((System.Drawing.Image)(resources.GetObject("buttonDecrease.Image")));
@@ -572,11 +590,11 @@
             // labelOrderInfo
             // 
             this.labelOrderInfo.AutoSize = true;
-            this.labelOrderInfo.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelOrderInfo.Font = new System.Drawing.Font("Segoe UI", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelOrderInfo.ForeColor = System.Drawing.Color.DimGray;
             this.labelOrderInfo.Location = new System.Drawing.Point(697, 579);
             this.labelOrderInfo.Name = "labelOrderInfo";
-            this.labelOrderInfo.Size = new System.Drawing.Size(60, 25);
+            this.labelOrderInfo.Size = new System.Drawing.Size(62, 30);
             this.labelOrderInfo.TabIndex = 28;
             this.labelOrderInfo.Text = "Total:";
             // 
@@ -772,24 +790,6 @@
             this.timerScanCard.Interval = 10000;
             this.timerScanCard.Tick += new System.EventHandler(this.timerScanCard_Tick);
             // 
-            // homeBtn
-            // 
-            this.homeBtn.FlatAppearance.BorderSize = 0;
-            this.homeBtn.FlatAppearance.MouseDownBackColor = System.Drawing.Color.WhiteSmoke;
-            this.homeBtn.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Gainsboro;
-            this.homeBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.homeBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.homeBtn.ForeColor = System.Drawing.Color.DimGray;
-            this.homeBtn.Image = ((System.Drawing.Image)(resources.GetObject("homeBtn.Image")));
-            this.homeBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.homeBtn.Location = new System.Drawing.Point(3, 3);
-            this.homeBtn.Name = "homeBtn";
-            this.homeBtn.Size = new System.Drawing.Size(44, 42);
-            this.homeBtn.TabIndex = 54;
-            this.homeBtn.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.homeBtn.UseVisualStyleBackColor = true;
-            this.homeBtn.Click += new System.EventHandler(this.homeBtn_Click);
-            // 
             // ShopForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -802,6 +802,7 @@
             this.Controls.Add(this.startPanel);
             this.Controls.Add(this.productPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ShopForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ShopForm";

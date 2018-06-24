@@ -29,13 +29,11 @@ namespace EntranceApp
         {
             if (tbUsername.Text != "" && tbPassword.Text != "")
             {
-                if (tbUsername.Text.StartsWith("admin") || (tbUsername.Text.StartsWith("entrance") == true))
+                if (tbUsername.Text.StartsWith("admin") && dh.CheckCredentials(tbUsername.Text, tbPassword.Text) == 1)
                 {
-                    if (dh.CheckCredentials(tbUsername.Text, tbPassword.Text) == 1)
+                    if (LoggedInHandler != null)
                     {
-                        Form mf = new EntranceForm();
-                        mf.ShowDialog();
-                        mf.Focus();
+                        this.LoggedInHandler(this, null); // fire them events
                     }
                 }
                 else
@@ -49,12 +47,5 @@ namespace EntranceApp
         {
             ValidateLogin();
         }
-
-        private void closeBtn_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-
     }
 }
