@@ -23,6 +23,7 @@ namespace ThanhDLL
         public bool Paid { get; set; }
         public double Price { get; set; }
 
+        public bool AtEntrance { get; set; }
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////
@@ -52,7 +53,7 @@ namespace ThanhDLL
                 + "\nType: " + this.TicketType
                 + "\nBuyer: " + this.BuyerNr
                 + "\nStatus: " + (Paid ? "PAID" : "NOT PAID")
-                + "\nPrice : €" + Price.ToString("0.00") + (Paid? "" : " + €10.00 = €" + (Price + 10).ToString("0.00"));
+                + "\nPrice : €" + Price.ToString("0.00") + (!AtEntrance? "" : "(incl. €10.00 additionall entrance)");
         }
 
         public void ChangeStatus()

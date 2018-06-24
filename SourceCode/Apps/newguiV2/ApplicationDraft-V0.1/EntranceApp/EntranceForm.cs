@@ -378,20 +378,21 @@ namespace EntranceApp
                     if (t != null) // if ticket exists
                     {
                         visitor = dh.FindVisitorByNr(t.BuyerNr);
-                        lbCheckIn.Text = t.ToString();
-
                         if (t.Paid)
                         {
-                            checkinStatusLbl.Text = "OK";
+                            checkinStatusLbl.Text = "Pending";
+                            checkinMessageLbl.Text = "Waiting for RFID";
                             checkinStatusLbl.ForeColor = Color.DarkGreen;
                             checkinHistoryBtn.Enabled = false;
-                            t = null;
                         }
                         else if (!t.Paid)
                         {
                             checkinStatusLbl.Text = "NOK";
                             checkinStatusLbl.ForeColor = Color.DarkRed;
                             checkinMessageLbl.Text = "Ticket has not been paid";
+                            t.Price += 10;
+                            t.AtEntrance = true;
+                            dh.UpdateSelectedTicket(t);
                             checkinHistoryBtn.Enabled = true;
                         }
                         else if (t.EntryTime != null)
@@ -400,7 +401,7 @@ namespace EntranceApp
                             checkinStatusLbl.ForeColor = Color.DarkRed;
                             checkinMessageLbl.Text = "Ticket already used";
                         }
-
+                        lbCheckIn.Text = t.ToString();
                         StopWebcam();
                     }
                     else
@@ -610,6 +611,22 @@ namespace EntranceApp
             else
             {
                 logsInfoLbx.Items.Add("No tickets used");
+            }
+        }
+
+        private void buttonConfirmPayment_Click(object sender, EventArgs e)
+        {
+            if (t!= null)
+            {
+                t.ChangeStatus();
+                lbCheckIn.Text = t.ToString();
+                if (dh.UpdateSelectedTicket(t) != -1)
+                {
+                    checkinStatusLbl.Text = "Pending";
+                    checkinMessageLbl.Text = "Waiting for RFID";
+                    checkinStatusLbl.ForeColor = Color.DarkGreen;
+                    checkinHistoryBtn.Enabled = false;
+                }
             }
         }
     }

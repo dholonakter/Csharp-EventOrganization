@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EntranceForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.checkinBtn = new System.Windows.Forms.Button();
@@ -36,6 +37,7 @@
             this.checkoutBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.checkinPanel = new System.Windows.Forms.Panel();
+            this.buttonConfirmPayment = new System.Windows.Forms.Button();
             this.checkinHistoryBtn = new System.Windows.Forms.Button();
             this.userDetailsBtn = new System.Windows.Forms.Button();
             this.labelEntrance = new System.Windows.Forms.Label();
@@ -68,9 +70,8 @@
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.labelMonitor = new System.Windows.Forms.Label();
             this.buttonSearch = new System.Windows.Forms.Button();
-            this.webCamTimer = new System.Windows.Forms.Timer();
+            this.webCamTimer = new System.Windows.Forms.Timer(this.components);
             this.label1 = new System.Windows.Forms.Label();
-            this.buttonConfirmPayment = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.checkinPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSource)).BeginInit();
@@ -87,8 +88,9 @@
             this.panel1.Controls.Add(this.checkoutBtn);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Left;
             this.panel1.Location = new System.Drawing.Point(0, 0);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(166, 788);
+            this.panel1.Size = new System.Drawing.Size(221, 970);
             this.panel1.TabIndex = 0;
             // 
             // checkinBtn
@@ -101,9 +103,10 @@
             this.checkinBtn.ForeColor = System.Drawing.Color.White;
             this.checkinBtn.Image = ((System.Drawing.Image)(resources.GetObject("checkinBtn.Image")));
             this.checkinBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkinBtn.Location = new System.Drawing.Point(11, 89);
+            this.checkinBtn.Location = new System.Drawing.Point(15, 110);
+            this.checkinBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkinBtn.Name = "checkinBtn";
-            this.checkinBtn.Size = new System.Drawing.Size(155, 74);
+            this.checkinBtn.Size = new System.Drawing.Size(207, 91);
             this.checkinBtn.TabIndex = 9;
             this.checkinBtn.Text = " Check In";
             this.checkinBtn.UseVisualStyleBackColor = true;
@@ -112,9 +115,10 @@
             // sideHighlight
             // 
             this.sideHighlight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.sideHighlight.Location = new System.Drawing.Point(0, 89);
+            this.sideHighlight.Location = new System.Drawing.Point(0, 110);
+            this.sideHighlight.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.sideHighlight.Name = "sideHighlight";
-            this.sideHighlight.Size = new System.Drawing.Size(10, 74);
+            this.sideHighlight.Size = new System.Drawing.Size(13, 91);
             this.sideHighlight.TabIndex = 14;
             // 
             // monitorBtn
@@ -127,9 +131,10 @@
             this.monitorBtn.ForeColor = System.Drawing.Color.White;
             this.monitorBtn.Image = ((System.Drawing.Image)(resources.GetObject("monitorBtn.Image")));
             this.monitorBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.monitorBtn.Location = new System.Drawing.Point(11, 296);
+            this.monitorBtn.Location = new System.Drawing.Point(15, 364);
+            this.monitorBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.monitorBtn.Name = "monitorBtn";
-            this.monitorBtn.Size = new System.Drawing.Size(155, 74);
+            this.monitorBtn.Size = new System.Drawing.Size(207, 91);
             this.monitorBtn.TabIndex = 10;
             this.monitorBtn.Text = "Logs";
             this.monitorBtn.UseVisualStyleBackColor = true;
@@ -145,9 +150,10 @@
             this.checkoutBtn.ForeColor = System.Drawing.Color.White;
             this.checkoutBtn.Image = ((System.Drawing.Image)(resources.GetObject("checkoutBtn.Image")));
             this.checkoutBtn.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.checkoutBtn.Location = new System.Drawing.Point(11, 191);
+            this.checkoutBtn.Location = new System.Drawing.Point(15, 235);
+            this.checkoutBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkoutBtn.Name = "checkoutBtn";
-            this.checkoutBtn.Size = new System.Drawing.Size(155, 74);
+            this.checkoutBtn.Size = new System.Drawing.Size(207, 91);
             this.checkoutBtn.TabIndex = 11;
             this.checkoutBtn.Text = "    Check Out";
             this.checkoutBtn.UseVisualStyleBackColor = true;
@@ -157,9 +163,10 @@
             // 
             this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(166, 0);
+            this.panel2.Location = new System.Drawing.Point(221, 0);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1151, 10);
+            this.panel2.Size = new System.Drawing.Size(1535, 12);
             this.panel2.TabIndex = 1;
             // 
             // checkinPanel
@@ -176,10 +183,32 @@
             this.checkinPanel.Controls.Add(this.labelStatusIn);
             this.checkinPanel.Controls.Add(this.buttonStartWC);
             this.checkinPanel.Controls.Add(this.pictureBoxSource);
-            this.checkinPanel.Location = new System.Drawing.Point(197, 54);
+            this.checkinPanel.Location = new System.Drawing.Point(263, 66);
+            this.checkinPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkinPanel.Name = "checkinPanel";
-            this.checkinPanel.Size = new System.Drawing.Size(1375, 948);
+            this.checkinPanel.Size = new System.Drawing.Size(1833, 1167);
             this.checkinPanel.TabIndex = 3;
+            // 
+            // buttonConfirmPayment
+            // 
+            this.buttonConfirmPayment.BackColor = System.Drawing.Color.Green;
+            this.buttonConfirmPayment.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.buttonConfirmPayment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.buttonConfirmPayment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.buttonConfirmPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonConfirmPayment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonConfirmPayment.ForeColor = System.Drawing.Color.White;
+            this.buttonConfirmPayment.Image = ((System.Drawing.Image)(resources.GetObject("buttonConfirmPayment.Image")));
+            this.buttonConfirmPayment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonConfirmPayment.Location = new System.Drawing.Point(643, 785);
+            this.buttonConfirmPayment.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonConfirmPayment.Name = "buttonConfirmPayment";
+            this.buttonConfirmPayment.Size = new System.Drawing.Size(146, 74);
+            this.buttonConfirmPayment.TabIndex = 66;
+            this.buttonConfirmPayment.Text = "Payment";
+            this.buttonConfirmPayment.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonConfirmPayment.UseVisualStyleBackColor = false;
+            this.buttonConfirmPayment.Click += new System.EventHandler(this.buttonConfirmPayment_Click);
             // 
             // checkinHistoryBtn
             // 
@@ -191,9 +220,10 @@
             this.checkinHistoryBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkinHistoryBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkinHistoryBtn.ForeColor = System.Drawing.Color.White;
-            this.checkinHistoryBtn.Location = new System.Drawing.Point(283, 638);
+            this.checkinHistoryBtn.Location = new System.Drawing.Point(377, 785);
+            this.checkinHistoryBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkinHistoryBtn.Name = "checkinHistoryBtn";
-            this.checkinHistoryBtn.Size = new System.Drawing.Size(173, 61);
+            this.checkinHistoryBtn.Size = new System.Drawing.Size(231, 75);
             this.checkinHistoryBtn.TabIndex = 65;
             this.checkinHistoryBtn.Text = "Check History";
             this.checkinHistoryBtn.UseVisualStyleBackColor = false;
@@ -207,9 +237,10 @@
             this.userDetailsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.userDetailsBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.userDetailsBtn.ForeColor = System.Drawing.Color.White;
-            this.userDetailsBtn.Location = new System.Drawing.Point(76, 638);
+            this.userDetailsBtn.Location = new System.Drawing.Point(101, 785);
+            this.userDetailsBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.userDetailsBtn.Name = "userDetailsBtn";
-            this.userDetailsBtn.Size = new System.Drawing.Size(173, 61);
+            this.userDetailsBtn.Size = new System.Drawing.Size(231, 75);
             this.userDetailsBtn.TabIndex = 64;
             this.userDetailsBtn.Text = "Visitor Details";
             this.userDetailsBtn.UseVisualStyleBackColor = false;
@@ -219,9 +250,10 @@
             this.labelEntrance.AutoSize = true;
             this.labelEntrance.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEntrance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelEntrance.Location = new System.Drawing.Point(68, 41);
+            this.labelEntrance.Location = new System.Drawing.Point(91, 50);
+            this.labelEntrance.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelEntrance.Name = "labelEntrance";
-            this.labelEntrance.Size = new System.Drawing.Size(167, 45);
+            this.labelEntrance.Size = new System.Drawing.Size(207, 54);
             this.labelEntrance.TabIndex = 62;
             this.labelEntrance.Text = "CHECK IN";
             // 
@@ -234,9 +266,10 @@
             this.checkinOverrideBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkinOverrideBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkinOverrideBtn.ForeColor = System.Drawing.Color.White;
-            this.checkinOverrideBtn.Location = new System.Drawing.Point(491, 638);
+            this.checkinOverrideBtn.Location = new System.Drawing.Point(1138, 786);
+            this.checkinOverrideBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkinOverrideBtn.Name = "checkinOverrideBtn";
-            this.checkinOverrideBtn.Size = new System.Drawing.Size(173, 61);
+            this.checkinOverrideBtn.Size = new System.Drawing.Size(231, 75);
             this.checkinOverrideBtn.TabIndex = 58;
             this.checkinOverrideBtn.Text = "Override";
             this.checkinOverrideBtn.UseVisualStyleBackColor = false;
@@ -246,20 +279,22 @@
             // 
             this.checkinInfoLbx.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkinInfoLbx.FormattingEnabled = true;
-            this.checkinInfoLbx.ItemHeight = 21;
-            this.checkinInfoLbx.Location = new System.Drawing.Point(76, 447);
+            this.checkinInfoLbx.ItemHeight = 28;
+            this.checkinInfoLbx.Location = new System.Drawing.Point(101, 550);
+            this.checkinInfoLbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkinInfoLbx.Name = "checkinInfoLbx";
-            this.checkinInfoLbx.Size = new System.Drawing.Size(952, 172);
+            this.checkinInfoLbx.Size = new System.Drawing.Size(1268, 200);
             this.checkinInfoLbx.TabIndex = 57;
             // 
             // checkinMessageLbl
             // 
             this.checkinMessageLbl.AutoSize = true;
             this.checkinMessageLbl.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.checkinMessageLbl.ForeColor = System.Drawing.Color.Red;
-            this.checkinMessageLbl.Location = new System.Drawing.Point(324, 315);
+            this.checkinMessageLbl.ForeColor = System.Drawing.Color.Gray;
+            this.checkinMessageLbl.Location = new System.Drawing.Point(424, 495);
+            this.checkinMessageLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkinMessageLbl.Name = "checkinMessageLbl";
-            this.checkinMessageLbl.Size = new System.Drawing.Size(81, 21);
+            this.checkinMessageLbl.Size = new System.Drawing.Size(99, 28);
             this.checkinMessageLbl.TabIndex = 55;
             this.checkinMessageLbl.Text = "(message)";
             // 
@@ -268,9 +303,10 @@
             this.checkinStatusLbl.AutoSize = true;
             this.checkinStatusLbl.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkinStatusLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.checkinStatusLbl.Location = new System.Drawing.Point(426, 290);
+            this.checkinStatusLbl.Location = new System.Drawing.Point(560, 464);
+            this.checkinStatusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkinStatusLbl.Name = "checkinStatusLbl";
-            this.checkinStatusLbl.Size = new System.Drawing.Size(95, 25);
+            this.checkinStatusLbl.Size = new System.Drawing.Size(120, 32);
             this.checkinStatusLbl.TabIndex = 56;
             this.checkinStatusLbl.Text = "(OK/NOK)";
             // 
@@ -279,9 +315,10 @@
             this.lbCheckIn.AutoSize = true;
             this.lbCheckIn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbCheckIn.ForeColor = System.Drawing.Color.Black;
-            this.lbCheckIn.Location = new System.Drawing.Point(324, 156);
+            this.lbCheckIn.Location = new System.Drawing.Point(432, 192);
+            this.lbCheckIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbCheckIn.Name = "lbCheckIn";
-            this.lbCheckIn.Size = new System.Drawing.Size(99, 25);
+            this.lbCheckIn.Size = new System.Drawing.Size(127, 32);
             this.lbCheckIn.TabIndex = 37;
             this.lbCheckIn.Text = "Ticket info";
             // 
@@ -290,9 +327,10 @@
             this.labelStatusIn.AutoSize = true;
             this.labelStatusIn.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelStatusIn.ForeColor = System.Drawing.Color.DimGray;
-            this.labelStatusIn.Location = new System.Drawing.Point(323, 290);
+            this.labelStatusIn.Location = new System.Drawing.Point(423, 464);
+            this.labelStatusIn.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStatusIn.Name = "labelStatusIn";
-            this.labelStatusIn.Size = new System.Drawing.Size(81, 25);
+            this.labelStatusIn.Size = new System.Drawing.Size(99, 32);
             this.labelStatusIn.TabIndex = 20;
             this.labelStatusIn.Text = "STATUS";
             // 
@@ -305,10 +343,10 @@
             this.buttonStartWC.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.buttonStartWC.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonStartWC.ForeColor = System.Drawing.Color.White;
-            this.buttonStartWC.Location = new System.Drawing.Point(76, 370);
-            this.buttonStartWC.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonStartWC.Location = new System.Drawing.Point(101, 455);
+            this.buttonStartWC.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonStartWC.Name = "buttonStartWC";
-            this.buttonStartWC.Size = new System.Drawing.Size(213, 60);
+            this.buttonStartWC.Size = new System.Drawing.Size(284, 74);
             this.buttonStartWC.TabIndex = 3;
             this.buttonStartWC.Text = "Start QR Scanner";
             this.buttonStartWC.UseVisualStyleBackColor = false;
@@ -316,10 +354,10 @@
             // 
             // pictureBoxSource
             // 
-            this.pictureBoxSource.Location = new System.Drawing.Point(76, 154);
-            this.pictureBoxSource.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBoxSource.Location = new System.Drawing.Point(101, 190);
+            this.pictureBoxSource.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.pictureBoxSource.Name = "pictureBoxSource";
-            this.pictureBoxSource.Size = new System.Drawing.Size(213, 198);
+            this.pictureBoxSource.Size = new System.Drawing.Size(284, 244);
             this.pictureBoxSource.TabIndex = 2;
             this.pictureBoxSource.TabStop = false;
             // 
@@ -332,9 +370,10 @@
             this.checkoutPanel.Controls.Add(this.checkoutMessageLbl);
             this.checkoutPanel.Controls.Add(this.checkoutStatusLbl);
             this.checkoutPanel.Controls.Add(this.labelStatusOut);
-            this.checkoutPanel.Location = new System.Drawing.Point(197, 54);
+            this.checkoutPanel.Location = new System.Drawing.Point(263, 66);
+            this.checkoutPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkoutPanel.Name = "checkoutPanel";
-            this.checkoutPanel.Size = new System.Drawing.Size(1260, 936);
+            this.checkoutPanel.Size = new System.Drawing.Size(1680, 1152);
             this.checkoutPanel.TabIndex = 4;
             // 
             // labelExit
@@ -342,9 +381,10 @@
             this.labelExit.AutoSize = true;
             this.labelExit.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelExit.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.labelExit.Location = new System.Drawing.Point(68, 44);
+            this.labelExit.Location = new System.Drawing.Point(91, 54);
+            this.labelExit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelExit.Name = "labelExit";
-            this.labelExit.Size = new System.Drawing.Size(198, 45);
+            this.labelExit.Size = new System.Drawing.Size(244, 54);
             this.labelExit.TabIndex = 63;
             this.labelExit.Text = "CHECK OUT";
             // 
@@ -357,9 +397,10 @@
             this.checkoutOverrideBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkoutOverrideBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkoutOverrideBtn.ForeColor = System.Drawing.Color.White;
-            this.checkoutOverrideBtn.Location = new System.Drawing.Point(283, 606);
+            this.checkoutOverrideBtn.Location = new System.Drawing.Point(377, 746);
+            this.checkoutOverrideBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkoutOverrideBtn.Name = "checkoutOverrideBtn";
-            this.checkoutOverrideBtn.Size = new System.Drawing.Size(172, 54);
+            this.checkoutOverrideBtn.Size = new System.Drawing.Size(229, 66);
             this.checkoutOverrideBtn.TabIndex = 47;
             this.checkoutOverrideBtn.Text = "Override";
             this.checkoutOverrideBtn.UseVisualStyleBackColor = false;
@@ -374,9 +415,10 @@
             this.checkoutDetailsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkoutDetailsBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkoutDetailsBtn.ForeColor = System.Drawing.Color.White;
-            this.checkoutDetailsBtn.Location = new System.Drawing.Point(75, 606);
+            this.checkoutDetailsBtn.Location = new System.Drawing.Point(100, 746);
+            this.checkoutDetailsBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkoutDetailsBtn.Name = "checkoutDetailsBtn";
-            this.checkoutDetailsBtn.Size = new System.Drawing.Size(181, 54);
+            this.checkoutDetailsBtn.Size = new System.Drawing.Size(241, 66);
             this.checkoutDetailsBtn.TabIndex = 49;
             this.checkoutDetailsBtn.Text = "Visitor details";
             this.checkoutDetailsBtn.UseVisualStyleBackColor = false;
@@ -386,10 +428,11 @@
             // 
             this.checkoutInfoLbx.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkoutInfoLbx.FormattingEnabled = true;
-            this.checkoutInfoLbx.ItemHeight = 21;
-            this.checkoutInfoLbx.Location = new System.Drawing.Point(76, 233);
+            this.checkoutInfoLbx.ItemHeight = 28;
+            this.checkoutInfoLbx.Location = new System.Drawing.Point(101, 287);
+            this.checkoutInfoLbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkoutInfoLbx.Name = "checkoutInfoLbx";
-            this.checkoutInfoLbx.Size = new System.Drawing.Size(892, 340);
+            this.checkoutInfoLbx.Size = new System.Drawing.Size(1188, 396);
             this.checkoutInfoLbx.TabIndex = 46;
             // 
             // checkoutMessageLbl
@@ -397,9 +440,10 @@
             this.checkoutMessageLbl.AutoSize = true;
             this.checkoutMessageLbl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.checkoutMessageLbl.ForeColor = System.Drawing.Color.Red;
-            this.checkoutMessageLbl.Location = new System.Drawing.Point(71, 182);
+            this.checkoutMessageLbl.Location = new System.Drawing.Point(95, 224);
+            this.checkoutMessageLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkoutMessageLbl.Name = "checkoutMessageLbl";
-            this.checkoutMessageLbl.Size = new System.Drawing.Size(84, 20);
+            this.checkoutMessageLbl.Size = new System.Drawing.Size(106, 25);
             this.checkoutMessageLbl.TabIndex = 43;
             this.checkoutMessageLbl.Text = "(message)";
             // 
@@ -408,9 +452,10 @@
             this.checkoutStatusLbl.AutoSize = true;
             this.checkoutStatusLbl.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkoutStatusLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.checkoutStatusLbl.Location = new System.Drawing.Point(152, 153);
+            this.checkoutStatusLbl.Location = new System.Drawing.Point(203, 188);
+            this.checkoutStatusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.checkoutStatusLbl.Name = "checkoutStatusLbl";
-            this.checkoutStatusLbl.Size = new System.Drawing.Size(95, 25);
+            this.checkoutStatusLbl.Size = new System.Drawing.Size(120, 32);
             this.checkoutStatusLbl.TabIndex = 44;
             this.checkoutStatusLbl.Text = "(OK/NOK)";
             // 
@@ -419,9 +464,10 @@
             this.labelStatusOut.AutoSize = true;
             this.labelStatusOut.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelStatusOut.ForeColor = System.Drawing.Color.DimGray;
-            this.labelStatusOut.Location = new System.Drawing.Point(71, 153);
+            this.labelStatusOut.Location = new System.Drawing.Point(95, 188);
+            this.labelStatusOut.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelStatusOut.Name = "labelStatusOut";
-            this.labelStatusOut.Size = new System.Drawing.Size(81, 25);
+            this.labelStatusOut.Size = new System.Drawing.Size(99, 32);
             this.labelStatusOut.TabIndex = 2;
             this.labelStatusOut.Text = "STATUS";
             // 
@@ -439,18 +485,20 @@
             this.searchPanel.Controls.Add(this.textBoxSearch);
             this.searchPanel.Controls.Add(this.labelMonitor);
             this.searchPanel.Controls.Add(this.buttonSearch);
-            this.searchPanel.Location = new System.Drawing.Point(197, 54);
+            this.searchPanel.Location = new System.Drawing.Point(263, 66);
+            this.searchPanel.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.searchPanel.Name = "searchPanel";
-            this.searchPanel.Size = new System.Drawing.Size(1395, 936);
+            this.searchPanel.Size = new System.Drawing.Size(1860, 1152);
             this.searchPanel.TabIndex = 5;
             // 
             // tagRbtn
             // 
             this.tagRbtn.AutoSize = true;
             this.tagRbtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tagRbtn.Location = new System.Drawing.Point(322, 154);
+            this.tagRbtn.Location = new System.Drawing.Point(429, 190);
+            this.tagRbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.tagRbtn.Name = "tagRbtn";
-            this.tagRbtn.Size = new System.Drawing.Size(73, 25);
+            this.tagRbtn.Size = new System.Drawing.Size(90, 32);
             this.tagRbtn.TabIndex = 45;
             this.tagRbtn.TabStop = true;
             this.tagRbtn.Text = "Tag Nr";
@@ -465,9 +513,10 @@
             this.checkoutLogsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkoutLogsBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkoutLogsBtn.ForeColor = System.Drawing.Color.White;
-            this.checkoutLogsBtn.Location = new System.Drawing.Point(491, 579);
+            this.checkoutLogsBtn.Location = new System.Drawing.Point(655, 713);
+            this.checkoutLogsBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkoutLogsBtn.Name = "checkoutLogsBtn";
-            this.checkoutLogsBtn.Size = new System.Drawing.Size(181, 54);
+            this.checkoutLogsBtn.Size = new System.Drawing.Size(241, 66);
             this.checkoutLogsBtn.TabIndex = 42;
             this.checkoutLogsBtn.Text = "Checked Out";
             this.checkoutLogsBtn.UseVisualStyleBackColor = false;
@@ -482,9 +531,10 @@
             this.checkinLogsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.checkinLogsBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.checkinLogsBtn.ForeColor = System.Drawing.Color.White;
-            this.checkinLogsBtn.Location = new System.Drawing.Point(283, 579);
+            this.checkinLogsBtn.Location = new System.Drawing.Point(377, 713);
+            this.checkinLogsBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.checkinLogsBtn.Name = "checkinLogsBtn";
-            this.checkinLogsBtn.Size = new System.Drawing.Size(181, 54);
+            this.checkinLogsBtn.Size = new System.Drawing.Size(241, 66);
             this.checkinLogsBtn.TabIndex = 43;
             this.checkinLogsBtn.Text = "Checked In";
             this.checkinLogsBtn.UseVisualStyleBackColor = false;
@@ -499,9 +549,10 @@
             this.viewLogsBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.viewLogsBtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.viewLogsBtn.ForeColor = System.Drawing.Color.White;
-            this.viewLogsBtn.Location = new System.Drawing.Point(76, 579);
+            this.viewLogsBtn.Location = new System.Drawing.Point(101, 713);
+            this.viewLogsBtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.viewLogsBtn.Name = "viewLogsBtn";
-            this.viewLogsBtn.Size = new System.Drawing.Size(181, 54);
+            this.viewLogsBtn.Size = new System.Drawing.Size(241, 66);
             this.viewLogsBtn.TabIndex = 44;
             this.viewLogsBtn.Text = "View Logs";
             this.viewLogsBtn.UseVisualStyleBackColor = false;
@@ -511,19 +562,21 @@
             // 
             this.logsInfoLbx.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.logsInfoLbx.FormattingEnabled = true;
-            this.logsInfoLbx.ItemHeight = 17;
-            this.logsInfoLbx.Location = new System.Drawing.Point(76, 207);
+            this.logsInfoLbx.ItemHeight = 21;
+            this.logsInfoLbx.Location = new System.Drawing.Point(101, 255);
+            this.logsInfoLbx.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.logsInfoLbx.Name = "logsInfoLbx";
-            this.logsInfoLbx.Size = new System.Drawing.Size(1029, 344);
+            this.logsInfoLbx.Size = new System.Drawing.Size(1371, 403);
             this.logsInfoLbx.TabIndex = 40;
             // 
             // ticketRbtn
             // 
             this.ticketRbtn.AutoSize = true;
             this.ticketRbtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ticketRbtn.Location = new System.Drawing.Point(226, 154);
+            this.ticketRbtn.Location = new System.Drawing.Point(301, 190);
+            this.ticketRbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.ticketRbtn.Name = "ticketRbtn";
-            this.ticketRbtn.Size = new System.Drawing.Size(90, 25);
+            this.ticketRbtn.Size = new System.Drawing.Size(111, 32);
             this.ticketRbtn.TabIndex = 38;
             this.ticketRbtn.TabStop = true;
             this.ticketRbtn.Text = "Ticket Nr";
@@ -533,9 +586,10 @@
             // 
             this.nameRbtn.AutoSize = true;
             this.nameRbtn.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nameRbtn.Location = new System.Drawing.Point(150, 154);
+            this.nameRbtn.Location = new System.Drawing.Point(200, 190);
+            this.nameRbtn.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.nameRbtn.Name = "nameRbtn";
-            this.nameRbtn.Size = new System.Drawing.Size(70, 25);
+            this.nameRbtn.Size = new System.Drawing.Size(85, 32);
             this.nameRbtn.TabIndex = 39;
             this.nameRbtn.TabStop = true;
             this.nameRbtn.Text = "Name";
@@ -546,9 +600,10 @@
             this.searchLbl.AutoSize = true;
             this.searchLbl.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.searchLbl.ForeColor = System.Drawing.Color.DimGray;
-            this.searchLbl.Location = new System.Drawing.Point(71, 152);
+            this.searchLbl.Location = new System.Drawing.Point(95, 187);
+            this.searchLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.searchLbl.Name = "searchLbl";
-            this.searchLbl.Size = new System.Drawing.Size(76, 25);
+            this.searchLbl.Size = new System.Drawing.Size(97, 32);
             this.searchLbl.TabIndex = 36;
             this.searchLbl.Text = "Search:";
             // 
@@ -557,19 +612,20 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.label4.Location = new System.Drawing.Point(68, 36);
+            this.label4.Location = new System.Drawing.Point(91, 44);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(100, 45);
+            this.label4.Size = new System.Drawing.Size(122, 54);
             this.label4.TabIndex = 33;
             this.label4.Text = "LOGS";
             // 
             // textBoxSearch
             // 
             this.textBoxSearch.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxSearch.Location = new System.Drawing.Point(400, 150);
-            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(2);
+            this.textBoxSearch.Location = new System.Drawing.Point(533, 185);
+            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBoxSearch.Name = "textBoxSearch";
-            this.textBoxSearch.Size = new System.Drawing.Size(252, 33);
+            this.textBoxSearch.Size = new System.Drawing.Size(335, 39);
             this.textBoxSearch.TabIndex = 30;
             // 
             // labelMonitor
@@ -577,9 +633,10 @@
             this.labelMonitor.AutoSize = true;
             this.labelMonitor.Font = new System.Drawing.Font("Century", 13F, System.Drawing.FontStyle.Bold);
             this.labelMonitor.ForeColor = System.Drawing.Color.DimGray;
-            this.labelMonitor.Location = new System.Drawing.Point(36, 73);
+            this.labelMonitor.Location = new System.Drawing.Point(48, 90);
+            this.labelMonitor.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.labelMonitor.Name = "labelMonitor";
-            this.labelMonitor.Size = new System.Drawing.Size(0, 22);
+            this.labelMonitor.Size = new System.Drawing.Size(0, 27);
             this.labelMonitor.TabIndex = 29;
             // 
             // buttonSearch
@@ -593,9 +650,10 @@
             this.buttonSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonSearch.ForeColor = System.Drawing.Color.White;
             this.buttonSearch.Image = ((System.Drawing.Image)(resources.GetObject("buttonSearch.Image")));
-            this.buttonSearch.Location = new System.Drawing.Point(657, 150);
+            this.buttonSearch.Location = new System.Drawing.Point(876, 185);
+            this.buttonSearch.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.buttonSearch.Name = "buttonSearch";
-            this.buttonSearch.Size = new System.Drawing.Size(48, 33);
+            this.buttonSearch.Size = new System.Drawing.Size(64, 41);
             this.buttonSearch.TabIndex = 14;
             this.buttonSearch.UseVisualStyleBackColor = false;
             this.buttonSearch.Click += new System.EventHandler(this.buttonSearch_Click);
@@ -609,37 +667,19 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DimGray;
-            this.label1.Location = new System.Drawing.Point(200, 15);
+            this.label1.Location = new System.Drawing.Point(267, 18);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(157, 32);
+            this.label1.Size = new System.Drawing.Size(195, 41);
             this.label1.TabIndex = 33;
             this.label1.Text = "Larp Festival";
             // 
-            // buttonConfirmPayment
-            // 
-            this.buttonConfirmPayment.BackColor = System.Drawing.Color.Green;
-            this.buttonConfirmPayment.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.buttonConfirmPayment.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.buttonConfirmPayment.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.buttonConfirmPayment.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.buttonConfirmPayment.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.buttonConfirmPayment.ForeColor = System.Drawing.Color.White;
-            this.buttonConfirmPayment.Image = ((System.Drawing.Image)(resources.GetObject("buttonConfirmPayment.Image")));
-            this.buttonConfirmPayment.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonConfirmPayment.Location = new System.Drawing.Point(901, 370);
-            this.buttonConfirmPayment.Name = "buttonConfirmPayment";
-            this.buttonConfirmPayment.Size = new System.Drawing.Size(127, 60);
-            this.buttonConfirmPayment.TabIndex = 66;
-            this.buttonConfirmPayment.Text = "Payment";
-            this.buttonConfirmPayment.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.buttonConfirmPayment.UseVisualStyleBackColor = false;
-            // 
             // EntranceForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1317, 788);
+            this.ClientSize = new System.Drawing.Size(1756, 970);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
@@ -648,6 +688,7 @@
             this.Controls.Add(this.searchPanel);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "EntranceForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EntranceForm";
