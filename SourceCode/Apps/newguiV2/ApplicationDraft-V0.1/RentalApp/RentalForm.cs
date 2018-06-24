@@ -76,6 +76,7 @@ namespace RentalApp
             loanInfoLbx.Items.Clear();
             returnLbx.Items.Clear();
             o = new LoanOrder(selectedShop);
+            v = null;
         }
         private void monitorBtn_Click(object sender, EventArgs e)
         {
@@ -121,26 +122,29 @@ namespace RentalApp
         private void ScanVisitor(object sender, RFIDTagEventArgs e)
         {
             o = new LoanOrder(selectedShop);
-            v = data.FindVisitorByTag(e.Tag);
-            if (v != null)
+            if (v == null)
             {
-                using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                v = data.FindVisitorByTag(e.Tag);
+                if (v != null)
                 {
-                    string infoVisitor = "Visitor nr. " + v.IdNr + ": " + v.FirstName + ", " + v.LastName.ToUpper();
-                    display.SetText(infoVisitor, labelVisitorB);
-                    display.SetText(infoVisitor, labelVisitorR);
-                }
-
-                if (MessageBox.Show("Please start scanning your items", "Confirm", MessageBoxButtons.OK) == DialogResult.OK)
-                {
-                    myRFIDReader.Tag -= ScanVisitor;
-                    if (borrow)
+                    using (CrossThreadDisplay display = new CrossThreadDisplay(this))
                     {
-                        myRFIDReader.Tag += ScanToBorrow;
+                        string infoVisitor = "Visitor nr. " + v.IdNr + ": " + v.FirstName + ", " + v.LastName.ToUpper();
+                        display.SetText(infoVisitor, labelVisitorB);
+                        display.SetText(infoVisitor, labelVisitorR);
                     }
-                    else
+
+                    if (MessageBox.Show("Please start scanning your items", "Confirm", MessageBoxButtons.OK) == DialogResult.OK)
                     {
-                        myRFIDReader.Tag += ScanToReturn;
+                        myRFIDReader.Tag -= ScanVisitor;
+                        if (borrow)
+                        {
+                            myRFIDReader.Tag += ScanToBorrow;
+                        }
+                        else
+                        {
+                            myRFIDReader.Tag += ScanToReturn;
+                        }
                     }
                 }
             }
@@ -149,26 +153,32 @@ namespace RentalApp
         private void ScanToBorrow(object sender, RFIDTagEventArgs e)
         {
             LoanArticle a = data.FindLoanArticleByTag(e.Tag);
-
-            try
+            if (a.ArticleNr != 0)
             {
-                if (o.ExistsArticle(a))
+                try
                 {
-                    MessageBox.Show("Items already added");
-                }
-                else
-                {
-                    o.AddArticle(a, 1); // borrowing 1 article
-                    using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                    if (o.ExistsArticle(a))
                     {
-                        display.DisplayArticle(o.Articles, loanInfoLbx);
+                        using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                        {
+                            display.SetText("Item already added", labelMessageB);
+                        }
+                    }
+                    else
+                    {
+                        o.AddArticle(a, 1); // borrowing 1 article
+                        using (CrossThreadDisplay display = new CrossThreadDisplay(this))
+                        {
+                            display.DisplayArticle(o.Articles, loanInfoLbx);
+                        }
                     }
                 }
+                catch (NullReferenceException)
+                {
+                    MessageBox.Show("Item not found");
+                }
             }
-            catch (NullReferenceException)
-            {
-                MessageBox.Show("Item not found");
-            }
+            
         }
 
         private void ScanToReturn(object sender, RFIDTagEventArgs e)
@@ -176,33 +186,40 @@ namespace RentalApp
             if (v != null)
             {
                 LoanArticle a = data.FindLoanArticleByTag(e.Tag);
-                v = data.FindVisitorByNr(data.GetVisitorNrForLoanArticle(a));
-                labelMessageR.Text = "Article successfully scanned";
-                DateTime returnDateOfItem = data.GetReturnDateForLoanArticle(a);
-                double fee = a.DepositValue - a.Price;
-
-                labelInfoR.Text = a.ToString();
-                labelInfoR.Text += "\nReturn date: " + returnDateOfItem;
-                labelInfoR.Text += "\nDeposit value: " + a.DepositValue;
-                labelInfoR.Text += "\nLoaning price: " + a.Price;
-
-                if (returnDateOfItem != DateTime.MinValue) // if found a return date
+                if (a.Available == 0)
                 {
-                    if (returnDateOfItem.CompareTo(DateTime.Now) < 0) // if return date is earlier than now
-                    {
-                        fee -= 10; // 10 credits fine
-                        labelInfoR.Text += "\nLate fine: 10 credits";
-                    }
-                    v.Credit += fee;
-                    data.UpdateSelectedVisitor(v);
-                    labelInfoR.Text += "\nTotal credits returned: " + fee;
-                    a.Available = 1;
+                    v = data.FindVisitorByNr(data.GetVisitorNrForLoanArticle(a));
+                    DateTime returnDateOfItem = data.GetReturnDateForLoanArticle(a);
+                    double fee = a.DepositValue - a.Price;
 
-                    if (data.UpdateLoanArticle(a) != -1)
+                    labelInfoR.Text = a.ToString();
+                    labelInfoR.Text += "\nReturn date: " + returnDateOfItem;
+                    labelInfoR.Text += "\nDeposit value: " + a.DepositValue;
+                    labelInfoR.Text += "\nLoaning price: " + a.Price;
+
+                    using (CrossThreadDisplay display = new CrossThreadDisplay(this))
                     {
-                        labelMessageR.Text = "Article successfully returned";
+                        display.AddLoanArticleToLB(a, returnLbx);
                     }
 
+                    if (returnDateOfItem != DateTime.MinValue) // if found a return date
+                    {
+                        if (returnDateOfItem.CompareTo(DateTime.Now) < 0) // if return date is earlier than now
+                        {
+                            fee -= 10; // 10 credits fine
+                            labelInfoR.Text += "\nLate fine: 10 credits";
+                        }
+
+                        v.Credit += fee;
+                        data.UpdateSelectedVisitor(v);
+                        labelInfoR.Text += "\nTOTAL CREDITS RETURNED: " + fee;
+                        a.Available = 1;
+
+                        if (data.UpdateLoanArticle(a) != -1)
+                        {
+                            labelMessageR.Text = "Article successfully returned";
+                        }
+                    }
                 }
             }
         }

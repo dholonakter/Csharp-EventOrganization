@@ -103,6 +103,21 @@ namespace ThanhDLL
             }
         }
 
+        public void AddLoanArticleToLB(Object o, ListBox lb)
+        {
+            LoanArticle a = (LoanArticle)o;
+
+            if (lb.InvokeRequired)
+            {
+                ListboxDelegate d = new ListboxDelegate(DisplayLoanArticle);
+                myForm.Invoke(d, new object[] { a, lb });
+            }
+            else
+            {
+                lb.Items.Add(a);
+            }
+        }
+
         // Display reservation
         public void DisplayReservation(Object o, ListBox lb)
         {
