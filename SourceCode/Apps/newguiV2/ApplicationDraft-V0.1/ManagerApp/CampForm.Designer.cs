@@ -38,7 +38,6 @@
             this.homeBtn = new System.Windows.Forms.Button();
             this.refreshBtn = new System.Windows.Forms.Button();
             this.dataGridViewCamp = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewCamp)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,7 +51,7 @@
             this.buttonClean.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonClean.ForeColor = System.Drawing.Color.White;
             this.buttonClean.Location = new System.Drawing.Point(58, 489);
-            this.buttonClean.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonClean.Margin = new System.Windows.Forms.Padding(2);
             this.buttonClean.Name = "buttonClean";
             this.buttonClean.Size = new System.Drawing.Size(158, 35);
             this.buttonClean.TabIndex = 40;
@@ -71,7 +70,7 @@
             this.buttonAvailable.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAvailable.ForeColor = System.Drawing.Color.White;
             this.buttonAvailable.Location = new System.Drawing.Point(225, 489);
-            this.buttonAvailable.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAvailable.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAvailable.Name = "buttonAvailable";
             this.buttonAvailable.Size = new System.Drawing.Size(158, 35);
             this.buttonAvailable.TabIndex = 39;
@@ -90,7 +89,7 @@
             this.buttonBooked.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonBooked.ForeColor = System.Drawing.Color.White;
             this.buttonBooked.Location = new System.Drawing.Point(391, 489);
-            this.buttonBooked.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonBooked.Margin = new System.Windows.Forms.Padding(2);
             this.buttonBooked.Name = "buttonBooked";
             this.buttonBooked.Size = new System.Drawing.Size(158, 35);
             this.buttonBooked.TabIndex = 36;
@@ -130,7 +129,7 @@
             this.buttonAll.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonAll.ForeColor = System.Drawing.Color.White;
             this.buttonAll.Location = new System.Drawing.Point(557, 489);
-            this.buttonAll.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.buttonAll.Margin = new System.Windows.Forms.Padding(2);
             this.buttonAll.Name = "buttonAll";
             this.buttonAll.Size = new System.Drawing.Size(158, 35);
             this.buttonAll.TabIndex = 50;
@@ -184,24 +183,12 @@
             this.dataGridViewCamp.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewCamp.EnableHeadersVisualStyles = false;
             this.dataGridViewCamp.Location = new System.Drawing.Point(58, 139);
-            this.dataGridViewCamp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewCamp.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewCamp.Name = "dataGridViewCamp";
+            this.dataGridViewCamp.ReadOnly = true;
             this.dataGridViewCamp.RowTemplate.Height = 24;
             this.dataGridViewCamp.Size = new System.Drawing.Size(890, 325);
             this.dataGridViewCamp.TabIndex = 71;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.SystemColors.Control;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Location = new System.Drawing.Point(776, 487);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(83, 35);
-            this.button1.TabIndex = 72;
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // CampForm
             // 
@@ -209,7 +196,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1004, 571);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.dataGridViewCamp);
             this.Controls.Add(this.refreshBtn);
             this.Controls.Add(this.homeBtn);
@@ -219,7 +205,7 @@
             this.Controls.Add(this.buttonBooked);
             this.Controls.Add(this.button9);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CampForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CampForm";
@@ -237,6 +223,5 @@
         private System.Windows.Forms.Button homeBtn;
         private System.Windows.Forms.Button refreshBtn;
         private System.Windows.Forms.DataGridView dataGridViewCamp;
-        private System.Windows.Forms.Button button1;
     }
 }

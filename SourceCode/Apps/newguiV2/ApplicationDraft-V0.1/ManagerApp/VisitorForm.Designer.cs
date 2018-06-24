@@ -107,7 +107,7 @@
             // 
             this.textBoxSearch.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxSearch.Location = new System.Drawing.Point(342, 141);
-            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.textBoxSearch.Margin = new System.Windows.Forms.Padding(2);
             this.textBoxSearch.Name = "textBoxSearch";
             this.textBoxSearch.Size = new System.Drawing.Size(252, 29);
             this.textBoxSearch.TabIndex = 64;
@@ -198,8 +198,9 @@
             this.dataGridViewVisitor.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridViewVisitor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewVisitor.Location = new System.Drawing.Point(52, 179);
-            this.dataGridViewVisitor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewVisitor.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewVisitor.Name = "dataGridViewVisitor";
+            this.dataGridViewVisitor.ReadOnly = true;
             this.dataGridViewVisitor.RowTemplate.Height = 24;
             this.dataGridViewVisitor.Size = new System.Drawing.Size(586, 297);
             this.dataGridViewVisitor.TabIndex = 72;
@@ -211,7 +212,7 @@
             legend1.Name = "Legend1";
             this.chartVisitor.Legends.Add(legend1);
             this.chartVisitor.Location = new System.Drawing.Point(666, 179);
-            this.chartVisitor.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.chartVisitor.Margin = new System.Windows.Forms.Padding(2);
             this.chartVisitor.Name = "chartVisitor";
             series1.ChartArea = "ChartArea1";
             series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Pie;
@@ -307,7 +308,7 @@
             this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.buttonSave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "VisitorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewVisitor)).EndInit();

@@ -36,7 +36,6 @@
             this.buttonRefresh = new System.Windows.Forms.Button();
             this.title = new System.Windows.Forms.Button();
             this.buttonShowAll = new System.Windows.Forms.Button();
-            this.buttonSave = new System.Windows.Forms.Button();
             this.homeBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewStaff)).BeginInit();
             this.SuspendLayout();
@@ -58,7 +57,7 @@
             this.locationComboBx.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.locationComboBx.FormattingEnabled = true;
             this.locationComboBx.Location = new System.Drawing.Point(137, 133);
-            this.locationComboBx.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.locationComboBx.Margin = new System.Windows.Forms.Padding(2);
             this.locationComboBx.Name = "locationComboBx";
             this.locationComboBx.Size = new System.Drawing.Size(207, 29);
             this.locationComboBx.TabIndex = 2;
@@ -70,8 +69,9 @@
             this.dataGridViewStaff.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.dataGridViewStaff.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewStaff.Location = new System.Drawing.Point(48, 177);
-            this.dataGridViewStaff.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridViewStaff.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridViewStaff.Name = "dataGridViewStaff";
+            this.dataGridViewStaff.ReadOnly = true;
             this.dataGridViewStaff.RowTemplate.Height = 24;
             this.dataGridViewStaff.Size = new System.Drawing.Size(890, 314);
             this.dataGridViewStaff.TabIndex = 70;
@@ -139,20 +139,6 @@
             this.buttonShowAll.UseVisualStyleBackColor = false;
             this.buttonShowAll.Click += new System.EventHandler(this.buttonShowAll_Click);
             // 
-            // buttonSave
-            // 
-            this.buttonSave.BackColor = System.Drawing.SystemColors.Control;
-            this.buttonSave.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.buttonSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.buttonSave.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.buttonSave.Image = ((System.Drawing.Image)(resources.GetObject("buttonSave.Image")));
-            this.buttonSave.Location = new System.Drawing.Point(766, 507);
-            this.buttonSave.Name = "buttonSave";
-            this.buttonSave.Size = new System.Drawing.Size(83, 35);
-            this.buttonSave.TabIndex = 73;
-            this.buttonSave.UseVisualStyleBackColor = false;
-            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
-            // 
             // homeBtn
             // 
             this.homeBtn.FlatAppearance.BorderSize = 0;
@@ -179,7 +165,6 @@
             this.ClientSize = new System.Drawing.Size(1004, 571);
             this.Controls.Add(this.homeBtn);
             this.Controls.Add(this.buttonRefresh);
-            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.buttonLogs);
             this.Controls.Add(this.dataGridViewStaff);
             this.Controls.Add(this.title);
@@ -187,7 +172,7 @@
             this.Controls.Add(this.locationComboBx);
             this.Controls.Add(this.locationLbl);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "StaffForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "StaffForm";
@@ -206,7 +191,6 @@
         private System.Windows.Forms.Button buttonRefresh;
         private System.Windows.Forms.Button title;
         private System.Windows.Forms.Button buttonShowAll;
-        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button homeBtn;
     }
 }
