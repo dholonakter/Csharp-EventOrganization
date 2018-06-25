@@ -396,5 +396,17 @@ namespace CampingApp
                 }
             }
         }
+
+        private void buttonConfirmPayment_Click(object sender, EventArgs e)
+        {
+            if (r != null)
+            {
+                r.ChangeStatus();
+                if (dh.UpdateSelectedReservation(r) != -1)
+                {
+                    DisplayReservation(r, listBoxCheckIn);
+                }
+            }
+        }
     }
 }
