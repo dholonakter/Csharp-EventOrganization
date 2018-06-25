@@ -428,11 +428,7 @@ namespace RentalApp
             }
             
         }
-
-        private void labelMessageB_Click(object sender, EventArgs e)
-        {
-
-        }
+«
 
         private void homeBtn_Click(object sender, EventArgs e)
         {

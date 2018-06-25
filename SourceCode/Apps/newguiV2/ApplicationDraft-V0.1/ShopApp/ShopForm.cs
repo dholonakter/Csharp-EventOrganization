@@ -16,6 +16,11 @@ namespace ShopApp
 {
     public partial class ShopForm : Form
     {
+
+        ///////////////////////////////////////
+        // DECLARATIONS
+        ///////////////////////////////////////
+
         Order o;
         DataHelper data;
         Shop selectedShop;
@@ -37,6 +42,10 @@ namespace ShopApp
                                       .Concat(controls)
                                       .Where(c => c.GetType() == type);
         }
+
+        ///////////////////////////////////////
+        // STARTUP
+        ///////////////////////////////////////
 
         public ShopForm(Shop s)
         {
@@ -114,8 +123,11 @@ namespace ShopApp
 
             DisplayProducts();
         }
-        
 
+
+        ///////////////////////////////////////
+        // RFID EVENTS HANDLERS
+        ///////////////////////////////////////
         private void Pay(object sender, RFIDTagEventArgs e)
         {
             timerScanCard.Stop();
@@ -193,25 +205,6 @@ namespace ShopApp
             }
         }
 
-
-        /*
-        public void DisplayProducts()
-        {
-            if (selectedShop != null)
-            {
-                CrossThreadDisplay display = new CrossThreadDisplay(this);
-                if (foodRbtn.Checked)
-                {
-                    display.DisplayArticle(data.GetFoodArticles(selectedShop.ShopNr), itemLbx);
-                }
-                else
-                {
-                    display.DisplayArticle(data.GetDrinkArticles(selectedShop.ShopNr), itemLbx);
-                }
-                display.Dispose();
-            }
-        }
-        */
         public void DisplayOrderItems()
         {
             itemLbx.Items.Clear();

@@ -168,7 +168,7 @@ namespace ManagerApp
             this.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "HomeForm";
-            this.Load += new System.EventHandler(this.HomeForm_Load);
+
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 

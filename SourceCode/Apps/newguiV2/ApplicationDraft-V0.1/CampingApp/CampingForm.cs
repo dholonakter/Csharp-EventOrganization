@@ -25,6 +25,12 @@ namespace CampingApp
         // Delegates for RFID
         public delegate void ProcessTag(object sender, RFIDTagEventArgs e);
 
+
+        ///////////////////////////////////////
+        // GUI THINGS
+        ///////////////////////////////////////
+
+
         public CampingForm()
         {
             InitializeComponent();
@@ -47,6 +53,7 @@ namespace CampingApp
             visitor = null;
             r = null;
         }
+
 
         private void checkinBtn_Click(object sender, EventArgs e)
         {
@@ -184,6 +191,12 @@ namespace CampingApp
             }
         }
 
+
+        ///////////////////////////////////////
+        // CHECK OUT PANEL
+        /////////////////////////////////////// 
+
+
         private void CheckOut(object sender, RFIDTagEventArgs e)
         {
             CrossThreadDisplay display = new CrossThreadDisplay(this);
@@ -221,6 +234,15 @@ namespace CampingApp
                 display.SetText("No reservation found", checkoutMessageLbl);
             }
         }
+
+
+
+        ///////////////////////////////////////
+        // SEARCH PANEL
+        ///////////////////////////////////////
+
+
+
         private void DisplayReservation(Reservation r, ListBox lb)
         {
             lb.Items.Clear();
@@ -265,10 +287,9 @@ namespace CampingApp
             }
         }
 
-        private void searchPanel_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
+        ///////////////////////////////////////
+        // OTHER CONTROLS
+        /////////////////////////////////////// 
 
         private void ShowUserDetails(ListBox lb)
         {
