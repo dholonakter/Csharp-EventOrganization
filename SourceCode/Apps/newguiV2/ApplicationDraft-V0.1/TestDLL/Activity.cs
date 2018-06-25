@@ -8,10 +8,6 @@ namespace ThanhDLL
 {
     public class Activity
     {
-        /// <summary>
-        /// Class to hold Activity's information
-        /// </summary>
-
         ///////////////////////////////////////
         // FIELDS AND PROPERTIES
         ///////////////////////////////////////
@@ -38,10 +34,7 @@ namespace ThanhDLL
         // METHODS
         ///////////////////////////////////////
 
-        /// <summary>
-        /// Returns info of the activity as a string
-        /// </summary>
-        /// <returns></returns>
+        // Export string
         public override string ToString()
         {
             return "Activity #" + this.ActivityNr + " - " + this.ActivityName +

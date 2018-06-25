@@ -8,10 +8,6 @@ namespace ThanhDLL
 {
     public class Staff : Participant
     {
-        /// <summary>
-        /// Class to store information about staff
-        /// </summary>
-
         ///////////////////////////////////////
         // FIELDS AND PROPERTIES
         ///////////////////////////////////////
@@ -45,10 +41,7 @@ namespace ThanhDLL
         // METHODS
         ///////////////////////////////////////
 
-        /// <summary>
-        /// Returns a string with staff's information
-        /// </summary>
-        /// <returns></returns>
+        // info to string
         public override string ToString()
         {
             return "[" + this.JobDescription + "] Staff #" + base.ToString();

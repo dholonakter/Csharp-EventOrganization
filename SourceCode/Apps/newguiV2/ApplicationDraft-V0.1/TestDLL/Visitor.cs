@@ -8,10 +8,6 @@ namespace ThanhDLL
 {
     public class Visitor:Participant
     {
-        /// <summary>
-        /// Class to hold Visitor's information
-        /// </summary>
-
         ///////////////////////////////////////
         // FIELDS AND PROPERTIES
         ///////////////////////////////////////
@@ -35,6 +31,7 @@ namespace ThanhDLL
         public int ReservNr { get; set; }
         public List<LoanArticle> ArticlesBorrowed { get; set; } // need for checking out
         public bool IsInCamp { get; set; }
+
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////
@@ -63,31 +60,21 @@ namespace ThanhDLL
         // METHODS
         ///////////////////////////////////////
 
-        /// <summary>
-        /// Returns a string with visitor's information
-        /// </summary>
-        /// <returns></returns>
+        // info to string
         public override string ToString()
         {
             return "Visitor Nr." + this.IdNr 
                 + ": " + this.FirstName + " , " + this.LastName.ToUpper()
                 + "; Phone: " + this.Phone;
         }
-
        
-        /// <summary>
-        /// Changes a visitor's credit by amount. Send negative number to reduce.
-        /// </summary>
-        /// <param name="amount"></param>
+        // add credit by amount
         public void ChangeCreditBy (int amount)
         {
             this.Credit += amount;
         }
 
-        /// <summary>
-        /// Returns true if the visitor has no borrowed articles
-        /// </summary>
-        /// <returns></returns>
+        // returns true if the list of borrowed articles is empty
         public bool CanLeave()
         {
             if (ArticlesBorrowed.Count == 0)
@@ -97,10 +84,7 @@ namespace ThanhDLL
             return false;
         }
 
-        /// <summary>
-        /// Returns a string with a list of all borrowed articles
-        /// </summary>
-        /// <returns></returns>
+        // returns a string of info about all unreturned articles
         public string ShowAllArticlesUnreturned()
         {
             string info = "No articles unreturned";

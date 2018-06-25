@@ -42,10 +42,7 @@ namespace ThanhDLL
         // METHODS
         ///////////////////////////////////////
 
-        /// <summary>
-        /// Returns ticket's information as a string
-        /// </summary>
-        /// <returns></returns>
+        // returns reservation's info as a string
         public override string ToString()
         {
             return "RESERVATION NR. " + ReservNr +
@@ -54,11 +51,13 @@ namespace ThanhDLL
                         "; Status: " + NrCheckedIn + "/" + NrOfRegistered + " present";
         }
 
+        // adds a camper to the reservation
         public void CheckIn()
         {
             this.NrCheckedIn += 1;
         }
 
+        // changes status to paid
         public void ChangeStatus()
         {
             this.Paid = true;

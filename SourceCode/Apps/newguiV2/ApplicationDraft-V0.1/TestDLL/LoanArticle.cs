@@ -8,10 +8,6 @@ namespace ThanhDLL
 {
     public class LoanArticle : Article
     {
-        /// <summary>
-        /// This class stores information about loanable articles
-        /// </summary>
-        
         ///////////////////////////////////////
         // FIELDS AND PROPERTIES
         ///////////////////////////////////////
@@ -56,11 +52,7 @@ namespace ThanhDLL
         // METHODS
         ///////////////////////////////////////
 
-        /// <summary>
-        /// Sets availability to 1 - which means has been returned
-        /// Returns true on success and false otherwise
-        /// </summary>
-        /// <returns></returns>
+        // Sets availability to 1 -> Returned
         public bool ReturnItem()
         {
             if (this.Available == 0)
@@ -71,11 +63,7 @@ namespace ThanhDLL
             return false;
         }
 
-        /// <summary>
-        /// Sets availability to 0 - which means has been borrowed
-        /// Returns true on success and false otherwise
-        /// </summary>
-        /// <returns></returns>
+        // Sets availability to 0 -> Borrowed
         public bool BorrowItem()
         {
             if (this.Available == 1)

@@ -8,9 +8,7 @@ namespace ThanhDLL
 {
     public class Shop
     {
-        /// <summary>
-        /// This class holds information about a shop (can be store/loan)
-        /// </summary>
+        // Shop = store or loan stands
 
         ///////////////////////////////////////
         // FIELDS AND PROPERTIES
@@ -34,7 +32,7 @@ namespace ThanhDLL
         ///////////////////////////////////////
         public override string ToString()
         {
-            return "Store #" + this.ShopNr + " - " + this.ShopName + " located at " + this.LocationName;
+            return "Store nr." + this.ShopNr + " - " + this.ShopName + " located at " + this.LocationName;
         }
 
     }

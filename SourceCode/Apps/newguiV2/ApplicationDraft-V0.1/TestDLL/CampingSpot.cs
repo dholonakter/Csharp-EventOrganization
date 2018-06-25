@@ -19,6 +19,11 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////
+
+
+        /**
+         * Full variables constructors
+         */
         public CampingSpot(int nr, string location, string name, bool serviced)
         {
             this.SpotNr = nr;
@@ -27,20 +32,21 @@ namespace ThanhDLL
             this.ToBeServiced = serviced;
         }
 
+        /**
+         * Constructor to display
+         */
         public CampingSpot(int nr, string name)
         {
             this.SpotNr = nr;
             this.SpotName = name;
         }
 
+        ///////////////////////////////////////
+        // METHODS
+        ///////////////////////////////////////
         public override string ToString()
         {
             return "Spot #" + this.SpotNr + " - " + this.SpotName + " at " + this.LocationName + (ToBeServiced ? " - Needes servicing" : " - Clear");
-        }
-
-        public void ChangeStatus()
-        {
-            ToBeServiced = !ToBeServiced;
         }
     }
 }

@@ -12,23 +12,39 @@ namespace ThanhDLL
 {
     public class CrossThreadDisplay : IDisposable
     {
+        // class to display data on GUI when called from a thread other than GUI's thread
+
+        ///////////////////////////////////////
+        // FIELDS AND PROPERTIES
+        ///////////////////////////////////////
         Form myForm;
+
         // Flag: Has Dispose already been called?
         bool disposed = false;
         // Instantiate a SafeHandle instance.
         SafeHandle handle = new SafeFileHandle(IntPtr.Zero, true);
 
-        public CrossThreadDisplay(Form f)
-        {
-            myForm = f;
-        }
-
+        ///////////////////////////////////////
+        // DELEGATES
+        ///////////////////////////////////////
         // Delegates for cross-thread processing
         delegate void TextboxDelegate(string text, TextBox tb);
         delegate void LabelDelegate(string text, Label lb);
         delegate void ListboxDelegate(Object o, ListBox lb);
         delegate void VoidListboxDelegate(ListBox lb);
 
+        ///////////////////////////////////////
+        // CONSTRUCTORS
+        ///////////////////////////////////////
+        public CrossThreadDisplay(Form f)
+        {
+            myForm = f;
+        }
+        
+        ///////////////////////////////////////
+        // METHODS
+        ///////////////////////////////////////
+        
         // Set text to textbox
         public void SetTextBox(string text, TextBox tb)
         {
@@ -58,6 +74,7 @@ namespace ThanhDLL
                 lb.Items.Clear();
             }
         }
+
         // Set text to label
         public void SetText(string text, Label lb)
         {
@@ -103,6 +120,7 @@ namespace ThanhDLL
             }
         }
 
+        // Add loan article to a listbox
         public void AddLoanArticleToLB(Object o, ListBox lb)
         {
             LoanArticle a = (LoanArticle)o;
@@ -174,6 +192,9 @@ namespace ThanhDLL
             }
         }
 
+        ///////////////////////////////////////
+        // IMPLEMENTING DISPOSE
+        ///////////////////////////////////////
         public void Dispose()
         {
             Dispose(true);

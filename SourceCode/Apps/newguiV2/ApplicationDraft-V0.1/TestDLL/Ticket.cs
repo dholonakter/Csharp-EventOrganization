@@ -8,10 +8,6 @@ namespace ThanhDLL
 {
     public class Ticket
     {
-        /// <summary>
-        /// Class to hold Ticket's information
-        /// </summary>
-
         ///////////////////////////////////////
         // FIELDS AND PROPERTIES
         ///////////////////////////////////////
@@ -23,7 +19,10 @@ namespace ThanhDLL
         public bool Paid { get; set; }
         public double Price { get; set; }
 
-        public bool AtEntrance { get; set; }
+        // if they scan the ticket at the entrance and the ticket is not paid, this attribute is set to true
+        // the visitor pays an extra 10 euros
+        public bool AtEntrance { get; set; } 
+
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////
@@ -53,7 +52,7 @@ namespace ThanhDLL
                 + "\nType: " + this.TicketType
                 + "\nBuyer: " + this.BuyerNr
                 + "\nStatus: " + (Paid ? "PAID" : "NOT PAID")
-                + "\nPrice : €" + Price.ToString("0.00") + (!AtEntrance? "" : "(incl. €10.00 additionall entrance)");
+                + "\nPrice : €" + Price.ToString("0.00") + (!AtEntrance? "" : "(incl. €10.00 pay at entrance)");
         }
 
         public void ChangeStatus()

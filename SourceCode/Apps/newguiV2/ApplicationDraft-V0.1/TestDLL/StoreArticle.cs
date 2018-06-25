@@ -22,6 +22,7 @@ namespace ThanhDLL
             this.Category = category;
         }
 
+        // Sort by category
         public int CompareTo(StoreArticle other)
         {
             return this.Category.CompareTo(other.Category);

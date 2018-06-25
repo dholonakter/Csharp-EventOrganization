@@ -37,6 +37,9 @@ namespace ThanhDLL
         // DATA TABLES
         ///////////////////////////////////////
 
+        // Data tables are used for displaying data on data grid views
+
+        // Build data table from SQL
         public DataTable DataTableFromSQL(string sql)
         {
             try
@@ -55,6 +58,8 @@ namespace ThanhDLL
             }
         }
 
+        // Update data table
+        // Used when data is being modified from application
         public bool UpdateTable(DataTable changes)
         {
             try
@@ -68,6 +73,12 @@ namespace ThanhDLL
             }
             return true;
         }
+
+        ///////////////////////////////////////
+        // DATASETS
+        ///////////////////////////////////////
+
+        // Data sets are used for charts
 
         public DataSet GetDataset(string sql)
         {
@@ -93,6 +104,8 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // COUNT ROWS
         ///////////////////////////////////////
+
+        // Count rows from an input sql
         public int CountRowSQL(string sql)
         {
             MySqlCommand command = new MySqlCommand(sql, connection);
@@ -113,6 +126,8 @@ namespace ThanhDLL
             }
 
         }
+
+        // Count all rows from a specified table
         public int CountRowTable(string table)
         {
             string sql = "SELECT COUNT(*) FROM " + table;
@@ -138,6 +153,8 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // AUTHENTICATION
         ///////////////////////////////////////
+
+        // Check for nr. of rows matching username and password
         public int CheckCredentials(string username, string pwd)
         {
             string sql = "SELECT COUNT(*) 'Nr' FROM LOGIN WHERE Username = '" + username + "' AND Password='" + pwd + "'";
@@ -164,6 +181,11 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // UPDATING DATA
         ///////////////////////////////////////
+
+        // Every entity has some attributes that can be modified depending on scenarios
+        // For example: with Visitor it can be the boolean CheckedIn
+        // These methods update those attributes in the database to match the changes made in the app
+
         public int UpdateSelectedVisitor(Visitor v)
         {
             string sql = "UPDATE VISITOR " +
@@ -310,6 +332,11 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // VISITORS
         ///////////////////////////////////////
+
+        // Methods dealing with data related to visitor are here
+
+
+        // Read from db and transfer to variables
         public Visitor ReadDataVisitor(MySqlDataReader reader, Visitor v)
         {
 
@@ -358,9 +385,7 @@ namespace ThanhDLL
             return v;
         }
 
-        /**
-         * Find visitors
-         */
+        // Find visitor based on visitor nr.
         public Visitor FindVisitorByNr(int visitorNr)
         {
             Visitor v = null;
@@ -384,6 +409,8 @@ namespace ThanhDLL
             }
             return v;
         }
+
+        // Find visitor based on RFID's tag
         public Visitor FindVisitorByTag(string rfidNr)
         {
             Visitor v = null;
@@ -409,6 +436,8 @@ namespace ThanhDLL
             return v;
         }
 
+        // Retrieve a list of visitor based on a given condition
+        // for encapsulation purposes, FindVisitorByCondition cant be called from outside
         private List<Visitor> FindVisitorByCondition(string whereCond)
         {
             string sql = "SELECT * FROM VISITOR WHERE" + whereCond;
@@ -475,17 +504,19 @@ namespace ThanhDLL
             return temp;
         }
 
+        // Retrieve a list of visitor with names containing a specified phrase
         public List<Visitor> FindVisitorByName(string name)
         {
-            // encapsulation
             return FindVisitorByCondition(" FirstName LIKE '%" + name + "%' OR LastName LIKE '%" + name + "%'");
         }
 
+        // Retrieve a list of visitor who are checked in
         public List<Visitor> FindCheckedInVisitors()
         {
             return FindVisitorByCondition(" CheckedIn = 1");
         }
 
+        // Retrieve a list of visitor who are checked out
         public List<Visitor> FindCheckedOutVisitors()
         {
             string sql = "SELECT * FROM deleted_VISITOR";
@@ -539,9 +570,7 @@ namespace ThanhDLL
         }
 
 
-        /**
-         * Other methods concerning visitor
-         */
+        // Add a list of unreturned items (if any) to the given visitor
         public void FindUnreturnedItems(Visitor v)
         {
             string sql = "SELECT ShopName, ArticleNr, ArticleName" +
@@ -617,7 +646,8 @@ namespace ThanhDLL
             return null;
         }
 
-
+        // move a record to the deleted_visitor table
+        // used for checking out
         public int MoveToDeletedVisitor(Visitor v)
         {
             string sql = "INSERT INTO DELETED_VISITOR(IdNr, FirstName, LastName, Phone, Email, RFIDNr)" +
@@ -655,6 +685,10 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // TICKETS
         ///////////////////////////////////////
+
+        // Methods concerning ticket data are here
+
+        // Get ticket by nr.
         public Ticket GetTicket(int nr)
         {
             string sql = "SELECT * " +
@@ -707,6 +741,7 @@ namespace ThanhDLL
             return t;
         }
 
+        // Get a list of used tickets
         public List<Ticket> GetUsedTickets()
         {
             string sql = "SELECT * " +
@@ -762,6 +797,7 @@ namespace ThanhDLL
             return temp;
         }
 
+        // Get a list of unused tickets
         public List<Ticket> GetUnusedTickets()
         {
             string sql = "SELECT * " +
@@ -820,6 +856,10 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // STATISTICS
         ///////////////////////////////////////
+
+        // Methods supporting the retrieval of statistics are here
+
+        // Get sum of all the credits in the visitor table
         public double GetTotalBalance()
         {
             string sql = "SELECT SUM(Credit) 'Total' FROM VISITOR";
@@ -849,15 +889,15 @@ namespace ThanhDLL
                 connection.Close();
             }
         }
-
-        public void GetTotalSpent()
-        {
-            /* not working */
-        }
+        
 
         ///////////////////////////////////////
         // SHOPS
         ///////////////////////////////////////
+
+        // methods concerning both stores and loan stands are here
+
+        // Retrieve a shop by shop nr.
         public Shop GetShopByNr(int shopNr)
         {
             String sql = "SELECT * FROM all_shop WHERE ShopNr=" + shopNr;
@@ -895,6 +935,11 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // STORES
         ///////////////////////////////////////
+
+        // Methods concerning stores (food & drinks) are here
+
+        // Retrieve a list of store articles based on condition
+        // Cannot be called from outside for encapsulation purposes
         private List<StoreArticle> GetStoreArticlesByCondition(Shop s, string condition)
         {
             String sql = "SELECT * FROM store_article WHERE ShopNr = " + s.ShopNr + " AND " + condition;
@@ -938,14 +983,20 @@ namespace ThanhDLL
             }
             return temp;
         }
+        
+        // Retrieve all store articles of a store
         public List<StoreArticle> GetAllStoreArticles(Shop s)
         {
             return GetStoreArticlesByCondition(s, "TRUE");
         }
+
+        // Retrieve all store articles containing a phrase
         public List<StoreArticle> GetStoreArticlesContaining(Shop s, string phrase)
         {
             return GetStoreArticlesByCondition(s, "ArticleName LIKE '%" + phrase + "%'");
         }
+
+        // Find a store article with specified nr
         public StoreArticle FindStoreArticleByNr(int nr, Shop s)
         {
             StoreArticle a = null;
@@ -992,6 +1043,10 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // STORE ORDERS HANDLING
         ///////////////////////////////////////
+
+        // Methods to handle store order are here
+
+        // Create a new record for the order
         public int CreateNewOrder(Order o)
         {
             string sql = "INSERT INTO SHOP_ORDER(OrderDate, ShopNr, VisitorNr) " +
@@ -1016,6 +1071,7 @@ namespace ThanhDLL
             }
         }
 
+        // Get the database-generated order number by comparing the orderdate
         public int GetRightOrderNr(Order o)
         {
             string sql = "SELECT OrderNr FROM SHOP_ORDER WHERE OrderDate = '" + o.OrderDate.ToString("yyyy-MM-dd HH:mm:ss") + "'";
@@ -1048,6 +1104,7 @@ namespace ThanhDLL
             }
         }
 
+        // add order line for each item ordered into the database
         public int AddStoreOrderLine(Order o)
         {
             string sql = "";
@@ -1082,6 +1139,8 @@ namespace ThanhDLL
             }
 
         }
+
+        // get all transactions made for a certain article
         public List<Order> GetStoreArticleOrderHistory(Shop s, StoreArticle a)
         {
             List<Order> o = new List<Order>();
@@ -1108,7 +1167,7 @@ namespace ThanhDLL
             }
             catch (MySqlException)
             {
-                
+
             }
             finally
             {
@@ -1117,6 +1176,7 @@ namespace ThanhDLL
             return o;
         }
 
+        // get all transactions made by certain list of visitors
         public List<Order> GetStoreArticleWithVisitorNrs(Shop s, List<Visitor> visitors)
         {
             List<Order> o = new List<Order>();
@@ -1170,10 +1230,10 @@ namespace ThanhDLL
         // LOAN
         ///////////////////////////////////////
 
+        // Methods concerning loan stands are here
 
-        /**
-        * Find articles
-        */
+        // Retrieve a list of loan articles based on condition
+        // Cannot be called from outside for encapsulation purposes
         private List<LoanArticle> GetLoanArticlesByCondition(int shopNr, string condition)
         {
             List<LoanArticle> temp = new List<LoanArticle>();
@@ -1216,6 +1276,8 @@ namespace ThanhDLL
             }
             return temp;
         }
+        
+        // Find a loan article by nr
         public LoanArticle FindLoanArticleByNr(int nr, int shopNr)
         {
             LoanArticle a = null;
@@ -1254,6 +1316,8 @@ namespace ThanhDLL
             }
             return null;
         }
+
+        // Find a loan article by tag
         public LoanArticle FindLoanArticleByTag(string rfidNr)
         {
             LoanArticle a = null;
@@ -1295,14 +1359,20 @@ namespace ThanhDLL
             }
             return null;
         }
+
+        // Retrieve all loan articles
         public List<LoanArticle> GetAllLoanArticles(int shopNr)
         {
             return GetLoanArticlesByCondition(shopNr, "TRUE"); // get all
         }
+
+        // Retrieve articles being loaned
         public List<LoanArticle> GetLoaningArticles(int shopNr)
         {
             return GetLoanArticlesByCondition(shopNr, "Available = 0;");
         }
+
+        // Retrieve all articles containing a string
         public List<LoanArticle> GetLoanArticlesContaining(int shopNr, string phrase)
         {
             return GetLoanArticlesByCondition(shopNr, "ArticleName LIKE '%" + phrase + "%'");
@@ -1312,6 +1382,7 @@ namespace ThanhDLL
         * Other methods concerning loan articles
         */
 
+        // Get return date for an article
         public DateTime GetReturnDateForLoanArticle(Article a)
         {
             string sql = "select ReturnDate from loan_orders where ArticleNr = " + a.ArticleNr + " and ShopNr = " + a.ShopNr;
@@ -1343,6 +1414,8 @@ namespace ThanhDLL
                 connection.Close();
             }
         }
+
+        // Get visitor nr for an article
         public int GetVisitorNrForLoanArticle(Article a)
         {
             string sql = "select VisitorNr from loan_orders where ArticleNr = " + a.ArticleNr + " and ShopNr = " + a.ShopNr;

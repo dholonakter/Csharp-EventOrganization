@@ -8,9 +8,7 @@ namespace ThanhDLL
 {
     public class Participant
     {
-        /// <summary>
-        /// Superclass for Visitor and Staff
-        /// </summary>
+        // Superclass for visitor and staff
 
         ///////////////////////////////////////
         // FIELDS AND PROPERTIES
@@ -50,10 +48,8 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // METHODS
         ///////////////////////////////////////
-        /// <summary>
-        /// Returns a string with info of a participant
-        /// </summary>
-        /// <returns></returns>
+        
+        // info to string
         public override string ToString()
         {
             return this.IdNr + " " + this.FirstName + " " + this.LastName 
@@ -62,19 +58,14 @@ namespace ThanhDLL
                 + "\nRFID: " + this.RFIDNr;
         }
 
-        /// <summary>
-        /// Changes RFID's attribute and sets CheckedIn to true
-        /// </summary>
-        /// <param name="rfid"></param>
+        // updates rfid and status for checking in
         public void CheckInWith(string rfid)
         {
             this.RFIDNr = rfid;
             this.CheckedIn = true;
         }
 
-        /// <summary>
-        /// Sets RFID to blank and sets CheckedIn to false
-        /// </summary>
+        // updates rfid and status for checking out
         public void CheckOut()
         {
             this.RFIDNr = "";

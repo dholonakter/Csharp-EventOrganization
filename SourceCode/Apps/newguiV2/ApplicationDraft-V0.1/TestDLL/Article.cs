@@ -8,10 +8,6 @@ namespace ThanhDLL
 {
     public class Article
     {
-        /// <summary>
-        /// Class to hold Article's information
-        /// </summary>
-
         ///////////////////////////////////////
         // FIELDS AND PROPERTIES
         ///////////////////////////////////////
@@ -25,6 +21,9 @@ namespace ThanhDLL
         ///////////////////////////////////////
         // CONSTRUCTORS
         ///////////////////////////////////////
+
+        // Various constructors to initialize object with
+        // Depending on the usage, the appropriate constructor will be chosen
 
         /**
          * Constructor with full variables
@@ -65,10 +64,6 @@ namespace ThanhDLL
         // METHODS
         ///////////////////////////////////////
 
-        /// <summary>
-        /// Returns info of the article as a string
-        /// </summary>
-        /// <returns></returns>
         public override string ToString()
         {
             return "Article nr. " + ArticleNr + ": " + ArticleName;

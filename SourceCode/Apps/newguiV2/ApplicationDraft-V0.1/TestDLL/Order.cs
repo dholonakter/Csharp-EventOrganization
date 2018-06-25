@@ -8,10 +8,6 @@ namespace ThanhDLL
 {
     public class Order
     {
-        /// <summary>
-        /// This class holds information about an order
-        /// </summary>
-
         ///////////////////////////////////////
         // FIELDS AND PROPERTIES
         ///////////////////////////////////////
@@ -19,8 +15,9 @@ namespace ThanhDLL
         public DateTime OrderDate { get; set; }
         public Shop Shop { get; set; }
         public int VisitorNr { get; set; }
-        public List<Article> Articles { get; set; }
-        public List<int> Quantity { get; set; }
+        public List<Article> Articles { get; set; } // list of articles ordered
+        public List<int> Quantity { get; set; } // list of quantities 
+                                                // Articles[i] will have Quantity[i]
 
         ///////////////////////////////////////
         // CONSTRUCTORS
@@ -36,6 +33,7 @@ namespace ThanhDLL
         // METHODS
         ///////////////////////////////////////
 
+        // export receipt
         public override string ToString()
         {
             if (Articles.Count != 0)
@@ -68,6 +66,7 @@ namespace ThanhDLL
             return "NO ARTICLES IN ORDER";
         }
 
+        // add article to order by n quantity
         public void AddArticle(Article a, int nr)
         {
             if (Articles.Count != 0)
@@ -85,6 +84,7 @@ namespace ThanhDLL
             Quantity.Add(nr);
         }
 
+        // set article in order to n quantity
         public void SetQuantity(Article a, int nr)
         {
             for (int i = 0; i < Articles.Count; i++)
@@ -105,10 +105,7 @@ namespace ThanhDLL
             }
         }
 
-        /// <summary>
-        /// Get total sum of an order
-        /// </summary>
-        /// <returns></returns>
+        // Get sum of an order
         public double GetSum()
         {
             double sum = 0;
@@ -124,6 +121,7 @@ namespace ThanhDLL
             return sum;
         }
 
+        // get total loan deposit 
         public double GetLoanDeposit()
         {
             double sum = 0;
@@ -139,41 +137,7 @@ namespace ThanhDLL
             return sum;
         }
 
-        public string GetDepositReceipt()
-        {
-            if (Articles.Count != 0)
-            {
-                string info = "--- WELCOME TO " + Shop.ShopName.ToUpper() + " ---\n";
-                
-
-                if (OrderDate != DateTime.MinValue)
-                {
-                    info += "Borrowed at: " + OrderDate.ToString() + "\n\n";
-                }
-                else
-                {
-                    info += "\nYou are loaning: \n";
-                }
-
-                for (int i = 0; i < Articles.Count; i++)
-                {
-                    info += Articles[i].ArticleName
-                        + "\t - Deposit value:€ " + ((LoanArticle)Articles[i]).DepositValue.ToString("0.00") + "\n";
-                }
-
-                info += "\nTOTAL: €" + GetLoanDeposit().ToString("0.00") + "\n";
-
-                if (OrderDate != DateTime.MinValue)
-                {
-                    info += "\nThank you for your purchase!";
-                }
-
-                return info;
-            }
-
-            return "NO ARTICLES IN ORDER";
-        }
-
+        // checks if an article is already in the order
         public bool ExistsArticle (Article article)
         {
             foreach (Article a in Articles)
@@ -185,7 +149,8 @@ namespace ThanhDLL
             }
             return false;
         }
-       
+
+        // get loan fee
         public double GetLoanFee()
         {
             double sum = 0;
@@ -194,57 +159,6 @@ namespace ThanhDLL
                 sum += Articles[i].Price * Quantity[i];
             }
             return sum;
-        }
-
-        public string GetReturnReceipt()
-        {
-            if (Articles.Count != 0)
-            {
-                double sum = GetLoanFee();
-                double depositVal = GetLoanDeposit();
-
-                string info = "--- WELCOME TO " + Shop.ShopName.ToUpper() + " ---\n";
-                
-
-                if (OrderDate != DateTime.MinValue)
-                {
-                    info += "Processed at: " + OrderDate.ToString() + "\n\n";
-                }
-                else
-                {
-                    info += "\nYou are returning: \n";
-                }
-
-                for (int i = 0; i < Articles.Count; i++)
-                {
-                    info += Articles[i].ArticleName
-                        + "\t - Deposit value: " + ((LoanArticle)Articles[i]).DepositValue 
-                        + "\n - " + Articles[i].Price + " x " + Quantity[i] + " hours"
-                        + "\t - Subtotal: " + Articles[i].Price * Quantity[i]
-                        + "\n";
-                }
-
-                info += "\nDeposit values: €" + depositVal.ToString("0.00") + "\n";
-                info += "\nLoan fees: €" + sum.ToString("0.00") + "\n";
-
-                if (depositVal - sum <= 0)
-                {
-                    info += "\nBalance deducted by €" + (sum - depositVal).ToString("0.00") + "\n";
-                }
-                else
-                {
-                    info += "\nBalance added by: €" +  (depositVal - sum).ToString("0.00") + "\n";
-                }
-
-                if (OrderDate != DateTime.MinValue)
-                {
-                    info += "\nThank you for your purchase!";
-                }
-
-                return info;
-            }
-
-            return "NO ARTICLES IN ORDER";
         }
 
     }
