@@ -183,7 +183,7 @@
             this.searchPanel.Name = "searchPanel";
             this.searchPanel.Size = new System.Drawing.Size(1409, 903);
             this.searchPanel.TabIndex = 6;
-            this.searchPanel.Paint += new System.Windows.Forms.PaintEventHandler(this.searchPanel_Paint);
+
             // 
             // checkoutLogsBtn
             // 

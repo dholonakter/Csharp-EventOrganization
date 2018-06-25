@@ -15,6 +15,10 @@ namespace ManagerApp
 {
     public partial class VisitorForm : Form
     {
+        ///////////////////////////////////////
+        // STARTUP
+        ///////////////////////////////////////
+
         DataHelper dh;
         BindingSource visitorTable;
         RFID myRFIDReader;
@@ -56,6 +60,12 @@ namespace ManagerApp
 
             UpdateLabels();
         }
+
+
+        ///////////////////////////////////////
+        // CONTROLS
+        ///////////////////////////////////////
+
         private void ScanRFID(object sender, RFIDTagEventArgs e)
         {
             if (e.Tag != null)

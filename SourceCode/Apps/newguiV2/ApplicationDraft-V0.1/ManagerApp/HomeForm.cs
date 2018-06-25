@@ -37,11 +37,6 @@ namespace ManagerApp
             this.Dispose();
         }
 
-        private void shopBtn_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void campBtn_Click(object sender, EventArgs e)
         {
             if (selectedForm != null)
@@ -52,11 +47,6 @@ namespace ManagerApp
             selectedForm.Show();
             selectedForm.BringToFront();
             this.Dispose();
-        }
-
-        private void inventoryBtn_Click(object sender, EventArgs e)
-        {
-            
         }
 
         private void staffBtn_Click(object sender, EventArgs e)
@@ -71,10 +61,6 @@ namespace ManagerApp
             this.Dispose();
         }
 
-        private void analyticBtn_Click(object sender, EventArgs e)
-        {
-            
-        }
 
         private void buttonTransactions_Click(object sender, EventArgs e)
         {
@@ -88,15 +74,7 @@ namespace ManagerApp
             this.Dispose();
         }
 
-        private void HomeForm_Load(object sender, EventArgs e)
-        {
 
-        }
-
-        private void buttonActivitiy_Click(object sender, EventArgs e)
-        {
-
-        }
 
     }
 }

@@ -13,6 +13,9 @@ namespace ManagerApp
 {
     public partial class CampForm : Form
     {
+        ///////////////////////////////////////
+        // STARTUP
+        ///////////////////////////////////////
         DataHelper dh;
         BindingSource campTable;
         string sql;
@@ -56,6 +59,9 @@ namespace ManagerApp
             }
         }
 
+        ///////////////////////////////////////
+        // CONTROLS
+        ///////////////////////////////////////
         private void button1_Click(object sender, EventArgs e)
         {
             if (dh.UpdateTable((DataTable)campTable.DataSource))

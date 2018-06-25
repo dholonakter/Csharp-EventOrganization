@@ -13,6 +13,9 @@ namespace ManagerApp
 {
     public partial class StaffForm : Form
     {
+        ///////////////////////////////////////
+        // STARTUP
+        ///////////////////////////////////////
         DataHelper dh;
         BindingSource staffTable;
         string sql;
@@ -60,7 +63,11 @@ namespace ManagerApp
             Display(sql);
             //labelCount.Text = "You have in total " + (dataGridViewStaff.RowCount - 1) + " people"; // minus empty row from hell
         }
-        
+
+        ///////////////////////////////////////
+        // CONTROLS
+        ///////////////////////////////////////
+
         private void buttonSave_Click(object sender, EventArgs e)
         {
             if (dh.UpdateTable((DataTable)staffTable.DataSource))

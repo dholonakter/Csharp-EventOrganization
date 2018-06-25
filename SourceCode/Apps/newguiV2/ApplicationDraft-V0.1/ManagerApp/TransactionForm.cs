@@ -14,6 +14,9 @@ namespace ManagerApp
 {
     public partial class TransactionForm : Form
     {
+        ///////////////////////////////////////
+        // STARTUP
+        ///////////////////////////////////////
         DataHelper dh;
         FileSystemWatcher watcher;
 
@@ -67,6 +70,9 @@ namespace ManagerApp
             }
         }
 
+        ///////////////////////////////////////
+        // CONTROLS
+        ///////////////////////////////////////
         private void buttonChange_Click(object sender, EventArgs e)
         {
             string path;
