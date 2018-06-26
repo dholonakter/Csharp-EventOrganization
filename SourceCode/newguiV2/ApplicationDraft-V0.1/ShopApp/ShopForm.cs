@@ -20,7 +20,7 @@ namespace ShopApp
         ///////////////////////////////////////
         // DECLARATIONS
         ///////////////////////////////////////
-
+        int pagination = 0;
         Order o;
         DataHelper data;
         Shop selectedShop;
@@ -178,27 +178,46 @@ namespace ShopApp
             startPanel.BringToFront();
         }
 
+        private void ClearProducts()
+        {
+            for (int i = 0; i < buttons.Count; i++)
+            {
+                buttons[i].Visible = false;
+                labels[i].Visible = false;
+            }
+        }
+
         public void DisplayProducts()
         {
             
             int stopNumber = allProducts.Count > buttons.Count ? buttons.Count : allProducts.Count;
-            
+
+
+            ClearProducts();
 
             for (int i = 0; i < stopNumber; i++)
             {
-                // index backwards due to recursion method
-                buttons[i].Image = System.Drawing.Image.FromFile("../../img/" + allProducts[i].ImgFile);
-                labels[i].Text = allProducts[i].ArticleName;
+                if (i + buttons.Count * pagination > allProducts.Count - 1)
+                {
+                    break;
+                }
 
-                if (allProducts[i].Category == "Food")
+                buttons[i].Visible = true;
+                labels[i].Visible = true;
+
+                // index backwards due to recursion method
+                buttons[i].Image = System.Drawing.Image.FromFile("../../img/" + allProducts[i + buttons.Count * pagination].ImgFile);
+                labels[i].Text = allProducts[i + buttons.Count * pagination].ArticleName;
+
+                if (allProducts[i + buttons.Count * pagination].Category == "Food")
                 {
                     buttons[i].BackColor = Color.LightSalmon;
                 }
-                else if (allProducts[i].Category == "Drink")
+                else if (allProducts[i + buttons.Count * pagination].Category == "Drink")
                 {
                     buttons[i].BackColor = Color.LightGreen;
                 }
-                else if (allProducts[i].Category == "Uncategorized")
+                else if (allProducts[i + buttons.Count * pagination].Category == "Uncategorized")
                 {
                     buttons[i].BackColor = Color.Silver;
                 }
@@ -376,6 +395,18 @@ namespace ShopApp
         private void homeBtn_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            pagination++;
+            DisplayProducts();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            pagination--;
+            DisplayProducts();
         }
     }
 }
