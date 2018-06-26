@@ -58,13 +58,22 @@
                     }
                     else {
                         echo '<h3 class="mb-3">Purchase Ticket</h3>
+                        <form id = "buyTicketForm" action="ticket_action.php" method="POST">    
+                        <span>Choose your ticket type: </span>
+                            <div class="mb-3">
+                                <select name="tickettype">
+                                    <option value ="Deluxe">Deluxe</option>
+                                    <option value ="Normal">Normal</option>
+                                </select>
+                            </div>
                             <span>Choose your payment method: </span>
                             <div class="mb-3">
                                 <input type="radio" name="payment" value="ideal"> iDeal<br>
                                 <input type="radio" name="payment" value="paypal"> PayPal<br>
                                 <input type="radio" name="payment" value="ipay"> iPay<br>
                             </div>
-                            <button type="submit" class="btn btn-info">Buy Ticket</button>';
+                            <button type="submit" class="btn btn-info">Buy Ticket</button>
+                            </form>';
                     }
                 ?>
             </div>

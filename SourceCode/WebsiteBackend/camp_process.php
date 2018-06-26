@@ -1,8 +1,8 @@
 <?php
     include('userData.php');
 
-    // retrieve spot data for all available spots
-    $spot_sql = ("SELECT * FROM camping_spot WHERE IsFree = 1");
+    // retrieve spot data
+    $spot_sql = ("SELECT * FROM camping_spot");
 
     if (isset($_SESSION["reservNr"]))
     {
