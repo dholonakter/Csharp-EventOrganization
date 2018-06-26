@@ -428,7 +428,7 @@ namespace RentalApp
             }
             
         }
-«
+
 
         private void homeBtn_Click(object sender, EventArgs e)
         {
