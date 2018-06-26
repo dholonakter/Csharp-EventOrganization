@@ -23,6 +23,7 @@ namespace ManagerApp
         private void closeBtn_Click(object sender, EventArgs e)
         {
             this.Dispose();
+            Program.home.Focus();
         }
 
         private void visitorBtn_Click(object sender, EventArgs e)

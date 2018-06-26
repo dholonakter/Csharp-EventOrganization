@@ -38,7 +38,7 @@ namespace ManagerApp
             // hide foreign keys
             dataGridViewCamp.Columns[0].Visible = false;
             dataGridViewCamp.Columns[2].Visible = false;
-
+            dataGridViewCamp.Columns[5].Visible = false;
             dataGridViewCamp.Refresh();
         }
 
